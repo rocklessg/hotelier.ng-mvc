@@ -22,7 +22,7 @@ namespace hotel_booking_mvc.Controllers
 
         public IActionResult IndexAsync()
         {
-           return View();
+            return View();
         }
         public async Task<IActionResult> TestApiAsync(IFormFile file)
         {
@@ -41,9 +41,14 @@ namespace hotel_booking_mvc.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public class Weather : BasicResponse<Weather> 
-        {           
+        public class WeatherResponse : BasicResponse<Weather>
+        {
         }
-       
+        public class Weather
+        {
+
+        }
+
+
     }
 }

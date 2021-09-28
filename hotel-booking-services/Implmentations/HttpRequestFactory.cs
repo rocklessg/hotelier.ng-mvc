@@ -8,7 +8,6 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace hotel_booking_services.Implmentations
@@ -30,26 +29,23 @@ namespace hotel_booking_services.Implmentations
             var client = CreateClient(baseUrl);
             var request = new HttpRequestMessage(HttpMethod.Get, url);
             var response = await client.SendAsync(request);
-            TRes result = default;
-            var responseString = await response.Content.ReadAsStringAsync();
-            result.Data = JsonConvert.DeserializeObject<TRes>(responseString);
-            result.StatusCode = (int)response.StatusCode;
-            result.Success = response.IsSuccessStatusCode;
-            return result;
-        }   
-
-         
-
-        public async Task<BasicResponse<TRes>> PostRequestAsync<TReq, TRes>(string url, TReq content, string baseUrl = null) where TRes : class where TReq : class
+            return await GetResponseResultAsync<TRes>(response);
+            //var responseString = await response.Content.ReadAsStringAsync();
+            //result.Data = JsonConvert.DeserializeObject<TRes>(responseString);
+            //result.StatusCode = (int)response.StatusCode;
+            //result.Success = response.IsSuccessStatusCode;
+            //return result;
+        }
+        public async Task<TRes> PostRequestAsync<TReq, TRes>(string url, TReq content, string baseUrl = null) where TRes : BasicResponse<TRes> where TReq : class
         {
             var client = CreateClient(baseUrl);
-            var reqContent = new StringContent(System.Text.Json.JsonSerializer.Serialize(content), Encoding.UTF8, "application/json");
+            var reqContent = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
             var request = new HttpRequestMessage(HttpMethod.Post, url) { Content = reqContent };
             var response = await client.SendAsync(request);
             return await GetResponseResultAsync<TRes>(response);
         }
 
-        public async Task<BasicResponse<TRes>> DeleteRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class
+        public async Task<TRes> DeleteRequestAsync<TRes>(string url, string baseUrl = null) where TRes : BasicResponse<TRes>
         {
             var client = CreateClient(baseUrl);
             var request = new HttpRequestMessage(HttpMethod.Delete, url);
@@ -57,7 +53,7 @@ namespace hotel_booking_services.Implmentations
             return await GetResponseResultAsync<TRes>(response);
         }
 
-        public async Task<BasicResponse<TRes>> UploadFileAsync<TReq, TRes>(string url, TReq file, string baseUrl = null) where TReq : IFormFile where TRes : class
+        public async Task<TRes> UploadFileAsync<TReq, TRes>(string url, TReq file, string baseUrl = null) where TReq : IFormFile where TRes : BasicResponse<TRes>
         {
             var client = CreateClient(baseUrl);
             var form = new MultipartFormDataContent();
@@ -73,10 +69,16 @@ namespace hotel_booking_services.Implmentations
             return await GetResponseResultAsync<TRes>(response);
         }
 
-        private async Task<BasicResponse<TRes>> GetResponseResultAsync<TRes>(HttpResponseMessage response) 
+        //private async Task<BasicResponse<TRes>> GetResponseResultAsync<TRes>(HttpResponseMessage response)
+        //{
+        //    var responseString = await response.Content.ReadAsStringAsync();
+        //    BasicResponse<TRes> result = JsonConvert.DeserializeObject<BasicResponse<TRes>>(responseString);
+        //    return result;
+        //}
+        private async Task<TRes> GetResponseResultAsync<TRes>(HttpResponseMessage response) where TRes : BasicResponse<TRes>
         {
             var responseString = await response.Content.ReadAsStringAsync();
-            BasicResponse<TRes> result = JsonConvert.DeserializeObject<BasicResponse<TRes>>(responseString);
+            TRes result = JsonConvert.DeserializeObject<TRes>(responseString);
             return result;
         }
 
