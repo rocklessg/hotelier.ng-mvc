@@ -1,11 +1,15 @@
+<<<<<<< HEAD
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using hotel_booking_mvc.CustomAuthorization;
+=======
+using hotel_booking_services.Implmentations;
+using hotel_booking_services.Interfaces;
+>>>>>>> 26c36aa55e0273f893b524917485853e46da19ad
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,28 +18,40 @@ namespace hotel_booking_mvc
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
             StaticConfig = configuration;
         }
+<<<<<<< HEAD
 
         public static IConfiguration StaticConfig { get; private set; }
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+=======
+>>>>>>> 26c36aa55e0273f893b524917485853e46da19ad
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor(); // configure httpcontext to be accessible in other class
+            services.AddHttpClient(); // configure httpclient for request to apis
+            services.AddSession();
+            services.AddSingleton<IHttpRequestFactory, HttpRequestFactory>();
             services.AddControllersWithViews();
+<<<<<<< HEAD
             services.AddSession();
             
             services.AddSingleton((provider) =>
             {
                 return Configuration;
             });
+=======
+
+>>>>>>> 26c36aa55e0273f893b524917485853e46da19ad
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -45,14 +61,12 @@ namespace hotel_booking_mvc
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
