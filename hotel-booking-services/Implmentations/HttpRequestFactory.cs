@@ -22,16 +22,23 @@ namespace hotel_booking_services.Implmentations
         {
             _clientFactory = clientFactory;
             _httpContextAccessor = httpContextAccessor;
-            _url = configuration.GetSection("").Value;
+            _url = configuration.GetSection("BaseURL").Value;
         }
 
-        public async Task<BasicResponse<TRes>> GetRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class
+        public async Task<TRes> GetRequestAsync<TRes>(string url, string baseUrl = null) where TRes : BasicResponse<TRes>
         {
             var client = CreateClient(baseUrl);
             var request = new HttpRequestMessage(HttpMethod.Get, url);
             var response = await client.SendAsync(request);
-            return await GetResponseResultAsync<TRes>(response);
+            TRes result = default;
+            var responseString = await response.Content.ReadAsStringAsync();
+            result.Data = JsonConvert.DeserializeObject<TRes>(responseString);
+            result.StatusCode = (int)response.StatusCode;
+            result.Success = response.IsSuccessStatusCode;
+            return result;
         }   
+
+         
 
         public async Task<BasicResponse<TRes>> PostRequestAsync<TReq, TRes>(string url, TReq content, string baseUrl = null) where TRes : class where TReq : class
         {
@@ -41,7 +48,6 @@ namespace hotel_booking_services.Implmentations
             var response = await client.SendAsync(request);
             return await GetResponseResultAsync<TRes>(response);
         }
-
 
         public async Task<BasicResponse<TRes>> DeleteRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class
         {
@@ -69,11 +75,8 @@ namespace hotel_booking_services.Implmentations
 
         private async Task<BasicResponse<TRes>> GetResponseResultAsync<TRes>(HttpResponseMessage response) 
         {
-            BasicResponse<TRes> result = new BasicResponse<TRes>();
             var responseString = await response.Content.ReadAsStringAsync();
-            result.Data = JsonConvert.DeserializeObject<TRes>(responseString);
-            result.StatusCode = (int)response.StatusCode;
-            result.Success = response.IsSuccessStatusCode;
+            BasicResponse<TRes> result = JsonConvert.DeserializeObject<BasicResponse<TRes>>(responseString);
             return result;
         }
 

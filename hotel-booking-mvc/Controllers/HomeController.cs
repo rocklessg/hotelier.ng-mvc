@@ -1,9 +1,11 @@
-﻿using hotel_booking_mvc.Models;
+﻿using hotel_booking_model.commons;
+using hotel_booking_mvc.Models;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace hotel_booking_mvc.Controllers
 {
@@ -22,8 +24,9 @@ namespace hotel_booking_mvc.Controllers
         {
            return View();
         }
-        public IActionResult TestApiAsync(IFormFile file)
+        public async Task<IActionResult> TestApiAsync(IFormFile file)
         {
+            await _httpRequestFactory.DeleteRequestAsync<BasicResponse<string>>("");
             return View("index");
         }
 
@@ -36,6 +39,11 @@ namespace hotel_booking_mvc.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }       
+        }
+
+        public class Weather : BasicResponse<Weather> 
+        {           
+        }
+       
     }
 }

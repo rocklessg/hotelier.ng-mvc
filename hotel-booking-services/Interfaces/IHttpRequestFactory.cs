@@ -26,7 +26,7 @@ namespace hotel_booking_services.Interfaces
         /// <param name="url"></param>
         /// <param name="baseUrl"></param>
         /// <returns>A BasicResponse<TRes> object that has a success field thats is ture if only the request succeded</returns>
-        Task<BasicResponse<TRes>> GetRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class;
+        Task<BasicResponse<TRes>> GetRequestAsync<TRes>(string url, string baseUrl = null) where TRes : BasicResponse<TRes>;
 
         /// <summary>
         /// Makes a HttpPost request to the api with baseUrl 
