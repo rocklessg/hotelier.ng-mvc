@@ -4,6 +4,8 @@ using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -20,35 +22,20 @@ namespace hotel_booking_mvc.Controllers
             _httpRequestFactory = httpRequestFactory;
         }
 
-        public IActionResult IndexAsync()
+        public  IActionResult IndexAsync()
         {
             return View();
-        }
-        public async Task<IActionResult> TestApiAsync(IFormFile file)
-        {
-            await _httpRequestFactory.DeleteRequestAsync<BasicResponse<string>>("");
-            return View("index");
         }
 
         public IActionResult Privacy()
         {
             return View();
-        }        
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-        public class WeatherResponse : BasicResponse<Weather>
-        {
-        }
-        public class Weather
-        {
-
-        }
-
-
     }
 }

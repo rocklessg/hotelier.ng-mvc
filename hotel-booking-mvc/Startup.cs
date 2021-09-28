@@ -23,7 +23,6 @@ namespace hotel_booking_mvc
             services.AddSession();
             services.AddSingleton<IHttpRequestFactory, HttpRequestFactory>();
             services.AddControllersWithViews();
-
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
