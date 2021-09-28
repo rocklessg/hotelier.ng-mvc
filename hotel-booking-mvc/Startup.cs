@@ -18,11 +18,12 @@ namespace hotel_booking_mvc
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews(); 
             services.AddHttpContextAccessor(); // configure httpcontext to be accessible in other class
             services.AddHttpClient(); // configure httpclient for request to apis
             services.AddSession();
             services.AddSingleton<IHttpRequestFactory, HttpRequestFactory>();
+            services.AddControllersWithViews();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -38,7 +39,7 @@ namespace hotel_booking_mvc
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
             app.UseAuthorization();
 

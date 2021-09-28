@@ -2,6 +2,7 @@
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net.Http;
@@ -24,35 +25,35 @@ namespace hotel_booking_services.Implmentations
             _url = configuration.GetSection("").Value;
         }
 
-        public async Task<TRes> GetRequestAsync<TRes>(string url, string baseUrl = null) where TRes : BasicResponse<TRes>
+        public async Task<BasicResponse<TRes>> GetRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class
         {
-            var client = CreateClient();
+            var client = CreateClient(baseUrl);
             var request = new HttpRequestMessage(HttpMethod.Get, url);
             var response = await client.SendAsync(request);
             return await GetResponseResultAsync<TRes>(response);
-        }
+        }   
 
-        public async Task<TRes> PostRequestAsync<TReq, TRes>(string url, TReq content, string baseUrl = null) where TRes : BasicResponse<TRes> where TReq : class
+        public async Task<BasicResponse<TRes>> PostRequestAsync<TReq, TRes>(string url, TReq content, string baseUrl = null) where TRes : class where TReq : class
         {
-            var client = CreateClient();
-            var reqContent = new StringContent(JsonSerializer.Serialize(content), Encoding.UTF8, "application/json");
-            var request = new HttpRequestMessage(HttpMethod.Get, url) { Content = reqContent };
+            var client = CreateClient(baseUrl);
+            var reqContent = new StringContent(System.Text.Json.JsonSerializer.Serialize(content), Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage(HttpMethod.Post, url) { Content = reqContent };
             var response = await client.SendAsync(request);
             return await GetResponseResultAsync<TRes>(response);
         }
 
 
-        public async Task<TRes> DeleteRequestAsync<TRes>(string url, string baseUrl = null) where TRes : BasicResponse<TRes>
+        public async Task<BasicResponse<TRes>> DeleteRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class
         {
-            var client = CreateClient();
+            var client = CreateClient(baseUrl);
             var request = new HttpRequestMessage(HttpMethod.Delete, url);
             var response = await client.SendAsync(request);
             return await GetResponseResultAsync<TRes>(response);
         }
 
-        public async Task<TRes> UploadFile<TReq, TRes>(string url, TReq file, string baseUrl = null) where TReq : IFormFile where TRes : BasicResponse<TRes>
+        public async Task<BasicResponse<TRes>> UploadFileAsync<TReq, TRes>(string url, TReq file, string baseUrl = null) where TReq : IFormFile where TRes : class
         {
-            var client = CreateClient();
+            var client = CreateClient(baseUrl);
             var form = new MultipartFormDataContent();
             using (var memoryStream = new MemoryStream())
             {
@@ -66,12 +67,14 @@ namespace hotel_booking_services.Implmentations
             return await GetResponseResultAsync<TRes>(response);
         }
 
-        private async Task<TRes> GetResponseResultAsync<TRes>(HttpResponseMessage response) where TRes : BasicResponse<TRes>
+        private async Task<BasicResponse<TRes>> GetResponseResultAsync<TRes>(HttpResponseMessage response) 
         {
-            TRes result = default;
+            BasicResponse<TRes> result = new BasicResponse<TRes>();
+            var responseString = await response.Content.ReadAsStringAsync();
+            result.Data = JsonConvert.DeserializeObject<TRes>(responseString);
             result.StatusCode = (int)response.StatusCode;
-            using var responseStream = await response.Content.ReadAsStreamAsync();
-            return await JsonSerializer.DeserializeAsync<TRes>(responseStream);
+            result.Success = response.IsSuccessStatusCode;
+            return result;
         }
 
         private HttpClient CreateClient(string baseUrl = null)

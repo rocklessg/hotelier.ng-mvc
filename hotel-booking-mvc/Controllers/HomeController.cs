@@ -1,8 +1,13 @@
-﻿using hotel_booking_mvc.Models;
+﻿using hotel_booking_model.commons;
+using hotel_booking_mvc.Models;
 using hotel_booking_services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace hotel_booking_mvc.Controllers
 {
@@ -11,7 +16,7 @@ namespace hotel_booking_mvc.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpRequestFactory _httpRequestFactory;
 
-        public HomeController(ILogger<HomeController> logger,IHttpRequestFactory httpRequestFactory)
+        public HomeController(ILogger<HomeController> logger, IHttpRequestFactory httpRequestFactory)
         {
             _logger = logger;
             _httpRequestFactory = httpRequestFactory;
@@ -19,7 +24,11 @@ namespace hotel_booking_mvc.Controllers
 
         public IActionResult IndexAsync()
         {
-            return View();
+           return View();
+        }
+        public IActionResult TestApiAsync(IFormFile file)
+        {
+            return View("index");
         }
 
         public IActionResult Privacy()
@@ -31,7 +40,6 @@ namespace hotel_booking_mvc.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
+        }       
     }
 }
