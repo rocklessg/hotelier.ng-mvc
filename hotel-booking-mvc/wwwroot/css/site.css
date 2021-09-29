@@ -59,8 +59,9 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-color: #F6FCFF;
 }
 .footer {
   position: absolute;
@@ -68,4 +69,44 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+<<<<<<< HEAD
+=======
+}
+
+ /*Css for Error page*/
+
+
+@font-face {
+    font-family: 'Monda';
+    src: url("/Fonts/Monda-Bold.ttf");
+}
+
+h1.bold-font {
+    font-family: 'Monda';
+    color: #2067a1;
+    font-size: 90px;
+    display: 2;
+}
+
+h3.bold-font-sm {
+    font-family: 'Monda';
+    color: #2067a1f1;
+}
+
+p.bold-font.p {
+    font-family: 'Monda';
+    color: #2067a183;
+}
+
+.bg {
+    background: url("/bg-circle.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.card {
+    background: #F6FCFF;
+    background: url("/bg-circle.svg");
+>>>>>>> c769e2051cd5e7c92abd5af5de2feb3eca402c81
 }
