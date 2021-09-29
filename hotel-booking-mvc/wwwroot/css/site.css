@@ -70,3 +70,40 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+ /*Css for Error page*/
+
+
+@font-face {
+    font-family: 'Monda';
+    src: url("/Fonts/Monda-Bold.ttf");
+}
+
+h1.bold-font {
+    font-family: 'Monda';
+    color: #2067a1;
+    font-size: 90px;
+    display: 2;
+}
+
+h3.bold-font-sm {
+    font-family: 'Monda';
+    color: #2067a1f1;
+}
+
+p.bold-font.p {
+    font-family: 'Monda';
+    color: #2067a183;
+}
+
+.bg {
+    background: url("/bg-circle.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.card {
+    background: #F6FCFF;
+    background: url("/bg-circle.svg");
+}
