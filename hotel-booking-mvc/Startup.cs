@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_services.Implmentations;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -11,11 +16,15 @@ namespace hotel_booking_mvc
     public class Startup
     {
         public IConfiguration Configuration { get; }
+        public static IConfiguration StaticConfig { get; private set; }
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            StaticConfig = configuration;
         }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpContextAccessor(); // configure httpcontext to be accessible in other class
@@ -23,7 +32,12 @@ namespace hotel_booking_mvc
             services.AddSession();
             services.AddSingleton<IHttpRequestFactory, HttpRequestFactory>();
             services.AddControllersWithViews();
-
+            services.AddSession();
+            
+            services.AddSingleton((provider) =>
+            {
+                return Configuration;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
