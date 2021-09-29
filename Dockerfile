@@ -26,6 +26,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /src/publish .
 
-ENTRYPOINT ["dotnet", "hotel-booking-mvc.dll"]
+#ENTRYPOINT ["dotnet", "hotel-booking-mvc.dll"]
 
-#CMD ASPNETCORE_URLS=http://*:$PORT dotnet hotel-booking-mvc.dll
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet hotel-booking-mvc.dll
