@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace hotel_booking_mvc.Controllers
 {
-    public class LandingPageController : Controller
+    public class LandingViewController : Controller
     {
         public IActionResult Index()
         {
