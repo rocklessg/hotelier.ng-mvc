@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @{
+        ViewData["Title"] = "Index";
+    }
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link href="@Url.Content("~/css/landingview.css")" rel="stylesheet" type="text/css" />
+    @RenderSection("Styles", false)
+
+
+    <script src="@Url.Content("~/js/landingpage.js")" type="text/javascript"></script>
+    <script src="index.js"></script>
+
+    <link href="//db.onlinewebfonts.com/c/ddb4daa06f2d44fdbfdeb2ef47cb4a58?family=Aribau+Grotesk" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="phone-nav hidden">
+        <div class="phone-nav-header">
+            <a class="phone-nav-logo" href="">LOGO</a>
+            <button class="close">x</button>
+        </div>
+        <div class="phone-div">
+            <ul class="phone-flex">
+                <li><a class="form-control me-2">HOME</a></li>
+                <li><a class="form-control me-2">SERVICES</a></li>
+                <li><a class="form-control me-2">CONTACT</a></li>
+                <li><a class="form-control me-2">HELP</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="container-fluid">
+        <nav class="navbar">
+            <a class="navbar-brand">LOGO</a>
+            <ul class="flex">
+                <li><a class="form-control me-2">HOME</a></li>
+                <li><a class="form-control me-2">SERVICES</a></li>
+                <li><a class="form-control me-2">CONTACT</a></li>
+                <li><a class="form-control me-2">HELP</a></li>
+            </ul>
+
+            <button class="nav-button">&#9776</button>
+        </nav>
+
+        <div class="first-cover">
+            <div class="first-cover-write-up">
+                <div class="first-cover-heading">
+                    <h2 class="head">Affordable Luxury Meets Convenience</h2>
+                </div>
+                <p class="first-cover-paragraph">
+                    Et has minim elitr intellegat. Mea aeterno eleifend
+                    antiopam ad, nam no suscipit quaerendum.
+                    At nam minimum ponderum. Est audiam animal molestiae te. Ex duo eripuit mentitum.
+                </p>
+
+                <div class="first-cover-navigation">
+                    <a class="nav-class" href="#"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Discover</a>
+                </div>
+            </div>
+
+            <div class="first-cover-picture">
+                <div class="covered-picture"></div>
+                <img class="opened-picture" src="https://www.godsavethepoints.com/wp-content/uploads/2017/07/andaz-tokyo5.jpg" alt="">
+            </div>
+        </div>
+
+        <div class="second-cover">
+            <!-- <div class="second"> -->
+            <h3 class="second-cover-heading">Top Deals</h3>
+            <p class="second-cover-paragraph">Amazing offers only for you</p>
+            <!-- </div> -->
+
+            <div class="second-cover-images">
+                <img src="https://images.all-free-download.com/images/graphiclarge/green_hotel_197599.jpg" alt="" class="first">
+                <img src="https://i.pinimg.com/474x/63/00/1a/63001ac7ffd71af905c06fd49ca7424f.jpg" alt="" class="second">
+                <img src="https://images.pexels.com/photos/3225531/pexels-photo-3225531.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" class="third">
+
+            </div>
+
+            <h3 class="second-cover-heading1">
+                Hotels Across Nigeria
+            </h3>
+
+
+        </div>
+        <div class="wrapper-cover">
+            <div class="wrapper">
+                <div class="grid-class one">
+                    <h5 class="hotel-name">Prestige Hotel</h5>
+                    <p class="hotel-names">Benin</p>
+                </div>
+                <div class="grid-class two">
+                    <h5 class="hotel-name">Royal Hills</h5>
+                    <p class="hotel-names">Abuja</p>
+                </div>
+                <div class="grid-class three">
+                    <h5 class="hotel-name">Decagon Bliss</h5>
+                    <p class="hotel-names">Lagos</p>
+                </div>
+                <div class="grid-class four">
+                    <h5 class="hotel-name">Railers Dome</h5>
+                    <p class="hotel-names">Ibadan</p>
+                </div>
+                <div class="grid-class five">
+                    <h5 class="hotel-name">Kailers Monti</h5>
+                    <p class="hotel-names">Lagos</p>
+                </div>
+                <div class="grid-class six">
+                    <h5 class="hotel-name">Paris Hotel</h5>
+                    <p class="hotel-names">Kogi</p>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="third-cover">
+            <div class="wrapper2">
+                <div class="wrapper-class-one">
+                    <div class="white-div">
+                        <h3 class="quote">“Et has minim elitr intellegat. Mea aeterno eleifend antiopam ad, nam no suscipit quaerendum.</h3>
+                    </div>
+                </div>
+                <div class="wrapper-class-two"></div>
+            </div>
+        </div>
+        <div class="forth-cover">
+            <div class="contact-message">
+                <h1 class="contact-us">Contact Us</h1>
+                <h2 class="message">Lorem ipsum dolor sit amet eam <br />quas malorum accusam</h2>
+            </div>
+            <form class="message-form" action="">
+                <input class="message-input" type="text" placeholder="Email"> <button class="submit" type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="fifth-cover">
+            <div class="fifth-cover-div paragraph">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem officiis ullam alias. <br />Sint expedita a distinctio sapiente nam ad cumque.</p>
+                <div class="socials">
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="fifth-cover-div links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><p>Portfolio</p></li>
+                    <li><p>Blogs</p></li>
+                    <li><p>About</p></li>
+                    <li><p>Press</p></li>
+                    <li><p>Careers</p></li>
+                </ul>
+            </div>
+            <div class="fifth-cover-div services">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><p>Hotel Bookings</p></li>
+                    <li><p>Sport Rentals</p></li>
+                </ul>
+            </div>
+            <div class="fifth-cover-div reach-us">
+                <h3>Reach Us</h3>
+                <ul>
+                    <li><p><i class="fa fa-envelope-o" aria-hidden="true"></i>  hello@decagon.com</p></li>
+                    <li><p><i class="fa fa-mobile" aria-hidden="true"></i>  +2348103630834</li>
+                    <li><p><i class="fa fa-map-marker" aria-hidden="true"></i>  Decagon HeadQuaters Lagos</p></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <p class="footer-paragraph">&#9400; 2021 Decagon Headquarters. All Rights Reserved.</p>
+            <ul class="footer-list">
+                <li><a class="one-with-bar" href="#">Terms & Conditions</a></li>
+                <li><a class="one-with-bar" href="#">Privacy Policy</a></li>
+                <li><a class="one-with-bar" href="#">Sitemap</a></li>
+                <li><a href="#">Disclaimer</a></li>
+            </ul>
+        </div>
+
+
+
+
+
+    </div>
+</body>
+</html>
