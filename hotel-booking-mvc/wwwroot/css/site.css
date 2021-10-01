@@ -1,6 +1,9 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+:root {
+    --off-white: rgba(23, 55, 82, 6%);
+}
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -107,4 +110,38 @@ p.bold-font.p {
 .card {
     background: #F6FCFF;
     background: url("/bg-circle.svg");
+}
+
+/*-----Hotel details utils------*/
+.slider__util {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.slider__util > div {
+    scroll-snap-align: start;
+}
+
+.slider__util::-webkit-scrollbar {
+    display: none;
+}
+
+.container__hotel__service__card {
+    background-color: var(--off-white);
+}
+
+ 
+.flow-vr > * + * {
+    margin-top: 1.2rem;
+}
+
+.flow-hr > * + * {
+    margin-left: .7rem;
 }
