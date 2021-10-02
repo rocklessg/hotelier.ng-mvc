@@ -32,6 +32,7 @@ namespace hotel_booking_mvc
             services.AddSession();
             services.AddSingleton<IHttpRequestFactory, HttpRequestFactory>();
             services.AddControllersWithViews();
+
             services.AddSession();
             
             services.AddSingleton((provider) =>
@@ -61,7 +62,7 @@ namespace hotel_booking_mvc
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=LandingView}/{action=Index}/{id?}");
             });
         }
     }

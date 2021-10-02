@@ -18,24 +18,20 @@ namespace hotel_booking_mvc.Controllers
             _httpRequestFactory = httpRequestFactory;
         }
 
-        public IActionResult IndexAsync()
+        public  IActionResult IndexAsync()
         {
-           return View();
-        }
-        public IActionResult TestApiAsync(IFormFile file)
-        {
-            return View("index");
+            return View();
         }
 
         public IActionResult Privacy()
         {
             return View();
-        }        
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }       
+        }
     }
 }

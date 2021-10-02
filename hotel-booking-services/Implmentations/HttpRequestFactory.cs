@@ -8,7 +8,6 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace hotel_booking_services.Implmentations
@@ -22,36 +21,38 @@ namespace hotel_booking_services.Implmentations
         {
             _clientFactory = clientFactory;
             _httpContextAccessor = httpContextAccessor;
-            _url = configuration.GetSection("").Value;
+            _url = configuration.GetSection("BaseURL").Value;
         }
 
-        public async Task<BasicResponse<TRes>> GetRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class
+        public async Task<TRes> GetRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class
         {
             var client = CreateClient(baseUrl);
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-            var response = await client.SendAsync(request);
-            return await GetResponseResultAsync<TRes>(response);
-        }   
-
-        public async Task<BasicResponse<TRes>> PostRequestAsync<TReq, TRes>(string url, TReq content, string baseUrl = null) where TRes : class where TReq : class
+            return await GetResponseResultAsync<TRes>(client, request);
+        }
+        public async Task<TRes> PostRequestAsync<TReq, TRes>(string url, TReq content, string baseUrl = null) where TRes : class where TReq : class
         {
             var client = CreateClient(baseUrl);
-            var reqContent = new StringContent(System.Text.Json.JsonSerializer.Serialize(content), Encoding.UTF8, "application/json");
+            var reqContent = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
             var request = new HttpRequestMessage(HttpMethod.Post, url) { Content = reqContent };
-            var response = await client.SendAsync(request);
-            return await GetResponseResultAsync<TRes>(response);
+            return await GetResponseResultAsync<TRes>(client, request);
+        }
+        public async Task<TRes> UpdateRequestAsync<TReq, TRes>(string url, TReq content, string baseUrl = null) where TRes : class where TReq : class
+        {
+            var client = CreateClient(baseUrl);
+            var reqContent = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage(HttpMethod.Patch, url) { Content = reqContent };
+            return await GetResponseResultAsync<TRes>(client, request);
         }
 
-
-        public async Task<BasicResponse<TRes>> DeleteRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class
+        public async Task<TRes> DeleteRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class
         {
             var client = CreateClient(baseUrl);
             var request = new HttpRequestMessage(HttpMethod.Delete, url);
-            var response = await client.SendAsync(request);
-            return await GetResponseResultAsync<TRes>(response);
+            return await GetResponseResultAsync<TRes>(client, request);
         }
 
-        public async Task<BasicResponse<TRes>> UploadFileAsync<TReq, TRes>(string url, TReq file, string baseUrl = null) where TReq : IFormFile where TRes : class
+        public async Task<TRes> UploadFileAsync<TReq, TRes>(string url, TReq file, string baseUrl = null) where TReq : IFormFile where TRes : class
         {
             var client = CreateClient(baseUrl);
             var form = new MultipartFormDataContent();
@@ -62,21 +63,17 @@ namespace hotel_booking_services.Implmentations
                 fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
                 form.Add(fileContent, nameof(file), file.FileName);
             }
-            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, url) { Content = form };
-            using var response = await client.SendAsync(httpRequestMessage);
-            return await GetResponseResultAsync<TRes>(response);
+            var request = new HttpRequestMessage(HttpMethod.Post, url) { Content = form };
+            return await GetResponseResultAsync<TRes>(client, request);
         }
 
-        private async Task<BasicResponse<TRes>> GetResponseResultAsync<TRes>(HttpResponseMessage response) 
+        private async Task<TRes> GetResponseResultAsync<TRes>(HttpClient client, HttpRequestMessage request) where TRes : class
         {
-            BasicResponse<TRes> result = new BasicResponse<TRes>();
+            var response = await client.SendAsync(request);
             var responseString = await response.Content.ReadAsStringAsync();
-            result.Data = JsonConvert.DeserializeObject<TRes>(responseString);
-            result.StatusCode = (int)response.StatusCode;
-            result.Success = response.IsSuccessStatusCode;
+            var result = JsonConvert.DeserializeObject<TRes>(responseString);
             return result;
         }
-
         private HttpClient CreateClient(string baseUrl = null)
         {
             baseUrl ??= _url;
