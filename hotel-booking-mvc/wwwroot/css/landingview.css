@@ -413,6 +413,7 @@ z-index: 1; */
     padding: 10px;
     background-color: #1A2E3D;
     flex-wrap: wrap;
+    font-size:10px;
 }
 
 .footer-list {
@@ -573,11 +574,13 @@ z-index: 1; */
     }
 
         .fifth-cover div ul {
-            margin-left: -10px;
+            margin-left: 10px;
+            
         }
 
         .fifth-cover div h3 {
             font-size: 1rem;
+            
         }
 
     .fifth-cover-div p {

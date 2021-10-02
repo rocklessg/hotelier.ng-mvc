@@ -61,7 +61,7 @@ namespace hotel_booking_mvc
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=LandingView}/{action=Index}/{id?}");
             });
         }
     }
