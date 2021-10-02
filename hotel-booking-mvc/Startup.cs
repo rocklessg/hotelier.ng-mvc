@@ -32,6 +32,7 @@ namespace hotel_booking_mvc
             services.AddSession();
             services.AddSingleton<IHttpRequestFactory, HttpRequestFactory>();
             services.AddControllersWithViews();
+
             services.AddSession();
             
             services.AddSingleton((provider) =>
