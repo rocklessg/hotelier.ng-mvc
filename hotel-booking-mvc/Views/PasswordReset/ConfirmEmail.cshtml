@@ -6,12 +6,12 @@
     <p class="text-center recovery-instruction">
         Verify your account by entering the 6 digit token sent your registered email.
     </p>
-    <form class="form" method="post" asp-action="ResetPassword">
+    <form class="form" method="post" asp-action="">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Token       ******" />
+            <input type="text" class="form-control" placeholder="Token       ******" required />
         </div>
         <button type="submit" class="btn btn-block btn-lg">Submit Code</button>
-        <a class="nav-link text-dark" asp-area="" asp-controller="PasswordReset" asp-action="Index">
+        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">
             <p class="text-center recovery-instruction mt-4"><small>Didn't receive any mail? Click Here.</small></p>
         </a>
     </form>
