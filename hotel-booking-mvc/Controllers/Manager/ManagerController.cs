@@ -1,0 +1,16 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace hotel_booking_mvc.Controllers.Manager
+{
+    public class ManagerController : Controller
+    {
+        public IActionResult Manager()
+        {
+            return View();
+        }
+    }
+}
