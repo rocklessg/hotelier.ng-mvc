@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace hotel_booking_mvc.Controllers.Admin
+namespace hotel_booking_mvc.Controllers.Manager
 {
-    public class DashboardController : Controller
+    public class ManagerController : Controller
     {
         public IActionResult Dashboard()
         {

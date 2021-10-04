@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace hotel_booking_mvc.Controllers.Manager
+namespace hotel_booking_mvc.Controllers.Admin
 {
-    public class ManagerController : Controller
+    public class AdminController : Controller
     {
-        public IActionResult Manager()
+        public IActionResult Dashboard()
         {
             return View();
         }
