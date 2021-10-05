@@ -77,6 +77,27 @@ body {
 
 }
 
+/*TYPOGRAPHY*/
+@font-face {
+    font-family: "Aribau Grotesk";
+    font-style: normal;
+    font-weight: normal;
+    src: url("/Fonts/AribauGrotesk-Regular.ttf");
+}
+
+
+
+@font-face {
+    font-family: "Aribau Grotesk";
+    font-style: normal;
+    font-weight: bold;
+    src: url("/Fonts/AribauGrotesk-Bold.ttf");
+}
+
+body {
+    font-family: 'Aribau Grotesk', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+}
+
  /*Css for Error page*/
 
 
