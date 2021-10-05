@@ -49,16 +49,25 @@
     <div class="container">
         @RenderBody()
     </div>
+    <footer class="bg-white w-100" style="position:absolute; bottom:0;">
+        <div class="row p-3 d-flex justify-content-center">
+            <div class="col-12 text-center">
+                © @DateTime.Now.ToString("yyyy")
+                <a href="https://https://decagon.institute/" style="text-decoration: none; color: #2067a1">Decagon Hq.</a> All rights reserved
 
+            </div>
+        </div>
+
+    </footer>
     <div class="sidebar m-0 p-0">
         <ul>
             <li>
                 <a class="text-center @(ViewContext.RouteData.Values["Action"].ToString() == "Dashboard" ? "active" : "")">
-                    <div class="container-fluid row d-flex justify-content-center " style="margin-top:15px; margin-bottom:15px;">
+                    <div class="container-fluid row d-flex justify-content-center w-100 gx-0 " style="margin-top:15px; margin-bottom:15px;">
                         <div class="col-12">
                             <i class='bx bxs-dashboard' style="font-size:30px;"></i>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 text-center">
                             <p>Dashboard</p>
                         </div>
                     </div>
@@ -66,11 +75,11 @@
             </li>
             <li>
                 <a class="text-center @(ViewContext.RouteData.Values["Action"].ToString() == "Hotel" ? "active" : "")">
-                    <div class="container-fluid row d-flex justify-content-center " style="margin-top:15px; margin-bottom:15px;">
+                    <div class="container-fluid row d-flex justify-content-center w-100 gx-0" style="margin-top:15px; margin-bottom:15px;">
                         <div class="col-12">
                             <i class='bx bxs-hotel' style="font-size:30px;"></i>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 text-center">
                             <p>Hotel</p>
                         </div>
                     </div>
@@ -78,11 +87,11 @@
             </li>
             <li>
                 <a class="text-center  @(ViewContext.RouteData.Values["Action"].ToString() == "Manager" ? "active" : "")">
-                    <div class="container-fluid row d-flex justify-content-center " style="margin-top:15px; margin-bottom:15px;">
+                    <div class="container-fluid row d-flex justify-content-center w-100 gx-0 " style="margin-top:15px; margin-bottom:15px;">
                         <div class="col-12">
                             <i class='bx bxs-user-rectangle' style="font-size:30px;"></i>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 text-center">
                             <p>Manager</p>
                         </div>
                     </div>
@@ -90,11 +99,11 @@
             </li>
             <li>
                 <a class="text-center  @(ViewContext.RouteData.Values["Action"].ToString() == "Transactions" ? "active" : "")">
-                    <div class="container-fluid row d-flex justify-content-center " style="margin-top:15px; margin-bottom:15px;">
+                    <div class="container-fluid row d-flex justify-content-center  w-100 gx-0" style="margin-top:15px; margin-bottom:15px;">
                         <div class="col-12">
                             <i class='bx bx-money' style="font-size:30px;"></i>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 text-center">
                             <p>Transactions</p>
                         </div>
                     </div>
