@@ -13,7 +13,7 @@
 body {
     position: relative;
     min-height: 100vh;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .main {
@@ -107,3 +107,9 @@ body {
     }
 }
 
+.navbar__fixed__util {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 999;
+}

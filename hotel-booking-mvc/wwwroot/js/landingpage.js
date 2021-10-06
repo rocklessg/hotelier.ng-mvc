@@ -6,10 +6,10 @@ const container = document.querySelector('.container-fluid');
 
 navButton.addEventListener('click', function () {
     phoneNav.classList.remove('hidden');
-    container.classList.add('hidden')
+    container.classList.add('hidden');
 })
 
 closeButton.addEventListener('click', function () {
-    phoneNav.classList.add('hidden')
-    container.classList.remove('hidden')
+    phoneNav.classList.add('hidden');
+    container.classList.remove('hidden');
 })
