@@ -4,7 +4,7 @@
     top: 0;
     left: 0;
     height: 100%;
-    width: 160px;
+    width: 120px;
     background: #2067A1;
     opacity: 1;
     transition: all 0.5s ease;
@@ -17,8 +17,8 @@ body {
 }
 
 .main {
-    width: calc(100% - 160px);
-    left: 160px;
+    width: calc(100% - 120px);
+    left: 120px;
     opacity: 1;
     transition: all 0.4s ease;
 }
@@ -77,8 +77,8 @@ body {
     @media(max-width:700px) {
 
     .main {
-        width: calc(100% - 160px);
-        left: 160px;
+        width: calc(100% - 120px);
+        left: 120px;
         opacity: 1;
         transition: all 0.4s ease;
     }
@@ -88,7 +88,7 @@ body {
         top: 0;
         left: 0;
         height: 100%;
-        width: 160px;
+        width: 120px;
         background: #2067A1;
         opacity: 1;
         transition: all 0.5s ease;

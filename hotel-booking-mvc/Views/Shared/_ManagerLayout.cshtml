@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Admin-Hotel-Booking-MVC</title>
+    <title>@ViewData["Title"] -Hotel-Booking-MVC</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -49,16 +49,25 @@
     <div class="container">
         @RenderBody()
     </div>
+    <footer class="bg-white w-100" style="position:absolute; bottom:0;">
+        <div class="row p-3 d-flex justify-content-center">
+            <div class="col-12 text-center">
+                © @DateTime.Now.ToString("yyyy")
+                <a href="https://https://decagon.institute/" style="text-decoration: none; color: #2067a1">Decagon Hq.</a> All rights reserved
 
+            </div>
+        </div>
+
+    </footer>
     <div class="sidebar m-0 p-0">
         <ul>
             <li>
                 <a class="text-center @(ViewContext.RouteData.Values["Action"].ToString() == "Dashboard" ? "active" : "")">
-                    <div class="container-fluid row d-flex justify-content-center " style="margin-top:15px; margin-bottom:15px;">
+                    <div class="container-fluid row d-flex justify-content-center w-100 gx-0" style="margin-top:15px; margin-bottom:15px;">
                         <div class="col-12">
                             <i class='bx bxs-dashboard' style="font-size:30px;"></i>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 text-center">
                             <p>Dashboard</p>
                         </div>
                     </div>
@@ -66,11 +75,11 @@
             </li>
             <li>
                 <a class="text-center @(ViewContext.RouteData.Values["Action"].ToString() == "Hotel" ? "active" : "")">
-                    <div class="container-fluid row d-flex justify-content-center " style="margin-top:15px; margin-bottom:15px;">
+                    <div class="container-fluid row d-flex justify-content-center w-100 gx-0 " style="margin-top:15px; margin-bottom:15px;">
                         <div class="col-12">
                             <i class='bx bxs-hotel' style="font-size:30px;"></i>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 text-center">
                             <p>Hotel</p>
                         </div>
                     </div>
@@ -78,11 +87,11 @@
             </li>
             <li>
                 <a class="text-center  @(ViewContext.RouteData.Values["Action"].ToString() == "Bookings" ? "active" : "")">
-                    <div class="container-fluid row d-flex justify-content-center " style="margin-top:15px; margin-bottom:15px;">
+                    <div class="container-fluid row d-flex justify-content-center w-100 gx-0" style="margin-top:15px; margin-bottom:15px;">
                         <div class="col-12">
                             <i class='bx bxs-calendar-check' style="font-size:30px;"></i>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 text-center">
                             <p>Bookings</p>
                         </div>
                     </div>
@@ -90,11 +99,11 @@
             </li>
             <li>
                 <a class="text-center  @(ViewContext.RouteData.Values["Action"].ToString() == "Transactions" ? "active" : "")">
-                    <div class="container-fluid row d-flex justify-content-center " style="margin-top:15px; margin-bottom:15px;">
+                    <div class="container-fluid row d-flex justify-content-center w-100 gx-0" style="margin-top:15px; margin-bottom:15px;">
                         <div class="col-12">
                             <i class='bx bx-money' style="font-size:30px;"></i>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 text-center">
                             <p>Transactions</p>
                         </div>
                     </div>
