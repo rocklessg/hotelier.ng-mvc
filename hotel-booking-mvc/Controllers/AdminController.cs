@@ -17,5 +17,10 @@ namespace hotel_booking_mvc.Controllers.Admin
         {
             return View("../Hotel/Details");
         }
+
+        public IActionResult SingleRoom()
+        {
+            return View("../Hotel/SingleRoom");
+        }
     }
 }
