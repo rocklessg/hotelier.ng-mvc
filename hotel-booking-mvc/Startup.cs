@@ -31,7 +31,7 @@ namespace hotel_booking_mvc
             services.AddHttpClient(); // configure httpclient for request to apis
             services.AddSession();
             services.AddSingleton<IHttpRequestFactory, HttpRequestFactory>();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddSession();
             
