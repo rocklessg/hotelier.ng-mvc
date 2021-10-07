@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="~/css/site.css"/>
     <link href="~/css/style.css" rel="stylesheet" />
 </head>
-<body class="main" style="background: #F6FCFF;">
+<body class="main override__margin" style="background: #F6FCFF;">
     <nav class="navbar navbar-light bg-white flex-nowrap">
         <div class="container-fluid">
             <a class="navbar-brand text-center align-content-center " id="side" style="width: 40px; height: auto; background: #2067A1"><i class='bx bx-menu text-white'></i></a>
@@ -50,7 +50,7 @@
         <div class="container">
             @RenderBody()
         </div>
-    <footer class="bg-white w-100 mt-5" style="position:absolute; bottom:0;">
+    <footer class="bg-white w-100" style="">
         <div class="row p-3 d-flex justify-content-center">
             <div class="col-12 text-center">
                 © @DateTime.Now.ToString("yyyy")
