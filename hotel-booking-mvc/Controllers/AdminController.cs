@@ -15,5 +15,10 @@ namespace hotel_booking_mvc.Controllers.Admin
             //ViewData["transactionPeriod"] = transactionPeriod;
             return View(transactionPeriod);
         }
+
+        public IActionResult HotelDetails()
+        {
+            return View("../Hotel/Details");
+        }
     }
 }
