@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using hotel_booking_model;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,9 @@ namespace hotel_booking_mvc.Controllers.Admin
     {
         public IActionResult Dashboard()
         {
-            return View();
+            TransactionPeriod transactionPeriod = new TransactionPeriod();
+            //ViewData["transactionPeriod"] = transactionPeriod;
+            return View(transactionPeriod);
         }
     }
 }
