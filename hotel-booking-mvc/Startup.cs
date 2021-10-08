@@ -1,3 +1,4 @@
+using hotel_booking_services.Implmentations;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,7 +26,8 @@ namespace hotel_booking_mvc
             services.AddHttpClient(); // configure httpclient for request to apis
             services.AddSession();
             services.AddSingleton<IHttpRequestFactory, HttpRequestFactory>();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
             services.AddSession();
             
             services.AddSingleton((provider) =>
@@ -55,7 +57,7 @@ namespace hotel_booking_mvc
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=LandingView}/{action=Index}/{id?}");
             });
         }
     }
