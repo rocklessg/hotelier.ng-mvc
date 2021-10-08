@@ -5,4 +5,10 @@
     <RootNamespace>hotel_booking_model</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="DTO\**" />
+    <EmbeddedResource Remove="DTO\**" />
+    <None Remove="DTO\**" />
+  </ItemGroup>
+
 </Project>

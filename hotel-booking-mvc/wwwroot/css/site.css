@@ -1,6 +1,11 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+:root {
+    --off-white: rgba(23, 55, 82, 6%);
+    --off-green: rgba(0, 178, 139, 0.1);
+    --green: rgba(0, 178, 139, 1);
+}
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -69,8 +74,28 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
-<<<<<<< HEAD
-=======
+
+}
+
+/*TYPOGRAPHY*/
+@font-face {
+    font-family: "Aribau Grotesk";
+    font-style: normal;
+    font-weight: normal;
+    src: url("/Fonts/AribauGrotesk-Regular.ttf");
+}
+
+
+
+@font-face {
+    font-family: "Aribau Grotesk";
+    font-style: normal;
+    font-weight: bold;
+    src: url("/Fonts/AribauGrotesk-Bold.ttf");
+}
+
+body {
+    font-family: 'Aribau Grotesk', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
 }
 
  /*Css for Error page*/
@@ -85,7 +110,7 @@ h1.bold-font {
     font-family: 'Monda';
     color: #2067a1;
     font-size: 90px;
-    display: 2;
+    display: block;
 }
 
 h3.bold-font-sm {
@@ -108,4 +133,51 @@ p.bold-font.p {
 .card {
     background: #F6FCFF;
     background: url("/bg-circle.svg");
+<<<<<<< HEAD
+=======
+}
+
+/*-----Hotel details utils------*/
+.slider__util {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+}
+
+.slider__util > div {
+    scroll-snap-align: start;
+}
+
+.slider__util::-webkit-scrollbar {
+    display: none;
+}
+
+.container__hotel__service__card {
+    background-color: var(--off-white);
+}
+
+ 
+.flow-vr > * + * {
+    margin-top: 1.2rem;
+}
+
+.flow-hr > * + * {
+    margin-left: .7rem;
+}
+
+.border__thin__util {
+    border-right: 1px solid rgba(23, 55, 82, 0.26) !important;
+}
+
+.rating__btn__util {
+    color: var(--green);
+    background-color: var(--off-green);
+    border-radius: 20px;
+    padding: 4px 20px;
+>>>>>>> b37346d49022f5ee271d6a518654a0ebd350e2b9
 }

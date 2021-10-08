@@ -15,7 +15,7 @@ namespace hotel_booking_services.Interfaces
         /// <param name="url"></param>
         /// <param name="baseUrl"></param>
         /// <returns>A BasicResponse<TRes> object that has a success field thats is ture if only the request succeded</returns>
-        Task<BasicResponse<TRes>> DeleteRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class;
+        Task<TRes> DeleteRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class;
 
         /// <summary>
         /// Makes a HttpGet request to the api with baseUrl to 
@@ -26,7 +26,7 @@ namespace hotel_booking_services.Interfaces
         /// <param name="url"></param>
         /// <param name="baseUrl"></param>
         /// <returns>A BasicResponse<TRes> object that has a success field thats is ture if only the request succeded</returns>
-        Task<BasicResponse<TRes>> GetRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class;
+        Task<TRes> GetRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class;
 
         /// <summary>
         /// Makes a HttpPost request to the api with baseUrl 
@@ -40,7 +40,7 @@ namespace hotel_booking_services.Interfaces
         /// <param name="content"></param>
         /// <param name="baseUrl"></param>
         /// <returns>A BasicResponse<TRes> object that has a success field thats is ture if only the request succeded</returns>
-        Task<BasicResponse<TRes>> PostRequestAsync<TReq, TRes>(string url, TReq content, string baseUrl = null)
+        Task<TRes> PostRequestAsync<TReq, TRes>(string url, TReq content, string baseUrl = null)
             where TReq : class
             where TRes : class;
 
@@ -55,8 +55,13 @@ namespace hotel_booking_services.Interfaces
         /// <param name="file"></param>
         /// <param name="baseUrl"></param>
         /// <returns>A BasicResponse<TRes> object that has a success field thats is ture if only the request succeded</returns>
-        Task<BasicResponse<TRes>> UploadFileAsync<TReq, TRes>(string url, TReq file, string baseUrl = null)
+        Task<TRes> UploadFileAsync<TReq, TRes>(string url, TReq file, string baseUrl = null)
             where TReq : IFormFile
             where TRes : class;
+
+        Task<TRes> UpdateRequestAsync<TReq, TRes>(string url, TReq content, string baseUrl = null) 
+            where TRes : class 
+            where TReq : class;
+
     }
 }
