@@ -12,5 +12,21 @@ namespace hotel_booking_mvc.Controllers.Manager
         {
             return View();
         }
+
+        
+        public IActionResult Hotel()
+        {
+            return View();
+        }
+
+        public IActionResult Bookings()
+        {
+            return View();  
+        }
+
+        public IActionResult Transactions()
+        {
+            return View();  
+        }
     }
 }

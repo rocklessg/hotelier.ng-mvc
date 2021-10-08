@@ -2,6 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+     ViewData["Title"] = "Single Room";
 }
 
 <link rel="stylesheet" href="~/css/single-room.css" />
@@ -20,8 +21,8 @@
         </div>
     </div>
 
-    <div class="d-flex flex-row justify-content-between m-0">
-        <div class="col-md-7 ">
+    <div class="d-flex row justify-content-between m-0">
+        <div class="col-sm-12 col-md-7 col-lg-7 mb-sm-2">
 
             <div class="mb-3">
                 <img class="room-image" src="https://s3-alpha-sig.figma.com/img/fe14/901d/2a9b8f140a70f90af3711822508d11b3?Expires=1634515200&Signature=P8fsKPONKiQ3nCLol4Gkz6h6CT4Ivj5GYKMSUqbkpLn20LJXzubPCwuVeXJ2RBw4I7pjqJfGkaP66SXc-U2hrZjhwvTHiRgie3XVdrp9XiIIcCVIvcHcd-65qnSC64Qtz0G4sNNCRUWZ8JLa9T5~c0sg2EKmUZa4whmb~5xXiGcV6c8-gZ9KXht3M-ekTnFawATGD2W9lkfKS0Uw6gN92Rd9M2NmRX4HqzHVYoer5XGJGNTKlWjx-VfyTrj8scLkSDkbnjAZmWsz5LbCCZXA2P5KlB386CG-5xhv8F1xZXuKwGuehixH1ABCC9aEuBdruZFflOh1Qj8F7jR~er0Gxg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA" alt="current room" />
@@ -69,8 +70,8 @@
             </div>
         </div>
 
-        <div class="col-md-4 d-flex flex-column justify-content-between" style="margin-bottom:100px">
-            <div class="d-flex flex-row card-container">
+        <div class="col-sm-12 col-md-4 col-lg-4 d-flex flex-column justify-content-between" style="margin-bottom:100px">
+            <div class="d-flex flex-row card-container mb-2">
                 <div class="card-image w-30">
                     <img class="img-fluid" alt="naira symbol" src="~/images/naira.png" />
                 </div>
@@ -79,7 +80,7 @@
                     <h4>Per Night</h4>
                 </div>
             </div>
-            <div class="d-flex flex-row card-container">
+            <div class="d-flex flex-row card-container mb-2">
                 <div class="card-image w-30">
                     <img class="img-fluid" alt="naira symbol" src="~/images/available.png" />
                 </div>
@@ -87,7 +88,7 @@
                     <h4><a href="#">AVAILABLE</a></h4>
                 </div>
             </div>
-            <div class="d-flex flex-row card-container">
+            <div class="d-flex flex-row card-container mb-2">
                 <div class="card-image w-30">
                     <img class="img-fluid" alt="naira symbol" src="~/images/room-service.png" />
                 </div>
@@ -95,7 +96,7 @@
                     <h4>ROOMS SERVICE 24/7</h4>
                 </div>
             </div>
-            <div class="d-flex flex-row card-container">
+            <div class="d-flex flex-row card-container mb-2">
                 <div class="card-image w-30">
                     <img class="img-fluid" alt="naira symbol" src="~/images/fitness-center.png" />
                 </div>
@@ -104,8 +105,8 @@
                 </div>
             </div>
             <div class="mx-auto">
-                <button type="button" class="btn btn-primary btn-lg">Edit </button>
-                <button type="button" class="btn btn-danger btn-lg">Delete</button>
+                <button type="button" class="btn btn-primary btn-md">Edit </button>
+                <button type="button" class="btn btn-danger btn-md">Delete</button>
             </div>
 
         </div>

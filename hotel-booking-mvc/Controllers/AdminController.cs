@@ -16,6 +16,24 @@ namespace hotel_booking_mvc.Controllers.Admin
             return View(transactionPeriod);
         }
 
+        // Hotel Listing Controller
+        public IActionResult Hotel()
+        {
+            return View();
+        }
+
+        // Manager Listing Controller
+        public IActionResult Manager()
+        {
+            return View();  
+
+        }
+
+        public IActionResult Transactions()
+        {
+            return View();  
+        }
+
         public IActionResult HotelDetails()
         {
             return View("../Hotel/Details");
