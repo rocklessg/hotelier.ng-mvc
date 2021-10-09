@@ -11,7 +11,7 @@ namespace hotel_booking_mvc.Controllers.Admin
     {
         public IActionResult Dashboard()
         {
-            TransactionPeriod transactionPeriod = new TransactionPeriod();
+            TransactionPeriod transactionPeriod = new();
             //ViewData["transactionPeriod"] = transactionPeriod;
             return View(transactionPeriod);
         }
@@ -22,16 +22,9 @@ namespace hotel_booking_mvc.Controllers.Admin
             return View();
         }
 
-<<<<<<< HEAD
-        public IActionResult Hotel()
-        {
+       
 
 
-            return View();
-        }
-      
-
-=======
         // Manager Listing Controller
         public IActionResult Manager()
         {
@@ -50,6 +43,5 @@ namespace hotel_booking_mvc.Controllers.Admin
         }
 
        
->>>>>>> fix-mvc-cleanup
     }
 }

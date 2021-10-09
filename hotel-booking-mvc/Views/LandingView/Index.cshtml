@@ -46,7 +46,7 @@
     </div>
     <div class="container-fluid">
         <nav class="navbar">
-            <img src="~/images/logos_only_dark.svg" width="50" height="50"/>
+            <img src="~/images/logos_only_dark.svg" width="40" height="40" style="padding:3px;"/>
             <ul class="flex">
                 <li><a class="form-control me-2">HOME</a></li>
                 <li><a class="form-control me-2">SERVICES</a></li>
@@ -200,6 +200,23 @@
 
 
     </div>
+    <script>
+        const navButton = document.querySelector('.nav-button');
+        const phoneNav = document.querySelector('.phone-nav');
+        const closeButton = document.querySelector('.close');
+        const container = document.querySelector('.container-fluid');
 
+
+        navButton.addEventListener('click', function () {
+            phoneNav.classList.remove('hidden');
+            container.classList.add('hidden')
+        })
+
+        closeButton.addEventListener('click', function () {
+            phoneNav.classList.add('hidden')
+            container.classList.remove('hidden')
+        })
+
+    </script>
 </body>
 </html>
