@@ -2,10 +2,9 @@
 var lineChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ['Jan', 'Feb', 'Mar', 'April', 'May', 'June', 'Jul', 'Aug'],
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [{
-            label: 'Total Transactions',
-            data: [0.5, 1.5, 3, 1.5, 3, 3, 0, 0],
+            data: [0, 1.5, 3, 1.5, 3, 3, 2, 1, 1.5, 2, 1.5, 3],
             backgroundColor: [
                 '#FFBB33',
             ],
