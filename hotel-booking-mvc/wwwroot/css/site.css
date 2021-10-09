@@ -1,71 +1,84 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿:root {
+    --off-white: rgba(23, 55, 82, 6%);
+    --off-green: rgba(0, 178, 139, 0.1);
+    --green: rgba(0, 178, 139, 1);
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+/* CSS for Error page */
+@font-face {
+    font-family: 'Monda';
+    src: url("/Fonts/Monda-Bold.ttf");
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+h1.bold-font {
+    font-family: 'Monda';
+    color: #2067a1;
+    font-size: 90px;
+    display: block;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+h3.bold-font-sm {
+    font-family: 'Monda';
+    color: #2067a1f1;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+p.bold-font.p {
+    font-family: 'Monda';
+    color: #2067a183;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+.bg {
+    background: url("/bg-circle.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+/*.card {
+    background: #F6FCFF;
+    background: url("/bg-circle.svg");
+}*/
+
+/*-----Hotel details utils------*/
+.slider__util {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+.slider__util > div {
+    scroll-snap-align: start;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+.slider__util::-webkit-scrollbar {
+    display: none;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+
+.container__hotel__service__card {
+    background-color: var(--off-white);
+}
+
+ 
+.flow-vr > * + * {
+    margin-top: 1.2rem;
+}
+
+.flow-hr > * + * {
+    margin-left: .7rem;
+}
+
+.border__thin__util {
+    border-right: 1px solid rgba(23, 55, 82, 0.26) !important;
+}
+
+.rating__btn__util {
+    color: var(--green);
+    background-color: var(--off-green);
+    border-radius: 20px;
+    padding: 4px 20px;
 }
