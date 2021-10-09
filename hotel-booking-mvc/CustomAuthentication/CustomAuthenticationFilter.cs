@@ -51,8 +51,8 @@ namespace hotel_booking_mvc.CustomAuthorization
                 context.Result = new RedirectToRouteResult(
                     new RouteValueDictionary
                     {
-                    { "controller", "Authentication" },
-                    { "action", "UnAuthorize" }
+                    { "controller", "Errors" },
+                    { "action", "Error401" }
                     });
 
             }
@@ -60,7 +60,7 @@ namespace hotel_booking_mvc.CustomAuthorization
             context.Result = new RedirectToRouteResult(
                 new RouteValueDictionary
                 {
-                { "controller", "Authentication" },
+                { "controller", "Auth" },
                 { "action", "Login" }
                 });
         }

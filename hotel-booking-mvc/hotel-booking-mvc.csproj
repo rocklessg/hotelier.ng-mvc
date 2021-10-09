@@ -8,6 +8,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\lib\flickity\" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.10" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <Folder Include="wwwroot\img\" />
@@ -17,6 +18,12 @@
     <ProjectReference Include="..\hotel-booking-model\hotel-booking-model.csproj" />
 
     <ProjectReference Include="..\hotel-booking-services\hotel-booking-services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\images\favicon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
