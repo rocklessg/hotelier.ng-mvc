@@ -10,7 +10,7 @@ else if (ViewContext.RouteData.Values["Controller"].ToString() == "Manager")
     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
 
-else if (ViewContext.RouteData.Values["Controller"].ToString() == "Auth")
+else if (ViewContext.RouteData.Values["Controller"].ToString() == "Auth" || ViewContext.RouteData.Values["Controller"].ToString() == "Errors")
 {
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }

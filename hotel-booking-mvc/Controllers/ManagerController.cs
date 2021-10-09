@@ -30,7 +30,7 @@ namespace hotel_booking_mvc.Controllers.Manager
         }
         public IActionResult SingleRoom()
         {
-            return View("../Hotel/SingleRoom");
+            return View();
         }
     }
 }
