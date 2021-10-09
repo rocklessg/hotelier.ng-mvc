@@ -36,12 +36,9 @@ namespace hotel_booking_mvc.Controllers.Admin
 
         public IActionResult HotelDetails()
         {
-            return View("../Hotel/Details");
+            return View();
         }
 
-        public IActionResult SingleRoom()
-        {
-            return View("../Hotel/SingleRoom");
-        }
+       
     }
 }

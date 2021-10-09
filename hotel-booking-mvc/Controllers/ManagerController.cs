@@ -28,5 +28,9 @@ namespace hotel_booking_mvc.Controllers.Manager
         {
             return View();  
         }
+        public IActionResult SingleRoom()
+        {
+            return View("../Hotel/SingleRoom");
+        }
     }
 }
