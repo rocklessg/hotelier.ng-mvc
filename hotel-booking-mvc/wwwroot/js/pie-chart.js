@@ -24,16 +24,11 @@ var pieChart = new Chart(ctx, {
             yPadding: 15,
             displayColors: false,
             caretPadding: 10,
+            offset: 20
+            
         },
         legend: {
             display: false
         },
-    }
-    //options: {
-    //    scales: {
-    //        y: {
-    //            beginAtZero: true
-    //        }
-    //    }
-    //}
+    }   
 });
