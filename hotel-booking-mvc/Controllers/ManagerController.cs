@@ -12,5 +12,10 @@ namespace hotel_booking_mvc.Controllers.Manager
         {
             return View();
         }
+
+        public IActionResult AllManagers()
+        {
+            return View();
+        }
     }
 }
