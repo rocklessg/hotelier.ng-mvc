@@ -11,19 +11,37 @@ namespace hotel_booking_mvc.Controllers.Admin
     {
         public IActionResult Dashboard()
         {
-            TransactionPeriod transactionPeriod = new TransactionPeriod();
+            TransactionPeriod transactionPeriod = new();
             //ViewData["transactionPeriod"] = transactionPeriod;
             return View(transactionPeriod);
         }
 
-        public IActionResult HotelDetails()
+        // Hotel Listing Controller
+        public IActionResult Hotel()
         {
-            return View("../Hotel/Details");
+            return View();
         }
 
-        public IActionResult SingleRoom()
+       
+
+
+        // Manager Listing Controller
+        public IActionResult Manager()
         {
-            return View("../Hotel/SingleRoom");
+            return View();  
+
         }
+
+        public IActionResult Transactions()
+        {
+            return View();  
+        }
+
+        public IActionResult HotelDetails()
+        {
+            return View();
+        }
+
+       
     }
 }
