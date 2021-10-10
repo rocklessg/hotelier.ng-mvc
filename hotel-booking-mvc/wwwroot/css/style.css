@@ -1,4 +1,14 @@
 ﻿
+
+/* Global Styling */
+
+@font-face {
+    font-family: "Aribau Grotesk";
+    font-style: normal;
+    font-weight: normal;
+    src: url("/Fonts/AribauGrotesk-Regular.ttf");
+}
+
 .sidebar {
     position: fixed;
     top: 0;
@@ -10,7 +20,12 @@
     transition: all 0.5s ease;
 }
 
+*{
+    margin:0;
+    padding:0;
+}
 body {
+    font-family: 'Aribau Grotesk', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
     position: relative;
     min-height: 100vh;
     overflow: scroll;
@@ -45,6 +60,7 @@ body {
         width: 100%;
         list-style: none;
         margin-bottom: 70px;
+        cursor:auto;
     }
 
         .sidebar ul li a {
@@ -107,6 +123,7 @@ body {
     }
 }
 
+/* Admin Dashboard Styling */
 #calendar_cancel {
     color: #333333;
     width: 81.2px;
@@ -149,7 +166,7 @@ body {
 }
 
 .card {
-    background: #FDFDFF;
+    background: #FFF;
     border: 1px solid #EBEBEB;
     box-sizing: border-box;
     border-radius: 13px;
@@ -162,7 +179,7 @@ body {
 .card-header {
     display: flex;
     justify-content: space-between;
-    background: transparent;
+    background: #fff;
     border-bottom: 0;
     color: #000043;
 }
