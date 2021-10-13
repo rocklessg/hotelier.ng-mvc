@@ -13,9 +13,11 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View();
         }
 
-<<<<<<< HEAD
+
         public IActionResult AllManagers()
-=======
+        {
+            return View();
+        }
         
         public IActionResult Hotel()
         {
@@ -29,10 +31,10 @@ namespace hotel_booking_mvc.Controllers.Manager
 
         public IActionResult Transactions()
         {
-            return View();  
+            return View();    
         }
         public IActionResult SingleRoom()
->>>>>>> reviews
+
         {
             return View();
         }
