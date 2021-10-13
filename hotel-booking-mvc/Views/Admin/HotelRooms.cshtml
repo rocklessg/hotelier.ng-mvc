@@ -20,9 +20,9 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews</button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    @*<li class="nav-item" role="presentation">
                         <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
-                    </li>
+                    </li>*@
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="rooms" role="tabpanel" aria-labelledby="home-tab">
@@ -38,22 +38,23 @@
                                         <div class="col-12 col-md-7">
                                             <div class="card-body">
                                                 <h5 class="card-title">Standard room</h5>
-                                                <div class="">
+                                                <div class="color__black__override">
                                                     <small>size: 21m</small>
-                                                    <small>Max guests: 2 Adults, 1 Child</small>
+                                                    <small class="mx-2">|</small>
+                                                    <small> <i class='bx bxs-user'></i> Max guests: 2 Adults, 1 Child</small>
                                                 </div>
-                                                <p class="">
+                                                <p class="color__black__override mt-2">
                                                     Our Standard Rooms with a king bed make a comfortable home away from home. After a round at Ikeja Golf Club, return to your room and enjoy a drink from the mini refrigerator while you watch your favorite TV show. Hungry for a midnight snack or an early breakfast? You can order something delicious from room service, which is available 24 hours. These standard amenities are also included:
                                                 </p>
 
-                                                <ul>
+                                                <ul class="color__black__override">
                                                     <li>Air Conditioning</li>
                                                     <li>Satellite TV</li>
                                                     <li>World Desk</li>
                                                 </ul>
 
                                                 <div class="d-flex flex-row justify-content-between align-items-end w-100">
-                                                    <div class="wrapper__icon__group" style="font-size: 2em;">
+                                                    <div class="wrapper__icon__group color__black__override" style="font-size: 2em;">
                                                         <i class='bx bx-wifi'></i>
                                                         <i class='bx bx-desktop'></i>
                                                         <i class='bx bxs-coffee'></i>
@@ -73,67 +74,71 @@
                     <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="profile-tab">
                         <h6 class="mt-3">Rating Overview</h6>
                         <div class="row">
-                            <div class="col-12 col-md-4">
+                            <div class="col-12 col-md-4 mt-3">
                                 <div class="flex flex-column">
                                     <div>
                                         <small>Staff</small>
-                                        <div class="rating__bar__util w-75"></div>
+                                        <div class="rating__bar__util w-100"></div>
                                     </div>
 
                                      <div class="mt-3">
                                         <small>Location</small>
-                                        <div>Bar</div>
+                                        <div class="rating__bar__util w-100"></div>
                                     </div>
 
                                      <div class="mt-3">
                                         <small>Value for money</small>
-                                        <div>Bar</div>
+                                        <div class="rating__bar__util w-100"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-4">
+                            <div class="col-12 col-md-4 mt-3">
                                 <div class="flex flex-column">
                                     <div>
                                         <small>Facilities</small>
-                                        <div>Bar</div>
+                                        <div class="rating__bar__util w-100"></div>
                                     </div>
 
                                      <div class="mt-3">
                                         <small>Services</small>
-                                        <div>Bar</div>
+                                        <div class="rating__bar__util w-100"></div>
                                     </div>
 
                                      <div class="mt-3">
                                         <small>Food</small>
-                                        <div>Bar</div>
+                                        <div class="rating__bar__util w-100"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-4">
+                            <div class="col-12 col-md-4 mt-3">
                                 <div class="flex flex-column">
                                     <div>
                                         <small>Cleaniness</small>
-                                        <div>Bar</div>
+                                        <div class="rating__bar__util w-100"></div>
                                     </div>
 
                                      <div class="mt-3">
                                         <small>Confort</small>
-                                        <div>Bar</div>
+                                        <div class="rating__bar__util w-100"></div>
                                     </div>
 
                                      <div class="mt-3">
                                         <small>Rooms</small>
-                                        <div>Bar</div>
+                                        <div class="rating__bar__util w-100"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5>Recent Gues Review</h5>
+
+                        <div class="d-flex w-100 justify-content-between mt-4">
+                            <h5>Recent Guest Review</h5>
                             <div>
                                 <b>Guest Rating</b>
+
                             </div>
                         </div>
+
+                        <div>
                         @{
                             for (int i = 0; i < 4; i++)
                             {
@@ -145,7 +150,7 @@
                                                  class="rounded-circle"
                                                  width="75"
                                                  height="75" />
-                                                <span>Katrina Jade</span>
+                                                <span class="color__black__override">Katrina Jade</span>
                                             </div>
                                         </div>
 
@@ -153,7 +158,7 @@
                                             <div class="card-body">
                                                 <div>
                                                     <h5 class="card-title">"Best Hotel in Lagos"</h5>
-                                                    <div>
+                                                    <div class="color__black__override">
                                                         <span>
                                                             @{
                                                                 for(int j = 0; j < 5; j++)
@@ -162,11 +167,12 @@
                                                                 }
                                                             }
                                                         </span>
+                                                        <span class="mx-2">|</span>
                                                         <span><b>Reviewed: </b> <small>2021-06-12</small></span>
                                                     </div>
                                                 </div>
 
-                                                <p class="w-80 mt-4">
+                                                <p class="w-80 mt-4 color__black__override">
                                                     Stayed here for 20 nights in March 2019. have been working in and around Lagos for the past 4 year-end this is by far the best hotel I have stayed in. The rooms, staff, cleanliness, internet and comfort offered by this hotel are second to none. I am currently (unfortunately) staying across the road in the Sheraton. Not a scratch on the Raddison Blu and so I will be returning there in June for another 20 nights!
                                                 </p>
                                             </div>
@@ -175,6 +181,7 @@
                                 </div>
                             }
                         }
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
                 </div>
