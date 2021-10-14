@@ -28,7 +28,7 @@ body {
     font-family: 'Aribau Grotesk', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
     position: relative;
     min-height: 100vh;
-    overflow-y: scroll;
+
     overflow: scroll;
 }
 
@@ -207,6 +207,10 @@ body {
 .content-area {
     width: 498px;
     height: 624px;
+}
+
+.form-control {
+    height: 65px;
 }
 
 #total {
