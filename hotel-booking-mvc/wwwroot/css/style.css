@@ -28,6 +28,7 @@ body {
     font-family: 'Aribau Grotesk', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
     position: relative;
     min-height: 100vh;
+
     overflow: scroll;
 }
 
