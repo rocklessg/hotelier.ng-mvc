@@ -28,11 +28,8 @@ body {
     font-family: 'Aribau Grotesk', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
     position: relative;
     min-height: 100vh;
-<<<<<<< HEAD
     overflow-y: scroll;
-=======
     overflow: scroll;
->>>>>>> fix-mvc-cleanup
 }
 
 .main {
