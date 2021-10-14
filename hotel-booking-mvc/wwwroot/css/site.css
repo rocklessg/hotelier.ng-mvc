@@ -37,7 +37,9 @@ p.bold-font.p {
 /*.card {
     background: #F6FCFF;
     background: url("/bg-circle.svg");
+
 }*/
+
 
 /*-----Hotel details utils------*/
 .slider__util {
@@ -82,6 +84,7 @@ p.bold-font.p {
     border-radius: 20px;
     padding: 4px 20px;
 }
+
 
 .rating__bar__util {
     height: 6px;
