@@ -37,13 +37,9 @@ p.bold-font.p {
 /*.card {
     background: #F6FCFF;
     background: url("/bg-circle.svg");
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-}
-=======
+
 }*/
->>>>>>> reviews
+
 
 /*-----Hotel details utils------*/
 .slider__util {
@@ -89,3 +85,14 @@ p.bold-font.p {
     padding: 4px 20px;
 }
 
+
+.rating__bar__util {
+    height: 6px;
+    border-radius: 2px;
+    background-color: rgba(229,229,229,1);
+    background: linear-gradient(90deg, rgba(0,53,128,1) 62%, rgba(229,229,229,1) 66%);
+}
+
+.color__black__override {
+   color: #1c1c1c !important;
+}
