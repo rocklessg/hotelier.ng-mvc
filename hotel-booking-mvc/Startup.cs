@@ -1,11 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_mvc.Extensions;
-using hotel_booking_services.Implmentations;
-using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
