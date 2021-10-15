@@ -1,10 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using hotel_booking_mvc.CustomAuthorization;
-using hotel_booking_services.Implmentations;
-using hotel_booking_services.Interfaces;
+using hotel_booking_mvc.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,9 +24,11 @@ namespace hotel_booking_mvc
             services.AddHttpContextAccessor(); // configure httpcontext to be accessible in other class
             services.AddHttpClient(); // configure httpclient for request to apis
             services.AddSession();
-            services.AddSingleton<IHttpRequestFactory, HttpRequestFactory>();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
+            // configures interfaces for dependency injection
+            services.ConfigureDependencies(Configuration);
+
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddSession();
             
             services.AddSingleton((provider) =>
