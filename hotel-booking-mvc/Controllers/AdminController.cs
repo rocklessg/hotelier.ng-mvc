@@ -42,6 +42,11 @@ namespace hotel_booking_mvc.Controllers.Admin
             return View();
         }
 
+
+        public IActionResult AllUsers()
+        {
+            return View();
+        }
        
     }
 }
