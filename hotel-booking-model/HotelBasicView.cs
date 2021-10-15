@@ -1,7 +1,7 @@
 ﻿namespace hotel_booking_model
 {
     public class HotelBasicView
-    {
+    {        
         public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
