@@ -22,6 +22,7 @@ namespace hotel_booking_services.Implmentations
             _clientFactory = clientFactory;
             _httpContextAccessor = httpContextAccessor;
             _url = configuration.GetSection("BaseURL").Value;
+
         }
 
         public async Task<TRes> GetRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class
