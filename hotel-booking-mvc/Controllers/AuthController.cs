@@ -4,6 +4,10 @@ namespace hotel_booking_mvc.Controllers.Auth
 {
     public class AuthController : Controller
     {
+        public AuthController()
+        {
+
+        }
         public IActionResult Login()
         {
             return View();

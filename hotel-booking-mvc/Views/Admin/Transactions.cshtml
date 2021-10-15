@@ -4,3 +4,110 @@
 @{
      ViewData["Title"] = "Transactions";
 }
+
+
+<div class="container mt-5">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Hotel Name</th>
+                <th scope="col">BookingId</th>
+                <th scope="col">Transaction Reference</th>
+                <th scope="col">Payment Method</th>
+                <th scope="col">Amount (₦)</th>
+                <th scope="col">Transaction Date</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Emmanuel Ovie</td>
+                <td>De Crussiers Hotels</td>
+                <td>Bk-245636</td>
+                <td>TX-567890</td>
+                <td>Cash</td>
+                <td>50689.00</td>
+                <td>12/10/2021</td>
+                <td><span class="badge rounded-pill bg-success">Paid</span></td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Olawale Raymond</td>
+                <td>Royal Hotels</td>
+                <td>Bk-246736</td>
+                <td>TX-566690</td>
+                <td>Debit Card</td>
+                <td>78656.00</td>
+                <td>14/10/2021</td>
+                <td><span class="badge rounded-pill bg-success">Paid</span></td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Yusuf Fisayo</td>
+                <td>Palace Royals</td>
+                <td>Bk-445636</td>
+                <td>TX-997890</td>
+                <td>Debit Card</td>
+                <td>56789.00</td>
+                <td>14/10/2021</td>
+                <td><span class="badge rounded-pill bg-success">Paid</span></td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>Paulson Sunday</td>
+                <td>Gogo Place</td>
+                <td>Bk-245636</td>
+                <td>TX-567890</td>
+                <td>Debit Card</td>
+                <td>9089.00</td>
+                <td>14/10/2021</td>
+                <td><span class="badge rounded-pill bg-warning">Pending</span></td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td>Frederick Holand</td>
+                <td>Sapa Hotel</td>
+                <td>Bk-245636</td>
+                <td>TX-567890</td>
+                <td>Debit Card</td>
+                <td>56780.00</td>
+                <td>14/10/2021</td>
+                <td><span class="badge rounded-pill bg-success">Paid</span></td>
+            </tr>
+            <tr>
+                <th scope="row">6</th>
+                <td>Reuben Sadders</td>
+                <td>Green Hills Gardens</td>
+                <td>Bk-245636</td>
+                <td>TX-567890</td>
+                <td>Debit Card</td>
+                <td>45657.00</td>
+                <td>14/10/2021</td>
+                <td><span class="badge rounded-pill bg-danger">Failed</span></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="container d-flex justify-content-center">
+        <nav aria-label="Page navigation d-flex align-center">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    
+</div>
