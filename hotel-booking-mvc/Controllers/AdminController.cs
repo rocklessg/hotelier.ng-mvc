@@ -39,10 +39,11 @@ namespace hotel_booking_mvc.Controllers.Admin
             return View();  
         }
 
-        public IActionResult HotelDetails()
+        public IActionResult HotelDetails(string hotelId)
         {
             return View();
         }
+
         public IActionResult HotelRooms()
         {
             return View();
