@@ -48,6 +48,10 @@ namespace hotel_booking_mvc.Controllers.Admin
         {
             return View();
         }
+        public IActionResult AllManagers()
+        {
+            return View();
+        }
 
     }
 }
