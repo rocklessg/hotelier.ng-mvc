@@ -19,19 +19,22 @@ namespace hotel_booking_services.Implmentations
             _httpRequestFactory = httpRequestFactory;
         }
 
-        public LoginDto Login()
+        public LoginDto Login(LoginModel loginModel)
         {
-            var response = _httpRequestFactory.GetRequestAsync<LoginDto>("/");
+
+            var response = _httpRequestFactory.PostRequestAsync<LoginModel, LoginDto>("/api/Authentication/login", loginModel);
             LoginDto login = response.Result;
             return login;
-            
+           
         }
 
 
 
-        /*public SignupDto Signp(SignupModel signupModel)
+        public SignupDto Signup(SignupModel signupModel) 
         {
-            var response = _httpRequestFactory.
-        }*/
+            var response = _httpRequestFactory.PostRequestAsync<SignupModel, SignupDto>("/api/Authentication", signupModel);
+            SignupDto signup = response.Result;
+            return signup;
+        }
     }
 }

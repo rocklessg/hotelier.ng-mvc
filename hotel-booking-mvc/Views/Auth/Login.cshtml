@@ -21,21 +21,40 @@
                             <div class="card-body">
                                 @using (Html.BeginForm("Login", "Auth", FormMethod.Post, new { novalidate = "true", @class = "needs-validation" }))
                                 {
-                                    <form asp-action="Index">
-                                        <div class="form-group mb-2">
-                                            <input name="Email" class="form-control" placeholder="Email" required />
-                                            <span name="Email" class="text-danger"></span>
-                                        </div>
-                                        <div class="form-group mb-2">
-                                            <input name="Password" class="form-control" placeholder="Password" required />
-                                            <span name="Password" class="text-danger"></span>
-                                        </div>
-                                        <div class="form-group">
-                                            <input asp-controller="Auth" asp-action="Login"
-                                                   type="submit" value="login" class="btn btn-primary form-control btn-block" />
-                                        </div>
 
-                                    </form>
+                                    <div class="form-group mb-2">
+
+                                        @Html.TextBoxFor(x => x.Email, new { @class = "form-control has-validation", @placeholder = "Email", @required = "required" })
+
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "badge bg-danger" })
+
+                                        @if (ViewBag.error != null)
+
+                                        {
+
+                                            <span class="badge bg-danger">@ViewBag.error</span>
+
+                                        }
+                                    </div>
+                                    <div class="form-group mb-2">
+
+                                        @Html.TextBoxFor(x => x.Password, new { @class = "form-control has-validation", @placeholder = "Password", @required = "required" })
+
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "badge bg-danger" })
+
+                                        @if (ViewBag.error != null)
+
+                                        {
+
+                                            <span class="badge bg-danger">@ViewBag.error</span>
+
+                                        }
+                                    </div>
+                                    <div class="form">
+                                        <input type="submit" value="Login" class="btn btn-primary form-control btn-block" />
+                                    </div>
+
+
 
                                 }
 
@@ -45,7 +64,7 @@
                                     <a href="" p-2>Register</a>
                                 </div>
                             </div>
-                        </div>
+                                </div>
 
                     </div>
                 </div>

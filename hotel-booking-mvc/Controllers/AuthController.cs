@@ -1,7 +1,6 @@
 ﻿using hotel_booking_model;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -10,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using hotel_booking_model.AuthModels;
 
 namespace hotel_booking_mvc.Controllers.Auth
 {
@@ -31,6 +31,8 @@ namespace hotel_booking_mvc.Controllers.Auth
 
 
 
+
+
         [HttpPost]
         public IActionResult Login(LoginModel loginModel)
         {
@@ -41,14 +43,14 @@ namespace hotel_booking_mvc.Controllers.Auth
             {
                 try
                 {
-                    var result = _auth.Login();
+                    var result = _auth.Login(loginModel);
 
                     HttpContext.Session.SetString("user", JsonConvert.SerializeObject(result));
-                    var decodedValue = handler.ReadJwtToken(result.Token);
+                    JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Data[' ']);
                     var Claim = decodedValue.Claims.ElementAt(2);
-                    if (Claim.Value == "Customer")
+                    if (Claim.Value == "Manager")
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Dashboard", "Manager");
                     }
                     return RedirectToAction("Dashboard", "Admin");
                 }
@@ -62,28 +64,35 @@ namespace hotel_booking_mvc.Controllers.Auth
         }
 
 
-       
 
 
-        /* [HttpPost]
-         public IActionResult Register(SignupModel signupmodel)
-         {
-             try
-             {
-                 if (!ModelState.IsValid)
-                 {
-                     return View();
-                 }
-                 var result = _auth.Register(signupmodel);
-                 //  result.EnsureSuccessStatusCode();
-                 return RedirectToAction("Login");
-             }
-             catch (Exception)
-             {
-                 TempData["error"] = "Oops something bad happened try again!";
-                 return View();
-             }
-         }*/
+        public IActionResult Signup()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Signup(SignupModel signupmodel)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View();
+                }
+                var result = _auth.Signup(signupmodel);
+                //  result.EnsureSuccessStatusCode();
+                return RedirectToAction("Login");
+            }
+            catch (Exception)
+            {
+                TempData["error"] = "Oops something bad happened try again!";
+                return View();
+            }
+        }
+
+
 
 
 
@@ -103,8 +112,6 @@ namespace hotel_booking_mvc.Controllers.Auth
         {
             return View();
         }
-
-
 
 
     }

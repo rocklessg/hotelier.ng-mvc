@@ -8,6 +8,9 @@ namespace hotel_booking_model.AuthModels.Dto
 {
     public class LoginDto
     {
-        public string Token { get; set; }
+        public string[] Data { get; set; }
+        public string Succeeded { get; set; }
+        public string Message { get; set; }
+        public string StatusCode { get; set; }
     }
 }

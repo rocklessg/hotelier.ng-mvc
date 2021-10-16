@@ -9,10 +9,11 @@ namespace hotel_booking_model.AuthModels
 {
     public class LoginModel
     {
-        [Required]
+        [Required(ErrorMessage ="Enter Email To Continue")]
+
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Enter Password To Continue")]
         public string Password { get; set; }
     }
 }
