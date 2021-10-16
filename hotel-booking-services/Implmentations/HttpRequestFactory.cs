@@ -27,20 +27,20 @@ namespace hotel_booking_services.Implmentations
 
         public async Task<TRes> GetRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class
         {
-            var client = CreateClient(baseUrl);
+            var client = CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Get, url);
             return await GetResponseResultAsync<TRes>(client, request);
         }
         public async Task<TRes> PostRequestAsync<TReq, TRes>(string url, TReq content, string baseUrl = null) where TRes : class where TReq : class
         {
-            var client = CreateClient(baseUrl);
+            var client = CreateClient();
             var reqContent = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
             var request = new HttpRequestMessage(HttpMethod.Post, url) { Content = reqContent };
             return await GetResponseResultAsync<TRes>(client, request);
         }
         public async Task<TRes> UpdateRequestAsync<TReq, TRes>(string url, TReq content, string baseUrl = null) where TRes : class where TReq : class
         {
-            var client = CreateClient(baseUrl);
+            var client = CreateClient();
             var reqContent = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
             var request = new HttpRequestMessage(HttpMethod.Patch, url) { Content = reqContent };
             return await GetResponseResultAsync<TRes>(client, request);
@@ -48,14 +48,14 @@ namespace hotel_booking_services.Implmentations
 
         public async Task<TRes> DeleteRequestAsync<TRes>(string url, string baseUrl = null) where TRes : class
         {
-            var client = CreateClient(baseUrl);
+            var client = CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Delete, url);
             return await GetResponseResultAsync<TRes>(client, request);
         }
 
         public async Task<TRes> UploadFileAsync<TReq, TRes>(string url, TReq file, string baseUrl = null) where TReq : IFormFile where TRes : class
         {
-            var client = CreateClient(baseUrl);
+            var client = CreateClient();
             var form = new MultipartFormDataContent();
             using (var memoryStream = new MemoryStream())
             {
@@ -75,13 +75,11 @@ namespace hotel_booking_services.Implmentations
             var result = JsonConvert.DeserializeObject<TRes>(responseString);
             return result;
         }
-        private HttpClient CreateClient(string baseUrl = null)
-        {
-            baseUrl ??= _url;
+        private HttpClient CreateClient() { 
             var client = _clientFactory.CreateClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.BaseAddress = new Uri(baseUrl);
+            client.BaseAddress = new Uri(_url);
             var token = _httpContextAccessor.HttpContext.Session.GetString("access_token");
             if (!string.IsNullOrEmpty(token))
             {

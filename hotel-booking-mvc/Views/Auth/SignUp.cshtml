@@ -1,4 +1,7 @@
-﻿@*
+﻿@model hotel_booking_model.SignupModel
+
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
@@ -18,27 +21,81 @@
                     <div class="col-sm-12 col-lg-6">
                         <div class="card bg-white">
                             <div class="card-body">
-                                <form method="post" asp-action="">
+                                @using (Html.BeginForm("Signup", "Auth", FormMethod.Post, new { novalidate = "true", @class = "needs-validation" }))
+                                {
+                                    
+
+
+
                                     <div class="form-group mb-2">
-                                        <input name="Firstname" class="form-control" placeholder="Firstname" required />
-                                        <span name="Firstname" class="text-danger"></span>
+
+                                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control has-validation", @placeholder = "First Name", @required = "required" })
+
+                                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "badge bg-danger" })
+
+                                        @if (ViewBag.error != null)
+
+                                        {
+
+                                            <span class="badge bg-danger">@ViewBag.error</span>
+
+                                        }
                                     </div>
-                                    <div class="form-group  mb-2">
-                                        <input name="Lastname" class="form-control" placeholder="Lastname" required />
-                                        <span name="Lastname" class="text-danger"></span>
+                                    <div class="form-group mb-2">
+
+                                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control has-validation", @placeholder = "Last Name", @required = "required" })
+
+                                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "badge bg-danger" })
+
+                                        @if (ViewBag.error != null)
+
+                                        {
+
+                                            <span class="badge bg-danger">@ViewBag.error</span>
+
+                                        }
                                     </div>
-                                    <div class="form-group  mb-2">
-                                        <input name="Email" class="form-control" placeholder="Email" required />
-                                        <span name="Email" class="text-danger"></span>
+                                    
+
+
+                                    <div class="form-group mb-2">
+
+                                        @Html.TextBoxFor(x => x.Email, new { @class = "form-control has-validation", @placeholder = "Email", @required = "required" })
+
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "badge bg-danger" })
+
+                                        @if (ViewBag.error != null)
+
+                                        {
+
+                                            <span class="badge bg-danger">@ViewBag.error</span>
+
+                                        }
                                     </div>
-                                    <div class="form-group  mb-2">
-                                        <input name="Password" class="form-control" placeholder="Password" required />
-                                        <span name="Password" class="text-danger"></span>
+                                    <div class="form-group mb-2">
+
+                                        @Html.TextBoxFor(x => x.Password, new { @class = "form-control has-validation", @placeholder = "Password", @required = "required" })
+
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "badge bg-danger" })
+
+                                        @if (ViewBag.error != null)
+
+                                        {
+
+                                            <span class="badge bg-danger">@ViewBag.error</span>
+
+                                        }
                                     </div>
+
+
+
                                     <div class="form-group">
                                         <input type="submit" value="signup" class="btn btn-primary form-control btn-block" />
                                     </div>
-                                </form>
+                                }
+                                @*<form method="post" asp-action="">*@
+
+                                @*</form>*@
                                 <div class="form-group m-4">
                                     <a href="" p-2>Already Have an account?</a>
                                 </div>
