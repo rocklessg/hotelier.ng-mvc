@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace hotel_booking_mvc.Controllers.Manager
 {
@@ -13,7 +9,8 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View();
         }
 
-        
+
+      
         public IActionResult Hotel()
         {
             return View();
@@ -26,9 +23,10 @@ namespace hotel_booking_mvc.Controllers.Manager
 
         public IActionResult Transactions()
         {
-            return View();  
+            return View();    
         }
         public IActionResult SingleRoom()
+
         {
             return View();
         }
