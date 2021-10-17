@@ -42,12 +42,12 @@
     font-size: 1em;
     width: 80px;
 }
-.inactive {
+.is-inactive-btn {
     background-color: white;
     color: black;
 }
 
-.active {
+.is-active-btn {
     background-color: rgb(109, 170, 235);
     color: white;
 }
