@@ -34,6 +34,10 @@
     padding-right: .5rem;
 }
 
+#service-name, #transaction-reference, #status, #amount, #commission {
+    white-space: nowrap;
+}
+
 
 .btn-state {
     height: 30px;
