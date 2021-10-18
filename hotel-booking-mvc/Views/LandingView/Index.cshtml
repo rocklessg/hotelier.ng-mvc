@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -28,34 +28,13 @@
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <title>Document</title>
 </head>
+
+
+
 <body>
-    <div class="phone-nav hidden">
-        <div class="phone-nav-header">
-            <img src="~/images/logos_only_dark.svg" width="100" height="50"/>
-            <button class="close">x</button>
-        </div>
-        <div class="phone-div">
-            <ul class="phone-flex">
-                <li><a class="form-control me-2">HOME</a></li>
-                <li><a class="form-control me-2">SERVICES</a></li>
-                <li><a class="form-control me-2">CONTACT</a></li>
-                <li><a class="form-control me-2">HELP</a></li>
-            </ul>
-        </div>
 
-    </div>
     <div class="container-fluid">
-        <nav class="navbar">
-            <img src="~/images/logos_only_dark.svg" width="40" height="40" style="padding:3px;"/>
-            <ul class="flex">
-                <li><a class="form-control me-2">HOME</a></li>
-                <li><a class="form-control me-2">SERVICES</a></li>
-                <li><a class="form-control me-2">CONTACT</a></li>
-                <li><a class="form-control me-2">HELP</a></li>
-            </ul>
 
-            <button class="nav-button">&#9776</button>
-        </nav>
 
         <div class="first-cover">
             <div class="first-cover-write-up">
@@ -147,8 +126,9 @@
                 <input class="message-input" type="text" placeholder="Email"> <button class="submit" type="submit">Submit</button>
             </form>
         </div>
-        <div class="fifth-cover">
-            <div class="fifth-cover-div paragraph">
+
+        <div class="footer-cover">
+            <div class="footer-cover-item">
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem officiis ullam alias. <br />Sint expedita a distinctio sapiente nam ad cumque.</p>
                 <div class="socials">
                     <i class="fa fa-facebook" aria-hidden="true"></i>
@@ -157,7 +137,8 @@
                     <i class="fa fa-google-plus" aria-hidden="true"></i>
                 </div>
             </div>
-            <div class="fifth-cover-div links">
+
+            <div class="footer-cover-item">
                 <h3>Quick Links</h3>
                 <ul>
                     <li><p>Portfolio</p></li>
@@ -167,14 +148,16 @@
                     <li><p>Careers</p></li>
                 </ul>
             </div>
-            <div class="fifth-cover-div services">
+
+            <div class="footer-cover-item">
                 <h3>Quick Links</h3>
                 <ul>
                     <li><p>Hotel Bookings</p></li>
                     <li><p>Sport Rentals</p></li>
                 </ul>
             </div>
-            <div class="fifth-cover-div reach-us">
+
+            <div class="footer-cover-item">
                 <h3>Reach Us</h3>
                 <ul>
                     <li><p><i class="fa fa-envelope-o" aria-hidden="true"></i>  hello@decagon.com</p></li>
@@ -185,38 +168,7 @@
 
         </div>
 
-        <div class="footer">
-            <p class="footer-paragraph">&#9400; 2021 Decagon Headquarters. All Rights Reserved.</p>
-            <ul class="footer-list">
-                <li><a class="one-with-bar" href="#">Terms & Conditions</a></li>
-                <li><a class="one-with-bar" href="#">Privacy Policy</a></li>
-                <li><a class="one-with-bar" href="#">Sitemap</a></li>
-                <li><a href="#">Disclaimer</a></li>
-            </ul>
-        </div>
-
-
-
-
-
     </div>
-    <script>
-        const navButton = document.querySelector('.nav-button');
-        const phoneNav = document.querySelector('.phone-nav');
-        const closeButton = document.querySelector('.close');
-        const container = document.querySelector('.container-fluid');
 
-
-        navButton.addEventListener('click', function () {
-            phoneNav.classList.remove('hidden');
-            container.classList.add('hidden')
-        })
-
-        closeButton.addEventListener('click', function () {
-            phoneNav.classList.add('hidden')
-            container.classList.remove('hidden')
-        })
-
-    </script>
 </body>
 </html>

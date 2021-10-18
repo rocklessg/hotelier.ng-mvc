@@ -5,49 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - hotel_booking_mvc</title>
     <link href="~/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
-    
+    <link href="@Url.Content("~/css/landingview.css")" rel="stylesheet" type="text/css" />
+
 </head>
 <body style="background: #F6FCFF;">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">hotel_booking_mvc</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="LandingView" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
 
-  
-                    </ul>
-                </div>
+        <div class="phone-nav hidden">
+            <div class="phone-nav-header">
+                <img src="~/images/logos_only_dark.svg" width="40" height="40" asp-area="" asp-controller="Home" asp-action="Index" />
+                <button class="close">x</button>
             </div>
-        </nav>
+            <div class="phone-div">
+                <ul class="phone-flex">
+                    <li><a class="form-control me-2" asp-area="" asp-controller="LandingView" asp-action="Index">HOME</a></li>
+                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="">SERVICES</a></li>
+                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="">CONTACT</a></li>
+                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="">HELP</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="container-fluid">
+            <nav class="navbar">
+                <img src="~/images/logos_only_dark.svg" width="40" height="40" style="padding:3px;" asp-area="" asp-controller="Home" asp-action="Index" />
+                <ul class="flex">
+                    <li><a class="form-control me-2" asp-area="" asp-controller="LandingView" asp-action="Index">HOME</a></li>
+                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="">SERVICES</a></li>
+                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="">CONTACT</a></li>
+                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="">HELP</a></li>
+                </ul>
+
+                <button class="nav-button">&#9776</button>
+            </nav>
+
+
+
+
+
+        </div>
     </header>
-    <div class="container-fluid">
+    <div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - hotel_booking_mvc - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <div class="footer">
+        <p class="footer-paragraph">&#9400; 2021 Decagon Headquarters. All Rights Reserved.</p>
+        <ul class="footer-list">
+            <li><a class="one-with-bar" href="#">Terms & Conditions</a></li>
+            <li><a class="one-with-bar" href="#">Privacy Policy</a></li>
+            <li><a class="one-with-bar" href="#">Sitemap</a></li>
+            <li><a href="#">Disclaimer</a></li>
+        </ul>
+    </div>
+
+
+
+
 </body>
 </html>
