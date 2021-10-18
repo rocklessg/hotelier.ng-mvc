@@ -208,9 +208,7 @@ body {
     height: 624px;
 }
 
-.form-control {
-    height: 65px;
-}
+
 
 #total {
     width: 16px;
@@ -231,4 +229,8 @@ body {
 .linechart__datepicker {
     border: none;
     color: #173752;
+}
+
+a {
+    text-decoration:none;
 }
