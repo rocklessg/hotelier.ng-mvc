@@ -96,3 +96,11 @@ p.bold-font.p {
 .color__black__override {
    color: #1c1c1c !important;
 }
+
+.blue__override {
+    color: #2067A1 !important;
+}
+
+.blue__bg {
+    background-color: #2067A1 !important;
+}
