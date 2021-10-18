@@ -114,7 +114,15 @@
                     <th scope="col"></th>
                     <th scope="col">ROOM NUMBER</th>
                     <th scope="col">STATUS</th>
-                    <th scope="col"> </th>
+                    <th scope="col">
+                        <!-- Add Room Buttons-->
+                        <div style="display:flex; justify-content:end">
+                            <button type="button" class="btn btn-outline-secondary btn-md d-flex align-items-center" style="color: black; border: 1px solid;">
+                                <box-icon size="sm" name='plus'></box-icon>
+                                ADD ROOM
+                            </button>
+                        </div>
+                    </th>
                 </tr>
             </thead>
 
@@ -124,7 +132,14 @@
                     <th scope="row"><input type="checkbox"></th>
                     <td>10</td>
                     <td><button class="btn btn-primary btn-sm tdbtn" style="border-radius: 15px 15px 15px 15px; background: #2067A1; border: 2px solid">Booked</button></td>
-                    <td></td>
+                    <th scope="col">
+                        <button data-bs-toggle="modal" data-bs-target="#editRoomModal" style="border: none; margin-right: 10%;">
+                            <box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='pencil'></box-icon>
+                        </button>
+                        <button data-bs-toggle="modal" data-bs-target="#deleteRoomModal" style="border: none; margin-right: 10%;">
+                            <box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='trash'></box-icon>
+                        </button>
+                    </th>
                 </tr>
 
                 <!--Row 2-->
@@ -132,7 +147,10 @@
                     <th scope="row"><input type="checkbox"></th>
                     <td>12</td>
                     <td><button class="bg-white btn btn-sm" style="border-radius: 15px 15px 15px 15px;  border: 1px solid; border-color:black; color:black">Available</button></td>
-                    <td></td>
+                    <th scope="col">
+                        <a href="#"><box-icon class="card-title" style=" margin-right:10%;" size="sm" type='solid' color="#2067A1" name='pencil'></box-icon></a>
+                        <a href="#"><box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='trash'></box-icon></a>
+                    </th>
                 </tr>
 
                 <!--Row 3-->
@@ -140,7 +158,10 @@
                     <th scope="row"><input type="checkbox"></th>
                     <td>19</td>
                     <td><button class="btn btn-primary btn-sm tdbtn" style="border-radius: 15px 15px 15px 15px; background: #2067A1; border: 2px solid">Booked</button></td>
-                    <td></td>
+                    <th scope="col">
+                        <a href="#"><box-icon class="card-title" style=" margin-right:10%;" size="sm" type='solid' color="#2067A1" name='pencil'></box-icon></a>
+                        <a href="#"><box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='trash'></box-icon></a>
+                    </th>
                 </tr>
 
                 <!--Row 4-->
@@ -148,11 +169,60 @@
                     <th scope="row"><input type="checkbox"></th>
                     <td>21</td>
                     <td><button class="bg-white btn btn-sm" style="border-radius: 15px 15px 15px 15px;  border: 1px solid; border-color:black; color:black">Available</button></td>
-                    <td></td>
+                    <th scope="col">
+                        <a href="#"><box-icon class="card-title" style=" margin-right:10%;" size="sm" type='solid' color="#2067A1" name='pencil'></box-icon></a>
+                        <a href="#"><box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='trash'></box-icon></a>
+                    </th>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    
+    <!--Edit hotel Details Modal-->
+    <div class="modal fade" id="editRoomModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Room Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input class="form-control" type="text" style="margin-bottom:5px;" placeholder="Room Number" aria-label="room number">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupSelect01">Status</label>
+                            <select class="form-select" id="inputGroupSelect01">
+                                <option selected>Choose...</option>
+                                <option value="1">Booked</option>
+                                <option value="2">Available</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Delete Room Confirmation Modal-->
+    <div class="modal fade" id="deleteRoomModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Room</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this Room?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,5 +1,4 @@
-﻿using hotel_booking_model.commons;
-using hotel_booking_services.Interfaces;
+﻿using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;

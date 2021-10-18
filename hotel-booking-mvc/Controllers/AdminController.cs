@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace hotel_booking_mvc.Controllers.Admin
 {
 	public class AdminController : Controller
-    {
+	{
 		private readonly IHotelService _hotelService;
 
 		public AdminController(IHotelService hotelService)
@@ -19,8 +19,6 @@ namespace hotel_booking_mvc.Controllers.Admin
             //ViewData["transactionPeriod"] = transactionPeriod;
             return View(transactionPeriod);
         }
-
-        // Hotel Listing Controller
         public async Task<IActionResult> HotelAsync(int pageNumber)
         {
             var hotelList = await _hotelService.GetAllHotelAsync(pageNumber);
@@ -52,14 +50,15 @@ namespace hotel_booking_mvc.Controllers.Admin
             return View();
         }
 
-<<<<<<< HEAD
 
         public IActionResult AllUsers()
         {
             return View();
         }
-       
-=======
->>>>>>> 755bea9ca34da5b34c00256822882643890e687f
-    }
+		public IActionResult HotelDetails(string hotelId)
+		{
+			return View();
+		}
+
+	}
 }
