@@ -391,8 +391,6 @@ z-index: 1; */
 
 /*footer cover starts here*/
 .footer-cover {
-<<<<<<< HEAD
-=======
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -424,11 +422,9 @@ z-index: 1; */
 
 .footer {
     width: 100%;
->>>>>>> reviews
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-<<<<<<< HEAD
     background: #1A2E3D;
     width: 100%;
     padding: 2rem;
@@ -452,9 +448,7 @@ z-index: 1; */
 
 .socials{
     margin-top: 3rem;
-=======
     font-size: 10px;
->>>>>>> reviews
 }
 
 

@@ -5,29 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
-<<<<<<< HEAD
 using System.IdentityModel.Tokens.Jwt;
-=======
->>>>>>> reviews
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using hotel_booking_model.AuthModels;
-<<<<<<< HEAD
-=======
-using System.IdentityModel.Tokens.Jwt;
->>>>>>> reviews
-
 namespace hotel_booking_mvc.Controllers.Auth
 {
     public class AuthController : Controller
     {
-<<<<<<< HEAD
-=======
-
-        public AuthController()
-        {
->>>>>>> reviews
 
         private readonly IAuthRepository _auth;
 
@@ -37,30 +23,15 @@ namespace hotel_booking_mvc.Controllers.Auth
             _auth = auth;
         }
 
-<<<<<<< HEAD
-=======
-
-        private readonly IAuthRepository _auth;
-
-
-        public AuthController(IAuthRepository auth)
-        {
-            _auth = auth;
-        }
-
->>>>>>> reviews
         public IActionResult Login()
         {
             return View();
         }
 
 
-
-
-
         [HttpPost]
         public IActionResult Login(LoginModel loginModel)
-<<<<<<< HEAD
+
         {
             var handler = new JwtSecurityTokenHandler();
 
@@ -92,39 +63,7 @@ namespace hotel_booking_mvc.Controllers.Auth
 
 
 
-        public IActionResult Signup()
-=======
->>>>>>> reviews
-        {
-            var handler = new JwtSecurityTokenHandler();
 
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var result = _auth.Login(loginModel);
-
-                    HttpContext.Session.SetString("user", JsonConvert.SerializeObject(result));
-                    JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Data[' ']);
-                    var Claim = decodedValue.Claims.ElementAt(2);
-                    if (Claim.Value == "Manager")
-                    {
-                        return RedirectToAction("Dashboard", "Manager");
-                    }
-                    return RedirectToAction("Dashboard", "Admin");
-                }
-                catch (Exception)
-                {
-                    TempData["error"] = "Oops something bad happened try again!";
-                    return View();
-                }
-            }
-            return View();
-        }
-
-
-<<<<<<< HEAD
         [HttpPost]
         public IActionResult Signup(SignupModel signupmodel)
         {
@@ -135,27 +74,7 @@ namespace hotel_booking_mvc.Controllers.Auth
             try
             {
                 var result = _auth.Signup(signupmodel);
-=======
 
-
-        public IActionResult Signup()
-        {
-            return View();
-        }
-
-
-        [HttpPost]
-        public IActionResult Signup(SignupModel signupmodel)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return View();
-                }
-                var result = _auth.Signup(signupmodel);
-                //  result.EnsureSuccessStatusCode();
->>>>>>> reviews
                 return RedirectToAction("Login");
             }
             catch (Exception)
@@ -167,11 +86,14 @@ namespace hotel_booking_mvc.Controllers.Auth
 
 
 
+        public IActionResult Signup()
+        {
+            return View();
+        }
 
 
 
-
-        public IActionResult ForgotPassword()
+            public IActionResult ForgotPassword()
         {
             return View();
         }
