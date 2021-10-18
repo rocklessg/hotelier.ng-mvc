@@ -1,4 +1,4 @@
-﻿using hotel_booking_model;
+using hotel_booking_model;
 using hotel_booking_model.AuthModels;
 using hotel_booking_model.AuthModels.Dto;
 using hotel_booking_services.Interfaces;
@@ -25,12 +25,11 @@ namespace hotel_booking_services.Implmentations
             var response = _httpRequestFactory.PostRequestAsync<LoginModel, LoginDto>("/api/Authentication/login", loginModel);
             LoginDto login = response.Result;
             return login;
-           
-        }
-
+ }
 
 
         public SignupDto Signup(SignupModel signupModel) 
+
         {
             var response = _httpRequestFactory.PostRequestAsync<SignupModel, SignupDto>("/api/Authentication", signupModel);
             SignupDto signup = response.Result;

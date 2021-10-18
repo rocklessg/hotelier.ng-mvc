@@ -9,6 +9,10 @@
     src: url("/Fonts/AribauGrotesk-Regular.ttf");
 }
 
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: #f6fcff;
+}
+
 .sidebar {
     position: fixed;
     top: 0;
@@ -20,19 +24,11 @@
     transition: all 0.5s ease;
 }
 
-*{
-    margin:0;
-    padding:0;
-}
 body {
     font-family: 'Aribau Grotesk', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
     position: relative;
     min-height: 100vh;
-<<<<<<< HEAD
-    overflow-y: scroll;
-=======
-    overflow: scroll;
->>>>>>> fix-mvc-cleanup
+    overflow: auto;
 }
 
 .main {
@@ -212,6 +208,8 @@ body {
     height: 624px;
 }
 
+
+
 #total {
     width: 16px;
     height: 16px;
@@ -231,4 +229,8 @@ body {
 .linechart__datepicker {
     border: none;
     color: #173752;
+}
+
+a {
+    text-decoration:none;
 }

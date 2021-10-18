@@ -1,4 +1,4 @@
-﻿using hotel_booking_model;
+using hotel_booking_model;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,9 +30,6 @@ namespace hotel_booking_mvc.Controllers.Auth
         }
 
 
-
-
-
         [HttpPost]
         public IActionResult Login(LoginModel loginModel)
         {
@@ -62,27 +59,21 @@ namespace hotel_booking_mvc.Controllers.Auth
             }
             return View();
         }
-
-
-
-
-        public IActionResult Signup()
-        {
-            return View();
-        }
+      
 
 
         [HttpPost]
         public IActionResult Signup(SignupModel signupmodel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return View();
-                }
                 var result = _auth.Signup(signupmodel);
-                //  result.EnsureSuccessStatusCode();
+
+
                 return RedirectToAction("Login");
             }
             catch (Exception)
@@ -95,17 +86,22 @@ namespace hotel_booking_mvc.Controllers.Auth
 
 
 
+        public IActionResult Signup()
+        {
+            return View();
+        }
 
 
 
         public IActionResult ForgotPassword()
+
         {
             return View();
         }
 
         public IActionResult ConfirmEmail()
         {
-            return View();  
+            return View();
         }
 
         public IActionResult ResetPassword()

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,8 +9,8 @@ namespace hotel_booking_model.AuthModels
 {
     public class LoginModel
     {
-        [Required(ErrorMessage ="Enter Email To Continue")]
 
+        [Required(ErrorMessage ="Enter Email To Continue")]
         public string Email { get; set; }
 
         [Required(ErrorMessage ="Enter Password To Continue")]

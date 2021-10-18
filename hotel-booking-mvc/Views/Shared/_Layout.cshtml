@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - hotel_booking_mvc</title>
     <link href="~/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
     <link href="@Url.Content("~/css/landingview.css")" rel="stylesheet" type="text/css" />
@@ -16,7 +16,7 @@
 
         <div class="phone-nav hidden">
             <div class="phone-nav-header">
-                <img src="~/images/logos_only_dark.svg" width="40" height="40"  asp-area="" asp-controller="Home" asp-action="Index" />
+                <img src="~/images/logos_only_dark.svg" width="40" height="40" asp-area="" asp-controller="Home" asp-action="Index" />
                 <button class="close">x</button>
             </div>
             <div class="phone-div">
@@ -27,6 +27,7 @@
                     <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="">HELP</a></li>
                 </ul>
             </div>
+
 
         </div>
         <div class="container-fluid">
@@ -41,11 +42,6 @@
 
                 <button class="nav-button">&#9776</button>
             </nav>
-
-
-
-
-          
         </div>
     </header>
     <div>
@@ -63,9 +59,6 @@
             <li><a href="#">Disclaimer</a></li>
         </ul>
     </div>
-    
-
-
 
 </body>
 </html>

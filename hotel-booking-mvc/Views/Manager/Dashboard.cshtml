@@ -1,6 +1,155 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
 @{
      ViewData["Title"] = "Dashboard";
 }
+<div class="container">
+    <div class="row pt-5 pb-5">
+
+        <!--Available Rooms Card-->
+        <div class="col-md-3 mb-2">
+            <div class="card" style="border-radius:20px 20px;">
+                <div class="m-2">
+                    <div class="text-center col-12">
+                        <box-icon class="card-title" style=" margin-top: 5px;" size="md" color='#2067A1' name='bed'></box-icon>
+                    </div>
+                    <div class="col-12 text-center">
+                        <h1 class="card-title" style=" margin-bottom: 1px;">
+                            Available Rooms
+                        </h1>
+                    </div>
+                    <div class="card-body col-12 text-center">
+                        <h1 class="card-title" style="font-size: 30px;">
+                            124
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Booked Rooms Card-->
+        <div class="col-md-3 mb-2">
+            <div class="card" style="border-radius:20px 20px;">
+                <div class="m-2">
+                    <div class="text-center col-12">
+                        <box-icon class="card-title" style=" margin-top: 5px;" size="md" color='#2067A1' name='bed'></box-icon>
+                    </div>
+                    <div class="col-12 text-center">
+                        <h1 class="card-title" style=" margin-bottom: 1px;">
+                            Booked Rooms
+                        </h1>
+                    </div>
+                    <div class="card-body col-12 text-center">
+                        <h1 class="card-title" style="font-size: 30px;">
+                            124
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Hotels Card-->
+        <div class="col-md-3 mb-2">
+            <div class="card" style="border-radius:20px 20px;">
+                <div class="m-2">
+                    <div class="text-center col-12">
+                        <box-icon class="card-title" style=" margin-top: 5px;" size="md" color='#2067A1' type='solid' name='bank'></box-icon>
+                    </div>
+                    <div class="col-12 text-center">
+                        <h1 class="card-title" style=" margin-bottom: 1px;">
+                            Hotels
+                        </h1>
+                    </div>
+                    <div class="card-body col-12 text-center">
+                        <h1 class="card-title" style="font-size: 30px;">
+                            36
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Total Transactions Card-->
+        <div class="col-md-3 mb-2">
+            <div class="card" style="border-radius:20px 20px;">
+                <div class="m-2">
+                    <div class="text-center col-12">
+                        <box-icon class="card-title" style=" margin-top: 5px;" size="md" color='#2067A1' type='regular' name='dollar'></box-icon>
+                    </div>
+                    <div class="col-12 text-center">
+                        <h1 class="card-title" style=" margin-bottom: 1px;">
+                            Total Transactions
+                        </h1>
+                    </div>
+                    <div class="card-body col-12 text-center">
+                        <h1 class="card-title" style="font-size: 30px;">
+                            2.4M
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Commission Statistics-->
+    <h2>
+        Commission Statistics
+    </h2>
+    <div class="Transaction-chart pt-2 pb-5 card mb-5">
+        <div class="row d-flex p-5">
+            <div class="container">
+                <canvas id="managerChart" width="800" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!--Top Customers-->
+    <h3>
+        Top Customers
+    </h3>
+    <div class="row">
+        <div class="col-sm-12">
+            <!--Customer 1-->
+            <div class="card p-2 m-4">
+                <div class="d-flex justify-content-sm-center justify-content-md-between flex-sm-wrap flex-md-nowrap ">
+                    <div class="d-sm-flex justify-content-sm-center align-content-center">
+                        <img src="~/images/profile.png" style="width:100px; height:100px; padding:10px;" />
+                    </div>
+                    <div class="ms-md-1">
+                        <h2 class="card-text text-md-start w-100 text-sm-center">
+                            John Doe
+                        </h2>
+                        <p>
+                            Abel Oreniyi Street Off Salvation Road Opebi, Ikeja.
+                        </p>
+                        <div>
+                            <p>
+                                Located in Ikeja, 5 Km from Kalakuta Museum, Presken Hotels Opebi Lagos provides
+                                accomodation with a restaurant, free private parking, a fitness center and a bar.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!--Pagination-->
+    <nav aria-label="...">
+        <ul class="pagination justify-content-center">
+            <li class="page-item active" aria-current="page">
+                <span class="page-link" style="background-color: #2067A1; border-color: #2067A1; ">1</span>
+            </li>
+            <li class="page-item"><a class="page-link" style="color:black" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" style="color:black" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" style="color:black" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" style="color:black" href="#">5</a></li>
+            <li class="page-item">
+                <a class="page-link" style="color:black" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
