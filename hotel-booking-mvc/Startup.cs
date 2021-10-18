@@ -27,10 +27,11 @@ namespace hotel_booking_mvc
             services.AddHttpClient(); // configure httpclient for request to apis
             services.AddSession();
 
+
             // configures interfaces for dependency injection
             services.ConfigureDependencies(Configuration);
-
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
             services.AddSession();
             services.AddTransient<IAuthRepository, AuthRepository>();
             
