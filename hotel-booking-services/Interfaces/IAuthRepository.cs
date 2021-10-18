@@ -1,4 +1,5 @@
-﻿using hotel_booking_model.AuthModels;
+using hotel_booking_model;
+using hotel_booking_model.AuthModels;
 using hotel_booking_model.AuthModels.Dto;
 using System;
 using System.Collections.Generic;

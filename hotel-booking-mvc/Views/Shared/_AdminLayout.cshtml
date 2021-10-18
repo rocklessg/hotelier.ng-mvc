@@ -9,8 +9,6 @@
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <link href="~/css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/css/site.css"/>
     <link rel="stylesheet" href="~/css/allmanagers.css" />
     <link rel="stylesheet" href="~/fontawesome-free-6.0.0-beta2-web/css/fontawesome.css" />
@@ -55,12 +53,11 @@
             </div>
         </div>
     </nav>
-        <div class="container">
-            @RenderBody()
-        </div>
+    <div class="container">
+        @RenderBody()
 
-  
-    <footer class="bg-white w-100" style="position:absolute; bottom:0;">
+    </div>
+    <footer class="bg-white w-100 mt-5">
 
         <div class="row p-3 d-flex justify-content-center">
             <div class="col-12 text-center">
@@ -69,6 +66,9 @@
             </div>
         </div>
     </footer>
+
+
+
 
     <div class="sidebar m-0 p-0">
         <ul>
@@ -97,7 +97,7 @@
                 </a>
             </li>
             <li>
-                <a class="text-center  @(ViewContext.RouteData.Values["Action"].ToString() == "Manager" ? "active" : "")" asp-controller="Admin" asp-action="Manager">
+                <a class="text-center  @(ViewContext.RouteData.Values["Action"].ToString() == "AllManagers" ? "active" : "")" asp-controller="Admin" asp-action="AllManagers">
                     <div class="container-fluid row d-flex justify-content-center w-100 gx-0 " style="margin-top:15px; margin-bottom:15px;">
                         <div class="col-12">
                             <i class='bx bxs-user-rectangle' style="font-size:30px;"></i>
