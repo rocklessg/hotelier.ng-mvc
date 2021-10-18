@@ -1,4 +1,4 @@
-﻿using hotel_booking_model;
+using hotel_booking_model;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using hotel_booking_model.AuthModels;
+
 namespace hotel_booking_mvc.Controllers.Auth
 {
     public class AuthController : Controller
@@ -31,7 +32,6 @@ namespace hotel_booking_mvc.Controllers.Auth
 
         [HttpPost]
         public IActionResult Login(LoginModel loginModel)
-
         {
             var handler = new JwtSecurityTokenHandler();
 
@@ -59,9 +59,7 @@ namespace hotel_booking_mvc.Controllers.Auth
             }
             return View();
         }
-
-
-
+      
 
 
         [HttpPost]
@@ -75,6 +73,7 @@ namespace hotel_booking_mvc.Controllers.Auth
             {
                 var result = _auth.Signup(signupmodel);
 
+
                 return RedirectToAction("Login");
             }
             catch (Exception)
@@ -86,6 +85,7 @@ namespace hotel_booking_mvc.Controllers.Auth
 
 
 
+
         public IActionResult Signup()
         {
             return View();
@@ -93,7 +93,8 @@ namespace hotel_booking_mvc.Controllers.Auth
 
 
 
-            public IActionResult ForgotPassword()
+        public IActionResult ForgotPassword()
+
         {
             return View();
         }
