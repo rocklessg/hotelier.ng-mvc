@@ -2,6 +2,13 @@
 
     ViewData["Title"] = "Hotel Rooms";
 }
+
+<style>
+    .my-color {
+        background-color: #2067A1 !important;
+    }
+</style>
+
 <div class="container pb-5">
 
     <div class="row">
@@ -117,7 +124,7 @@
                     <th scope="col">
                         <!-- Add Room Buttons-->
                         <div style="display:flex; justify-content:end">
-                            <button type="button" class="btn btn-outline-secondary btn-md d-flex align-items-center" style="color: black; border: 1px solid;">
+                            <button type="button" class="btn btn-outline-secondary btn-md d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modalAddRoom" style="color: black; border: 1px solid;">
                                 <box-icon size="sm" name='plus'></box-icon>
                                 ADD ROOM
                             </button>
@@ -222,6 +229,37 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-danger">Delete</button>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Room Modal -->
+<div class="modal fade" id="modalAddRoom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Room</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+                <form>
+
+                    <div class="mb-3">
+                        <div>
+                            <label for="Room*" class="form-label">Room</label>
+                            <input type="text" class="form-control" id="Room Number" name="Room Number" placeholder="Room Number" />
+                        </div>
+
+                    </div>
+                    <div class="mb-3 form-check">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary my-color">Add Room</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

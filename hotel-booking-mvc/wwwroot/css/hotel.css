@@ -6,9 +6,7 @@
     margin-bottom: 1em;
 }
 
- .my-color {
-     background-color: #2067A1 !important;
- }
+
 .hotel-card {
     display: flex;
     flex-flow: row;
