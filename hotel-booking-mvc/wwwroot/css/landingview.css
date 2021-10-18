@@ -391,9 +391,44 @@ z-index: 1; */
 
 /*footer cover starts here*/
 .footer-cover {
+<<<<<<< HEAD
+=======
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    background: #1A2E3D;
+    width: 100%;
+    padding: 2rem;
+}
+
+
+.footer-cover-item {
+    width: 12rem;
+    margin: 1rem;
+}
+
+
+    .footer-cover-item ul {
+        list-style: none;
+    }
+
+        .footer-cover-item ul li, .footer-cover-item p, .footer-cover-item h3 {
+            color: white;
+        }
+
+.socials {
+    margin-top: 3rem;
+}
+
+
+
+.footer {
+    width: 100%;
+>>>>>>> reviews
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+<<<<<<< HEAD
     background: #1A2E3D;
     width: 100%;
     padding: 2rem;
@@ -417,6 +452,9 @@ z-index: 1; */
 
 .socials{
     margin-top: 3rem;
+=======
+    font-size: 10px;
+>>>>>>> reviews
 }
 
 
@@ -595,12 +633,10 @@ z-index: 1; */
 
         .fifth-cover div ul {
             margin-left: 10px;
-            
         }
 
         .fifth-cover div h3 {
             font-size: 1rem;
-            
         }
 
     .fifth-cover-div p {
@@ -622,7 +658,6 @@ z-index: 1; */
         border: none;
         outline: none;
         color: #5785da;
-    
     }
 
     .phone-nav-header {

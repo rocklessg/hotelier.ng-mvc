@@ -1,4 +1,6 @@
 using hotel_booking_mvc.Extensions;
+using hotel_booking_services.Implmentations;
+using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +32,7 @@ namespace hotel_booking_mvc
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddSession();
+            services.AddTransient<IAuthRepository, AuthRepository>();
             
             services.AddSingleton((provider) =>
             {

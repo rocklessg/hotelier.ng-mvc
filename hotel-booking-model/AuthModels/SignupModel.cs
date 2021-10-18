@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+<<<<<<< HEAD
 using System.ComponentModel.DataAnnotations;
+=======
+>>>>>>> reviews
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+<<<<<<< HEAD
 namespace hotel_booking_model
 {
     public class SignupModel
@@ -18,5 +22,19 @@ namespace hotel_booking_model
         [Required(ErrorMessage = "Enter Password To Continue")]
         public string Password { get; set; }
        
+=======
+namespace hotel_booking_model.AuthModels
+{
+    public class SignupModel
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Gender { get; set; }
+        public int Age { get; set; }
+>>>>>>> reviews
     }
 }
