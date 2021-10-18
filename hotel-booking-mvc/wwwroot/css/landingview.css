@@ -1,4 +1,4 @@
-﻿
+
 
 :root {
     --privary-font: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
@@ -423,14 +423,47 @@ z-index: 1; */
 .footer {
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 50px;
-    padding: 10px;
-    background-color: #1A2E3D;
+    justify-content: space-around;
     flex-wrap: wrap;
+    background: #1A2E3D;
+    width: 100%;
+    padding: 2rem;
+}
+
+
+.footer-cover-item{
+    width: 12rem;
+    margin: 1rem;
+}
+
+
+.footer-cover-item ul{
+    list-style: none;
+   
+}
+
+    .footer-cover-item ul li, .footer-cover-item p, .footer-cover-item h3 {
+        color: white;
+    }
+
+.socials{
+    margin-top: 3rem;
     font-size: 10px;
 }
+
+
+
+    .footer {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 50px;
+        padding: 10px;
+        background-color: #1A2E3D;
+        flex-wrap: wrap;
+        font-size: 10px;
+    }
 
 .footer-list {
     display: flex;
@@ -482,6 +515,7 @@ z-index: 1; */
     .nav-button {
         display: none;
     }
+   
 }
 
 

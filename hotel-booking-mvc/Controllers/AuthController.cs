@@ -1,15 +1,15 @@
-﻿using hotel_booking_model;
+using hotel_booking_model;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using hotel_booking_model.AuthModels;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace hotel_booking_mvc.Controllers.Auth
 {
@@ -28,9 +28,6 @@ namespace hotel_booking_mvc.Controllers.Auth
         {
             return View();
         }
-
-
-
 
 
         [HttpPost]
@@ -62,27 +59,21 @@ namespace hotel_booking_mvc.Controllers.Auth
             }
             return View();
         }
-
-
-
-
-        public IActionResult Signup()
-        {
-            return View();
-        }
+      
 
 
         [HttpPost]
         public IActionResult Signup(SignupModel signupmodel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return View();
-                }
                 var result = _auth.Signup(signupmodel);
-                //  result.EnsureSuccessStatusCode();
+
+
                 return RedirectToAction("Login");
             }
             catch (Exception)
@@ -95,10 +86,15 @@ namespace hotel_booking_mvc.Controllers.Auth
 
 
 
+        public IActionResult Signup()
+        {
+            return View();
+        }
 
 
 
         public IActionResult ForgotPassword()
+
         {
             return View();
         }
