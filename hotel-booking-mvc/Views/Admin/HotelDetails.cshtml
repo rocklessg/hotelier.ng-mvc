@@ -22,7 +22,7 @@
                     </li>
                     @*<li class="nav-item" role="presentation">
                         <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
-                    </li>*@
+                        </li>*@
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="rooms" role="tabpanel" aria-labelledby="home-tab">
@@ -59,9 +59,8 @@
                                                         <i class='bx bx-desktop'></i>
                                                         <i class='bx bxs-coffee'></i>
                                                     </div>
-
-                                                    <div>
-                                                        <button class="btn btn-primary">N 2000 <br /> Per Night</button>
+                                                    <div class="blue__bg text-white px-3 py-2 rounded-3">
+                                                        <span>N 2000 <br /> Per Night</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,12 +80,12 @@
                                         <div class="rating__bar__util w-100"></div>
                                     </div>
 
-                                     <div class="mt-3">
+                                    <div class="mt-3">
                                         <small>Location</small>
                                         <div class="rating__bar__util w-100"></div>
                                     </div>
 
-                                     <div class="mt-3">
+                                    <div class="mt-3">
                                         <small>Value for money</small>
                                         <div class="rating__bar__util w-100"></div>
                                     </div>
@@ -99,12 +98,12 @@
                                         <div class="rating__bar__util w-100"></div>
                                     </div>
 
-                                     <div class="mt-3">
+                                    <div class="mt-3">
                                         <small>Services</small>
                                         <div class="rating__bar__util w-100"></div>
                                     </div>
 
-                                     <div class="mt-3">
+                                    <div class="mt-3">
                                         <small>Food</small>
                                         <div class="rating__bar__util w-100"></div>
                                     </div>
@@ -117,12 +116,12 @@
                                         <div class="rating__bar__util w-100"></div>
                                     </div>
 
-                                     <div class="mt-3">
+                                    <div class="mt-3">
                                         <small>Confort</small>
                                         <div class="rating__bar__util w-100"></div>
                                     </div>
 
-                                     <div class="mt-3">
+                                    <div class="mt-3">
                                         <small>Rooms</small>
                                         <div class="rating__bar__util w-100"></div>
                                     </div>
@@ -139,48 +138,48 @@
                         </div>
 
                         <div>
-                        @{
-                            for (int i = 0; i < 4; i++)
-                            {
-                                <div class="card mt-4">
-                                    <div class="row">
-                                        <div class="col-12 col-md-2">
-                                            <div class="d-flex flex-column mt-3 ms-4">
-                                                <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80"
-                                                 class="rounded-circle"
-                                                 width="75"
-                                                 height="75" />
-                                                <span class="color__black__override">Katrina Jade</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-10">
-                                            <div class="card-body">
-                                                <div>
-                                                    <h5 class="card-title">"Best Hotel in Lagos"</h5>
-                                                    <div class="color__black__override">
-                                                        <span>
-                                                            @{
-                                                                for(int j = 0; j < 5; j++)
-                                                                {
-                                                                    <i class='bx bxs-star' ></i>
-                                                                }
-                                                            }
-                                                        </span>
-                                                        <span class="mx-2">|</span>
-                                                        <span><b>Reviewed: </b> <small>2021-06-12</small></span>
-                                                    </div>
+                            @{
+                                for (int i = 0; i < 4; i++)
+                                {
+                                    <div class="card mt-4">
+                                        <div class="row">
+                                            <div class="col-12 col-md-2">
+                                                <div class="d-flex flex-column mt-3 ms-4">
+                                                    <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80"
+                                                     class="rounded-circle"
+                                                     width="75"
+                                                     height="75" />
+                                                    <span class="color__black__override">Katrina Jade</span>
                                                 </div>
+                                            </div>
 
-                                                <p class="w-80 mt-4 color__black__override">
-                                                    Stayed here for 20 nights in March 2019. have been working in and around Lagos for the past 4 year-end this is by far the best hotel I have stayed in. The rooms, staff, cleanliness, internet and comfort offered by this hotel are second to none. I am currently (unfortunately) staying across the road in the Sheraton. Not a scratch on the Raddison Blu and so I will be returning there in June for another 20 nights!
-                                                </p>
+                                            <div class="col-12 col-md-10">
+                                                <div class="card-body">
+                                                    <div>
+                                                        <h5 class="card-title">"Best Hotel in Lagos"</h5>
+                                                        <div class="color__black__override">
+                                                            <span>
+                                                                @{
+                                                                    for (int j = 0; j < 5; j++)
+                                                                    {
+                                                                        <i class='bx bxs-star'></i>
+                                                                    }
+                                                                }
+                                                            </span>
+                                                            <span class="mx-2">|</span>
+                                                            <span><b>Reviewed: </b> <small>2021-06-12</small></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <p class="w-80 mt-4 color__black__override">
+                                                        Stayed here for 20 nights in March 2019. have been working in and around Lagos for the past 4 year-end this is by far the best hotel I have stayed in. The rooms, staff, cleanliness, internet and comfort offered by this hotel are second to none. I am currently (unfortunately) staying across the road in the Sheraton. Not a scratch on the Raddison Blu and so I will be returning there in June for another 20 nights!
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
                             }
-                        }
                         </div>
                     </div>
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
