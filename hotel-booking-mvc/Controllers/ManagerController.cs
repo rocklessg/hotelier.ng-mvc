@@ -40,12 +40,7 @@ namespace hotel_booking_mvc.Controllers.Manager
         {
             return View();
         }
-        public IActionResult HotelRooms()
-        {
-            return View();
-        }
-
-        public IActionResult HotelDetails()
+        public IActionResult SingleRoom()
 
         {
             return View();
