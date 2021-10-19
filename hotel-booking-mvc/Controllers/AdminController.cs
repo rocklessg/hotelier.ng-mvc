@@ -15,9 +15,7 @@ namespace hotel_booking_mvc.Controllers.Admin
 		}
         public IActionResult Dashboard()
         {
-            TransactionPeriod transactionPeriod = new();
-            //ViewData["transactionPeriod"] = transactionPeriod;
-            return View(transactionPeriod);
+            return View();
         }
         public async Task<IActionResult> HotelAsync(int pageNumber)
         {
