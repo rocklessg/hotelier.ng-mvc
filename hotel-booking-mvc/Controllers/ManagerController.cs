@@ -46,5 +46,10 @@ namespace hotel_booking_mvc.Controllers.Manager
         {
             return View();
         }
+
+        public IActionResult HotelDetails(string hotelId)
+        {
+            return View();
+        }
     }
 }
