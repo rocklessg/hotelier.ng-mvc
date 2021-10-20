@@ -1,4 +1,3 @@
-using hotel_booking_model;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -6,20 +5,18 @@ using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using hotel_booking_model.AuthModels;
+using hotel_booking_model.Dtos.AuthenticationDtos;
 
 namespace hotel_booking_mvc.Controllers.Auth
 {
     public class AuthController : Controller
     {
 
-        private readonly IAuthRepository _auth;
+        private readonly IAuthenticationService _auth;
 
 
-        public AuthController(IAuthRepository auth)
+        public AuthController(IAuthenticationService auth)
         {
             _auth = auth;
         }
@@ -31,7 +28,7 @@ namespace hotel_booking_mvc.Controllers.Auth
 
 
         [HttpPost]
-        public IActionResult Login(LoginModel loginModel)
+        public async Task<IActionResult> Login(LoginDto loginModel)
         {
             var handler = new JwtSecurityTokenHandler();
 
@@ -40,10 +37,10 @@ namespace hotel_booking_mvc.Controllers.Auth
             {
                 try
                 {
-                    var result = _auth.Login(loginModel);
+                    var result = await _auth.Login(loginModel);
 
                     HttpContext.Session.SetString("user", JsonConvert.SerializeObject(result));
-                    JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Data[' ']);
+                    JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Token);
                     var Claim = decodedValue.Claims.ElementAt(2);
                     if (Claim.Value == "Manager")
                     {
@@ -63,33 +60,34 @@ namespace hotel_booking_mvc.Controllers.Auth
 
 
         [HttpPost]
-        public IActionResult Signup(SignupModel signupmodel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-            try
-            {
-                var result = _auth.Signup(signupmodel);
-
-
-                return RedirectToAction("Login");
-            }
-            catch (Exception)
-            {
-                TempData["error"] = "Oops something bad happened try again!";
-                return View();
-            }
-        }
-
-
-
-
         public IActionResult Signup()
         {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            //try
+            //{
+            //    var result = _auth.Signup(signupmodel);
+
+
+            //    return RedirectToAction("Login");
+            //}
+            //catch (Exception)
+            //{
+            //    TempData["error"] = "Oops something bad happened try again!";
+            //    return View();
+            //}
             return View();
         }
+
+
+
+
+        //public IActionResult Signup()
+        //{
+        //    return View();
+        //}
 
 
 

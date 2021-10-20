@@ -1,191 +1,224 @@
 ﻿@model AdminDashboardViewModel
-@{ 
-    ViewData["Title"] = "Dashboard";
-}
+
 <div class="container pb-5">
-    <div class="row pt-5 pb-5">
-        <div class="col-md-4 mb-sm-2">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">
-                        Managers
-                    </h2>
-                    <i class='bx bx-dots-horizontal-rounded'></i>
-                </div>
-                <div class="card-body">
-                    <h2 class="card-title">
-                        15
-                    </h2>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-sm-2">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">
-                        Hotels
-                    </h2>
-                    <i class='bx bx-dots-horizontal-rounded'></i>
-                </div>
-                <div class="card-body">
-                    <h2 class="card-title">
-                        23
-                    </h2>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-sm-2">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">
-                        Transactions
-                    </h2>
-                    <h2 class="card-title">
-                        <i class='bx bx-dots-horizontal-rounded'></i>
-                    </h2>
-                </div>
-                <div class="card-body d-flex justify-content-between">
-                    <h2 class="card-title">
-                        N458,000
-                    </h2>
-                    <h2 class="card-title">
-                        +1%
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row pt-5 pb-5">
+		<div class="col-md-4 mb-sm-2">
+			<div class="card">
+				<div class="card-header">
+					<h2 class="card-title">
+						Managers
+					</h2>
+					<i class='bx bx-dots-horizontal-rounded'></i>
+				</div>
+				<div class="card-body">
+					<h2 class="card-title">
+						@Model.TotalManagers
+					</h2>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 mb-sm-2">
+			<div class="card">
+				<div class="card-header">
+					<h2 class="card-title">
+						Hotels
+					</h2>
+					<i class='bx bx-dots-horizontal-rounded'></i>
+				</div>
+				<div class="card-body">
+					<h2 class="card-title">
+						@Model.TotalHotels
+					</h2>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 mb-sm-2">
+			<div class="card">
+				<div class="card-header">
+					<h2 class="card-title">
+						Transactions
+					</h2>
+					<h2 class="card-title">
+						<i class='bx bx-dots-horizontal-rounded'></i>
+					</h2>
+				</div>
+				<div class="card-body d-flex justify-content-between">
+					<h2 class="card-title">
+						@Model.TotalMonthlyCommission
+					</h2>
+					<h2 class="card-title">
+						+1%
+					</h2>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="pt-3 pb-5">
-        <div class="card">
-            <div class="card-body">
-                <h2 class="card-header">
-                    Top Hotels
-                </h2>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="hotel-card">
-                            <div class="card-body">
-                                <img src="~/images/Rectangle 21.svg" class="card-img-top" alt="hotel image" />
-                                <h2 class="card-text mt-2">
-                                    The Croniche Hotel Bistro
-                                </h2>
-                                <p class="hotels-location">Lekki Phase 1, Lagos </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="hotel-card">
-                            <div class="card-body">
-                                <img src="~/images/Rectangle 22.svg" class="card-img-top" alt="hotel image" />
-                                <h2 class="card-text mt-2">
-                                    George Town Hotel
-                                </h2>
-                                <p class="hotels-location">Ikeja, Lagos </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="hotel-card">
-                            <div class="card-body">
-                                <img src="~/images/Rectangle 23.svg" class="card-img-top" alt="hotel image" />
-                                <h2 class="card-text mt-2">
-                                    Ibom Hotel and Golf Resort
-                                </h2>
-                                <p class="hotels-location"> Uyo, Akwa Ibom</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="Transaction-chart pt-5 pb-5 card">
-        <div class="card-header d-flex justify-content-between align-items-center m-3">
-            <div class="card-title">
-                Transactions
-            </div>
-            <div id="range" class="d-flex flex-column">
-                <div class="form-group d-flex justify-content-between form-control-sm">
-                    <select id="month" name="month" class="linechart__datepicker form-select">
-                        <option value="" disabled>Month</option>
-                        <option value="January">January</option>
-                        <option value="February">February</option>
-                        <option value="March">March</option>
-                        <option value="April">April</option>
-                        <option value="May">May</option>
-                        <option value="June">June</option>
-                        <option value="July">July</option>
-                        <option value="August">August</option>
-                        <option value="September">September</option>
-                        <option value="October">October</option>
-                        <option value="November">November</option>
-                        <option value="December">December</option>
-                    </select>
-                    <select id="year" name="year" class="linechart__datepicker form-select">
-                        <option value="" disabled selected>Year</option>
-                    </select>
-                </div>
-
-                <div class="d-flex justify-content-between form-control-sm" >
-                    <select id="endMonth" name="month" class="linechart__datepicker form-select">
-                        <option value="" disabled>Month</option>
-                        <option value="January">January</option>
-                        <option value="February">February</option>
-                        <option value="March">March</option>
-                        <option value="April">April</option>
-                        <option value="May">May</option>
-                        <option value="June">June</option>
-                        <option value="July">July</option>
-                        <option value="August">August</option>
-                        <option value="September">September</option>
-                        <option value="October">October</option>
-                        <option value="November">November</option>
-                        <option value="December">December</option>
-                    </select>
-                    <select id="endYear" name="year" class="linechart__datepicker  form-select">
-                        <option value="" disabled selected>Year</option>
-                    </select>
-                </div>
-             
-            </div>
-
-            <div class="form-group">
-                <input type="checkbox" id="total" name="total" value="Total">
-                <label for="total">Total</label>
-            </div>
-        </div>
-        <div class="row d-flex m-3">
-            <div class="container">
-                <canvas id="lineChart" width="800" height="200"></canvas>
-            </div>
-        </div>
-    </div>
-    <div class="row pt-5 pb-5">
-        <div class="col-md-4">
-            <div class="card pt-4">
-                <div class="card-header pb-3">
-                    <div id="my-calendar"></div>
-                </div>
-                <div class="card-body pt-4 pb-5 d-flex justify-content-between">
-                    <button id="calendar_cancel" type="button">Cancel</button>
-                    <button id="calendar_done" type="button"> Done </button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">
-                        Hotels By Location
-                    </h2>
-                </div>
-                <div class="row d-flex">
-                    <div class="container m-4">
-                        <canvas id="pieChart" width="200" height="300"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="pt-3 pb-5">
+		<div class="card">
+			<div class="card-body">
+				<h2 class="card-header">
+					Top Hotels
+				</h2>
+			</div>
+			<a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+			   data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<div class="carousel-inner">
+				@for (int i = 0; i <= Model.TopHotels.Count() / 3 + 1; i++)
+				{
+					<div class="carousel-item @if(i==0) {<text>active</text>}">
+						@foreach (var hotel in Model.TopHotels.Skip(i * 3).Take(3))
+						{
+							<div class="row">
+								<div class="col-md-4">
+									<div class="hotel-card">
+										<div class="card-body">
+											<img src=@hotel.Thumbnail class="card-img-top" alt="hotel image" />
+											<h2 class="card-text mt-2">@hotel.Name</h2>
+											<p class="hotels-location">@(String.Format("{0}, {1} {2}", hotel.Address, hotel.City, hotel.State))</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						}
+					</div>
+				}
+				<a class="carousel-control-next" href="#carouselExampleControls" role="button"
+				   data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+	</div>
 </div>
+	
+	<div class="Transaction-chart pt-5 pb-5 card">
+			<div class="card-header d-flex justify-content-between align-items-center m-3">
+				<div class="card-title">
+					Transactions
+				</div>
+				<div class="form-group">
+					<input type="checkbox" id="total" name="total" value="Total">
+					<label for="total">Total</label>
+				</div>
+			</div>
+			<div class="row d-flex m-3">
+				<div class="container">
+					<canvas id="myLineChart" width="800" height="200"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="row pt-5 pb-5">
+			<div class="col-md-4">
+				<div class="card pt-4">
+					<div class="card-header pb-3">
+						<div id="my-calendar"></div>
+					</div>
+					<div class="card-body pt-4 pb-5 d-flex justify-content-between">
+						<button id="calendar_cancel" type="button">Cancel</button>
+						<button id="calendar_done" type="button"> Done </button>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="card">
+					<div class="card-header">
+						<h2 class="card-title">
+							Hotels By Location
+						</h2>
+					</div>
+					<div class="row d-flex">
+						<div class="container m-4">
+							<canvas id="pieChart" width="200" height="300"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+</div>
+
+@section Scripts {
+	<script>
+	
+		$(function() {
+			console.log("here");
+
+			// Variables
+			var months = @Html.Raw(Json.Serialize(Model.Months));
+			var revenues = @Html.Raw(Json.Serialize(Model.Revenues));
+
+			// Line Chart
+			var ctx_line = document.getElementById("myLineChart").getContext("2d");
+			var transactionChart = new Chart(ctx_line, {
+				type: 'line',
+				data: {
+					labels: months,
+					datasets: [{
+						data: revenues,
+						backgroundColor: [
+							'#FFBB33',
+						],
+						borderColor: [
+							'#2067A1',
+						],
+						borderWidth: 1,
+						fill: true
+					}]
+			},
+			options: {
+				scale: {
+					y: {
+						beginAtZero: true
+					}
+				},
+				legend: {
+					display: false
+				},
+			}
+		});
+
+		// Pie Chart
+		var ctx_pie = document.getElementById('pieChart').getContext('2d');
+		var pieChart = new Chart(ctx_pie, {
+			type: 'pie',
+			data: {
+				labels: ['Lagos', 'Abuja'],
+				datasets: [{
+					label: 'Location',
+					data: [86, 14],
+					backgroundColor: [
+						'#2067A1',
+						'#FFBB33'
+					],
+				}]
+			},
+			options: {
+				maintainAspectRatio: false,
+				tooltips: {
+					backgroundColor: "rgb(255,255,255)",
+					bodyFontColor: "#858796",
+					borderColor: '#dddfeb',
+					borderWidth: 1,
+					xPadding: 15,
+					yPadding: 15,
+					displayColors: false,
+					caretPadding: 10,
+					offset: 20
+            
+				},
+				legend: {
+					display: false
+				},
+			}   
+		});
+	});
+
+	</script>
+}
+
+

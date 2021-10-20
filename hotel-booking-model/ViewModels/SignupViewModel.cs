@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hotel_booking_model.AuthModels.Dto
+namespace hotel_booking_model.ViewModels
 {
-    public class SignupDto
+    public class SignupViewModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

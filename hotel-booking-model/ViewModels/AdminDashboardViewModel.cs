@@ -1,4 +1,5 @@
-﻿using System;
+﻿using hotel_booking_model.Dtos.Hotels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace hotel_booking_model.ViewModels
         public int TotalManagers { get; set; }
         public int TotalHotels { get; set; }
         public decimal TotalMonthlyCommission { get; set; }
-        public List<HotelBasicView> TopHotels { get; set; }
+        public IEnumerable<HotelBasicDetailsDto> TopHotels { get; set; }
+        public IEnumerable<string> Months { get; set; }
+        public IEnumerable<decimal> Revenues { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using hotel_booking_model;
 using hotel_booking_model.commons;
+using hotel_booking_model.Dtos.Hotels;
 using hotel_booking_services.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -30,6 +31,15 @@ namespace hotel_booking_services.Implmentations
                 <BasicResponse<IEnumerable<HotelBasicView>>>(
                     requestUrl: $"api/Manager/{managerId}/hotels",
                     baseUrl: "http://hoteldotnet.herokuapp.com");
+            return response.Data;
+        }
+
+        public async Task<IEnumerable<HotelBasicDetailsDto>> GetTopHotelsAsync()
+        {
+            var response = await _requestFactory.GetRequestAsync
+                <BasicResponse<IEnumerable<HotelBasicDetailsDto>>>(
+                    requestUrl: $"api/Hotel/top-hotels",
+                    baseUrl: "https://localhost:44319/");
             return response.Data;
         }
     }
