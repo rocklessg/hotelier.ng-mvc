@@ -37,18 +37,18 @@ namespace hotel_booking_mvc.Controllers.Admin
 			return View();  
 		}
 
-		public IActionResult HotelDetails()
-		{
-			return View();
-		}
-		public IActionResult HotelRooms()
-		{
-			return View();
-		}
-		public IActionResult AllManagers()
-		{
-			return View();
-		}
+        public IActionResult HotelDetails()
+        {
+            return View();
+        }
+        public IActionResult HotelRooms()
+        {
+            return View();
+        }
+        public IActionResult AllManagers()
+        {
+            return View();
+        }
 
 
 		public IActionResult AllUsers()
