@@ -1,4 +1,3 @@
-using hotel_booking_model;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -6,20 +5,18 @@ using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http;
-using System.Net.Http.Headers;
+using hotel_booking_model.Dtos.AuthenticationDtos;
 using System.Threading.Tasks;
-using hotel_booking_model.AuthModels;
 
 namespace hotel_booking_mvc.Controllers.Auth
 {
     public class AuthController : Controller
     {
 
-        private readonly IAuthRepository _auth;
+        private readonly IAuthenticationService _auth;
 
 
-        public AuthController(IAuthRepository auth)
+        public AuthController(IAuthenticationService auth)
         {
             _auth = auth;
         }
@@ -31,20 +28,19 @@ namespace hotel_booking_mvc.Controllers.Auth
 
 
         [HttpPost]
-        public IActionResult Login(LoginModel loginModel)
+        public async Task<IActionResult> Login(LoginDto loginDto)
         {
             var handler = new JwtSecurityTokenHandler();
-
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = _auth.Login(loginModel);
+                    var result = await _auth.Login(loginDto);
 
                     HttpContext.Session.SetString("user", JsonConvert.SerializeObject(result));
-                    JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Data[' ']);
-                    var Claim = decodedValue.Claims.ElementAt(2);
+                    JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Token);
+                    var Claim = decodedValue.Claims.ElementAt(1);
                     if (Claim.Value == "Manager")
                     {
                         return RedirectToAction("Dashboard", "Manager");
@@ -59,23 +55,30 @@ namespace hotel_booking_mvc.Controllers.Auth
             }
             return View();
         }
-      
 
 
-        [HttpPost]
-        public IActionResult Signup(SignupModel signupmodel)
+
+        
+        public IActionResult Register()
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
+            return View();
+        }
+
+
+        [HttpPost("register")]
+        public IActionResult Register(RegisterDto registerDTO)
+        {
             try
             {
-                var result = _auth.Signup(signupmodel);
-
-
+                if (!ModelState.IsValid)
+                {
+                    return View();
+                }
+                var result = _auth.Register(registerDTO);
+                //  result.EnsureSuccessStatusCode();
                 return RedirectToAction("Login");
             }
+
             catch (Exception)
             {
                 TempData["error"] = "Oops something bad happened try again!";
@@ -85,11 +88,6 @@ namespace hotel_booking_mvc.Controllers.Auth
 
 
 
-
-        public IActionResult Signup()
-        {
-            return View();
-        }
 
 
 
