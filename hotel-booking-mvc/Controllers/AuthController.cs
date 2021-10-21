@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using hotel_booking_model.AuthModels;
+using hotel_booking_model.AuthModels.Dto;
 
 namespace hotel_booking_mvc.Controllers.Auth
 {
@@ -99,15 +100,33 @@ namespace hotel_booking_mvc.Controllers.Auth
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(string email) 
+        {
+            var result = await _auth.ForgotPassword(email);
+            ViewBag.Data = "Kindly check your email for a password recovery link";
+            return View();
+        }
+
         public IActionResult ConfirmEmail()
         {
             return View();
         }
 
+
         public IActionResult ResetPassword()
         {
             return View();
         }
+
+        [HttpPatch]
+        public async Task<ActionResult> UpdatePassword([FromBody] UpdatePasswordDto model) 
+        {
+            //var result = await _auth.
+
+            return View();
+        }
+
 
 
     }
