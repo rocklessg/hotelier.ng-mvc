@@ -1,8 +1,10 @@
 ﻿using hotel_booking_model;
 using hotel_booking_model.commons;
 using hotel_booking_model.Dtos.Hotels;
+using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace hotel_booking_services.Implmentations
@@ -51,5 +53,7 @@ namespace hotel_booking_services.Implmentations
                 baseUrl: "https://localhost:44319/");
             return response.Data;
 		}
+
+        
     }
 }

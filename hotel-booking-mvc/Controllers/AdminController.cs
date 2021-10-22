@@ -19,21 +19,7 @@ namespace hotel_booking_mvc.Controllers.Admin
 		}
         public async Task<IActionResult> Dashboard()
         {
-            var adminStatisticsDto = await _adminService.GetAdminStatistics();
-            var topHotels = await _hotelService.GetTopHotelsAsync();
-            var hotelsCountPerState = await _hotelService.GetTotalHotelsPerLocation();
-            var result = new AdminDashboardViewModel()
-            {
-                TopHotels = topHotels,
-                TotalHotels = adminStatisticsDto.TotalNumberOfHotels,
-                TotalManagers = adminStatisticsDto.Managers.Count,
-                TotalMonthlyCommission = adminStatisticsDto.TotalMonthlyCommission,
-                TotalMonthlyTransaction = adminStatisticsDto.TotalMonthlyTransactions,
-                Months = adminStatisticsDto.AnnualRevenue.Select(x => x.Key).ToList(),
-                Revenues = adminStatisticsDto.AnnualRevenue.Select(x => x.Value).ToList(),
-                States = hotelsCountPerState.Select(x => x.Key).ToList(),
-                TotalHotelsPerState = hotelsCountPerState.Select(x => x.Value).ToList()
-            };
+            var result = await _adminService.ShowAdminDashboard();
             return View(result);
         }
         public async Task<IActionResult> HotelAsync(int pageNumber)

@@ -13,9 +13,11 @@ namespace hotel_booking_services.Implmentations
     public class AdminService : IAdminService
     {
         private readonly IHttpRequestFactory _httpRequestFactory;
-        public AdminService(IHttpRequestFactory httpRequestFactory)
+        private readonly IHotelService _hotelService;
+        public AdminService(IHttpRequestFactory httpRequestFactory, IHotelService hotelService)
         {
             _httpRequestFactory = httpRequestFactory;
+            _hotelService = hotelService;
         }
 
         public async Task<AdminStatisticsDto> GetAdminStatistics()
@@ -25,6 +27,26 @@ namespace hotel_booking_services.Implmentations
                     requestUrl: $"api/Statistics/get-statistics/admin",
                     baseUrl: "https://localhost:44319/");
             return response.Data;
+        }
+
+        public async Task<AdminDashboardViewModel> ShowAdminDashboard()
+        {
+            var adminStatisticsDto = await GetAdminStatistics();
+            var topHotels = await _hotelService.GetTopHotelsAsync();
+            var hotelsCountPerState = await _hotelService.GetTotalHotelsPerLocation();
+            var result = new AdminDashboardViewModel()
+            {
+                TopHotels = topHotels,
+                TotalHotels = adminStatisticsDto.TotalNumberOfHotels,
+                TotalManagers = adminStatisticsDto.Managers.Count,
+                TotalMonthlyCommission = adminStatisticsDto.TotalMonthlyCommission,
+                TotalMonthlyTransaction = adminStatisticsDto.TotalMonthlyTransactions,
+                Months = adminStatisticsDto.AnnualRevenue.Select(x => x.Key).ToList(),
+                Revenues = adminStatisticsDto.AnnualRevenue.Select(x => x.Value).ToList(),
+                States = hotelsCountPerState.Select(x => x.Key).ToList(),
+                TotalHotelsPerState = hotelsCountPerState.Select(x => x.Value).ToList()
+            };
+            return result;
         }
     }
 }
