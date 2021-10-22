@@ -42,5 +42,14 @@ namespace hotel_booking_services.Implmentations
                     baseUrl: "https://localhost:44319/");
             return response.Data;
         }
+
+        public async Task<Dictionary<string, int>> GetTotalHotelsPerLocation()
+		{
+            var response = await _requestFactory.GetRequestAsync
+                <BasicResponse<Dictionary<string, int>>>(
+                requestUrl: "api/Hotel/total-hotels-per-location",
+                baseUrl: "https://localhost:44319/");
+            return response.Data;
+		}
     }
 }
