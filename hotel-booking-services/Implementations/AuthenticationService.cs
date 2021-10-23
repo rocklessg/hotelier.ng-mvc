@@ -29,14 +29,5 @@ namespace hotel_booking_services.Implmentations
             _httpContextAccessor.HttpContext.Session.SetString("access_token", result.Data.Token);
             return result.Data;
         }
-
-
-        //public SignupDto Signup(SignupModel signupModel) 
-
-        //{
-        //    var response = _httpRequestFactory.PostRequestAsync<SignupModel, SignupDto>("/api/Authentication", signupModel);
-        //    SignupDto signup = response.Result;
-        //    return signup;
-        //}
     }
 }
