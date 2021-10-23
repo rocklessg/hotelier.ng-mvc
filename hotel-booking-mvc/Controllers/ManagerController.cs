@@ -41,7 +41,17 @@ namespace hotel_booking_mvc.Controllers.Manager
         {
             return View();
         }
+<<<<<<< HEAD
         public IActionResult SingleRoom()
+=======
+        public IActionResult HotelRooms()
+
+>>>>>>> reviews
+        {
+            return View();
+        }
+
+        public IActionResult HotelDetails(string hotelId)
         {
             return View();
         }
