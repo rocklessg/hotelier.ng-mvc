@@ -1,4 +1,5 @@
-﻿@model List<HotelBasicView>
+﻿@using hotel_booking_model.commons
+@model PaginationResponse<IEnumerable<HotelBasicView>>
 @{
     ViewData["Title"] = "Hotels";
 }
@@ -33,10 +34,10 @@
 
         </div>
     </div>
-    @foreach (var hotel in @Model)
+    @foreach (var hotel in @Model.PageItems)
     {
         var address = hotel.Address + ", " + hotel.City + ", " + hotel.State;
-        <a class="hotel-card d-flex row" asp-action="HotelDetails" asp-controller="Admin" asp-route-hotelId=@hotel.Id>
+        <a class="hotel-card d-flex row" asp-action="HotelDetails" asp-controller="Manager" asp-route-hotelId=@hotel.Id>
             <div class="col-sm-12 col-md-3 hotel-img">
                 <img class="img img-fluid rounded-start" src=@hotel.FeaturedImage />
             </div>

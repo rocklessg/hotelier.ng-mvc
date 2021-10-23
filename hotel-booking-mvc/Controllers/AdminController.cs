@@ -21,8 +21,8 @@ namespace hotel_booking_mvc.Controllers.Admin
         }
         public async Task<IActionResult> HotelAsync(int pageNumber)
         {
-            var hotelList = await _hotelService.GetAllHotelAsync(pageNumber);
-            return View(hotelList);
+            var paginationResponse = await _hotelService.GetAllHotelAsync(pageNumber);
+            return View(paginationResponse);
         }     
 
 
@@ -35,11 +35,6 @@ namespace hotel_booking_mvc.Controllers.Admin
         public IActionResult Transactions()
         {
             return View();  
-        }
-
-        public IActionResult HotelDetails()
-        {
-            return View();
         }
         public IActionResult HotelRooms()
         {
