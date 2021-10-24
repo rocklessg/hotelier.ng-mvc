@@ -16,19 +16,19 @@ namespace hotel_booking_services.Implmentations
             _requestFactory = requestFactory;
         }
 
-        public async Task<IEnumerable<HotelBasicView>> GetAllHotelAsync(int pageNumber)
+        public async Task<PaginationResponse<IEnumerable<HotelBasicView>>> GetAllHotelAsync(int pageNumber)
         {
             pageNumber = pageNumber > 0 ? pageNumber : 1;
             var response = await _requestFactory.GetRequestAsync
-                <BasicResponse<IEnumerable<HotelBasicView>>>(
-                    requestUrl: $"api/Hotel/all-hotels?PageSize=3&PageNumber={pageNumber}",
+                <BasicResponse< PaginationResponse<IEnumerable < HotelBasicView>>>>(
+                    requestUrl: $"api/Hotel/all-hotels?PageSize=5&PageNumber={pageNumber}",
                     baseUrl: "http://hoteldotnet.herokuapp.com");
             return response.Data;
         }
-        public async Task<IEnumerable<HotelBasicView>> GetAllHotelForManagerAsync(string managerId)
+        public async Task<PaginationResponse<IEnumerable<HotelBasicView>>> GetAllHotelForManagerAsync(string managerId)
         {
             var response = await _requestFactory.GetRequestAsync
-                <BasicResponse<IEnumerable<HotelBasicView>>>(
+                <BasicResponse<PaginationResponse<IEnumerable<HotelBasicView>>>>(
                     requestUrl: $"api/Manager/{managerId}/hotels",
                     baseUrl: "http://hoteldotnet.herokuapp.com");
             return response.Data;

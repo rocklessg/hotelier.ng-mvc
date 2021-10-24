@@ -5,8 +5,8 @@ using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.IdentityModel.Tokens.Jwt;
-using System.Threading.Tasks;
 using hotel_booking_model.Dtos.AuthenticationDtos;
+using System.Threading.Tasks;
 
 namespace hotel_booking_mvc.Controllers.Auth
 {
@@ -28,20 +28,19 @@ namespace hotel_booking_mvc.Controllers.Auth
 
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginDto loginModel)
+        public async Task<IActionResult> Login(LoginDto loginDto)
         {
             var handler = new JwtSecurityTokenHandler();
-
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = await _auth.Login(loginModel);
+                    var result = await _auth.Login(loginDto);
 
                     HttpContext.Session.SetString("user", JsonConvert.SerializeObject(result));
                     JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Token);
-                    var Claim = decodedValue.Claims.ElementAt(2);
+                    var Claim = decodedValue.Claims.ElementAt(1);
                     if (Claim.Value == "Manager")
                     {
                         return RedirectToAction("Dashboard", "Manager");
@@ -56,38 +55,39 @@ namespace hotel_booking_mvc.Controllers.Auth
             }
             return View();
         }
-      
 
 
-        [HttpPost]
-        public IActionResult Signup()
+
+        
+        public IActionResult Register()
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View();
-            //}
-            //try
-            //{
-            //    var result = _auth.Signup(signupmodel);
-
-
-            //    return RedirectToAction("Login");
-            //}
-            //catch (Exception)
-            //{
-            //    TempData["error"] = "Oops something bad happened try again!";
-            //    return View();
-            //}
             return View();
         }
 
 
+        [HttpPost("register")]
+        public IActionResult Register(RegisterDto registerDTO)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View();
+                }
+                var result = _auth.Register(registerDTO);
+                //  result.EnsureSuccessStatusCode();
+                return RedirectToAction("Login");
+            }
+
+            catch (Exception)
+            {
+                TempData["error"] = "Oops something bad happened try again!";
+                return View();
+            }
+        }
 
 
-        //public IActionResult Signup()
-        //{
-        //    return View();
-        //}
+
 
 
 
