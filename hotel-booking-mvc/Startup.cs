@@ -33,7 +33,7 @@ namespace hotel_booking_mvc
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddSession();
-            services.AddTransient<IAuthRepository, AuthRepository>();
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
             
             services.AddSingleton((provider) =>
             {

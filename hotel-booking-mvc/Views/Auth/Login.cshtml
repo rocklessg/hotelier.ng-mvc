@@ -1,4 +1,4 @@
-@model hotel_booking_model.AuthModels.LoginModel
+@model hotel_booking_model.Dtos.AuthenticationDtos.LoginDto
 
 @{
     ViewData["Title"] = "Login";
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="form-group mb-2">
 
-                                    @Html.TextBoxFor(x => x.Password, new { @class = "form-control has-validation", @placeholder = "Password", @required = "required" })
+                                    @Html.TextBoxFor(x => x.Password, new { @class = "form-control has-validation", @placeholder = "Password", @required = "required", @type ="password" })
 
                                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "badge bg-danger" })
 

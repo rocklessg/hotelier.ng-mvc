@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hotel_booking_model.AuthModels.Dto
+namespace hotel_booking_model.Dtos.AuthenticationDtos
 {
     public class UpdatePasswordDto
     {
