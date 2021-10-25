@@ -40,11 +40,10 @@ namespace hotel_booking_mvc.Controllers.Auth
                 {
                     var result = await _auth.Login(loginDto);
                     HttpContext.Session.SetString("user", JsonConvert.SerializeObject(result));
-                   
+                    HttpContext.Session.SetString("access_token", result.Token);
                     JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Token);
                     var Claim = decodedValue.Claims.ElementAt(1);
                     role = Claim.Value;
-                    
                     if (role == "Manager")
                     {
                         return RedirectToAction("Dashboard", "Manager");
@@ -59,6 +58,7 @@ namespace hotel_booking_mvc.Controllers.Auth
             }
             return View();
         }
+    
 
 
 
@@ -101,7 +101,7 @@ namespace hotel_booking_mvc.Controllers.Auth
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("ForgotPassword")]
         public async Task<IActionResult> ForgotPassword(string email) 
         {
             var result = await _auth.ForgotPassword(email);
@@ -127,7 +127,7 @@ namespace hotel_booking_mvc.Controllers.Auth
 
         
 
-        [HttpPost]
+        [HttpPost("UpdatePassword")]
         public async Task<IActionResult> UpdatePassword(UpdatePasswordDto model)
         {
             ViewBag.Role = role;
@@ -137,8 +137,6 @@ namespace hotel_booking_mvc.Controllers.Auth
             {
                 var result = await _auth.UpdatePassword(model);
                 ModelState.Clear();
-
-                //ViewBag.Data = "Your password has been updated successfully!";
                 ViewBag.Data = result;
                 return View();
 
