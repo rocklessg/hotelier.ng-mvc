@@ -23,7 +23,7 @@ namespace hotel_booking_mvc.Controllers.Admin
 		{
 			var hotelList = await _hotelService.GetAllHotelAsync(pageNumber);
 			return View(hotelList);
-		}     
+		} 
 
 
 		// Manager Listing Controller
@@ -55,10 +55,5 @@ namespace hotel_booking_mvc.Controllers.Admin
 		{
 			return View();
 		}
-	/*	public IActionResult HotelDetails(string hotelId)
-		{
-			return View();
-		}
-*/
 	}
 }
