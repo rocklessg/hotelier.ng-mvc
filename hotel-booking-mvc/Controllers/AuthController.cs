@@ -137,8 +137,9 @@ namespace hotel_booking_mvc.Controllers.Auth
             {
                 var result = await _auth.UpdatePassword(model);
                 ModelState.Clear();
-                
-                ViewBag.Data = "Your password has been updated successfully!";
+
+                //ViewBag.Data = "Your password has been updated successfully!";
+                ViewBag.Data = result;
                 return View();
 
             }

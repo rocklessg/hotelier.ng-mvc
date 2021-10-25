@@ -23,11 +23,6 @@ namespace hotel_booking_services.Implmentations
         {
 
             var result = await _httpRequestFactory.PostRequestAsync<LoginDto, BasicResponse<LoginResponseDto>>("/api/Authentication/login", loginDto);
-            if (result.Succeeded) 
-            {
-                _httpContext.HttpContext.Session.SetString("access_token", result.Data.Token);
-            }
-           
             return result.Data;
         }
 
@@ -38,6 +33,11 @@ namespace hotel_booking_services.Implmentations
             return result.Data;
         }
 
+        /// <summary>
+        /// Forgot Password
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public async Task<string> ForgotPassword(string email)
         {
 
@@ -48,6 +48,11 @@ namespace hotel_booking_services.Implmentations
             return response.Message;
         }
 
+        /// <summary>
+        /// UpdatePassword
+        /// </summary>
+        /// <param name="updatePasswordDto"></param>
+        /// <returns></returns>
         public async Task<string> UpdatePassword(UpdatePasswordDto updatePasswordDto)
         {
             string url = $"api/Authentication/update-password";
