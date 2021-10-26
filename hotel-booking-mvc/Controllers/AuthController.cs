@@ -37,23 +37,9 @@ namespace hotel_booking_mvc.Controllers.Auth
                 var response = await _auth.Login(loginDto);
                 var result = response.Data; if (result == null)
                 {
-<<<<<<< HEAD
                     /*TempData["error"] = response.Message;*/
                     ModelState.AddModelError(string.Empty, "Invalid Login Details");
                     return View();
-=======
-                    var result = await _auth.Login(loginDto);
-                    HttpContext.Session.SetString("user", JsonConvert.SerializeObject(result));
-                    HttpContext.Session.SetString("access_token", result.Token);
-                    JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Token);
-                    var Claim = decodedValue.Claims.ElementAt(1);
-                    role = Claim.Value;
-                    if (role == "Manager")
-                    {
-                        return RedirectToAction("Dashboard", "Manager");
-                    }
-                    return RedirectToAction("Dashboard", "Admin");
->>>>>>> 1899691e19c91fcbe985165d847b89f590eafe19
                 }
                 if (result.Claim.Value == "Manager")
                 {
@@ -68,12 +54,7 @@ namespace hotel_booking_mvc.Controllers.Auth
 
 
 
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> 1899691e19c91fcbe985165d847b89f590eafe19
         public IActionResult Register()
         {
             return View();
