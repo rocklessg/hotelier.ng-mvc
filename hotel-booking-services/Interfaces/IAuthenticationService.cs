@@ -8,5 +8,7 @@ namespace hotel_booking_services.Interfaces
     {
         Task<LoginViewModel> Login(LoginDto loginDto);
         Task<RegisterDto> Register(RegisterDto registerdto);
+        Task<string> ForgotPassword(string email);
+        Task<string> UpdatePassword(UpdatePasswordDto updatePasswordDto);
     }
 }
