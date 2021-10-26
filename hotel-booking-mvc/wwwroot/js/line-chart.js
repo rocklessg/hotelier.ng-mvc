@@ -1,4 +1,6 @@
-﻿var ctx = document.getElementById('lineChart').getContext('2d');
+﻿
+
+var ctx = document.getElementById('lineChart').getContext('2d');
 var lineChart = new Chart(ctx, {
     type: 'line',
     data: {
