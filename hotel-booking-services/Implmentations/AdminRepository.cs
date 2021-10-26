@@ -14,16 +14,5 @@ namespace hotel_booking_services.Implmentations
         {
             _httpRequestFactory = httpRequestFactory;
         }
-
-        public async Task<IEnumerable<>> GetAllTransactionsAsync(int pageNumber)
-        {
-            pageNumber = pageNumber > 0 ? pageNumber : 1;
-            var response = await _requestFactory.GetRequestAsync
-                <BasicResponse<IEnumerable<>>>(
-                    requestUrl: $"api/admin/all-hotels?PageSize=3&PageNumber={pageNumber}",
-                    baseUrl: "http://hoteldotnet.herokuapp.com");
-            return response.Data;
-        }
-
     }
 }

@@ -8,11 +8,13 @@ namespace hotel_booking_mvc.Controllers.Admin
 	public class AdminController : Controller
 	{
 		private readonly IHotelService _hotelService;
+        private readonly IAdminService _adminService;
 
-		public AdminController(IHotelService hotelService)
+        public AdminController(IHotelService hotelService, IAdminService adminService)
 		{
 			_hotelService = hotelService;
-		}
+            _adminService = adminService;
+        }
 		public IActionResult Dashboard()
 		{
 			TransactionPeriod transactionPeriod = new();
@@ -32,9 +34,10 @@ namespace hotel_booking_mvc.Controllers.Admin
 			return View();  
 		}
 
-		public IActionResult Transactions()
+		public async Task<IActionResult> Transactions(int pageNumber, int pageSize)
 		{
-			return View();  
+			var transactions = await _adminService.GetAllTransactions(pageSize, pageNumber);
+			return View(transactions);  
 		}
 
         public IActionResult HotelDetails()
