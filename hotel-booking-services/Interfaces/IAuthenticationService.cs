@@ -7,7 +7,7 @@ namespace hotel_booking_services.Interfaces
 {
     public interface IAuthenticationService
     {
-        public Task<LoginResponseDto> Login(LoginDto loginDto);
+        Task<BasicResponse<LoginViewModel>> Login(LoginDto loginDto);
 
         Task<RegisterDto> Register(RegisterDto registerdto);
     }
