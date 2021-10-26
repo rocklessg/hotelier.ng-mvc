@@ -1,6 +1,8 @@
 ﻿using hotel_booking_model;
+using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace hotel_booking_mvc.Controllers.Admin
@@ -8,39 +10,37 @@ namespace hotel_booking_mvc.Controllers.Admin
 	public class AdminController : Controller
 	{
 		private readonly IHotelService _hotelService;
+		private readonly IAdminService _adminService;
 
-		public AdminController(IHotelService hotelService)
+		public AdminController(IHotelService hotelService, IAdminService adminService)
 		{
 			_hotelService = hotelService;
+            _adminService = adminService;
 		}
-		public IActionResult Dashboard()
-		{
-			TransactionPeriod transactionPeriod = new();
-			//ViewData["transactionPeriod"] = transactionPeriod;
-			return View(transactionPeriod);
-		}
-		public async Task<IActionResult> HotelAsync(int pageNumber)
-		{
-			var hotelList = await _hotelService.GetAllHotelAsync(pageNumber);
-			return View(hotelList);
-		} 
-
-
-		// Manager Listing Controller
-		public IActionResult Manager()
-		{
-			return View();  
-		}
-
-		public IActionResult Transactions()
-		{
-			return View();  
-		}
-
-        public IActionResult HotelDetails()
+        public async Task<IActionResult> Dashboard()
         {
-            return View();
+            var result = await _adminService.ShowAdminDashboard();
+            return View(result);
         }
+        public async Task<IActionResult> HotelAsync(int pageNumber)
+        {
+            var hotelList = await _hotelService.GetAllHotelAsync(pageNumber);
+            return View(hotelList);
+        }     
+
+
+        // Manager Listing Controller
+        public IActionResult Manager()
+        {
+            return View();  
+        }
+
+        public IActionResult Transactions()
+        {
+            return View();  
+        }
+
+
         public IActionResult HotelRooms()
         {
             return View();
@@ -51,9 +51,14 @@ namespace hotel_booking_mvc.Controllers.Admin
         }
 
 
-		public IActionResult AllUsers()
+        public IActionResult AllUsers()
+        {
+            return View();
+        }
+		public IActionResult HotelDetails(string hotelId)
 		{
 			return View();
 		}
+
 	}
 }

@@ -3,7 +3,7 @@
     public class BasicResponse<TRes> where TRes : class
     {
         public string Message { get; set; }
-        public bool Success { get; set; }
+        public bool Succeeded { get; set; }
         public int StatusCode { get; set; }
         public TRes Data { get; set; }
     }
