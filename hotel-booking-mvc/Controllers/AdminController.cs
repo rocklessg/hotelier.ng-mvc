@@ -17,11 +17,14 @@ namespace hotel_booking_mvc.Controllers.Admin
 			_hotelService = hotelService;
             _adminService = adminService;
 		}
-        public async Task<IActionResult> Dashboard()
+
+
+        public IActionResult Dashboard()
         {
-            var result = await _adminService.ShowAdminDashboard();
-            return View(result);
+            TransactionPeriod transactionPeriod = new();
+            return View(transactionPeriod);
         }
+
         public async Task<IActionResult> HotelAsync(int pageNumber)
         {
             var hotelList = await _hotelService.GetAllHotelAsync(pageNumber);

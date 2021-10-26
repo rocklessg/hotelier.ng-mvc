@@ -3,6 +3,9 @@ using hotel_booking_model.Dtos.AuthenticationDtos;
 using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace hotel_booking_services.Implmentations
@@ -10,35 +13,32 @@ namespace hotel_booking_services.Implmentations
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IHttpRequestFactory _httpRequestFactory;
-<<<<<<< HEAD:hotel-booking-services/Implmentations/AuthenticationService.cs
-        private readonly IHttpContextAccessor _httpContext;
-        
-        public AuthenticationService(IHttpRequestFactory httpRequestFactory, IHttpContextAccessor httpContext)
-        {
-            _httpRequestFactory = httpRequestFactory;
-           _httpContext = httpContext;
-
-
-=======
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public AuthenticationService(IHttpRequestFactory httpRequestFactory, IHttpContextAccessor httpContextAccessor)
         {
             _httpRequestFactory = httpRequestFactory;
             _httpContextAccessor = httpContextAccessor;
->>>>>>> 36e85e360c55bb570d583a30bcfe5ba23b807c9a:hotel-booking-services/Implementations/AuthenticationService.cs
+
         }
 
-        public async Task<LoginViewModel> Login(LoginDto loginDto)
+        public async Task<BasicResponse<LoginViewModel>> Login(LoginDto loginDto)
         {
+            var handler = new JwtSecurityTokenHandler();
 
-<<<<<<< HEAD:hotel-booking-services/Implmentations/AuthenticationService.cs
-            var result = await _httpRequestFactory.PostRequestAsync<LoginDto, BasicResponse<LoginResponseDto>>("/api/Authentication/login", loginDto);
-=======
+
+
             var result = await _httpRequestFactory.PostRequestAsync<LoginDto, BasicResponse<LoginViewModel>>("/api/Authentication/login", loginDto);
-            _httpContextAccessor.HttpContext.Session.SetString("access_token", result.Data.Token);
->>>>>>> 36e85e360c55bb570d583a30bcfe5ba23b807c9a:hotel-booking-services/Implementations/AuthenticationService.cs
-            return result.Data;
+            if (result.Succeeded)
+            {
+                _httpContextAccessor.HttpContext.Session.SetString("access_token", result.Data.Token);
+                _httpContextAccessor.HttpContext.Session.SetString("user", JsonConvert.SerializeObject(result));
+                JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Data.Token);
+                result.Data.Claim = decodedValue.Claims.ElementAt(1);
+                return result;
+            }
+
+            return result;
         }
 
 
@@ -47,7 +47,7 @@ namespace hotel_booking_services.Implmentations
             var result = await _httpRequestFactory.PostRequestAsync<RegisterDto, BasicResponse<RegisterDto>>("/api/Authentiation/register", registerdto);
             return result.Data;
         }
-<<<<<<< HEAD:hotel-booking-services/Implmentations/AuthenticationService.cs
+
 
         /// <summary>
         /// Forgot Password
@@ -73,13 +73,9 @@ namespace hotel_booking_services.Implmentations
         {
             string url = $"api/Authentication/update-password";
             var response = await _httpRequestFactory.UpdateRequestAsync<UpdatePasswordDto, BasicResponse<string>>(url, updatePasswordDto);
-
             return response.Message;
-
         }
 
 
-=======
->>>>>>> 36e85e360c55bb570d583a30bcfe5ba23b807c9a:hotel-booking-services/Implementations/AuthenticationService.cs
     }
 }
