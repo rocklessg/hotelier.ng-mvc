@@ -1,4 +1,4 @@
-@model hotel_booking_model.Dtos.AuthenticationDtos.RegisterDto
+@model SignupViewModel
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -76,7 +76,7 @@
                                     </div>
                                     <div class="form-group mb-2">
 
-                                        @Html.TextBoxFor(x => x.Password, new { @class = "form-control has-validation", @placeholder = "Password", @required = "required", @type="password" })
+                                        @Html.TextBoxFor(x => x.Password, new { @class = "form-control has-validation", @placeholder = "Password", @required = "required" })
 
                                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "badge bg-danger" })
 
