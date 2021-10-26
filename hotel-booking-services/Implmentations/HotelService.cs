@@ -24,10 +24,10 @@ namespace hotel_booking_services.Implmentations
                     baseUrl: "http://hoteldotnet.herokuapp.com");
             return response.Data;
         }
-        public async Task<PaginationResponse<IEnumerable<HotelBasicView>>> GetAllHotelForManagerAsync(string managerId)
+        public async Task<IEnumerable<HotelBasicView>> GetAllHotelForManagerAsync(string managerId)
         {
             var response = await _requestFactory.GetRequestAsync
-                <BasicResponse<PaginationResponse<IEnumerable<HotelBasicView>>>>(
+                <BasicResponse<IEnumerable<HotelBasicView>>>(
                     requestUrl: $"api/Manager/{managerId}/hotels",
                     baseUrl: "http://hoteldotnet.herokuapp.com");
             return response.Data;
