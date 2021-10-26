@@ -13,11 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
-=======
     <PackageReference Include="Chart.js" Version="2.9.3" />
->>>>>>> 36e85e360c55bb570d583a30bcfe5ba23b807c9a
     <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.10" />
