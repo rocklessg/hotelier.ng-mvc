@@ -1,10 +1,6 @@
 using hotel_booking_services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System;
-using System.Linq;
-using System.IdentityModel.Tokens.Jwt;
 using hotel_booking_model.Dtos.AuthenticationDtos;
 using System.Threading.Tasks;
 
@@ -13,15 +9,16 @@ namespace hotel_booking_mvc.Controllers.Auth
 {
     public class AuthController : Controller
     {
-
         private readonly IAuthenticationService _auth;
         public static string role = string.Empty;
+<<<<<<< HEAD
 
+=======
+>>>>>>> fcd335aa0d9011668e16ad0405ce6e552b0aba0d
         public AuthController(IAuthenticationService auth)
         {
             _auth = auth;
         }
-
         public IActionResult Login()
         {
             return View();
@@ -34,6 +31,7 @@ namespace hotel_booking_mvc.Controllers.Auth
             if (ModelState.IsValid)
             {
                 var response = await _auth.Login(loginDto);
+<<<<<<< HEAD
 <<<<<<< HEAD
                 var result = response.Data;
 
@@ -55,15 +53,22 @@ namespace hotel_booking_mvc.Controllers.Auth
 
 =======
                 var result = response.Data; if (result == null)
+=======
+                var result = response.Data;
+
+                if (result == null)
+>>>>>>> fcd335aa0d9011668e16ad0405ce6e552b0aba0d
                 {
-                    /*TempData["error"] = response.Message;*/
                     ModelState.AddModelError(string.Empty, "Invalid Login Details");
                     return View();
                 }
-                if (result.Claim.Value == "Manager")
+
+                role = result.Claim.Value;
+                if (role == "Manager")
                 {
                     return RedirectToAction("Dashboard", "Manager");
                 }
+<<<<<<< HEAD
                 return RedirectToAction("Dashboard", "Admin");
 >>>>>>> 9bd685fe19b59bb94f1188b55f6c6e6adae38723
             }
@@ -72,13 +77,23 @@ namespace hotel_booking_mvc.Controllers.Auth
 
 
 
+=======
+                else
+                {
+                    return RedirectToAction("Dashboard", "Admin");
+                }
+>>>>>>> fcd335aa0d9011668e16ad0405ce6e552b0aba0d
 
+            }
+            return View();
 
+        }
 
         public IActionResult Register()
         {
             return View();
         }
+
 
 
         [HttpPost("register")]
@@ -91,76 +106,38 @@ namespace hotel_booking_mvc.Controllers.Auth
                     return View();
                 }
                 var result = _auth.Register(registerDTO);
-                //  result.EnsureSuccessStatusCode();
                 return RedirectToAction("Login");
             }
-
             catch (Exception)
             {
                 TempData["error"] = "Oops something bad happened try again!";
                 return View();
             }
         }
+<<<<<<< HEAD
 
 
 
 
 
         
+=======
+>>>>>>> fcd335aa0d9011668e16ad0405ce6e552b0aba0d
         public IActionResult ForgotPassword()
         {
             return View();
         }
 
-        [HttpPost("ForgotPassword")]
-        public async Task<IActionResult> ForgotPassword(string email) 
-        {
-            var result = await _auth.ForgotPassword(email);
-            ViewBag.Data = "Kindly check your email for a password recovery link";
-            return View();
-        }
 
         public IActionResult ConfirmEmail()
         {
             return View();
         }
-
-
         public IActionResult ResetPassword()
         {
             return View();
         }
-
-        public IActionResult UpdatePassword() 
-        {
-            return View();
-        }
-
-        
-
-        [HttpPost("UpdatePassword")]
-        public async Task<IActionResult> UpdatePassword(UpdatePasswordDto model)
-        {
-            ViewBag.Role = role;
-
-
-            if (model.NewPassword == model.ConfirmPassword) 
-            {
-                var result = await _auth.UpdatePassword(model);
-                ModelState.Clear();
-                ViewBag.Data = result;
-                return View();
-
-            }
-
-            ModelState.Clear();
-            ViewBag.Data = "The new password and current password must match";
-            return View();
-
-
-        }
-
-
-
     }
 }
+
+

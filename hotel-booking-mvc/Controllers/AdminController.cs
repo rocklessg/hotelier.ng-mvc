@@ -15,8 +15,9 @@ namespace hotel_booking_mvc.Controllers.Admin
 		public AdminController(IHotelService hotelService, IAdminService adminService)
 		{
 			_hotelService = hotelService;
-            _adminService = adminService;
+			_adminService = adminService;
 		}
+<<<<<<< HEAD
 
 
         public IActionResult Dashboard()
@@ -30,34 +31,46 @@ namespace hotel_booking_mvc.Controllers.Admin
             var hotelList = await _hotelService.GetAllHotelAsync(pageNumber);
             return View(hotelList);
         }     
+=======
+		public async Task<IActionResult> Dashboard()
+		{
+			var result = await _adminService.ShowAdminDashboard();
+			return View(result);
+		}
+		public async Task<IActionResult> HotelAsync(int pageNumber)
+		{
+			var hotelList = await _hotelService.GetAllHotelAsync(pageNumber);
+			return View(hotelList);
+		}     
+>>>>>>> fcd335aa0d9011668e16ad0405ce6e552b0aba0d
 
 
-        // Manager Listing Controller
-        public IActionResult Manager()
-        {
-            return View();  
-        }
+		// Manager Listing Controller
+		public IActionResult Manager()
+		{
+			return View();  
+		}
 
-        public IActionResult Transactions()
-        {
-            return View();  
-        }
-
-
-        public IActionResult HotelRooms()
-        {
-            return View();
-        }
-        public IActionResult AllManagers()
-        {
-            return View();
-        }
+		public IActionResult Transactions()
+		{
+			return View();  
+		}
 
 
-        public IActionResult AllUsers()
-        {
-            return View();
-        }
+		public IActionResult HotelRooms()
+		{
+			return View();
+		}
+		public IActionResult AllManagers()
+		{
+			return View();
+		}
+
+
+		public IActionResult AllUsers()
+		{
+			return View();
+		}
 		public IActionResult HotelDetails(string hotelId)
 		{
 			return View();
