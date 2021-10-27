@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
+using LoginViewModel = hotel_booking_model.Dtos.AuthenticationDtos.LoginViewModel;
 
 namespace hotel_booking_services.Implmentations
 {
@@ -34,7 +35,9 @@ namespace hotel_booking_services.Implmentations
                 _httpContextAccessor.HttpContext.Session.SetString("access_token", result.Data.Token);
                 _httpContextAccessor.HttpContext.Session.SetString("user", JsonConvert.SerializeObject(result));
                 JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Data.Token);
-                result.Data.Claim = decodedValue.Claims.ElementAt(2);
+
+                result.Data.Claim = decodedValue.Claims.ElementAt(1);
+
                 return result;
             }
 

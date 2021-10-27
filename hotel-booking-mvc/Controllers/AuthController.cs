@@ -34,6 +34,7 @@ namespace hotel_booking_mvc.Controllers.Auth
             if (ModelState.IsValid)
             {
                 var response = await _auth.Login(loginDto);
+<<<<<<< HEAD
                 var result = response.Data;
 
                 if (result == null)
@@ -52,9 +53,23 @@ namespace hotel_booking_mvc.Controllers.Auth
                     return RedirectToAction("Dashboard", "Admin");
                 }
 
+=======
+                var result = response.Data; if (result == null)
+                {
+                    /*TempData["error"] = response.Message;*/
+                    ModelState.AddModelError(string.Empty, "Invalid Login Details");
+                    return View();
+                }
+                if (result.Claim.Value == "Manager")
+                {
+                    return RedirectToAction("Dashboard", "Manager");
+                }
+                return RedirectToAction("Dashboard", "Admin");
+>>>>>>> 9bd685fe19b59bb94f1188b55f6c6e6adae38723
             }
-            return View();
+            return View(loginDto);
         }
+
 
 
 
