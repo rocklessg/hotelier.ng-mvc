@@ -10,6 +10,7 @@ namespace hotel_booking_mvc.Controllers.Auth
     public class AuthController : Controller
     {
         private readonly IAuthenticationService _auth;
+        public static string role = string.Empty;
         public AuthController(IAuthenticationService auth)
         {
             _auth = auth;
@@ -27,23 +28,28 @@ namespace hotel_booking_mvc.Controllers.Auth
             {
                 var response = await _auth.Login(loginDto);
                 var result = response.Data;
-                var role = result.Claim.Value; 
-                
+
                 if (result == null)
                 {
-                    TempData["error"] = response.Message;
+                    ModelState.AddModelError(string.Empty, "Invalid Login Details");
                     return View();
                 }
 
-
+                role = result.Claim.Value;
                 if (role == "Manager")
                 {
                     return RedirectToAction("Dashboard", "Manager");
                 }
-                return RedirectToAction("Dashboard", "Admin");
+                else
+                {
+                    return RedirectToAction("Dashboard", "Admin");
+                }
+
             }
             return View();
+
         }
+
         public IActionResult Register()
         {
             return View();
