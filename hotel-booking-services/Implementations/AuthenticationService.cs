@@ -3,6 +3,9 @@ using hotel_booking_model.Dtos.AuthenticationDtos;
 using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace hotel_booking_services.Implmentations
@@ -19,11 +22,22 @@ namespace hotel_booking_services.Implmentations
 
         }
 
-        public async Task<LoginViewModel> Login(LoginDto loginDto)
+        public async Task<BasicResponse<LoginViewModel>> Login(LoginDto loginDto)
         {
+            var handler = new JwtSecurityTokenHandler();
+
+
+
             var result = await _httpRequestFactory.PostRequestAsync<LoginDto, BasicResponse<LoginViewModel>>("/api/Authentication/login", loginDto);
-            _httpContextAccessor.HttpContext.Session.SetString("access_token", result.Data.Token);
-            return result.Data;
+            if (result.Succeeded)
+            {
+                _httpContextAccessor.HttpContext.Session.SetString("access_token", result.Data.Token);
+                _httpContextAccessor.HttpContext.Session.SetString("user", JsonConvert.SerializeObject(result));
+                JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Data.Token);
+                result.Data.Claim = decodedValue.Claims.ElementAt(2);
+                return result;
+            }
+            return result;
         }
 
 
