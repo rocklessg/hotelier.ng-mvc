@@ -34,17 +34,24 @@ namespace hotel_booking_mvc.Controllers.Auth
             if (ModelState.IsValid)
             {
                 var response = await _auth.Login(loginDto);
-                var result = response.Data; 
+                var result = response.Data;
+
                 if (result == null)
                 {
-                    TempData["error"] = response.Message;
+                    ModelState.AddModelError(string.Empty, "Invalid Login Details");
                     return View();
                 }
-                if (result.Claim.Value == "Manager")
+
+                role = result.Claim.Value;
+                if (role == "Manager")
                 {
                     return RedirectToAction("Dashboard", "Manager");
                 }
-                return RedirectToAction("Dashboard", "Admin");
+                else
+                {
+                    return RedirectToAction("Dashboard", "Admin");
+                }
+
             }
             return View();
         }

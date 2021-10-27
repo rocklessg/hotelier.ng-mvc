@@ -33,6 +33,8 @@
                                     <a asp-controller="Auth" asp-action="Signup" class="d-flex justify-content-end align-content-end">Signup <i class='bx bx-right-arrow-alt'></i></a>
                                 </div>
 
+                                <div class="text-danger" asp-validation-summary="All"></div>
+
                                 @using (Html.BeginForm("Login", "Auth", FormMethod.Post, new { novalidate = "true", @class = "needs-validation" }))
                                 {
 
