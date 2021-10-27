@@ -42,15 +42,15 @@ namespace hotel_booking_mvc.Controllers.Auth
                     HttpContext.Session.SetString("user", JsonConvert.SerializeObject(result));
                     HttpContext.Session.SetString("access_token", result.Token);
                     JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Token);
-                    var Claim = decodedValue.Claims.ElementAt(1);
+                    var Claim = decodedValue.Claims.ElementAt(2);
                     role = Claim.Value;
                     if (role == "Manager")
                     {
-                        return RedirectToAction("Dashboard", "Manager");
+                        return RedirectToAction("Dashboard", "Manager", new { managerId = result.Id});
                     }
                     return RedirectToAction("Dashboard", "Admin");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     TempData["error"] = "Oops something bad happened try again!";
                     return View();

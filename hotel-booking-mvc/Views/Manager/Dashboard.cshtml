@@ -1,5 +1,7 @@
+@model ManagerDashboardViewModel
 @{
-     ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = "Dashboard";
+    Layout = "_ManagerLayout";
 }
 <div class="container">
     <div class="row pt-5 pb-5">
@@ -18,7 +20,7 @@
                     </div>
                     <div class="card-body col-12 text-center">
                         <h1 class="card-title" style="font-size: 30px;">
-                            124
+                            @Model.Statistics.AvailableRooms
                         </h1>
                     </div>
                 </div>
@@ -39,7 +41,7 @@
                     </div>
                     <div class="card-body col-12 text-center">
                         <h1 class="card-title" style="font-size: 30px;">
-                            124
+                            @Model.Statistics.BookedRooms
                         </h1>
                     </div>
                 </div>
@@ -60,7 +62,7 @@
                     </div>
                     <div class="card-body col-12 text-center">
                         <h1 class="card-title" style="font-size: 30px;">
-                            36
+                            @Model.Statistics.TotalHotels
                         </h1>
                     </div>
                 </div>
@@ -81,7 +83,7 @@
                     </div>
                     <div class="card-body col-12 text-center">
                         <h1 class="card-title" style="font-size: 30px;">
-                            2.4M
+                            @Model.Statistics.TotalMonthlyTransactions
                         </h1>
                     </div>
                 </div>
@@ -90,25 +92,32 @@
     </div>
 
     <!--Commission Statistics-->
-    <h2>
-        Commission Statistics
-    </h2>
-    <div class="Transaction-chart pt-2 pb-5 card mb-5">
-        <div class="row d-flex p-5">
+    <h3>Commission Statistics</h3>
+    <div class="Transaction-chart pt-5 pb-5 card">
+        <div class="card-header d-flex justify-content-between align-items-center m-3">
+            <div class="card-title">
+                Transactions
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="total" name="total" value="Total">
+                <label for="total">Total</label>
+            </div>
+        </div>
+        <div class="row d-flex m-3">
             <div class="container">
-                <canvas id="managerChart" width="800" height="300"></canvas>
+                <canvas id="myLineChart" width="800" height="200"></canvas>
             </div>
         </div>
     </div>
 
     <!--Top Customers-->
-    <h3>
+    <!--<h3>
         Top Customers
     </h3>
     <div class="row">
-        <div class="col-sm-12">
-            <!--Customer 1-->
-            <div class="card p-2 m-4">
+        <div class="col-sm-12">-->
+    <!--Customer 1-->
+    <!--<div class="card p-2 m-4">
                 <div class="d-flex justify-content-sm-center justify-content-md-between flex-sm-wrap flex-md-nowrap ">
                     <div class="d-sm-flex justify-content-sm-center align-content-center">
                         <img src="~/images/profile.png" style="width:100px; height:100px; padding:10px;" />
@@ -129,27 +138,75 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-    </div>
-
-    <!--Pagination-->
-    <nav aria-label="...">
-        <ul class="pagination justify-content-center">
-            <li class="page-item active" aria-current="page">
-                <span class="page-link" style="background-color: #2067A1; border-color: #2067A1; ">1</span>
-            </li>
-            <li class="page-item"><a class="page-link" style="color:black" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" style="color:black" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" style="color:black" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" style="color:black" href="#">5</a></li>
-            <li class="page-item">
-                <a class="page-link" style="color:black" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    </div> -->
 </div>
+
+@section Scripts {
+    <script>
+			const actions = [
+			    {
+			    name: 'Position: average',
+			    handler(chart) {
+				    chart.options.plugins.tooltip.position = 'average';
+				    chart.update();
+			    }},
+			    {
+			    name: 'Position: nearest',
+			    handler(chart) {
+				    chart.options.plugins.tooltip.position = 'nearest';
+				    chart.update();
+			    }},
+			    {
+			    name: 'Position: bottom (custom)',
+			    handler(chart) {
+				    chart.options.plugins.tooltip.position = 'bottom';
+				    chart.update();
+                    }
+                }
+            ];
+
+            function charting() {
+            // Variables
+            var months = @Html.Raw(Model.Statistics.Months);
+            var revenues = @Html.Raw(Model.Statistics.Revenues);
+
+            // Line Chart
+            var ctx_line = document.getElementById("myLineChart").getContext("2d");
+            var transactionChart = new Chart(ctx_line, {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [{
+                        data: revenues,
+                        backgroundColor: [
+                            '#FFBB33',
+                        ],
+                        borderColor: [
+                            '#2067A1',
+                        ],
+                        borderWidth: 1,
+                        fill: true
+                    }]
+                },
+                options: {
+                    scale: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    legend: {
+                        display: false
+                    },
+                    plugins: {
+                        title: {
+                            display: true
+                        },
+                    }
+                }
+            });
+        }
+        charting();
+    </script>
+}
 
