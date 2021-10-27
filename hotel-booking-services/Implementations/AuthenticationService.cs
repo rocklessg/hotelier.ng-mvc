@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
-using LoginViewModel = hotel_booking_model.Dtos.AuthenticationDtos.LoginViewModel;
+
 
 namespace hotel_booking_services.Implmentations
 {

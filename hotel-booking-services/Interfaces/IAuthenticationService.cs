@@ -2,8 +2,8 @@ using hotel_booking_model.commons;
 using hotel_booking_model.Dtos.AuthenticationDtos;
 using hotel_booking_model.ViewModels;
 using System.Threading.Tasks;
-//using LoginViewModel = hotel_booking_model.ViewModels.LoginViewModel;
-using LoginViewModel = hotel_booking_model.Dtos.AuthenticationDtos.LoginViewModel;
+
+
 
 namespace hotel_booking_services.Interfaces
 {
