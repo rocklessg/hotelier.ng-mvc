@@ -35,7 +35,7 @@ namespace hotel_booking_services.Implmentations
                 _httpContextAccessor.HttpContext.Session.SetString("access_token", result.Data.Token);
                 _httpContextAccessor.HttpContext.Session.SetString("user", JsonConvert.SerializeObject(result));
                 JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Data.Token);
-                result.Data.Claim = decodedValue.Claims.ElementAt(1);
+                result.Data.Claim = decodedValue.Claims.ElementAt(2);
                 return result;
             }
 
