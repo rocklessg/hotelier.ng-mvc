@@ -1,6 +1,8 @@
 ﻿using hotel_booking_model;
+using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace hotel_booking_mvc.Controllers.Admin
@@ -8,18 +10,17 @@ namespace hotel_booking_mvc.Controllers.Admin
 	public class AdminController : Controller
 	{
 		private readonly IHotelService _hotelService;
-        private readonly IAdminService _adminService;
+		private readonly IAdminService _adminService;
 
-        public AdminController(IHotelService hotelService, IAdminService adminService)
+		public AdminController(IHotelService hotelService, IAdminService adminService)
 		{
 			_hotelService = hotelService;
-            _adminService = adminService;
-        }
-		public IActionResult Dashboard()
+			_adminService = adminService;
+		}
+		public async Task<IActionResult> Dashboard()
 		{
-			TransactionPeriod transactionPeriod = new();
-			//ViewData["transactionPeriod"] = transactionPeriod;
-			return View(transactionPeriod);
+			var result = await _adminService.ShowAdminDashboard();
+			return View(result);
 		}
 		public async Task<IActionResult> HotelAsync(int pageNumber)
 		{
@@ -40,28 +41,25 @@ namespace hotel_booking_mvc.Controllers.Admin
 			return View(transactions);  
 		}
 
-        public IActionResult HotelDetails()
-        {
-            return View();
-        }
-        public IActionResult HotelRooms()
-        {
-            return View();
-        }
-        public IActionResult AllManagers()
-        {
-            return View();
-        }
+
+		public IActionResult HotelRooms()
+		{
+			return View();
+		}
+		public IActionResult AllManagers()
+		{
+			return View();
+		}
 
 
 		public IActionResult AllUsers()
 		{
 			return View();
 		}
-	/*	public IActionResult HotelDetails(string hotelId)
+		public IActionResult HotelDetails(string hotelId)
 		{
 			return View();
 		}
-*/
+
 	}
 }

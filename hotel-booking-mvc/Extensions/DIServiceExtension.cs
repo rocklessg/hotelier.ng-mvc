@@ -12,7 +12,7 @@ namespace hotel_booking_mvc.Extensions
 			services.AddSingleton<IHttpRequestFactory, HttpRequestFactory>();
 			services.AddScoped<IHotelService, HotelService>();
 			services.AddTransient<IAuthenticationService, AuthenticationService>();
-			services.AddScoped<IAdminService, AdminService>();
+			services.AddTransient<IAdminService, AdminService>();
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿@model List<HotelBasicView>
+﻿@using hotel_booking_model.commons
+@model PaginationResponse<IEnumerable<HotelBasicView>>
 @{
     ViewData["Title"] = "Hotels";
 }
@@ -15,25 +16,9 @@
                 <select name="" id="" style="width: 120px; border-radius: 5px; height: 30px; outline: none;">
                 </select>
             </div>
-        </div>
-        <div class="row m-3 d-flex justify-content-between">
-            <div class="col-sm-6 mb-2 col-md-6 col-lg-6 d-flex justify-content-left">
-                <div class="d-flex justify-content-between">
-                    <button style="border: #2067A1 1px solid; color: #2067A1;" type="button" class="btn btn-outline-primary">All</button>
-                    <button style="border: #2067A1 1px solid; color: #2067A1;" type="button" class="btn btn-outline-primary">Hotel</button>
-                </div>
-                <button style="border: #2067A1 1px solid; color: #2067A1;" type="button" class="btn btn-outline-primary">House/Apartment</button>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-6 d-flex justify-content-end">
-                <div class="d-flex justify-content-between">
-                    <button style="border: #2067A1 1px solid; color: #2067A1; text-wrap:none;" type="button" class="btn btn-outline-primary">Top picks</button>
-                    <button style="border: #2067A1 1px solid; color: #2067A1; text-wrap:none;" type="button" class="btn btn-outline-primary">Stars(highest first)</button>
-                </div>
-                <button style="border: #2067A1 1px solid; color: #2067A1; text-wrap:none" type="button" class="btn btn-outline-primary">Starts(lowest first)</button>
-            </div>
-        </div>
+        </div>        
     </div>
-    @foreach (var hotel in @Model)
+    @foreach (var hotel in @Model.PageItems)
     {
         var address = hotel.Address + ", " + hotel.City + ", " + hotel.State;
         <a class="hotel-card d-flex row" asp-action="HotelDetails" asp-controller="Admin" asp-route-hotelId=@hotel.Id>
@@ -52,7 +37,7 @@
                             {
                                 <i class="fa fa-star"></i>
                             }
-                            else if (i > hotel.Rating && (hotel.Rating % 1) > 0 &&  i  == ((int)hotel.Rating + 1))
+                            else if (i > hotel.Rating && (hotel.Rating % 1) > 0 && i == ((int)hotel.Rating + 1))
                             {
                                 <i class="fas fa-star-half-alt star-color mr-1"></i>
                             }
@@ -79,21 +64,21 @@
     }
 
     <div class="col-10 mx-auto mb-5 d-flex justify-content-center">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item"><a class="page-link" asp-route-pageNumber=1>1</a></li>
-                <li class="page-item"><a class="page-link" asp-route-pageNumber=2>2</a></li>
-                <li class="page-item"><a class="page-link" asp-route-pageNumber=3>3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
+        <nav aria-label="Pagination">
+            <ul class="pagination justify-content-center">
+                @for (int i = 1; i <= Model.NumberOfPages; i++)
+                {
+                    if (i == Model.CurrentPage)
+                    {
+                        <li class="page-item active" aria-current="page">
+                            <span class="page-link" asp-route-pageNumber=@i style="background-color: #2067A1; border-color: #2067A1; ">@i</span>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link"  asp-route-pageNumber=@i style="color:black" a>@i</a></li>
+                    }
+                }
             </ul>
         </nav>
     </div>

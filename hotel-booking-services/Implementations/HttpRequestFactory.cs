@@ -90,9 +90,10 @@ namespace hotel_booking_services.Implmentations
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.BaseAddress = new Uri(baseUrl);
             var token = _httpContextAccessor.HttpContext.Session.GetString("access_token");
+            
             if (!string.IsNullOrEmpty(token))
             {
-                _httpContextAccessor.HttpContext.Request.Headers.Add("Authorization", "Bearer " + token);
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
             }
             return client;
         }
