@@ -52,6 +52,15 @@ namespace hotel_booking_services.Implmentations
             return response.Data;
 		}
 
-        
+        public async Task<HotelDetailsViewDTo> GetHotelById(string hotelId)
+        {
+            var response = await _requestFactory.GetRequestAsync
+                <BasicResponse<HotelDetailsViewDTo>>(
+                    requestUrl: $"api/Hotel/{hotelId}",
+                    baseUrl: "http://hoteldotnet.herokuapp.com");
+            return response.Data;
+        }
+
+
     }
 }
