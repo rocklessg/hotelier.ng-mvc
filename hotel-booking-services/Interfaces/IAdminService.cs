@@ -13,6 +13,6 @@ namespace hotel_booking_services.Interfaces
     {
         Task<AdminDashboardViewModel> ShowAdminDashboard();
         Task<AdminStatisticsDto> GetAdminStatistics();
-        Task<IEnumerable<TransactionsResponseDto>> GetAllTransactions(int pageSize = 10, int pageNumber = 1);
+        Task<TransactionsResponseDto> GetAllTransactions(int pageSize = 10, int pageNumber = 1, string searchQuery = null);
     }
 }
