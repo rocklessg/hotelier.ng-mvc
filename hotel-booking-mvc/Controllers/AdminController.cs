@@ -35,9 +35,20 @@ namespace hotel_booking_mvc.Controllers.Admin
 			return View();  
 		}
 
-		public IActionResult Transactions()
+		[HttpGet]
+		public async Task<IActionResult> Transactions(int pageNumber, int pageSize)
 		{
-			return View();  
+			var transactions = await _adminService.GetAllTransactions(pageSize, pageNumber);
+			var app = transactions;
+			return View(transactions);  
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Transactions(int pageNumber, int pageSize, string searchQuery)
+		{
+			var transactions = await _adminService.GetAllTransactions(pageSize, pageNumber, searchQuery);
+			var app = transactions;
+			return View(transactions);  
 		}
 
 
