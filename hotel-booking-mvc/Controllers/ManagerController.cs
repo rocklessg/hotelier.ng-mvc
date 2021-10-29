@@ -41,6 +41,7 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View();
         }
 
+        [HttpGet("managerId")]
         public async Task<IActionResult> Transactions(string managerId, int pageNumber)
         {
 

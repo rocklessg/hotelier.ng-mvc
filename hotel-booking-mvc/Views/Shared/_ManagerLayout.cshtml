@@ -108,7 +108,7 @@
                 </a>
             </li>
             <li>
-                <a class="text-center  @(ViewContext.RouteData.Values["Action"].ToString() == "Transactions" ? "active" : "")" asp-controller="Manager" asp-action="Transactions">
+                <a class="text-center  @(ViewContext.RouteData.Values["Action"].ToString() == "Transactions" ? "active" : "")" asp-controller="Manager" asp-action="Transactions/@user.Id">
                     <div class="container-fluid row d-flex justify-content-center w-100 gx-0" style="margin-top:15px; margin-bottom:15px;">
                         <div class="col-12">
                             <i class='bx bx-money' style="font-size:30px;"></i>
