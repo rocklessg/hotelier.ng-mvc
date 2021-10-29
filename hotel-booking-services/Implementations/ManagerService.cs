@@ -17,12 +17,14 @@ namespace hotel_booking_services.Implmentations
             _httpRequestFactory = httpRequestFactory;
         }
 
-        public async Task<IEnumerable<ManagerTransactionsView>> GetAllManagerTransactionsAsync(string managerId)
+        public async Task<PaginationResponse<IEnumerable<ManagerTransactionsView>>> GetAllManagerTransactionsAsync(string managerId, int pageNumber)
         {
-            var response = await _httpRequestFactory.GetRequestAsync
-                <BasicResponse<IEnumerable<ManagerTransactionsView>>>(
-                    requestUrl: $"api/Manager/{managerId}/hotels", // change this line to connect to the right api endpoint
-                    baseUrl: "http://hoteldotnet.herokuapp.com");
+
+            pageNumber = pageNumber > 0 ? pageNumber : 1;
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<PaginationResponse<IEnumerable<ManagerTransactionsView>>>>
+            (requestUrl: $"/api/Admin/{managerId}/transaction?PageSize=5&PageNumber={pageNumber}",
+            baseUrl: "https://localhost:44379");
+
             return response.Data;
         }
 

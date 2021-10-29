@@ -1,4 +1,6 @@
-﻿using System;
+﻿using hotel_booking_model;
+using hotel_booking_model.commons;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace hotel_booking_services.Interfaces
 {
-    public class IManagerService
+    public interface IManagerService
     {
+        public  Task<PaginationResponse<IEnumerable<ManagerTransactionsView>>> GetAllManagerTransactionsAsync(string managerId, int pageNumber);
     }
 }

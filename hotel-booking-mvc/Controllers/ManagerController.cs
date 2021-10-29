@@ -9,10 +9,12 @@ namespace hotel_booking_mvc.Controllers.Manager
     public class ManagerController : Controller
     {
         private readonly IHotelService _hotelService;
+        private readonly IManagerService _managerService;
 
-        public ManagerController(IHotelService hotelService)
+        public ManagerController(IHotelService hotelService, IManagerService managerService)
         {
             _hotelService = hotelService;
+            _managerService = managerService;
         }
 
         public IActionResult Dashboard()
@@ -37,9 +39,11 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View();
         }
 
-        public IActionResult Transactions()
+        public async Task<IActionResult> Transactions(string managerId, int pageNumber)
         {
-            return View();
+          
+            var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(managerId,pageNumber);
+            return View(managerTransactionsList);
         }
         public IActionResult HotelRooms()
         {
