@@ -32,14 +32,6 @@
                                     <p>Don't have an account?</p>
                                     <a asp-controller="Auth" asp-action="Signup" class="d-flex justify-content-end align-content-end">Signup <i class='bx bx-right-arrow-alt'></i></a>
                                 </div>
-
-
-
-                                <div class="text-danger" asp-validation-summary="All"></div>
-
-
-                                <div asp-validation-summary="All" class="text-danger"></div>
-
                                 <div class="text-danger" asp-validation-summary="All"></div>
                                 @using (Html.BeginForm("Login", "Auth", FormMethod.Post, new { novalidate = "true", @class = "needs-validation" }))
                                 {
@@ -62,8 +54,6 @@
                                 <div class="form-group mb-2">
 
                                     @Html.TextBoxFor(x => x.Password, new { @class = "form-control has-validation", @placeholder = "Password", @required = "required", type="Password" })
-
-                                    @Html.TextBoxFor(x => x.Password, new { @class = "form-control has-validation", @placeholder = "Password", @required = "required", type="password" })
 
                                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "badge bg-danger" })
 
