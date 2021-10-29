@@ -4,8 +4,6 @@
 @{
     var loggedinUser = Context.Session.GetString("User");
     var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
-    ViewData["FullName"] = user.FullName;
-    ViewData["Avatar"] = user.Avatar;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -45,15 +43,15 @@
                         </button>
                         <div class="dropdown bg-white mr-1">
                             <a class="btn  dropdown-toggle" href="#" style="color: #2067A1;" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                @ViewData["FullName"]
+                                @user.FullName
                             </a>
                             <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="Admin/Profile">Edit My Profile</a></li>
-                                <li><a class="dropdown-item" href="Auth/Logout" >Signout</a></li>
+                                <li><a class="dropdown-item" asp-controller="Admin" asp-action="Account">Edit My Profile</a></li>
+                                <li><a class="dropdown-item" asp-controller="Auth" asp-action="Logout" >Signout</a></li>
                             </ul>
                         </div>
                         <a>
-                            <img class="rounded-circle" src="@ViewData["Avatar"]" onerror="this.src='~/images/default.png';this.onerror=null; " style="width: 35px; height: 35px;">
+                            <img class="rounded-circle" src="@user.Avatar" onerror="this.src='~/images/default.png';this.onerror=null; " style="width: 35px; height: 35px;">
        
                         </a>
                     </div>

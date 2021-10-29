@@ -103,7 +103,7 @@ namespace hotel_booking_mvc.Controllers.Auth
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Auth", "Login");
+            return RedirectToAction("Login", "Auth");
         }
     }
 }
