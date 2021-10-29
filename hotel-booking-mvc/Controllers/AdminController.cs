@@ -1,4 +1,5 @@
 ﻿using hotel_booking_model;
+using hotel_booking_model.Dtos.AuthenticationDtos;
 using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -70,6 +71,20 @@ namespace hotel_booking_mvc.Controllers.Admin
 		{
 			return View();
 		}
+
+	
+		public IActionResult Account()
+		{
+			return View();
+		}
+
+
+		[HttpPost]
+		public IActionResult Account(UserDto userDto)
+        {
+			return View();
+        }
+
 
 	}
 }

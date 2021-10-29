@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@using hotel_booking_model.Dtos.AuthenticationDtos;
+@using Newtonsoft.Json;
+@{
+    var loggedinUser = Context.Session.GetString("User");
+    var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -33,17 +40,16 @@
                         </button>
                         <div class="dropdown bg-white mr-1">
                             <a class="btn  dropdown-toggle" href="#" style="color: #2067A1;" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                Michael Nwosu
+                                @user.FullName
                             </a>
                             <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Account</a></li>
-                                <li><a class="dropdown-item" href="#">Features</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="">Signout</a></li>
+                                <li><a class="dropdown-item" asp-controller="Manager" asp-action="Account">Edit My Profile</a></li>
+                                <li><a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Signout</a></li>
                             </ul>
                         </div>
                         <a>
-                            <img src="~/images/profile.png" style="width:35px; height:35px;" />
+                            <img class="rounded-circle" src="@user.Avatar" onerror="this.src='~/images/default.png';this.onerror=null; " style="width: 35px; height: 35px;">
+                            
                         </a>
                     </div>
                 </div>
