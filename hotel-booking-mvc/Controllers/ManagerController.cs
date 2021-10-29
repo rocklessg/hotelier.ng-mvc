@@ -3,6 +3,7 @@ using hotel_booking_model.Dtos.AuthenticationDtos;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
 namespace hotel_booking_mvc.Controllers.Manager
@@ -42,6 +43,7 @@ namespace hotel_booking_mvc.Controllers.Manager
 
         public async Task<IActionResult> Transactions(string managerId, int pageNumber)
         {
+
           
             var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(managerId,pageNumber);
             return View(managerTransactionsList);
