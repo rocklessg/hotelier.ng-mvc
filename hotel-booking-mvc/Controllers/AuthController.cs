@@ -76,6 +76,7 @@ namespace hotel_booking_mvc.Controllers.Auth
                     return View();
                 }
                 var result = _auth.Register(registerDTO);
+                // result.EnsureSuccessStatusCode();
                 return RedirectToAction("Login");
             }
             catch (Exception)
