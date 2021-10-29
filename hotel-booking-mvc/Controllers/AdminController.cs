@@ -22,14 +22,14 @@ namespace hotel_booking_mvc.Controllers.Admin
 			var result = await _adminService.ShowAdminDashboard();
 			return View(result);
 		}
+
 		public async Task<IActionResult> HotelAsync(int pageNumber)
-		{
-			var hotelList = await _hotelService.GetAllHotelAsync(pageNumber);
-			return View(hotelList);
-		}     
+        {
+            var hotelList = await _hotelService.GetAllHotelAsync(pageNumber);
+            return View(hotelList);
+        }     
 
-
-		// Manager Listing Controller
+		
 		public IActionResult Manager()
 		{
 			return View();  
