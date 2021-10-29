@@ -1,4 +1,4 @@
-﻿
+﻿@model AddRoomTypeDto
 @{
     HotelDetailsViewDTo SingleHotel = ViewData["GetHotel"] as HotelDetailsViewDTo;
 }
@@ -388,23 +388,23 @@
                 <form>
                     <div class="mb-3">
                         <!-- <label for="formFile" class="form-label">Add Room Type Photos</label> -->
-                        <input class="form-control" type="file" id="formFile" name="Add Services" multiple>
+                        <input class="form-control" asp-for=@Model.Image type="file" id="formFile" name="Add Services" multiple>
                     </div>
 
                     <div class="mb-3">
 
-                        <input type="text" class="form-control" id="Room Name" name="Room Name" placeholder="Room Name" />
+                        <input type="text" asp-for=@Model.RoomName class="form-control" id="Room Name" name="Room Name" placeholder="Room Name" />
                     </div>
 
                     <div class="mb-3">
 
-                        <input type="text" class="form-control" id="Amount Per Night" name="Amount Per Night" placeholder="Amount Per Night" />
+                        <input type="text" asp-for=@Model.Image class="form-control" id="Amount Per Night" name="Amount Per Night" placeholder="Amount Per Night" />
                     </div>
 
                     <div class="mb-3">
 
                         <div class="form-outline">
-                            <textarea class="form-control" id="textAreaExample" name="Description" placeholder="Room Description" rows="4"></textarea>
+                            <textarea class="form-control" asp-for=@Model.Description id="textAreaExample" name="Description" placeholder="Room Description" rows="4"></textarea>
                         </div>
 
                     </div>
@@ -412,7 +412,7 @@
                     <div class="mb-3 form-check">
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary my-color">Finish</button>
+                            <button type="submit" class="btn btn-primary my-color">Add</button>
                         </div>
                     </div>
                 </form>
