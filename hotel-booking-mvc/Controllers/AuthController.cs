@@ -35,6 +35,7 @@ namespace hotel_booking_mvc.Controllers.Auth
                 var handler = new JwtSecurityTokenHandler();
                 JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Token);
                 Hashtable user = new Hashtable();
+                user.Add("Id", decodedValue.Claims.ElementAt(1).Value);
                 user.Add("FirstName", decodedValue.Claims.ElementAt(2).Value);
                 user.Add("LastName", decodedValue.Claims.ElementAt(3).Value);
                 user.Add("Avatar", decodedValue.Claims.ElementAt(4).Value);
