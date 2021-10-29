@@ -1,4 +1,5 @@
 ﻿using hotel_booking_model;
+using hotel_booking_model.Dtos.AuthenticationDtos;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -51,6 +52,18 @@ namespace hotel_booking_mvc.Controllers.Manager
         }
 
         public IActionResult HotelDetails(string hotelId)
+        {
+            return View();
+        }
+
+        public IActionResult Account()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Account(UserDto userDto)
         {
             return View();
         }

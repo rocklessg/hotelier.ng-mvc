@@ -1,4 +1,5 @@
 ﻿using hotel_booking_model;
+using hotel_booking_model.Dtos.AuthenticationDtos;
 using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -35,9 +36,20 @@ namespace hotel_booking_mvc.Controllers.Admin
 			return View();  
 		}
 
-		public IActionResult Transactions()
+		[HttpGet]
+		public async Task<IActionResult> Transactions(int pageNumber, int pageSize)
 		{
-			return View();  
+			var transactions = await _adminService.GetAllTransactions(pageSize, pageNumber);
+			var app = transactions;
+			return View(transactions);  
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Transactions(int pageNumber, int pageSize, string searchQuery)
+		{
+			var transactions = await _adminService.GetAllTransactions(pageSize, pageNumber, searchQuery);
+			var app = transactions;
+			return View(transactions);  
 		}
 
 
@@ -59,6 +71,20 @@ namespace hotel_booking_mvc.Controllers.Admin
 		{
 			return View();
 		}
+
+	
+		public IActionResult Account()
+		{
+			return View();
+		}
+
+
+		[HttpPost]
+		public IActionResult Account(UserDto userDto)
+        {
+			return View();
+        }
+
 
 	}
 }
