@@ -55,8 +55,7 @@ namespace hotel_booking_mvc.Controllers.Auth
                 else
                 {
                     return RedirectToAction("Dashboard", "Admin");
-                }
-            
+                }     
 
 
 

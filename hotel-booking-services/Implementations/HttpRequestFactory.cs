@@ -75,7 +75,7 @@ namespace hotel_booking_services.Implmentations
                 var result = JsonConvert.DeserializeObject<TRes>(responseString);
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
