@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>hotel_booking_mvc</RootNamespace>
+    <RootNamespace>hotel-booking-mvc</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +14,9 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+
+
+
     <PackageReference Include="Chart.js" Version="2.9.3" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.11" />
