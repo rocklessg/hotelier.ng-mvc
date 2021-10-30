@@ -13,6 +13,7 @@ namespace hotel_booking_mvc.Extensions
 			services.AddScoped<IHotelService, HotelService>();
 			services.AddTransient<IAuthenticationService, AuthenticationService>();
 			services.AddTransient<IAdminService, AdminService>();
+			services.AddTransient<IManagerService, ManagerService>();
 		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿using hotel_booking_services.Interfaces;
+﻿using hotel_booking_model;
+using hotel_booking_model.commons;
+using hotel_booking_services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +17,14 @@ namespace hotel_booking_services.Implmentations
             _httpRequestFactory = httpRequestFactory;
         }
 
+        public async Task<PaginationResponse<IEnumerable<ManagerModel>>> GetAllManagersAsync( int? pageNumber)
+        {
+            pageNumber = pageNumber > 0 ? pageNumber : 1;
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<PaginationResponse<IEnumerable<ManagerModel>>>>
+                                                    (requestUrl: $"/api/Manager/HotelManagers?PageSize=5&PageNumber={pageNumber}",
+                                                    baseUrl: "https://hoteldotnet.herokuapp.com");
+
+            return response.Data;
+        }
     }
 }
