@@ -22,7 +22,7 @@ namespace hotel_booking_services.Implmentations
             var response = await _requestFactory.GetRequestAsync
                 <BasicResponse< PaginationResponse<IEnumerable < HotelBasicView>>>>(
                     requestUrl: $"api/Hotel/all-hotels?PageSize=5&PageNumber={pageNumber}",
-                    baseUrl: "http://hoteldotnet.herokuapp.com");
+                    baseUrl: "https://hoteldotnet.herokuapp.com");
             return response.Data;
         }
         public async Task<IEnumerable<HotelBasicView>> GetAllHotelForManagerAsync(string managerId)
@@ -30,7 +30,7 @@ namespace hotel_booking_services.Implmentations
             var response = await _requestFactory.GetRequestAsync
                 <BasicResponse<IEnumerable<HotelBasicView>>>(
                     requestUrl: $"api/Manager/{managerId}/hotels",
-                    baseUrl: "http://hoteldotnet.herokuapp.com");
+                    baseUrl: "https://hoteldotnet.herokuapp.com");
             return response.Data;
         }
 
@@ -39,7 +39,7 @@ namespace hotel_booking_services.Implmentations
             var response = await _requestFactory.GetRequestAsync
                 <BasicResponse<IEnumerable<HotelBasicDetailsDto>>>(
                     requestUrl: $"api/Hotel/top-hotels",
-                    baseUrl: "http://hoteldotnet.herokuapp.com");
+                    baseUrl: "https://hoteldotnet.herokuapp.com");
             return response.Data;
         }
 
@@ -48,7 +48,7 @@ namespace hotel_booking_services.Implmentations
             var response = await _requestFactory.GetRequestAsync
                 <BasicResponse<Dictionary<string, int>>>(
                 requestUrl: "api/Hotel/total-hotels-per-location",
-                baseUrl: "http://hoteldotnet.herokuapp.com");
+                baseUrl: "https://hoteldotnet.herokuapp.com");
             return response.Data;
 		}
 
