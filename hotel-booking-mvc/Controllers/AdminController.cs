@@ -12,17 +12,23 @@ namespace hotel_booking_mvc.Controllers.Admin
 	{
 		private readonly IHotelService _hotelService;
 		private readonly IAdminService _adminService;
-
-		public AdminController(IHotelService hotelService, IAdminService adminService)
+		private readonly IManagerService _managerService;
+	
+		public AdminController(
+			IHotelService hotelService, 
+			IAdminService adminService,
+			IManagerService managerService)
 		{
 			_hotelService = hotelService;
 			_adminService = adminService;
+			_managerService = managerService;
 		}
 		public async Task<IActionResult> Dashboard()
 		{
 			var result = await _adminService.ShowAdminDashboard();
 			return View(result);
 		}
+
 
 		public async Task<IActionResult> HotelAsync(int pageNumber)
         {
@@ -52,16 +58,27 @@ namespace hotel_booking_mvc.Controllers.Admin
 			return View(transactions);  
 		}
 
-
 		public IActionResult HotelRooms()
 		{
 			return View();
 		}
-		public IActionResult AllManagers()
-		{
-			return View();
-		}
 
+		public async Task<IActionResult> AllManagers(string managerId, int? pageNumber)
+		{
+			var response = await _managerService.GetAllManagersAsync(pageNumber);
+			
+			if (response!=null)
+            {
+				ViewBag.SingleManager = null;
+				var singleManager = response.PageItems.FirstOrDefault(x => x.ManagerId == managerId);
+				ViewBag.SingleManager = singleManager ??= response.PageItems.FirstOrDefault();
+				return View(response);
+			}
+            else
+            {
+				return View();
+            }
+		}
 
 		public IActionResult AllUsers()
 		{
@@ -86,7 +103,5 @@ namespace hotel_booking_mvc.Controllers.Admin
         {
 			return View();
         }
-
-
 	}
 }
