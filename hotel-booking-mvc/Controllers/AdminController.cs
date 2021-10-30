@@ -67,8 +67,10 @@ namespace hotel_booking_mvc.Controllers.Admin
 		{
 			return View();
 		}
-		public IActionResult HotelDetails(string hotelId)
+		public async Task<IActionResult> HotelDetails(string hotelId)
 		{
+			var singleHotel = await _hotelService.GetHotelById(hotelId);
+			ViewData["GetHotel"] = singleHotel;
 			return View();
 		}
 

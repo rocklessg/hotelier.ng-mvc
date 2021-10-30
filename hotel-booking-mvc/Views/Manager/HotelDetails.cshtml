@@ -1,7 +1,6 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model AddRoomTypeDto
 @{
+    HotelDetailsViewDTo SingleHotel = ViewData["GetHotel"] as HotelDetailsViewDTo;
 }
 
 <style>
@@ -13,7 +12,7 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <img class="img-fluid" src="https://res.cloudinary.com/techtheriac/image/upload/v1633978036/decagon/Rectangle_617_ubgzzs.png" />
+            <img class="img-fluid" style="width: 1250px; height: 520px;" src=@SingleHotel.Gallery.FirstOrDefault() />
         </div>
     </div>
 
@@ -68,27 +67,25 @@
                                     </svg>
                                 </button>
                             </div>
-                        </div>
-
-                        @{
-                            for (int i = 0; i < 3; i++)
-                            {
-                               <a class="hotel-card d-flex row" asp-action="HotelRooms" asp-controller="Manager" asp-route-hotelId="ddhbhdhbdhbhdchd">
+                        </div>                
+                        @foreach (var item in SingleHotel.RoomTypes)
+                        {
+                            <a class="hotel-card d-flex row" asp-action="HotelRooms" asp-controller="Manager" asp-route-hotelId=@item.Id>
                                 <div class="card mt-4">
                                     <div class="row">
                                         <div class="col-12 col-md-5">
-                                            <img class="img-fluid" src="https://images.unsplash.com/photo-1521783988139-89397d761dce?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=100" />
+                                            <img class="img-fluid" src=@item.Thumbnail />
                                         </div>
                                         <div class="col-12 col-md-7">
                                             <div class="card-body">
-                                                <h5 class="card-title">Standard room</h5>
+                                                <h5 class="card-title">@item.Name</h5>
                                                 <div class="color__black__override">
                                                     <small>size: 21m</small>
                                                     <small class="mx-2">|</small>
                                                     <small> <i class='bx bxs-user'></i> Max guests: 2 Adults, 1 Child</small>
                                                 </div>
                                                 <p class="color__black__override mt-2">
-                                                    Our Standard Rooms with a king bed make a comfortable home away from home. After a round at Ikeja Golf Club, return to your room and enjoy a drink from the mini refrigerator while you watch your favorite TV show. Hungry for a midnight snack or an early breakfast? You can order something delicious from room service, which is available 24 hours. These standard amenities are also included:
+                                                    @item.Description
                                                 </p>
 
                                                 <ul class="color__black__override">
@@ -103,18 +100,18 @@
                                                         <i class='bx bx-desktop'></i>
                                                         <i class='bx bxs-coffee'></i>
                                                     </div>
-
                                                     <div class="blue__bg text-white px-3 py-2 rounded-3">
-                                                        <span>N 2000 <br /> Per Night</span>
+                                                        <span>@item.Price.ToString("C", CultureInfo.GetCultureInfo("en-NG"))<br /> Per Night</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                </a>
-                            }
+                            </a>
                         }
+                                                
+                            
                     </div>
                     <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="profile-tab">
                         <h6 class="mt-3 text-body">Rating Overview</h6>
@@ -391,23 +388,23 @@
                 <form>
                     <div class="mb-3">
                         <!-- <label for="formFile" class="form-label">Add Room Type Photos</label> -->
-                        <input class="form-control" type="file" id="formFile" name="Add Services" multiple>
+                        <input class="form-control" asp-for=@Model.Image type="file" id="formFile" name="Add Services" multiple>
                     </div>
 
                     <div class="mb-3">
 
-                        <input type="text" class="form-control" id="Room Name" name="Room Name" placeholder="Room Name" />
+                        <input type="text" asp-for=@Model.RoomName class="form-control" id="Room Name" name="Room Name" placeholder="Room Name" />
                     </div>
 
                     <div class="mb-3">
 
-                        <input type="text" class="form-control" id="Amount Per Night" name="Amount Per Night" placeholder="Amount Per Night" />
+                        <input type="text" asp-for=@Model.Image class="form-control" id="Amount Per Night" name="Amount Per Night" placeholder="Amount Per Night" />
                     </div>
 
                     <div class="mb-3">
 
                         <div class="form-outline">
-                            <textarea class="form-control" id="textAreaExample" name="Description" placeholder="Room Description" rows="4"></textarea>
+                            <textarea class="form-control" asp-for=@Model.Description id="textAreaExample" name="Description" placeholder="Room Description" rows="4"></textarea>
                         </div>
 
                     </div>
@@ -415,7 +412,7 @@
                     <div class="mb-3 form-check">
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary my-color">Finish</button>
+                            <button type="submit" class="btn btn-primary my-color">Add</button>
                         </div>
                     </div>
                 </form>
