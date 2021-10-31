@@ -3,8 +3,6 @@ using hotel_booking_model.Dtos;
 using hotel_booking_model.Dtos.TransactionsDtos;
 using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 

@@ -1,6 +1,4 @@
-﻿using hotel_booking_model;
-using hotel_booking_model.Dtos.AuthenticationDtos;
-using hotel_booking_model.ViewModels;
+﻿using hotel_booking_model.Dtos.AuthenticationDtos;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -14,9 +12,7 @@ namespace hotel_booking_mvc.Controllers.Admin
 		private readonly IAdminService _adminService;
 		private readonly IManagerService _managerService;
 	
-		public AdminController(
-			IHotelService hotelService, 
-			IAdminService adminService,
+		public AdminController(IHotelService hotelService, IAdminService adminService,
 			IManagerService managerService)
 		{
 			_hotelService = hotelService;
