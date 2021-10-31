@@ -1,13 +1,13 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hotel_booking_model
+namespace hotel_booking_model.ViewModels
 {
-    public class SignupModel
+    public class SignupViewModel
     {
         [Required(ErrorMessage = "Enter First Name To Continue")]
         public string FirstName { get; set; }

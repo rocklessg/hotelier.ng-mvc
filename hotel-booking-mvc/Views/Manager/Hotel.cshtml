@@ -1,4 +1,4 @@
-﻿@model List<HotelBasicView>
+﻿@model IEnumerable<HotelBasicView>
 @{
     ViewData["Title"] = "Hotels";
 }
@@ -33,7 +33,7 @@
 
         </div>
     </div>
-    @foreach (var hotel in @Model)
+    @foreach (var hotel in Model)
     {
         var address = hotel.Address + ", " + hotel.City + ", " + hotel.State;
         <a class="hotel-card d-flex row" asp-action="HotelDetails" asp-controller="Manager" asp-route-hotelId=@hotel.Id>

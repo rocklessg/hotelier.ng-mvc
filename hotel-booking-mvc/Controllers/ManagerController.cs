@@ -1,4 +1,5 @@
 ﻿using hotel_booking_model;
+using hotel_booking_model.Dtos.AuthenticationDtos;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -28,8 +29,8 @@ namespace hotel_booking_mvc.Controllers.Manager
         public async Task<IActionResult> HotelAsync(string managerId)
         {
             managerId = "390e272d-a264-4d7b-b3af-8bdc2a1f92f3";
-            var hotelList = await _hotelService.GetAllHotelForManagerAsync(managerId);
-            return View(hotelList);
+            var paginationResponse = await _hotelService.GetAllHotelForManagerAsync(managerId);
+            return View(paginationResponse);
         }
 
         public IActionResult Bookings()
@@ -42,12 +43,25 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View();
         }
         public IActionResult HotelRooms()
-
         {
             return View();
         }
 
-        public IActionResult HotelDetails(string hotelId)
+        public async Task<IActionResult> HotelDetails(string hotelId)
+        {
+            var singleHotel = await _hotelService.GetHotelById(hotelId);
+            ViewData["GetHotel"] = singleHotel;
+            return View();
+        }
+
+        public IActionResult Account()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Account(UserDto userDto)
         {
             return View();
         }

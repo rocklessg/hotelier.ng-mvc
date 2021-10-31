@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hotel_booking_services.Interfaces
+namespace hotel_booking_model
 {
-    public class IManagerRepository
+    public class CustomerViewModel
     {
     }
 }

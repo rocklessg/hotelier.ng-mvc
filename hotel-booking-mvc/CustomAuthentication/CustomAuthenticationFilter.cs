@@ -1,9 +1,12 @@
-﻿using System;
-using System.Net.Http;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Routing;
+using Newtonsoft.Json;
+using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace hotel_booking_mvc.CustomAuthorization
 {
@@ -21,9 +24,9 @@ namespace hotel_booking_mvc.CustomAuthorization
             this.roles = roles;
             Client = new HttpClient
             {
-                BaseAddress = new Uri(Startup.StaticConfig.GetSection("ApiUrl").Value)
+                BaseAddress = new Uri(Startup.StaticConfig.GetSection("baseUrl").Value)
             };
-            
+
         }
 
 
@@ -40,9 +43,11 @@ namespace hotel_booking_mvc.CustomAuthorization
             {
                 // If token is not null, it makes an Api call to verify if Logged in User's
                 // role/roles is contained in the array of permitted roles.
-                Client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-                Client.DefaultRequestHeaders.Add("userRole", roles);
-                HttpResponseMessage result = Client.GetAsync("api/User/roles").GetAwaiter().GetResult();
+                Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                HttpResponseMessage result = Client.PostAsync(
+                    "api/Authentication/validate-user", 
+                    new StringContent(JsonConvert.SerializeObject(new { Roles = roles }), Encoding.UTF8, "application/json")
+                    ).GetAwaiter().GetResult();
                 if (result.IsSuccessStatusCode)
                 {
                     return;
@@ -65,7 +70,7 @@ namespace hotel_booking_mvc.CustomAuthorization
                 });
         }
     }
- }
+}
 
 
 

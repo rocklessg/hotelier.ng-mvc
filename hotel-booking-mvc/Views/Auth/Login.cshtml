@@ -1,4 +1,4 @@
-@model hotel_booking_model.AuthModels.LoginModel
+@model LoginViewModel
 
 @{
     ViewData["Title"] = "Login";
@@ -32,7 +32,7 @@
                                     <p>Don't have an account?</p>
                                     <a asp-controller="Auth" asp-action="Signup" class="d-flex justify-content-end align-content-end">Signup <i class='bx bx-right-arrow-alt'></i></a>
                                 </div>
-
+                                <div class="text-danger" asp-validation-summary="All"></div>
                                 @using (Html.BeginForm("Login", "Auth", FormMethod.Post, new { novalidate = "true", @class = "needs-validation" }))
                                 {
 
@@ -50,9 +50,10 @@
 
                                         }
                                 </div>
+                             
                                 <div class="form-group mb-2">
 
-                                    @Html.TextBoxFor(x => x.Password, new { @class = "form-control has-validation", @placeholder = "Password", @required = "required" })
+                                    @Html.TextBoxFor(x => x.Password, new { @class = "form-control has-validation", @placeholder = "Password", @required = "required", type="Password" })
 
                                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "badge bg-danger" })
 
@@ -75,7 +76,7 @@
 
                                <div class="d-flex justify-content-between m-2 ">
                                     <a asp-controller="LandingView" asp-action="index" p-2><i class='bx bx-arrow-back'></i> Back</a>
-                                    <a asp-controller="Auth" asp-action="ForgotPassword" p-2>Forgot Password?</a>
+                                    <a href="/Auth/ForgotPassword">Forgot Password?</a>
                                 </div>
                             </div>
                         </div>
