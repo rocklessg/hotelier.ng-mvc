@@ -17,24 +17,44 @@ namespace hotel_booking_services.Implmentations
             _httpRequestFactory = httpRequestFactory;
         }
 
+
         public async Task<ManagerStatisticDto> GetManagerStatistics(string managerId)
         {
             var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<ManagerStatisticDto>>(
                 requestUrl: $"api/Statistics/{managerId}/hotelManager");
-            return response.Data;
-        }
 
-        private IEnumerable<CustomerViewModel> GetTopCustomersForManger(string managerId)
+            return response.Data;
+        }//end GetManagerStatistics
+
+
+        public async Task<IEnumerable<CustomerViewModel>> GetTopCustomersForMangerAsync(string managerId)
         {
-            return new List<CustomerViewModel>();
-        }
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<IEnumerable<CustomerViewModel>>>(
+                requestUrl: $"api/Manager/{managerId}/top-customers");
+
+            return response.Data;
+        }//end GetTopCustomersForMangerAsync
+
 
         public async Task<ManagerDashboardViewModel> ShowManagerDashboard(string managerId)
         {
             var statistics = await GetManagerStatistics(managerId);
-            var topCustomers = GetTopCustomersForManger(managerId);
+
+            var topCustomers = await GetTopCustomersForMangerAsync(managerId);
+
             var result = new ManagerDashboardViewModel(statistics, topCustomers);
+
             return result;
-        }
+        }//end ShowManagerDashboard
+
+
+        public async Task<PaginationResponse<IEnumerable<ManagerModel>>> GetAllManagersAsync( int? pageNumber)
+        {
+            pageNumber = pageNumber > 0 ? pageNumber : 1;
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<PaginationResponse<IEnumerable<ManagerModel>>>>(
+                requestUrl: $"/api/Manager/HotelManagers?PageSize=5&PageNumber={pageNumber}");
+
+            return response.Data;
+        }//end GetAllManagersAsync
     }
 }

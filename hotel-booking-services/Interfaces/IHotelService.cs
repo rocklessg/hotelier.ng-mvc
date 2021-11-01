@@ -12,5 +12,6 @@ namespace hotel_booking_services.Interfaces
         Task<IEnumerable<HotelBasicView>> GetAllHotelForManagerAsync(string managerId);
 		Task<IEnumerable<HotelBasicDetailsDto>> GetTopHotelsAsync();
 		Task<Dictionary<string, int>> GetTotalHotelsPerLocation();
+		Task<HotelDetailsViewDTo> GetHotelById(string hotelId);
 	}
 }

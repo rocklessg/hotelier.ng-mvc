@@ -8,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace hotel_booking_services.Implmentations
 {
     public class AuthenticationService : IAuthenticationService
@@ -34,7 +35,9 @@ namespace hotel_booking_services.Implmentations
                 _httpContextAccessor.HttpContext.Session.SetString("access_token", result.Data.Token);
                 _httpContextAccessor.HttpContext.Session.SetString("user", JsonConvert.SerializeObject(result));
                 JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Data.Token);
-                result.Data.Claim = decodedValue.Claims.ElementAt(2);
+
+                result.Data.Claim = decodedValue.Claims.ElementAt(5);
+
                 return result;
             }
             return result;
@@ -72,10 +75,9 @@ namespace hotel_booking_services.Implmentations
         {
             string url = $"api/Authentication/update-password";
             var response = await _httpRequestFactory.UpdateRequestAsync<UpdatePasswordDto, BasicResponse<string>>(url, updatePasswordDto);
-
             return response.Message;
-
         }
+
 
     }
 }

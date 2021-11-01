@@ -1,5 +1,6 @@
 ﻿using hotel_booking_model.commons;
 using hotel_booking_model.Dtos;
+using hotel_booking_model.Dtos.TransactionsDtos;
 using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
 using System.Linq;
@@ -21,8 +22,8 @@ namespace hotel_booking_services.Implmentations
         {
             var response = await _httpRequestFactory.GetRequestAsync
                 <BasicResponse<AdminStatisticsDto>>(
-                    requestUrl: $"api/Statistics/get-statistics/admin",
-                    baseUrl: "http://hoteldotnet.herokuapp.com");
+                    requestUrl: $"api/Statistics/get-statistics/admin");
+
             return response.Data;
         }
 
@@ -43,6 +44,16 @@ namespace hotel_booking_services.Implmentations
                 States = hotelsCountPerState.Select(x => x.Key).ToList(),
                 TotalHotelsPerState = hotelsCountPerState.Select(x => x.Value).ToList()
             };
+            return result;
+        }
+
+        public async Task<TransactionsResponseDto> GetAllTransactions(int pageSize = 10, int pageNumber = 1, string searchQuery = null)
+        {
+            pageNumber = pageNumber > 0 ? pageNumber : 1;
+            var result = await _httpRequestFactory.GetRequestAsync<TransactionsResponseDto>
+                (
+                requestUrl: $"api/Admin/transactions?PageSize={pageSize}&PageNumber={pageNumber}&SearchQuery={searchQuery}"      
+                );
             return result;
         }
     }
