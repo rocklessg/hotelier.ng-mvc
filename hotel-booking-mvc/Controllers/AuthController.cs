@@ -50,14 +50,12 @@ namespace hotel_booking_mvc.Controllers.Auth
                 }
                 else if (Role == "Manager")
                 {
-                    return RedirectToAction("Dashboard", "Manager");
+                    return RedirectToAction("Dashboard", "Manager", new { managerId = result.Id });
                 }
                 else
                 {
                     return RedirectToAction("Dashboard", "Admin");
                 }     
-
-
 
             }
             return View(loginDto);
