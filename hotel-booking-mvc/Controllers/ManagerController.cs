@@ -20,17 +20,14 @@ namespace hotel_booking_mvc.Controllers.Manager
 
         public async Task<IActionResult> DashboardAsync(string managerId)
         {
+            TempData["managerId"] = managerId;
             var result = await _managerService.ShowManagerDashboard(managerId);
             return View(result);
         }
 
-        public IActionResult AllManagers()
-        {
-            return View();
-        }
-
         public async Task<IActionResult> HotelAsync(string managerId)
         {
+            TempData["managerId"] = managerId;
             var paginationResponse = await _hotelService.GetAllHotelForManagerAsync(managerId);
             return View(paginationResponse);
         }
