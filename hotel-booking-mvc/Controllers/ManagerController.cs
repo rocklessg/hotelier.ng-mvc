@@ -11,6 +11,7 @@ using hotel_booking_model.Dtos.AuthenticationDtos;
 using Newtonsoft.Json;
 
 
+
 namespace hotel_booking_mvc.Controllers.Manager
 {
     [CustomAuthenticationFilter(roles: new string[] { "Manager" })]
