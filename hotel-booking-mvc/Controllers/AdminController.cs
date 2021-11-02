@@ -8,10 +8,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using hotel_booking_mvc.CustomAuthorization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace hotel_booking_mvc.Controllers.Admin
 {
-    [CustomAuthenticationFilter(roles: new string[] { "Admin" })]
 	public class AdminController : Controller
 	{
 		private readonly IHotelService _hotelService;
@@ -26,7 +26,7 @@ namespace hotel_booking_mvc.Controllers.Admin
 			_managerService = managerService;
 		}
 
-        
+        [AllowAnonymous]
 		public async Task<IActionResult> Dashboard()
 		{
 			var result = await _adminService.ShowAdminDashboard();
@@ -50,7 +50,6 @@ namespace hotel_booking_mvc.Controllers.Admin
 		public async Task<IActionResult> Transactions(int pageNumber, int pageSize)
 		{
 			var transactions = await _adminService.GetAllTransactions(pageSize, pageNumber);
-			var app = transactions;
 			return View(transactions);  
 		}
 
@@ -58,7 +57,6 @@ namespace hotel_booking_mvc.Controllers.Admin
 		public async Task<IActionResult> Transactions(int pageNumber, int pageSize, string searchQuery)
 		{
 			var transactions = await _adminService.GetAllTransactions(pageSize, pageNumber, searchQuery);
-			var app = transactions;
 			return View(transactions);  
 		}
 
