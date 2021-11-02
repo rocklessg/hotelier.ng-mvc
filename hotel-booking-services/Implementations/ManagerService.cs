@@ -18,6 +18,20 @@ namespace hotel_booking_services.Implmentations
         }
 
 
+
+        public async Task<PaginationResponse<IEnumerable<ManagerTransactionsView>>> GetAllManagerTransactionsAsync(string managerId, int pageSize = 10, int pageNumber = 1, string searchQuery = null)
+        {
+
+            pageNumber = pageNumber > 0 ? pageNumber : 1;
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<PaginationResponse<IEnumerable<ManagerTransactionsView>>>>
+                                                    (requestUrl: $"/api/Admin/{managerId}/transaction?PageSize={pageSize}&PageNumber={pageNumber}&SearchQuery={searchQuery}");
+
+            return response.Data;
+        }// end of GetAllManagerTransactionsAsync
+
+
+       
+
         public async Task<ManagerStatisticDto> GetManagerStatistics(string managerId)
         {
             var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<ManagerStatisticDto>>(
@@ -47,6 +61,7 @@ namespace hotel_booking_services.Implmentations
         }
 
         public async Task<PaginationResponse<IEnumerable<ManagerModel>>> GetAllManagersAsync( int? pageNumber)
+
         {
             pageNumber = pageNumber > 0 ? pageNumber : 1;
             var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<PaginationResponse<IEnumerable<ManagerModel>>>>
