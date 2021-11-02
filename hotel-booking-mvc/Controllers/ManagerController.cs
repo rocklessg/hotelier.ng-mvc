@@ -1,5 +1,6 @@
 ﻿using hotel_booking_model;
 using hotel_booking_model.Dtos.AuthenticationDtos;
+using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -65,5 +66,13 @@ namespace hotel_booking_mvc.Controllers.Manager
         {
             return View();
         }
+
+
+        [HttpPost]
+        public IActionResult Req()
+        {
+            return Redirect("");
+        }
+
     }
 }
