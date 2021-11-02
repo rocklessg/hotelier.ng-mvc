@@ -498,8 +498,8 @@ z-index: 1; */
 
 
     .first-cover-picture {
-        width: 100px;
-        height: 100px;
+        width: 20rem;
+        height: 20rem;
     }
 
     .covered-picture {
@@ -567,7 +567,7 @@ z-index: 1; */
     }
 
     .first-cover-write-up {
-        width: 150px;
+        width: 15rem;
     }
 
     .first-cover-navigation .nav-class, .first-cover-navigation .nav-class .fa {
@@ -762,6 +762,6 @@ z-index: 1; */
         margin-top: 1rem;
         display: flex;
         width: 70%;
-        margin-left: 5%;
+      /*  margin-left: 5%;*/
     }
 }

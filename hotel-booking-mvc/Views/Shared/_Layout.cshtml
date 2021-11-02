@@ -8,15 +8,12 @@
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
-    <link href="@Url.Content("~/css/landingview.css")" rel="stylesheet" type="text/css" />   
+    <link href="@Url.Content("~/css/landingview.css")" rel="stylesheet" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
-	<script type="text/javascript"></Script>
-    
-
+    <script type="text/javascript"></script>
 </head>
 <body style="background: #F6FCFF;">
     <header>
-
         <div class="phone-nav hidden">
             <div class="phone-nav-header">
                 <img src="~/images/logos_only_dark.svg" width="40" height="40" asp-area="" asp-controller="Home" asp-action="Index" />
@@ -37,12 +34,18 @@
             <nav class="navbar">
                 <img src="~/images/logos_only_dark.svg" width="40" height="40" style="padding:3px;" asp-area="" asp-controller="Home" asp-action="Index" />
                 <ul class="flex">
-                    <li><a class="form-control me-2" asp-area="" asp-controller="LandingView" asp-action="Index">HOME</a></li>
-                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="">SERVICES</a></li>
-                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="">CONTACT</a></li>
-                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="">HELP</a></li>
+                    <li><a class="form-control me-2" asp-area="" asp-controller="LandingView" asp-action="Index" style="text-decoration: none;color: darkblue;">HOME</a></li>
+                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="" style="text-decoration: none;color: darkblue;">SERVICES</a></li>
+                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="" style="text-decoration: none;color: darkblue;">CONTACT</a></li>
+                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="" style="text-decoration: none;color: darkblue;">HELP</a></li>
+                    <li>
+                        <a class="btn btn-outline-primary" asp-area="" asp-controller="Auth" asp-action="Login"
+                           style=" text-decoration:none !important; background-image: linear-gradient( 135deg, rgb(24, 42, 115) 0%, rgb(33, 138, 174) 69%,
+                            rgb(32, 167, 172) 89% ) !important; padding: 5px 15px !important; border-radius: 3px !important; margin: 5px !important; color:#fff !important; font-weight:900 !important;">
+                            LOGIN
+                        </a>
+                    </li>
                 </ul>
-
                 <button class="nav-button">&#9776</button>
             </nav>
         </div>
@@ -62,6 +65,5 @@
             <li><a href="#">Disclaimer</a></li>
         </ul>
     </div>
-
 </body>
 </html>

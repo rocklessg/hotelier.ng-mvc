@@ -7,22 +7,24 @@ using hotel_booking_mvc.CustomAuthorization;
 
 namespace hotel_booking_mvc.Controllers.Admin
 {
-    [CustomAuthenticationFilter(roles: new string[] { "Admin" })]
+	[CustomAuthenticationFilter(roles: new string[] { "Admin" })]
 	public class AdminController : Controller
 	{
 		private readonly IHotelService _hotelService;
 		private readonly IAdminService _adminService;
 		private readonly IManagerService _managerService;
+		private readonly IReviewService _reviewService;
 	
 		public AdminController(IHotelService hotelService, IAdminService adminService,
-			IManagerService managerService)
+			IManagerService managerService, IReviewService reviewService)
 		{
 			_hotelService = hotelService;
 			_adminService = adminService;
 			_managerService = managerService;
+			_reviewService = reviewService;
 		}
 
-        
+		
 		public async Task<IActionResult> Dashboard()
 		{
 			var result = await _adminService.ShowAdminDashboard();
@@ -31,10 +33,10 @@ namespace hotel_booking_mvc.Controllers.Admin
 
 
 		public async Task<IActionResult> HotelAsync(int pageNumber)
-        {
-            var hotelList = await _hotelService.GetAllHotelAsync(pageNumber);
-            return View(hotelList);
-        }     
+		{
+			var hotelList = await _hotelService.GetAllHotelAsync(pageNumber);
+			return View(hotelList);
+		}     
 
 		
 		public IActionResult Manager()
@@ -68,16 +70,16 @@ namespace hotel_booking_mvc.Controllers.Admin
 			var response = await _managerService.GetAllManagersAsync(pageNumber);
 			
 			if (response!=null)
-            {
+			{
 				ViewBag.SingleManager = null;
 				var singleManager = response.PageItems.FirstOrDefault(x => x.ManagerId == managerId);
 				ViewBag.SingleManager = singleManager ??= response.PageItems.FirstOrDefault();
 				return View(response);
 			}
-            else
-            {
+			else
+			{
 				return View();
-            }
+			}
 		}
 
 		public IActionResult AllUsers()
@@ -100,8 +102,17 @@ namespace hotel_booking_mvc.Controllers.Admin
 
 		[HttpPost]
 		public IActionResult Account(UserDto userDto)
-        {
+		{
 			return View();
-        }
+		}
+
+
+		[HttpGet]
+		public IActionResult GetReviews(string hotelId)
+		{
+			var reviews = _reviewService.GetHotelReviews(hotelId);
+			return View(reviews);
+		}
+		
 	}
 }

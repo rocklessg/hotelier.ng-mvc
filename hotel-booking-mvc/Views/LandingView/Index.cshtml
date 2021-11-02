@@ -1,108 +1,105 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     @{
         ViewData["Title"] = "Index";
     }
-
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
     <link href="@Url.Content("~/css/landingview.css")" rel="stylesheet" type="text/css" />
 
 
-
     <script src="~/js/landingpage.js" asp-append-version="true"></script>
-
     <link href="//db.onlinewebfonts.com/c/ddb4daa06f2d44fdbfdeb2ef47cb4a58?family=Aribau+Grotesk" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <title>Document</title>
-    <style>
-        a {
-            text-decoration: none;
-            color: white;
-        }        
-    </style>
 </head>
 
-<body>
+<body style="background: #E3ECF7">
+
+    @{ var name = Model;
+
+        List<string> hotelNames = new List<string>();
+        List<string> hotelAddress = new List<string>();
+        List<string> hotelImage = new List<string>();
+        foreach (var item in name)
+        {
+            hotelNames.Add(item.Name);
+            hotelAddress.Add(item.Address);
+            hotelImage.Add(item.Thumbnail);
+        }
+    }
+
+
 
     <div class="container-fluid">
-
         <div class="first-cover">
             <div class="first-cover-write-up">
                 <div class="first-cover-heading">
                     <h2 class="head">Affordable Luxury Meets Convenience</h2>
                 </div>
                 <p class="first-cover-paragraph">
-                   Make bookings conveniently, from a collection of luxury hotels
-                   spanned accross the country.
+                    Make bookings conveniently, from a collection of luxury hotels
+                    spanned accross the country.
                 </p>
-
                 <div class="first-cover-navigation">
                     <a class="nav-class" href="#"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Discover</a>
                 </div>
             </div>
-
             <div class="first-cover-picture">
                 <div class="covered-picture"></div>
-                <img class="opened-picture" src="https://www.godsavethepoints.com/wp-content/uploads/2017/07/andaz-tokyo5.jpg" alt="">
+                <img class="opened-picture img-fluid" style="max-width:100%; max-height:100%;" src="https://www.godsavethepoints.com/wp-content/uploads/2017/07/andaz-tokyo5.jpg" alt="">
             </div>
         </div>
-
         <div class="second-cover">
             <!-- <div class="second"> -->
             <h3 class="second-cover-heading">Top Deals</h3>
-            <p class="second-cover-paragraph">Amazing offers only for you</p>
+            <p class="second-cover-paragraph" style="margin-bottom: 20px">Amazing offers only for you</p>
             <!-- </div> -->
-
             <div class="second-cover-images">
                 <img src="https://images.all-free-download.com/images/graphiclarge/green_hotel_197599.jpg" alt="" class="first">
                 <img src="https://i.pinimg.com/474x/63/00/1a/63001ac7ffd71af905c06fd49ca7424f.jpg" alt="" class="second">
                 <img src="https://images.pexels.com/photos/3225531/pexels-photo-3225531.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" class="third">
-
             </div>
-
-            <h3 class="second-cover-heading1">
+            <h3 class="second-cover-heading1" style="padding-bottom: 10px;">
                 Hotels Across Nigeria
             </h3>
-
         </div>
-        <div class="wrapper-cover">
-            <div class="wrapper">
-                <div class="grid-class one">
-                    <h5 class="hotel-name">Prestige Hotel</h5>
-                    <p class="hotel-names">Benin</p>
+
+
+        <div class="wrapper-cover" style="padding-">
+            <div class="wrapper" style=" margin-top: 4rem;">
+                <div class="grid-class one" style="background: linear-gradient(rgba(0, 0, 0, .5),rgba(0, 0, 0, .5)),url( @hotelImage[0] ); background-size: cover; ">
+                    <h5 class="hotel-name">@hotelNames[0]</h5>
+                    <p class="hotel-names">@hotelAddress[0]</p>
                 </div>
-                <div class="grid-class two">
-                    <h5 class="hotel-name">Royal Hills</h5>
-                    <p class="hotel-names">Abuja</p>
+                <div class="grid-class two" style="background: linear-gradient(rgba(0, 0, 0, .5),rgba(0, 0, 0, .5)),url( @hotelImage[1] ); background-size: cover">
+                    <h5 class="hotel-name">@hotelNames[1]</h5>
+                    <p class="hotel-names">@hotelAddress[1]</p>
                 </div>
-                <div class="grid-class three">
-                    <h5 class="hotel-name">Decagon Bliss</h5>
-                    <p class="hotel-names">Lagos</p>
+                <div class="grid-class three" style="background: linear-gradient(rgba(0, 0, 0, .5),rgba(0, 0, 0, .5)), url( @hotelImage[2] ); background-size: cover">
+                    <h5 class="hotel-name">@hotelNames[2]</h5>
+                    <p class="hotel-names">@hotelAddress[2]</p>
                 </div>
-                <div class="grid-class four">
-                    <h5 class="hotel-name">Railers Dome</h5>
-                    <p class="hotel-names">Ibadan</p>
+                <div class="grid-class four" style="background: linear-gradient(rgba(0, 0, 0, .5),rgba(0, 0, 0, .5)), url( @hotelImage[3] );
+                background-size: cover">
+                    <h5 class="hotel-name">@hotelNames[3]</h5>
+                    <p class="hotel-names">@hotelAddress[3]</p>
                 </div>
-                <div class="grid-class five">
-                    <h5 class="hotel-name">Kailers Monti</h5>
-                    <p class="hotel-names">Lagos</p>
+                <div class="grid-class five" style="background: linear-gradient(rgba(0, 0, 0, .5),rgba(0, 0, 0, .5)),url( @hotelImage[4] ); background-size: cover">
+                    <h5 class="hotel-name">@hotelNames[4]</h5>
+                    <p class="hotel-names">@hotelAddress[4]</p>
                 </div>
-                <div class="grid-class six">
-                    <h5 class="hotel-name">Paris Hotel</h5>
-                    <p class="hotel-names">Kogi</p>
+                <div class="grid-class six" style="background: linear-gradient(rgba(0, 0, 0, .5),rgba(0, 0, 0, .5)),url( @hotelImage[0] ); background-size: cover">
+                    <h5 class="hotel-name">@hotelNames[0]</h5>
+                    <p class="hotel-names">@hotelAddress[0]</p>
                 </div>
 
 
@@ -114,7 +111,7 @@
                     <div class="white-div">
                         <h3 class="quote">
                             "Everything is a luxury, this begins with being in this world."
-                            <br/><i>Cesare Pavese</i>
+                            <br /><i>Cesare Pavese</i>
                         </h3>
                     </div>
                 </div>
@@ -125,9 +122,10 @@
             <div class="contact-message">
                 <h1 class="contact-us">Contact Us</h1>
             </div>
-            <form class="message-form" action="">
-                <input class="message" type="text" placeholder="Your Message" required> <br /><br />
-                <input class="message-input" type="email" placeholder="Email" required>
+            <form class="message-form" action="" style="display:flex; flex-direction: column; align-items: center;">
+                @*<input class="message" type="" placeholder="Your Message" required> <br /><br />*@
+                <textarea rows="6" cols="64">Enter your comment here...</textarea><br/>
+                <input class="message-input" type="email" placeholder="Email" required><br />
                 <button class="submit" type="submit">Submit</button>
             </form>
         </div>
@@ -135,38 +133,35 @@
         <div class="footer-cover">
             <div class="footer-cover-item">
                 <h3>About Us</h3>
-                <p>We bridge the gap between customers and hotel owners by connecting luxury to business through tech.</p>               
+                <p>We bridge the gap between customers and hotel owners by connecting luxury to business through tech.</p>
             </div>
-
             <div class="footer-cover-item">
                 <h3>Reach Us</h3>
                 <ul>
                     <li><p><i class="fa fa-envelope-o" aria-hidden="true"></i>  hello@hotelier.ng</p></li>
                     <li><p><i class="fa fa-mobile" aria-hidden="true"></i>  +2348103630834</li>
-                    <li><p><i class="fa fa-map-marker" aria-hidden="true"></i>  Decagon HeadQuaters Lagos, Nigeria</p></li><br/>
-                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a> &nbsp
-                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>&nbsp
-                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>&nbsp
-                    <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i> </a>
+                    <li><p><i class="fa fa-map-marker" aria-hidden="true"></i>  Decagon HeadQuaters Lagos, Nigeria</p></li>
+                    <br />
+                    <li>
+                        <a style="text-decoration: none;color: white;" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a> &nbsp
+                        <a style="text-decoration: none;color: white;" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>&nbsp
+                        <a style="text-decoration: none;color: white;" href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>&nbsp
+                        <a style="text-decoration: none;color: white;" href="#"><i class="fa fa-google-plus" aria-hidden="true"></i> </a>
                     </li>
-
-                </ul>                    
+                </ul>
             </div>
 
             <div class="footer-cover-item">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="#"> Portfolio</a></li>
-                    <li> <a href="#"> Blogs</a></li>
-                    <li><a href="#"> About</a></li>
-                    <li><a href="#"> Press</a></li>
-                    <li><a href="#"> Careers</a></li>
+                    <li><a style="text-decoration: none;color: white;" href="#"> Portfolio</a></li>
+                    <li> <a style="text-decoration: none;color: white;" href="#"> Blogs</a></li>
+                    <li><a style="text-decoration: none;color: white;" href="#"> About</a></li>
+                    <li><a style="text-decoration: none;color: white;" href="#"> Press</a></li>
+                    <li><a style="text-decoration: none;color: white;" href="#"> Careers</a></li>
                 </ul>
             </div>
-
         </div>
-
     </div>
-
 </body>
 </html>
