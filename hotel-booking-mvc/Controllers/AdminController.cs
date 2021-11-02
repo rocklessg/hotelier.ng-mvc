@@ -1,11 +1,17 @@
-﻿using hotel_booking_model.Dtos.AuthenticationDtos;
+﻿using hotel_booking_model;
+using hotel_booking_model.commons;
+using hotel_booking_model.Dtos.AuthenticationDtos;
+using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using hotel_booking_mvc.CustomAuthorization;
 
 namespace hotel_booking_mvc.Controllers.Admin
 {
+    [CustomAuthenticationFilter(roles: new string[] { "Admin" })]
 	public class AdminController : Controller
 	{
 		private readonly IHotelService _hotelService;
@@ -19,6 +25,8 @@ namespace hotel_booking_mvc.Controllers.Admin
 			_adminService = adminService;
 			_managerService = managerService;
 		}
+
+        
 		public async Task<IActionResult> Dashboard()
 		{
 			var result = await _adminService.ShowAdminDashboard();
@@ -61,19 +69,26 @@ namespace hotel_booking_mvc.Controllers.Admin
 
 		public async Task<IActionResult> AllManagers(string managerId, int? pageNumber)
 		{
-			var response = await _managerService.GetAllManagersAsync(pageNumber);
-			
-			if (response!=null)
-            {
-				ViewBag.SingleManager = null;
-				var singleManager = response.PageItems.FirstOrDefault(x => x.ManagerId == managerId);
-				ViewBag.SingleManager = singleManager ??= response.PageItems.FirstOrDefault();
-				return View(response);
+			List<PaginationResponse<IEnumerable<ManagerModel>>> AllManagers = new List<PaginationResponse<IEnumerable<ManagerModel>>>();
+			if (AllManagers.Count <= 0)
+			{
+				var response = await _managerService.GetAllManagersAsync(pageNumber);
+				if (response != null)
+				{
+					AllManagers.Add(response);
+					ViewBag.SingleManager = null;
+					var singleManager = response.PageItems.FirstOrDefault(x => x.ManagerId == managerId);
+					ViewBag.SingleManager = singleManager ??= response.PageItems.FirstOrDefault();
+					return View(response);
+				}
+         
 			}
-            else
-            {
-				return View();
-            }
+			else if (AllManagers.Count > 0)
+			{
+				ViewBag.SingleManager = AllManagers.FirstOrDefault(x => x.PageItems.Any(x => x.ManagerId == managerId));
+			} 
+
+			return View();
 		}
 
 		public IActionResult AllUsers()
@@ -96,6 +111,11 @@ namespace hotel_booking_mvc.Controllers.Admin
 
 		[HttpPost]
 		public IActionResult Account(UserDto userDto)
+        {
+			return View();
+        }
+
+		public IActionResult AllManagersRequests()
         {
 			return View();
         }
