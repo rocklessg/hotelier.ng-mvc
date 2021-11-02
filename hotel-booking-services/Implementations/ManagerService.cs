@@ -26,7 +26,6 @@ namespace hotel_booking_services.Implmentations
             return response.Data;
         }
 
-
         public async Task<IEnumerable<CustomerViewModel>> GetTopCustomersForMangerAsync(string managerId)
         {
             var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<IEnumerable<CustomerViewModel>>>(
@@ -34,7 +33,6 @@ namespace hotel_booking_services.Implmentations
 
             return response.Data;
         }
-
 
         public async Task<ManagerDashboardViewModel> ShowManagerDashboard(string managerId)
         {
@@ -45,13 +43,12 @@ namespace hotel_booking_services.Implmentations
             var result = new ManagerDashboardViewModel(statistics, topCustomers);
 
             return result;
-        }
 
+        }
 
         public async Task<PaginationResponse<IEnumerable<ManagerModel>>> GetAllManagersAsync( int? pageNumber)
         {
             pageNumber = pageNumber > 0 ? pageNumber : 1;
-
             var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<PaginationResponse<IEnumerable<ManagerModel>>>>
                                                     (requestUrl: $"/api/Manager/HotelManagers?PageSize=5&PageNumber={pageNumber}",
                                                     baseUrl: "http://hoteldotnet.herokuapp.com");

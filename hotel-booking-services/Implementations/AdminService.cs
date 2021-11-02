@@ -25,7 +25,6 @@ namespace hotel_booking_services.Implmentations
                     requestUrl: $"api/Statistics/get-statistics/admin",
                     baseUrl: "http://hoteldotnet.herokuapp.com");
 
-
             return response.Data;
         }
 
