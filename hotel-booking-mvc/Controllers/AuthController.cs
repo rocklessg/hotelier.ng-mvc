@@ -35,14 +35,22 @@ namespace hotel_booking_mvc.Controllers.Auth
                 var response = await _auth.Login(loginDto);
 
                 var result = response.Data;
-                var handler = new JwtSecurityTokenHandler();
-                JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Token);
-                Hashtable user = new Hashtable();
-                user.Add("Id", decodedValue.Claims.ElementAt(0).Value);
-                user.Add("FirstName", decodedValue.Claims.ElementAt(2).Value);
-                user.Add("LastName", decodedValue.Claims.ElementAt(3).Value);
-                user.Add("Avatar", decodedValue.Claims.ElementAt(4).Value);
-                var Role = decodedValue.Claims.ElementAt(5).Value;
+
+                if (result == null && !response.Succeeded)
+                {
+                    ModelState.AddModelError(string.Empty, response.Message);
+                    return View();
+                }
+
+                var user = new Hashtable
+                {
+                    { "Id", result.Claims.ElementAt(0).Value },
+                    { "FirstName", result.Claims.ElementAt(2).Value },
+                    { "LastName", result.Claims.ElementAt(3).Value },
+                    { "Avatar", result.Claims.ElementAt(4).Value }
+                };
+
+                var Role = result.Claims.ElementAt(5).Value;
                 HttpContext.Session.SetString("User", JsonConvert.SerializeObject(user));
                 if (Role == null)
                 {
@@ -56,16 +64,16 @@ namespace hotel_booking_mvc.Controllers.Auth
                 else
                 {
                     return RedirectToAction("Dashboard", "Admin");
-                }     
-
+                }
             }
-            return View(loginDto);
+
+            return View();
         }
 
 
 
 
-               
+
         public IActionResult Register()
         {
             return View();
@@ -99,18 +107,18 @@ namespace hotel_booking_mvc.Controllers.Auth
         }
 
         [HttpGet]
-        public IActionResult UpdatePassword() 
+        public IActionResult UpdatePassword()
         {
             return View();
         }
 
         [HttpPost("updatePassword")]
-        [CustomAuthenticationFilter(roles: new string[] {"Admin", "Manager"})]
-        public IActionResult UpdatePassword(UpdatePasswordDto obj) 
+        [CustomAuthenticationFilter(roles: new string[] { "Admin", "Manager" })]
+        public IActionResult UpdatePassword(UpdatePasswordDto obj)
         {
             try
             {
-                if (!ModelState.IsValid) 
+                if (!ModelState.IsValid)
                 {
                     return View();
                 }
