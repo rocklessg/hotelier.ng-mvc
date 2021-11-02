@@ -69,9 +69,10 @@ namespace hotel_booking_mvc.Controllers.Manager
             var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(user.Id, pageSize, pageNumber, searchQuery);
             return View(managerTransactionsList);
         }
-        public IActionResult HotelRooms()
+        public async Task<IActionResult> HotelRooms(string roomTypeId)
         {
-            return View();
+            var result = await _hotelService.GetRoomTypeDetails(roomTypeId);
+            return View(result);
         }
 
         public async Task<IActionResult> HotelDetails(string hotelId)
@@ -92,5 +93,6 @@ namespace hotel_booking_mvc.Controllers.Manager
         {
             return View();
         }
+       
     }
 }
