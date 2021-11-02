@@ -23,16 +23,21 @@ namespace hotel_booking_services.Implmentations
                 <BasicResponse< PaginationResponse<IEnumerable < HotelBasicView>>>>(
                     requestUrl: $"api/Hotel/all-hotels?PageSize=5&PageNumber={pageNumber}",
                     baseUrl: "http://hoteldotnet.herokuapp.com");
+
             return response.Data;
         }
+
+
         public async Task<IEnumerable<HotelBasicView>> GetAllHotelForManagerAsync(string managerId)
         {
             var response = await _requestFactory.GetRequestAsync
                 <BasicResponse<IEnumerable<HotelBasicView>>>(
                     requestUrl: $"api/Manager/{managerId}/hotels",
                     baseUrl: "http://hoteldotnet.herokuapp.com");
+
             return response.Data;
         }
+
 
         public async Task<IEnumerable<HotelBasicDetailsDto>> GetTopHotelsAsync()
         {
@@ -40,27 +45,29 @@ namespace hotel_booking_services.Implmentations
                 <BasicResponse<IEnumerable<HotelBasicDetailsDto>>>(
                     requestUrl: $"api/Hotel/top-hotels",
                     baseUrl: "http://hoteldotnet.herokuapp.com");
+
             return response.Data;
         }
 
+
         public async Task<Dictionary<string, int>> GetTotalHotelsPerLocation()
-		{
+        {
             var response = await _requestFactory.GetRequestAsync
                 <BasicResponse<Dictionary<string, int>>>(
                 requestUrl: "api/Hotel/total-hotels-per-location",
                 baseUrl: "http://hoteldotnet.herokuapp.com");
+
             return response.Data;
 		}
+
 
         public async Task<HotelDetailsViewDTo> GetHotelById(string hotelId)
         {
             var response = await _requestFactory.GetRequestAsync
                 <BasicResponse<HotelDetailsViewDTo>>(
-                    requestUrl: $"api/Hotel/{hotelId}",
-                    baseUrl: "http://hoteldotnet.herokuapp.com");
+                    requestUrl: $"api/Hotel/{hotelId}");
+
             return response.Data;
         }
-
-
     }
 }

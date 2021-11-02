@@ -7,24 +7,26 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using hotel_booking_mvc.CustomAuthorization;
 
 namespace hotel_booking_mvc.Controllers.Admin
 {
+    [CustomAuthenticationFilter(roles: new string[] { "Admin" })]
 	public class AdminController : Controller
 	{
 		private readonly IHotelService _hotelService;
 		private readonly IAdminService _adminService;
 		private readonly IManagerService _managerService;
 	
-		public AdminController(
-			IHotelService hotelService, 
-			IAdminService adminService,
+		public AdminController(IHotelService hotelService, IAdminService adminService,
 			IManagerService managerService)
 		{
 			_hotelService = hotelService;
 			_adminService = adminService;
 			_managerService = managerService;
 		}
+
+        
 		public async Task<IActionResult> Dashboard()
 		{
 			var result = await _adminService.ShowAdminDashboard();
