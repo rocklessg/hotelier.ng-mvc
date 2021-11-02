@@ -27,7 +27,7 @@ namespace hotel_booking_services.Implmentations
                                                     (requestUrl: $"/api/Admin/{managerId}/transaction?PageSize={pageSize}&PageNumber={pageNumber}&SearchQuery={searchQuery}");
 
             return response.Data;
-        }// end GetAllManagerTransactionsAsync
+        }// end of GetAllManagerTransactionsAsync
 
 
        
