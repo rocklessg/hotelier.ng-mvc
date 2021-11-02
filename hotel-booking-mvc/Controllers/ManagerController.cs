@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using hotel_booking_model.Dtos.AuthenticationDtos;
 using Newtonsoft.Json;
-
-
+using System;
 
 namespace hotel_booking_mvc.Controllers.Manager
 {
@@ -82,17 +81,33 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View();
         }
 
+        [HttpGet]
         public IActionResult Account()
         {
-            return View();
+            var loggedInUser = HttpContext.Session.GetString("User");
+
+            var user = JsonConvert.DeserializeObject<UserDto>(loggedInUser);
+            ViewData["FirstName"] = user.FirstName;
+
+            return View(user);
         }
 
 
         [HttpPost]
-        public IActionResult Account(UserDto userDto)
+        public async Task<IActionResult> Account(UserDto userDto)
         {
-            return View();
+            //var loggedInUser = HttpContext.Session.GetString("User");
+            //var user = JsonConvert.DeserializeObject<UserDto>(loggedInUser);
+            //userDto.Id = user.Id;
+
+            if (ModelState.IsValid)
+            {
+                var response = await _managerService.EditManagerAccountAsync(userDto);
+
+                return View();
+            }
+            throw new ArgumentException("user data can not be null");
         }
-       
+
     }
 }
