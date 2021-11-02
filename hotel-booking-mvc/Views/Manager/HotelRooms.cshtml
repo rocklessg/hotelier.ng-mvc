@@ -1,7 +1,6 @@
-﻿@{
+﻿@model RoomTypeDetailsDto
 
-    ViewData["Title"] = "Hotel Rooms";
-}
+
 
 <style>
     .my-color {
@@ -15,18 +14,23 @@
         <div class="col">
             <div class="container__hotel_details">
                 <div class="media">
-                    <div class="d-flex" style="display:flex; justify-content:center">
-                        <h1>Middleton Hotel</h1>    <!--Hotel Name-->
-                        <span class="rating__btn__util ml-3" style="margin-left:5%; margin-top:1%; height:10%;">
-                            <small>4.5</small>                  <!--Hotel Rating-->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
-                                <path d="M4.00665 0.794671L0.233726 8.08151C-0.314906 9.14107 0.135284 10 1.23919 10H8.7608C9.86472 10 10.3149 9.14107 9.76626 8.08151L5.99344 0.794671C5.44483 -0.264891 4.55531 -0.264891 4.00665 0.794671Z" fill="#00B28B" />
-                            </svg>
-                        </span>
+                    <div class="d-flex mt-5" style="display:flex;">
+                        <h1>@Model.HotelName - @Model.Name Room</h1><br />    <!--Hotel Name-->
+                        <!--<span class="rating__btn__util ml-3" style="margin-left:5%; margin-top:1%; height:10%;">
+        <small>4.5</small>-->
+                        <!--Hotel Rating-->
+                        <!--<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <path d="M4.00665 0.794671L0.233726 8.08151C-0.314906 9.14107 0.135284 10 1.23919 10H8.7608C9.86472 10 10.3149 9.14107 9.76626 8.08151L5.99344 0.794671C5.44483 -0.264891 4.55531 -0.264891 4.00665 0.794671Z" fill="#00B28B" />
+        </svg>
+        </span>-->
+
                     </div>
                     <div>
-                        <h2>Single Room Type</h2>
+                        <p>@Model.HotelAddress</p>
                     </div>
+                    @*<div>
+            <h2 style="text-align:center;">@Model.Name Room</h2>
+        </div>*@
 
                 </div>
             </div>
@@ -36,9 +40,10 @@
         <div class="col-12 col-md-7">
 
             <div class=" flow-vr d-flex flex-column">
-                <div class="wrapper__main__image">
-                    <img class="img-fluid" src="https://s3-alpha-sig.figma.com/img/fe14/901d/2a9b8f140a70f90af3711822508d11b3?Expires=1634515200&Signature=P8fsKPONKiQ3nCLol4Gkz6h6CT4Ivj5GYKMSUqbkpLn20LJXzubPCwuVeXJ2RBw4I7pjqJfGkaP66SXc-U2hrZjhwvTHiRgie3XVdrp9XiIIcCVIvcHcd-65qnSC64Qtz0G4sNNCRUWZ8JLa9T5~c0sg2EKmUZa4whmb~5xXiGcV6c8-gZ9KXht3M-ekTnFawATGD2W9lkfKS0Uw6gN92Rd9M2NmRX4HqzHVYoer5XGJGNTKlWjx-VfyTrj8scLkSDkbnjAZmWsz5LbCCZXA2P5KlB386CG-5xhv8F1xZXuKwGuehixH1ABCC9aEuBdruZFflOh1Qj8F7jR~er0Gxg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA" alt="Room Type image" />
-                </div>
+                
+                @*<div class="wrapper__main__image">*@
+                <img class="img-fluid" src="@Model.Thumbnail" alt="Room Type image" />
+                @*</div>*@
 
                 <div class="room-description">
                     <p>
@@ -60,7 +65,7 @@
                         </svg>
                     </div>
                     <div class="ms-3">
-                        <p class="text-uppercase">200,000</p>
+                        <p class="text-uppercase">@Model.PricePerNight</p>
                         <p class="text-uppercase">Per Night</p>
                     </div>
                 </div>
@@ -113,77 +118,77 @@
 
 
 
-    <!--Room Table-->
-    <div class="table-container" style="margin-top:10%;">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col">ROOM NUMBER</th>
-                    <th scope="col">STATUS</th>
-                    <th scope="col">
-                        <!-- Add Room Buttons-->
-                        <div style="display:flex; justify-content:end">
-                            <button type="button" class="btn btn-outline-secondary btn-md d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modalAddRoom" style="color: black; border: 1px solid;">
-                                <box-icon size="sm" name='plus'></box-icon>
-                                ADD ROOM
+    @*<!--Room Table-->
+        <div class="table-container" style="margin-top:10%;">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">ROOM NUMBER</th>
+                        <th scope="col">STATUS</th>
+                        <th scope="col">
+                            <!-- Add Room Buttons-->
+                            <div style="display:flex; justify-content:end">
+                                <button type="button" class="btn btn-outline-secondary btn-md d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modalAddRoom" style="color: black; border: 1px solid;">
+                                    <box-icon size="sm" name='plus'></box-icon>
+                                    ADD ROOM
+                                </button>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+
+                <!--Row 1-->
+                <tbody>
+                    <tr>
+                        <th scope="row"><input type="checkbox"></th>
+                        <td>10</td>
+                        <td><button class="btn btn-primary btn-sm tdbtn" style="border-radius: 15px 15px 15px 15px; background: #2067A1; border: 2px solid">Booked</button></td>
+                        <th scope="col">
+                            <button data-bs-toggle="modal" data-bs-target="#editRoomModal" style="border: none; margin-right: 10%;">
+                                <box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='pencil'></box-icon>
                             </button>
-                        </div>
-                    </th>
-                </tr>
-            </thead>
+                            <button data-bs-toggle="modal" data-bs-target="#deleteRoomModal" style="border: none; margin-right: 10%;">
+                                <box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='trash'></box-icon>
+                            </button>
+                        </th>
+                    </tr>
 
-            <!--Row 1-->
-            <tbody>
-                <tr>
-                    <th scope="row"><input type="checkbox"></th>
-                    <td>10</td>
-                    <td><button class="btn btn-primary btn-sm tdbtn" style="border-radius: 15px 15px 15px 15px; background: #2067A1; border: 2px solid">Booked</button></td>
-                    <th scope="col">
-                        <button data-bs-toggle="modal" data-bs-target="#editRoomModal" style="border: none; margin-right: 10%;">
-                            <box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='pencil'></box-icon>
-                        </button>
-                        <button data-bs-toggle="modal" data-bs-target="#deleteRoomModal" style="border: none; margin-right: 10%;">
-                            <box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='trash'></box-icon>
-                        </button>
-                    </th>
-                </tr>
+                    <!--Row 2-->
+                    <tr>
+                        <th scope="row"><input type="checkbox"></th>
+                        <td>12</td>
+                        <td><button class="bg-white btn btn-sm" style="border-radius: 15px 15px 15px 15px;  border: 1px solid; border-color:black; color:black">Available</button></td>
+                        <th scope="col">
+                            <a href="#"><box-icon class="card-title" style=" margin-right:10%;" size="sm" type='solid' color="#2067A1" name='pencil'></box-icon></a>
+                            <a href="#"><box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='trash'></box-icon></a>
+                        </th>
+                    </tr>
 
-                <!--Row 2-->
-                <tr>
-                    <th scope="row"><input type="checkbox"></th>
-                    <td>12</td>
-                    <td><button class="bg-white btn btn-sm" style="border-radius: 15px 15px 15px 15px;  border: 1px solid; border-color:black; color:black">Available</button></td>
-                    <th scope="col">
-                        <a href="#"><box-icon class="card-title" style=" margin-right:10%;" size="sm" type='solid' color="#2067A1" name='pencil'></box-icon></a>
-                        <a href="#"><box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='trash'></box-icon></a>
-                    </th>
-                </tr>
+                    <!--Row 3-->
+                    <tr>
+                        <th scope="row"><input type="checkbox"></th>
+                        <td>19</td>
+                        <td><button class="btn btn-primary btn-sm tdbtn" style="border-radius: 15px 15px 15px 15px; background: #2067A1; border: 2px solid">Booked</button></td>
+                        <th scope="col">
+                            <a href="#"><box-icon class="card-title" style=" margin-right:10%;" size="sm" type='solid' color="#2067A1" name='pencil'></box-icon></a>
+                            <a href="#"><box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='trash'></box-icon></a>
+                        </th>
+                    </tr>
 
-                <!--Row 3-->
-                <tr>
-                    <th scope="row"><input type="checkbox"></th>
-                    <td>19</td>
-                    <td><button class="btn btn-primary btn-sm tdbtn" style="border-radius: 15px 15px 15px 15px; background: #2067A1; border: 2px solid">Booked</button></td>
-                    <th scope="col">
-                        <a href="#"><box-icon class="card-title" style=" margin-right:10%;" size="sm" type='solid' color="#2067A1" name='pencil'></box-icon></a>
-                        <a href="#"><box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='trash'></box-icon></a>
-                    </th>
-                </tr>
-
-                <!--Row 4-->
-                <tr>
-                    <th scope="row"><input type="checkbox"></th>
-                    <td>21</td>
-                    <td><button class="bg-white btn btn-sm" style="border-radius: 15px 15px 15px 15px;  border: 1px solid; border-color:black; color:black">Available</button></td>
-                    <th scope="col">
-                        <a href="#"><box-icon class="card-title" style=" margin-right:10%;" size="sm" type='solid' color="#2067A1" name='pencil'></box-icon></a>
-                        <a href="#"><box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='trash'></box-icon></a>
-                    </th>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                    <!--Row 4-->
+                    <tr>
+                        <th scope="row"><input type="checkbox"></th>
+                        <td>21</td>
+                        <td><button class="bg-white btn btn-sm" style="border-radius: 15px 15px 15px 15px;  border: 1px solid; border-color:black; color:black">Available</button></td>
+                        <th scope="col">
+                            <a href="#"><box-icon class="card-title" style=" margin-right:10%;" size="sm" type='solid' color="#2067A1" name='pencil'></box-icon></a>
+                            <a href="#"><box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='trash'></box-icon></a>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>*@
 
     <!--Edit hotel Details Modal-->
     <div class="modal fade" id="editRoomModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

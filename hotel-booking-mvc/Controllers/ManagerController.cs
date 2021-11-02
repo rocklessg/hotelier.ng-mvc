@@ -44,9 +44,10 @@ namespace hotel_booking_mvc.Controllers.Manager
         {
             return View();
         }
-        public IActionResult HotelRooms()
+        public async Task<IActionResult> HotelRooms(string roomTypeId)
         {
-            return View();
+            var result = await _hotelService.GetRoomTypeDetails(roomTypeId);
+            return View(result);
         }
 
         public async Task<IActionResult> HotelDetails(string hotelId)
@@ -67,5 +68,6 @@ namespace hotel_booking_mvc.Controllers.Manager
         {
             return View();
         }
+       
     }
 }
