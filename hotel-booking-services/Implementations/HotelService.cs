@@ -21,8 +21,7 @@ namespace hotel_booking_services.Implmentations
             pageNumber = pageNumber > 0 ? pageNumber : 1;
             var response = await _requestFactory.GetRequestAsync
                 <BasicResponse< PaginationResponse<IEnumerable < HotelBasicView>>>>(
-                    requestUrl: $"api/Hotel/all-hotels?PageSize=5&PageNumber={pageNumber}",
-                    baseUrl: "http://hoteldotnet.herokuapp.com");
+                    requestUrl: $"api/Hotel/all-hotels?PageSize=5&PageNumber={pageNumber}");
 
             return response.Data;
         }
@@ -32,8 +31,7 @@ namespace hotel_booking_services.Implmentations
         {
             var response = await _requestFactory.GetRequestAsync
                 <BasicResponse<IEnumerable<HotelBasicView>>>(
-                    requestUrl: $"api/Manager/{managerId}/hotels",
-                    baseUrl: "http://hoteldotnet.herokuapp.com");
+                    requestUrl: $"api/Manager/{managerId}/hotels");
 
             return response.Data;
         }
@@ -43,8 +41,7 @@ namespace hotel_booking_services.Implmentations
         {
             var response = await _requestFactory.GetRequestAsync
                 <BasicResponse<IEnumerable<HotelBasicDetailsDto>>>(
-                    requestUrl: $"api/Hotel/top-hotels",
-                    baseUrl: "http://hoteldotnet.herokuapp.com");
+                    requestUrl: $"api/Hotel/top-hotels");
 
             return response.Data;
         }
@@ -54,8 +51,7 @@ namespace hotel_booking_services.Implmentations
         {
             var response = await _requestFactory.GetRequestAsync
                 <BasicResponse<Dictionary<string, int>>>(
-                requestUrl: "api/Hotel/total-hotels-per-location",
-                baseUrl: "http://hoteldotnet.herokuapp.com");
+                requestUrl: "api/Hotel/total-hotels-per-location");
 
             return response.Data;
 		}

@@ -22,8 +22,7 @@ namespace hotel_booking_services.Implmentations
         {
             var response = await _httpRequestFactory.GetRequestAsync
                 <BasicResponse<AdminStatisticsDto>>(
-                    requestUrl: $"api/Statistics/get-statistics/admin",
-                    baseUrl: "http://hoteldotnet.herokuapp.com");
+                    requestUrl: $"api/Statistics/get-statistics/admin");
 
             return response.Data;
         }
