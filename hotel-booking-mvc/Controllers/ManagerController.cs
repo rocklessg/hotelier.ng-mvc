@@ -1,36 +1,45 @@
-﻿using hotel_booking_model;
-using hotel_booking_model.Dtos.AuthenticationDtos;
+﻿using hotel_booking_model.Dtos.AuthenticationDtos;
+using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
-using hotel_booking_mvc.CustomAuthorization;
+using Microsoft.AspNetCore.Http;
+using hotel_booking_model.Dtos.AuthenticationDtos;
+using Newtonsoft.Json;
+
+
 
 namespace hotel_booking_mvc.Controllers.Manager
 {
     [CustomAuthenticationFilter(roles: new string[] { "Manager" })]
     public class ManagerController : Controller
     {
+        private readonly IManagerService _managerService;
         private readonly IHotelService _hotelService;
+        
 
-        public ManagerController(IHotelService hotelService)
+
+        public ManagerController(IHotelService hotelService, IManagerService managerService)
+
         {
+          
             _hotelService = hotelService;
+            _managerService = managerService;
         }
 
-        public IActionResult Dashboard()
+        public async Task<IActionResult> DashboardAsync(string managerId)
         {
-            return View();
-        }
-
-        public IActionResult AllManagers()
-        {
-            return View();
+            TempData["managerId"] = managerId;
+            var result = await _managerService.ShowManagerDashboard(managerId);
+            return View(result);
         }
 
         public async Task<IActionResult> HotelAsync(string managerId)
         {
-            managerId = "390e272d-a264-4d7b-b3af-8bdc2a1f92f3";
+            TempData["managerId"] = managerId;
             var paginationResponse = await _hotelService.GetAllHotelForManagerAsync(managerId);
             return View(paginationResponse);
         }
@@ -40,9 +49,25 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View();
         }
 
-        public IActionResult Transactions()
+       [HttpGet]
+        public async Task<IActionResult> Transactions(int pageNumber, int pageSize)
         {
-            return View();
+
+            var loggedinUser = HttpContext.Session.GetString("User");
+            var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+
+            var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(user.Id, pageSize, pageNumber);
+            return View(managerTransactionsList);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Transactions(int pageNumber, int pageSize, string searchQuery)
+        {
+
+            var loggedinUser = HttpContext.Session.GetString("User");
+            var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+
+            var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(user.Id, pageSize, pageNumber, searchQuery);
+            return View(managerTransactionsList);
         }
         public async Task<IActionResult> HotelRooms(string roomTypeId)
         {
