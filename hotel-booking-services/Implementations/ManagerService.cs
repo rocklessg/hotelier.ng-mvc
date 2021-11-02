@@ -24,8 +24,7 @@ namespace hotel_booking_services.Implmentations
 
             pageNumber = pageNumber > 0 ? pageNumber : 1;
             var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<PaginationResponse<IEnumerable<ManagerTransactionsView>>>>
-                                                    (requestUrl: $"/api/Admin/{managerId}/transaction?PageSize={pageSize}&PageNumber={pageNumber}&SearchQuery={searchQuery}",
-                                                      baseUrl: "http://hoteldotnet.herokuapp.com");
+                                                    (requestUrl: $"/api/Admin/{managerId}/transaction?PageSize={pageSize}&PageNumber={pageNumber}&SearchQuery={searchQuery}");
 
             return response.Data;
         }// end GetAllManagerTransactionsAsync

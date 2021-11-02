@@ -63,8 +63,8 @@
                                             <button class="bg-white btn btn-sm" style="border-radius: 15px 15px 15px 15px; border: 1px solid; border-color: black; color: black; width: 80px; ">UNPAID</button>
                                         }
                                     </td>
-                                    <td style=>@transaction.PaymentAmount</td>
-                                    <td>@transaction.Commission</td>
+                                    <td >@transaction.PaymentAmount.ToString("0.00") </td>
+                                    <td>@transaction.Commission.ToString("0.00")</td>
                                 </tr>
                             }
                         </tbody>
