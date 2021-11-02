@@ -3,11 +3,11 @@ using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using hotel_booking_mvc.CustomAuthorization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace hotel_booking_mvc.Controllers.Manager
 {
-    [CustomAuthenticationFilter(roles: new string[] { "Manager" })]
+    //[CustomAuthenticationFilter(roles: new string[] { "Manager" })]
     public class ManagerController : Controller
     {
         private readonly IManagerService _managerService;
@@ -62,6 +62,11 @@ namespace hotel_booking_mvc.Controllers.Manager
 
         [HttpPost]
         public IActionResult Account(UserDto userDto)
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public IActionResult RegisterManager()
         {
             return View();
         }
