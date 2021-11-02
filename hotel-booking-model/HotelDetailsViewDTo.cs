@@ -13,6 +13,7 @@ namespace hotel_booking_model
         public IList<Amenity> Amenities { get; set; }
         public IList<Review> Reviews { get; set; }
 
+       
         public class Roomtype
         {
             public string Id { get; set; }
@@ -23,11 +24,19 @@ namespace hotel_booking_model
             public string Thumbnail { get; set; }
         }
 
+        public class Room
+        {
+            public string RoomTypeId { get; set; }
+            public string RoomNo { get; set; }
+            public bool IsBooked { get; set; }
+            public Roomtype Roomtype { get; set; }
+        }
+
         public class Amenity
         {
             public string Id { get; set; }
             public string Name { get; set; }
-            public decimal Nrice { get; set; }
+            public decimal Price { get; set; }
             public decimal Discount { get; set; }
         }
 
