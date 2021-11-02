@@ -8,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using System.Collections;
+using hotel_booking_mvc.CustomAuthorization;
 
 namespace hotel_booking_mvc.Controllers.Auth
 {
@@ -97,6 +98,33 @@ namespace hotel_booking_mvc.Controllers.Auth
             return View();
         }
 
+        [HttpGet]
+        public IActionResult UpdatePassword() 
+        {
+            return View();
+        }
+
+        [HttpPost("updatePassword")]
+        [CustomAuthenticationFilter(roles: new string[] {"Admin", "Manager"})]
+        public IActionResult UpdatePassword(UpdatePasswordDto obj) 
+        {
+            try
+            {
+                if (!ModelState.IsValid) 
+                {
+                    return View();
+                }
+
+                var response = _auth.UpdatePassword(obj);
+                ViewBag.Data = response.Result;
+                return View();
+            }
+            catch (Exception)
+            {
+                TempData["error"] = "Oops something bad happened try again!";
+                return View();
+            }
+        }
 
         public IActionResult ConfirmEmail()
         {
