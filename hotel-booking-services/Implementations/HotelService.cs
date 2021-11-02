@@ -22,7 +22,7 @@ namespace hotel_booking_services.Implmentations
             var response = await _requestFactory.GetRequestAsync
                 <BasicResponse< PaginationResponse<IEnumerable < HotelBasicView>>>>(
                     requestUrl: $"api/Hotel/all-hotels?PageSize=5&PageNumber={pageNumber}");
-            
+
             return response.Data;
         }
 
@@ -32,7 +32,7 @@ namespace hotel_booking_services.Implmentations
             var response = await _requestFactory.GetRequestAsync
                 <BasicResponse<IEnumerable<HotelBasicView>>>(
                     requestUrl: $"api/Manager/{managerId}/hotels");
-                    
+
             return response.Data;
         }
 

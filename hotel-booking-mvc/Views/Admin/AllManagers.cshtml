@@ -11,7 +11,13 @@
 		<h1 id="new-name">Managers</h1>
 
 		<span style="font-size: 3em;">
-			<i class='bx bx-user-plus'></i>
+			@*<i class='bx bx-user-plus'></i>*@
+			
+
+			<a href="/Admin/AllManagersRequests" class="btn blue__bg text-light">
+				Requests
+			</a>
+            
 		</span>
 	</div>
 
@@ -33,6 +39,11 @@
 		</div>
 
 		<div class="col-md-6"  style="margin-left: 20px; width: 55%; height: 100%;">
+			<div class="row">
+				<div class="col-md-6">
+
+				</div>
+			</div>
 			<div class="card" style=" margin-bottom: 12px;">
 				<div class="card-body d-flex flex-column">
 					<p class="card-subtitle mb-2 text-muted" style="margin-left:50px">Additional Records</p>
@@ -42,11 +53,6 @@
 								<small class="card-subtitle mb-2 text-muted">Date joined</small>
 								<p class="card-subtitle mb-2 text-muted">@ViewBag.SingleManager.CreatedAt.ToShortDateString()</p>
 							</div>
-
-							<div>
-								<small class="card-subtitle mb-2 text-muted">ManagerID</small>
-								<p class="card-subtitle mb-2 text-muted">@ViewBag.SingleManager.ManagerId</p>
-							</div>
 						</div>
 
 						<div style="margin-right:100px;">
@@ -54,17 +60,64 @@
 								<small class="card-subtitle mb-2 text-muted">Last Updated</small>
 								<p class="card-subtitle mb-2 text-muted">@ViewBag.SingleManager.UpdatedAt.ToShortDateString()</p>
 							</div>
-							<div> 
-								<small class="card-subtitle mb-2 text-muted">Total Hotels</small>
-								<p class="card-subtitle mb-2 text-muted">@ViewBag.SingleManager.TotalHotels</p>
-							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+				<div class="card" style=" margin-bottom: 12px; height:180px; overflow: auto">
+					<div class="card-body">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<td class="text-muted mb-2">Hotel Name</td>
+									<td class="text-muted mb-2">Street</td>
+									<td class="text-muted mb-2">City</td>
+									<td class="text-muted mb-2">State</td>
+								</tr>
+							</thead>
+							<tbody>
+									@for(int i =0; i < @ViewBag.SingleManager.TotalHotels; i++)
+								{
+									<tr class="text-muted mb-2">
+										<td >@ViewBag.SingleManager.HotelNames[i]</td>
+										<td >
+											@ViewBag.SingleManager.HotelStreet[i]
+										</td>
+										<td>
+											@ViewBag.SingleManager.HotelCity[i]
+										</td>
+										<td>
+											@ViewBag.SingleManager.HotelState[i]
+										</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			<div>
+
+			</div>
 
 			<div class="card" style="">
 				<div class="card-body">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<td class="card-subtitle mb-2 text-muted mb-2">Total Amount Generated</td>
+								<td class="card-subtitle mb-2 text-muted mb-2">Account Number</td>
+								<td class="card-subtitle mb-2 text-muted mb-2 ">Account Name</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="card-subtitle mb-2 text-muted mb-2">@ViewBag.SingleManager.TotalAmount</td>
+								<td class="card-subtitle mb-2 text-muted mb-2">@ViewBag.SingleManager.AccountNumber</td>
+								<td class="card-subtitle mb-2 text-muted mb-2">@ViewBag.SingleManager.AccountName</td>
+							</tr>
+						</tbody>
+					</table>
 					<p class="card-subtitle mb-2 text-muted" style="margin-left:50px">Total Amount Generated</p>
 					<h3 class="card-subtitle mb-2 text-muted" style="margin-left:50px">@ViewBag.SingleManager.TotalAmount.ToString("C", CultureInfo.GetCultureInfo("en-NG"))</h3>
 				</div>
@@ -80,36 +133,46 @@
 						<div class="">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M7 11h10v2H7zM4 7h16v2H4zm6 8h4v2h-4z"></path></svg>
 						</div>
-						<div>    
-							<input class="form-control me-2 search" type="search" placeholder="search" aria-label="Search">
+						
+						<div class="">
+							<div class="">
+								<div class="">
+									<div class="d-flex"> 
+										<input type="text" class="form-control" placeholder="Search"> 
+										<button class="btn btn-sm blue__bg text-light">Search</button> 
+									</div>
+								</div>
+							</div>
 						</div>
+
 
 						</div>
 					</caption>
 				<thead>
 					<tr class="text-muted">
 						<th class="col">Manager Name</th>
-						<th class="col">Hotel</th>
+						<th class="col">Email</th>
 						<th class="col">Phone</th>
+						<th class="col">No. of Hotels</th>
 						<th class="col">...</th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach (var managerr in Model.PageItems)
 					{
-							<tr>
-								<td class="hotel-name col">
-								@managerr.FirstName &nbsp @managerr.LastName <br />
-									<span class="hotel-id mt-2">@managerr.ManagerId</span>
-								</td>
-								<td class="hotel-description col">
-									Lorem ipsum dolor sitamet, consecteur
-								</td>
-								<td class="col">@managerr.BusinessPhone</td>
-								<td class="col">
-									<a asp-controller="Admin" asp-action="AllManagers" asp-route-managerId=@managerr.ManagerId class="btn btn-sm blue__bg text-light" role="button">View</a>
-								</td>
-							</tr>
+						<tr class="text-muted">
+							<td >
+							@managerr.FirstName &nbsp @managerr.LastName <br />
+							</td>
+							<td class="hotel-description col">
+								@managerr.ManagerEmail
+							</td>
+							<td class="col">@managerr.ManagerPhone</td>
+							<td class="col">@ViewBag.SingleManager.TotalHotels</td>
+							<td class="col">
+								<a asp-controller="Admin" asp-action="AllManagers" asp-route-managerId=@managerr.ManagerId class="btn btn-sm blue__bg text-light" role="button">View</a>
+							</td>
+						</tr>
 					}
 				</tbody>
 			</table>
