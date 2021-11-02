@@ -30,7 +30,6 @@
                     <table class="table table-striped mt-4">
                         <thead>
                             <tr>
-                                <th scope="col"><input type="checkbox"></th>
                                 <th scope="col">NAME<img src="~/images/up-down.png" style="height:20px"></th>
                                 <th scope="col">SERVICE NAME</th>
                                 <th scope="col">TRANSACTION REFERENCE</th>
@@ -44,7 +43,6 @@
                             @foreach (var transaction in Model.data.pageItems)
                             {
                             <tr>
-                                <th scope="row"><input type="checkbox"></th>
                                 <td>@transaction.customerName</td>
                                 <td>@transaction.serviceName</td>
                                 <td>@transaction.bookingReference</td>
@@ -63,9 +61,6 @@
                     </table>
                 </div> <!-- END label row -->
                 <div class="row">
-                    <div class="col-md-7">
-                        <p id="ftp01">ACTIVE CUSTOMERS: 479/706</p>
-                    </div>
                     <div class="col-md-2">
                         <p> Rows Per Page:10</p>
                     </div>

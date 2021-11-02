@@ -1,6 +1,10 @@
-﻿using hotel_booking_model.Dtos.AuthenticationDtos;
+﻿using hotel_booking_model;
+using hotel_booking_model.commons;
+using hotel_booking_model.Dtos.AuthenticationDtos;
+using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using hotel_booking_mvc.CustomAuthorization;
@@ -67,19 +71,26 @@ namespace hotel_booking_mvc.Controllers.Admin
 
 		public async Task<IActionResult> AllManagers(string managerId, int? pageNumber)
 		{
-			var response = await _managerService.GetAllManagersAsync(pageNumber);
-			
-			if (response!=null)
+			List<PaginationResponse<IEnumerable<ManagerModel>>> AllManagers = new List<PaginationResponse<IEnumerable<ManagerModel>>>();
+			if (AllManagers.Count <= 0)
 			{
-				ViewBag.SingleManager = null;
-				var singleManager = response.PageItems.FirstOrDefault(x => x.ManagerId == managerId);
-				ViewBag.SingleManager = singleManager ??= response.PageItems.FirstOrDefault();
-				return View(response);
+				var response = await _managerService.GetAllManagersAsync(pageNumber);
+				if (response != null)
+				{
+					AllManagers.Add(response);
+					ViewBag.SingleManager = null;
+					var singleManager = response.PageItems.FirstOrDefault(x => x.ManagerId == managerId);
+					ViewBag.SingleManager = singleManager ??= response.PageItems.FirstOrDefault();
+					return View(response);
+				}
+		 
 			}
-			else
+			else if (AllManagers.Count > 0)
 			{
-				return View();
-			}
+				ViewBag.SingleManager = AllManagers.FirstOrDefault(x => x.PageItems.Any(x => x.ManagerId == managerId));
+			} 
+
+			return View();
 		}
 
 		public IActionResult AllUsers()
@@ -106,13 +117,9 @@ namespace hotel_booking_mvc.Controllers.Admin
 			return View();
 		}
 
-
-		[HttpGet]
-		public IActionResult GetReviews(string hotelId)
+		public IActionResult AllManagersRequests()
 		{
-			var reviews = _reviewService.GetHotelReviews(hotelId);
-			return View(reviews);
+			return View();
 		}
-		
 	}
 }

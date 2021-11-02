@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace hotel_booking_services.Implmentations
 {
-    public class HotelService : IHotelService
+	public class HotelService : IHotelService
 	{
 		private readonly IHttpRequestFactory _requestFactory;
 

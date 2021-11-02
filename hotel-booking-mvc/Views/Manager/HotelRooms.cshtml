@@ -113,77 +113,7 @@
 
 
 
-    <!--Room Table-->
-    <div class="table-container" style="margin-top:10%;">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col">ROOM NUMBER</th>
-                    <th scope="col">STATUS</th>
-                    <th scope="col">
-                        <!-- Add Room Buttons-->
-                        <div style="display:flex; justify-content:end">
-                            <button type="button" class="btn btn-outline-secondary btn-md d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modalAddRoom" style="color: black; border: 1px solid;">
-                                <box-icon size="sm" name='plus'></box-icon>
-                                ADD ROOM
-                            </button>
-                        </div>
-                    </th>
-                </tr>
-            </thead>
-
-            <!--Row 1-->
-            <tbody>
-                <tr>
-                    <th scope="row"><input type="checkbox"></th>
-                    <td>10</td>
-                    <td><button class="btn btn-primary btn-sm tdbtn" style="border-radius: 15px 15px 15px 15px; background: #2067A1; border: 2px solid">Booked</button></td>
-                    <th scope="col">
-                        <button data-bs-toggle="modal" data-bs-target="#editRoomModal" style="border: none; margin-right: 10%;">
-                            <box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='pencil'></box-icon>
-                        </button>
-                        <button data-bs-toggle="modal" data-bs-target="#deleteRoomModal" style="border: none; margin-right: 10%;">
-                            <box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='trash'></box-icon>
-                        </button>
-                    </th>
-                </tr>
-
-                <!--Row 2-->
-                <tr>
-                    <th scope="row"><input type="checkbox"></th>
-                    <td>12</td>
-                    <td><button class="bg-white btn btn-sm" style="border-radius: 15px 15px 15px 15px;  border: 1px solid; border-color:black; color:black">Available</button></td>
-                    <th scope="col">
-                        <a href="#"><box-icon class="card-title" style=" margin-right:10%;" size="sm" type='solid' color="#2067A1" name='pencil'></box-icon></a>
-                        <a href="#"><box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='trash'></box-icon></a>
-                    </th>
-                </tr>
-
-                <!--Row 3-->
-                <tr>
-                    <th scope="row"><input type="checkbox"></th>
-                    <td>19</td>
-                    <td><button class="btn btn-primary btn-sm tdbtn" style="border-radius: 15px 15px 15px 15px; background: #2067A1; border: 2px solid">Booked</button></td>
-                    <th scope="col">
-                        <a href="#"><box-icon class="card-title" style=" margin-right:10%;" size="sm" type='solid' color="#2067A1" name='pencil'></box-icon></a>
-                        <a href="#"><box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='trash'></box-icon></a>
-                    </th>
-                </tr>
-
-                <!--Row 4-->
-                <tr>
-                    <th scope="row"><input type="checkbox"></th>
-                    <td>21</td>
-                    <td><button class="bg-white btn btn-sm" style="border-radius: 15px 15px 15px 15px;  border: 1px solid; border-color:black; color:black">Available</button></td>
-                    <th scope="col">
-                        <a href="#"><box-icon class="card-title" style=" margin-right:10%;" size="sm" type='solid' color="#2067A1" name='pencil'></box-icon></a>
-                        <a href="#"><box-icon class="card-title" size="sm" type='solid' color="#2067A1" name='trash'></box-icon></a>
-                    </th>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  
 
     <!--Edit hotel Details Modal-->
     <div class="modal fade" id="editRoomModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -229,37 +159,6 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-danger">Delete</button>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Add Room Modal -->
-<div class="modal fade" id="modalAddRoom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Room</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-
-                <form>
-
-                    <div class="mb-3">
-                        <div>
-                            <label for="Room*" class="form-label">Room</label>
-                            <input type="text" class="form-control" id="Room Number" name="Room Number" placeholder="Room Number" />
-                        </div>
-
-                    </div>
-                    <div class="mb-3 form-check">
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary my-color">Add Room</button>
-                        </div>
-                    </div>
-                </form>
             </div>
         </div>
     </div>

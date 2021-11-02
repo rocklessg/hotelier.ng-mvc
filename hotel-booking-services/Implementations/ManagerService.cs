@@ -18,14 +18,27 @@ namespace hotel_booking_services.Implmentations
         }
 
 
+
+        public async Task<PaginationResponse<IEnumerable<ManagerTransactionsView>>> GetAllManagerTransactionsAsync(string managerId, int pageSize = 10, int pageNumber = 1, string searchQuery = null)
+        {
+
+            pageNumber = pageNumber > 0 ? pageNumber : 1;
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<PaginationResponse<IEnumerable<ManagerTransactionsView>>>>
+                                                    (requestUrl: $"/api/Admin/{managerId}/transaction?PageSize={pageSize}&PageNumber={pageNumber}&SearchQuery={searchQuery}");
+
+            return response.Data;
+        }// end of GetAllManagerTransactionsAsync
+
+
+       
+
         public async Task<ManagerStatisticDto> GetManagerStatistics(string managerId)
         {
             var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<ManagerStatisticDto>>(
                 requestUrl: $"api/Statistics/{managerId}/hotelManager");
 
             return response.Data;
-        }//end GetManagerStatistics
-
+        }
 
         public async Task<IEnumerable<CustomerViewModel>> GetTopCustomersForMangerAsync(string managerId)
         {
@@ -33,8 +46,7 @@ namespace hotel_booking_services.Implmentations
                 requestUrl: $"api/Manager/{managerId}/top-customers");
 
             return response.Data;
-        }//end GetTopCustomersForMangerAsync
-
+        }
 
         public async Task<ManagerDashboardViewModel> ShowManagerDashboard(string managerId)
         {
@@ -45,16 +57,29 @@ namespace hotel_booking_services.Implmentations
             var result = new ManagerDashboardViewModel(statistics, topCustomers);
 
             return result;
-        }//end ShowManagerDashboard
 
+        }
 
         public async Task<PaginationResponse<IEnumerable<ManagerModel>>> GetAllManagersAsync( int? pageNumber)
+
         {
             pageNumber = pageNumber > 0 ? pageNumber : 1;
-            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<PaginationResponse<IEnumerable<ManagerModel>>>>(
-                requestUrl: $"/api/Manager/HotelManagers?PageSize=5&PageNumber={pageNumber}");
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<PaginationResponse<IEnumerable<ManagerModel>>>>
+                                                    (requestUrl: $"/api/Manager/HotelManagers?PageSize=5&PageNumber={pageNumber}");
 
             return response.Data;
+
+
         }//end GetAllManagersAsync
+
+
+
+
+
+
+
+
+        
+
     }
 }
