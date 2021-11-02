@@ -54,5 +54,23 @@ namespace hotel_booking_services.Implmentations
 
             return response.Data;
         }
+
+
+        public async Task<PaginationResponse<IEnumerable<ManagerRequests>>> GetAllManagerRequests(int? pageNumber)
+        {
+            pageNumber = pageNumber > 0 ? pageNumber : 1;
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<PaginationResponse<IEnumerable<ManagerRequests>>>>(
+                                                       requestUrl: $"/api/Manager/getall-request?PageSize=10&PageNumber={pageNumber}");
+            return response.Data;
+        }
+
+
+        public async Task<bool>SendManagerInvite(string email)
+        {
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<bool>>(
+                                requestUrl: $"/api/Manager/send-invite?email={email}");
+            return response.Succeeded;
+        }
+
     }
 }

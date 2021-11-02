@@ -12,5 +12,9 @@ namespace hotel_booking_services.Interfaces
 
         Task<PaginationResponse<IEnumerable<ManagerModel>>> GetAllManagersAsync(int? pageNumber);
 
+        Task<PaginationResponse<IEnumerable<ManagerRequests>>> GetAllManagerRequests(int? pageNumber);
+
+        Task<bool> SendManagerInvite(string email);
+
     }
 }

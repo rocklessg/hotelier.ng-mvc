@@ -47,12 +47,12 @@
                             </a>
                             <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
                                 <li><a class="dropdown-item" asp-controller="Admin" asp-action="Account">Edit My Profile</a></li>
-                                <li><a class="dropdown-item" asp-controller="Auth" asp-action="Logout" >Signout</a></li>
+                                <li><a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Signout</a></li>
                             </ul>
                         </div>
                         <a>
                             <img class="rounded-circle" src="@user.Avatar" onerror="this.src='~/images/default.png';this.onerror=null; " style="width: 35px; height: 35px;">
-       
+
                         </a>
                     </div>
                 </div>
@@ -143,7 +143,9 @@
 
     <script src=~/lib/jquery/dist/jquery.min.js></script>
     <script src="~/js/charts.js"></script>
-        @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/lib/notify.min.js"></script>
+    <script src="~/js/site.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
     @*<script src="~/js/pie-chart.js"></script>*@
     @*<script src="~/js/line-chart.js"></script>*@
 
@@ -151,6 +153,6 @@
     <script src="~/TavoCalendar-master/dist/tavo-calendar.js"></script>
     <script src="~/js/calendar.js"></script>
     <script src="~/js/date-picker.js"></script>
-    
+
 </body>
 </html>

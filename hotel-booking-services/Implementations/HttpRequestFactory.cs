@@ -23,7 +23,7 @@ namespace hotel_booking_services.Implmentations
             _url = configuration["BaseUrl"];
         }
 
-        public async Task<TRes> GetRequestAsync<TRes>(string requestUrl, string baseUrl = null) where TRes : class
+        public async Task<TRes> GetRequestAsync<TRes>(string requestUrl, string baseUrl = null) 
         {
             var client = CreateClient(baseUrl);
             var request = new HttpRequestMessage(HttpMethod.Get, requestUrl);
@@ -66,7 +66,7 @@ namespace hotel_booking_services.Implmentations
             return await GetResponseResultAsync<TRes>(client, request);
         }
 
-        private async Task<TRes> GetResponseResultAsync<TRes>(HttpClient client, HttpRequestMessage request) where TRes : class
+        private async Task<TRes> GetResponseResultAsync<TRes>(HttpClient client, HttpRequestMessage request)
         {
             var response = await client.SendAsync(request);
             var responseString = await response.Content.ReadAsStringAsync();
