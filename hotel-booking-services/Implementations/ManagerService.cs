@@ -22,7 +22,7 @@ namespace hotel_booking_services.Implmentations
             pageNumber = pageNumber > 0 ? pageNumber : 1;
             var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<PaginationResponse<IEnumerable<ManagerModel>>>>
                                                     (requestUrl: $"/api/Manager/HotelManagers?PageSize=5&PageNumber={pageNumber}",
-                                                    baseUrl: "https://hoteldotnet.herokuapp.com");
+                                                    baseUrl: "http://hoteldotnet.herokuapp.com");
 
             return response.Data;
         }
