@@ -1,104 +1,106 @@
-﻿
+﻿@using hotel_booking_model.commons
+@model PaginationResponse<IEnumerable<ManagerTransactionsView>>;
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    Task<PaginationResponse<IEnumerable<ManagerTransactionsView>>>
 *@
 @{
     ViewData["Title"] = "Transactions";
+    SearchViewModel search = new SearchViewModel();
 }
+<div class="container-fluid mt-5 p-3">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
 
-<div class="table-container p-1">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <td class="text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="40px" viewBox="0 0 24 24" style="fill: rgb(9 96 242);"><path d="M7 11h10v2H7zM4 7h16v2H4zm6 8h4v2h-4z"></path></svg>
-                </td>
-                <td>
-                    <input class="transaction-search form-control" type="search" placeholder="search" aria-label="Search">
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="text-center">
-                </td>
-            </tr>
-            <tr>
-                <th class="header-of-up-down-arrow">
-                    NAME
 
-                    <img src="/images/up-down.png" style="height: 15px;" />
+                <div id="transaction mb-5">
+                    <div id="search-bar-row">
+                        <div class="d-sm-flex d-md-flex d-lg-flex justify-content-between flex-nowrap">
+                            <div id="search-bar-row">
+                                <div class="first-col">
+                                    <form class="d-none d-sm-none d-sm-flex d-md-flex d-lg-flex" method="post" asp-controller="Manager" asp-action="Transactions">
+                                        <img src="~/images/strawberry menu.png" style="height:20px">
+                                        <div class="bg-#2067A1; px-4">
+                                            <input type="text" id="searchquery" name="searchquery" asp-for="@search.SearchQuery" Placeholder="Search by Hotel">
+                                            <button type="submit" class="btn"><i class='bx bx-search'></i></button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
 
-                </th>
-                
-                <th class="text-center" id="service-name">SERVICE NAME</th>
-                <th class="text-center" id="transaction-reference">TRANSACTION REFERENCE</th>
-                <th class="text-center" id="status">STATUS</th>
-                <th class="text-center" id="amount">AMOUNT (&#8358)</th>
-                <th class="text-center" id="commission">COMMISSION (&#8358)</th>
-                
-                <th class="text-center">
-                    <a>
+                       <div class="table-container p-1">
 
-                        <svg width="20" height="5" viewBox="0 0 20 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.1951 2.14286C12.1951 3.33333 11.2195 4.28571 10 4.28571C8.78049 4.28571 7.80488 3.33333 7.80488 2.14286C7.80488 0.952381 8.78049 0 10 0C11.2195 0 12.1951 0.952381 12.1951 2.14286ZM17.8049 0C16.5854 0 15.6098 0.952381 15.6098 2.14286C15.6098 3.33333 16.5854 4.28571 17.8049 4.28571C19.0244 4.28571 20 3.33333 20 2.14286C20 0.952381 19.0244 0 17.8049 0ZM2.19512 0C0.97561 0 0 0.952381 0 2.14286C0 3.33333 0.97561 4.28571 2.19512 4.28571C3.41463 4.28571 4.39024 3.33333 4.39024 2.14286C4.39024 0.952381 3.41463 0 2.19512 0Z" fill="#606F89" />
-                        </svg>
-                    </a>
-                </th>
-            </tr>
-        </thead>
-        <tbody class="s-min">
-            @for (int i = 0; i < 15; i++)
-            {
-                <tr>
-                    <td class="hotel-name mr-0">
-                        Kadin Herwitz 
-                    </td>
-                    <td class="hotel-description ">
-                        Lorem ipsum dolor sitamet, consecteur
-                    </td>
-                    <td class="text-center">5684236583</td>
-                    <td class="text-center"><button class="isActive btn-state">ACTIVE</button></td>
-                    <td class="text-center">500.00</td>
-                    <td class="text-center">199</td>
-                    <td class="text-center">
-                        <div id="edit-delete-etc">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(125,144,178, 0.8); transform:; msFilter:;"><path d="M8.707 19.707 18 10.414 13.586 6l-9.293 9.293a1.003 1.003 0 0 0-.263.464L3 21l5.242-1.03c.176-.044.337-.135.465-.263zM21 7.414a2 2 0 0 0 0-2.828L19.414 3a2 2 0 0 0-2.828 0L15 4.586 19.414 9 21 7.414z"></path></svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(125,144,178, 0.8); transform:; msFilter:;"><path d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm4 12H8v-9h2v9zm6 0h-2v-9h2v9zm.618-15L15 2H9L7.382 4H3v2h18V4z"></path></svg>
-                            <svg width="20" height="5" viewBox="0 0 20 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12.1951 2.14286C12.1951 3.33333 11.2195 4.28571 10 4.28571C8.78049 4.28571 7.80488 3.33333 7.80488 2.14286C7.80488 0.952381 8.78049 0 10 0C11.2195 0 12.1951 0.952381 12.1951 2.14286ZM17.8049 0C16.5854 0 15.6098 0.952381 15.6098 2.14286C15.6098 3.33333 16.5854 4.28571 17.8049 4.28571C19.0244 4.28571 20 3.33333 20 2.14286C20 0.952381 19.0244 0 17.8049 0ZM2.19512 0C0.97561 0 0 0.952381 0 2.14286C0 3.33333 0.97561 4.28571 2.19512 4.28571C3.41463 4.28571 4.39024 3.33333 4.39024 2.14286C4.39024 0.952381 3.41463 0 2.19512 0Z" fill="#606F89" />
-                            </svg>
+
                         </div>
-
-                    </td>
-                </tr>
-
-
-            }
-
-
-        </tbody>
-
-    </table>
-    <div id="table-footer">
-        <p id="active-customers"> ACTIVE CUSTOMERS: 479/700</p>
-        <p id="rows-per-page">
-            <span>Rows per page: 10</span>
-            <span>
-                <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 5L0 0H8L4 5Z" fill="#606F89" />
-                </svg>
-            </span>
-        </p>
-        <p id="paging"> 1 -10 of 706</p>
-        <p id="direction-images">
-            <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" id="left-arrow">
-                <path d="M5.79971 1.10636C6.42812 0.51287 5.43313 -0.426818 4.80472 0.216126L0.196378 4.51891C-0.0654595 4.7662 -0.0654595 5.21131 0.196378 5.4586L4.80472 9.81084C5.43313 10.4043 6.42812 9.46464 5.79971 8.87115L1.71504 5.01348L5.79971 1.10636Z" fill="#606F89" />
-            </svg>
-
-            <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" id="right-arrow">
-                <path d="M0.200293 1.10636C-0.428118 0.51287 0.566865 -0.426818 1.19528 0.216126L5.80362 4.51891C6.06546 4.7662 6.06546 5.21131 5.80362 5.4586L1.19528 9.81084C0.566865 10.4043 -0.428118 9.46464 0.200293 8.87115L4.28496 5.01348L0.200293 1.10636Z" fill="#606F89" />
-            </svg>
-        </p>
+                    </div>
+                    <div class="second-third-col"></div>
+                </div>
+                <div id="label-row">
+                    <table class="table table-striped mt-4">
+                        <thead>
+                            <tr>
+                               
+                                <th scope="col">NAME</th>
+                                <th scope="col">SERVICE NAME</th>
+                                <th scope="col">TRANSACTION REFERENCE</th>
+                                <th scope="col">STATUS</th>
+                                <th scope="col">AMOUNT(&#8358)</th>
+                                <th scope="col">COMMISSION(&#8358)</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var transaction in Model.PageItems)
+                            {
+                                <tr>
+                                   
+                                    <td>@transaction.HotelName</td>
+                                    <td>@transaction.ServiceName</td>
+                                    <td>@transaction.BookingReference</td>
+                                    <td>
+                                        @if (transaction.PaymentStatus == true)
+                                        {
+                                            <button class="btn btn-primary btn-sm" style="border-radius: 15px 15px 15px 15px; border: 2px solid; width: 80px;">PAID</button>
+                                        }
+                                        else
+                                        {
+                                            <button class="bg-white btn btn-sm" style="border-radius: 15px 15px 15px 15px; border: 1px solid; border-color: black; color: black; width: 80px; ">UNPAID</button>
+                                        }
+                                    </td>
+                                    <td >@transaction.PaymentAmount.ToString("0.00") </td>
+                                    <td>@transaction.Commission.ToString("0.00")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div> <!-- END label row -->
+               
+            </div>
+        </div>
     </div>
+</div>
+
+
+
+<div class="col-10 mx-auto mb-5 d-flex justify-content-center">
+    <nav aria-label="Pagination">
+        <ul class="pagination justify-content-center">
+            @for (int i = 1; i <= Model.NumberOfPages; i++)
+            {
+                if (i == Model.CurrentPage)
+                {
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link" asp-route-pageNumber=@i style="background-color: #2067A1; border-color: #2067A1; ">@i</span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" asp-route-pageNumber=@i style="color:black" a>@i</a></li>
+                }
+            }
+        </ul>
+    </nav>
+</div>
+
 </div>
