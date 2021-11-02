@@ -68,20 +68,12 @@ namespace hotel_booking_services.Implmentations
 
         private async Task<TRes> GetResponseResultAsync<TRes>(HttpClient client, HttpRequestMessage request) where TRes : class
         {
-            try
-            {
-                var response = await client.SendAsync(request);
-                var responseString = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<TRes>(responseString);
-                return result;
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-            
+            var response = await client.SendAsync(request);
+            var responseString = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<TRes>(responseString);
+            return result;
         }
+
         private HttpClient CreateClient(string baseUrl = null)
         {
             baseUrl ??= _url;
@@ -90,7 +82,7 @@ namespace hotel_booking_services.Implmentations
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.BaseAddress = new Uri(baseUrl);
             var token = _httpContextAccessor.HttpContext.Session.GetString("access_token");
-            
+
             if (!string.IsNullOrEmpty(token))
             {
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);

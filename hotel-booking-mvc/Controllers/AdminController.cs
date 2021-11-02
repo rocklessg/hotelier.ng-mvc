@@ -3,9 +3,11 @@ using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
+using hotel_booking_mvc.CustomAuthorization;
 
 namespace hotel_booking_mvc.Controllers.Admin
 {
+    [CustomAuthenticationFilter(roles: new string[] { "Admin" })]
 	public class AdminController : Controller
 	{
 		private readonly IHotelService _hotelService;
@@ -19,6 +21,8 @@ namespace hotel_booking_mvc.Controllers.Admin
 			_adminService = adminService;
 			_managerService = managerService;
 		}
+
+        
 		public async Task<IActionResult> Dashboard()
 		{
 			var result = await _adminService.ShowAdminDashboard();
