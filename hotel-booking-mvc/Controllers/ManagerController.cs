@@ -44,14 +44,24 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Transactions(string managerId, int pageNumber = 0)
+       [HttpGet]
+        public async Task<IActionResult> Transactions(int pageNumber, int pageSize)
         {
 
             var loggedinUser = HttpContext.Session.GetString("User");
             var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
 
-            var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(user.Id,pageNumber);
+            var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(user.Id, pageSize, pageNumber);
+            return View(managerTransactionsList);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Transactions(int pageNumber, int pageSize, string searchQuery)
+        {
+
+            var loggedinUser = HttpContext.Session.GetString("User");
+            var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+
+            var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(user.Id, pageSize, pageNumber, searchQuery);
             return View(managerTransactionsList);
         }
         public IActionResult HotelRooms()
@@ -59,8 +69,10 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View();
         }
 
-        public IActionResult HotelDetails(string hotelId)
+        public async Task<IActionResult> HotelDetails(string hotelId)
         {
+            var singleHotel = await _hotelService.GetHotelById(hotelId);
+            ViewData["GetHotel"] = singleHotel;
             return View();
         }
 

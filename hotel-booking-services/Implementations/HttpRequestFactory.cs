@@ -20,7 +20,7 @@ namespace hotel_booking_services.Implmentations
         {
             _clientFactory = clientFactory;
             _httpContextAccessor = httpContextAccessor;
-            _url = configuration.GetSection("BaseURL").Value;
+            _url = configuration["BaseUrl"];
         }
 
         public async Task<TRes> GetRequestAsync<TRes>(string requestUrl, string baseUrl = null) where TRes : class
@@ -75,7 +75,7 @@ namespace hotel_booking_services.Implmentations
                 var result = JsonConvert.DeserializeObject<TRes>(responseString);
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

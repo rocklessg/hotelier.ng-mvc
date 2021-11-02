@@ -10,6 +10,10 @@ namespace hotel_booking_services.Interfaces
 {
     public interface IManagerService
     {
-        public  Task<PaginationResponse<IEnumerable<ManagerTransactionsView>>> GetAllManagerTransactionsAsync(string managerId, int pageNumber);
+
+        public Task<PaginationResponse<IEnumerable<ManagerTransactionsView>>> GetAllManagerTransactionsAsync(string managerId, int pageSize = 10, int pageNumber = 1, string searchQuery = null);
+
+        public  Task<PaginationResponse<IEnumerable<ManagerModel>>> GetAllManagersAsync(int? pageNumber);
+
     }
 }

@@ -15,6 +15,7 @@ namespace hotel_booking_mvc.Controllers.Auth
     {
         private readonly IAuthenticationService _auth;
         public static string role = string.Empty;
+
         public AuthController(IAuthenticationService auth)
         {
             _auth = auth;
@@ -31,6 +32,7 @@ namespace hotel_booking_mvc.Controllers.Auth
             if (ModelState.IsValid)
             {
                 var response = await _auth.Login(loginDto);
+
                 var result = response.Data;
                 var handler = new JwtSecurityTokenHandler();
                 JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Token);
@@ -53,13 +55,18 @@ namespace hotel_booking_mvc.Controllers.Auth
                 else
                 {
                     return RedirectToAction("Dashboard", "Admin");
-                }
+                }     
+
+
 
             }
-            return View();
-
+            return View(loginDto);
         }
 
+
+
+
+               
         public IActionResult Register()
         {
             return View();
@@ -86,6 +93,7 @@ namespace hotel_booking_mvc.Controllers.Auth
                 return View();
             }
         }
+
         public IActionResult ForgotPassword()
         {
             return View();
