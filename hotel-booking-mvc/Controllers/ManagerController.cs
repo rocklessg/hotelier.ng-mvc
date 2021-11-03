@@ -79,7 +79,9 @@ namespace hotel_booking_mvc.Controllers.Manager
         public async Task<IActionResult> HotelDetails(string hotelId)
         {
             var singleHotel = await _hotelService.GetHotelById(hotelId);
+            var customers = await _hotelService.GetHotelCustomersAsync(hotelId);
             ViewData["GetHotel"] = singleHotel;
+            ViewData["Customers"] = customers;
             return View();
         }
 

@@ -47,6 +47,12 @@ namespace hotel_booking_services.Implmentations
             return response.Data;
         }
 
+        public async Task<IEnumerable<HotelCustomerDTO>> GetHotelCustomersAsync(string hotelId)
+        {
+            var response = await _requestFactory.GetRequestAsync<BasicResponse<IEnumerable<HotelCustomerDTO>>>($"api/Hotel/{hotelId}/customers");
+            return response.Data;
+        }
+
 
         public async Task<Dictionary<string, int>> GetTotalHotelsPerLocation()
         {
