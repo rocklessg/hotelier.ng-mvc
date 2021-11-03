@@ -1,6 +1,7 @@
 ﻿using hotel_booking_model;
 using hotel_booking_model.commons;
 using hotel_booking_model.Dtos.AuthenticationDtos;
+using hotel_booking_model.ViewModels;
 using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -85,6 +86,53 @@ namespace hotel_booking_mvc.Controllers.Admin
             }
 
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AllManagers(string managerId, int? pageNumber, SearchViewModel search = null)
+        {
+            List<PaginationResponse<IEnumerable<ManagerModel>>> AllManagers = new List<PaginationResponse<IEnumerable<ManagerModel>>>();
+            PaginationResponse<IEnumerable<ManagerModel>> response = null;
+            if (AllManagers.Count <= 0)
+            {
+                response = await _managerService.GetAllManagersAsync(pageNumber);
+
+                if (string.IsNullOrWhiteSpace(search.SearchQuery))
+                {
+                    ViewBag.SingleManager = response.PageItems.FirstOrDefault();
+                    return View(response);
+                }
+
+                if (response != null)
+                {
+                    AllManagers.Add(response);
+                    ViewBag.SingleManager = null;
+
+                    var managers = response.PageItems;
+                    var filteredManagers = managers.Where(m => m.FirstName.ToLower().Contains(search.SearchQuery.ToLower())
+                                                || m.LastName.ToLower().Contains(search.SearchQuery.ToLower())
+                                                || m.ManagerEmail.ToLower().Contains(search.SearchQuery.ToLower()));
+
+                    if (filteredManagers.Count() <= 0)
+                    {
+                        ViewBag.SingleManager = response.PageItems.FirstOrDefault();
+                        return View(response);
+                    }
+
+                    response.PageItems = filteredManagers;
+
+                    ViewBag.SingleManager = response.PageItems.FirstOrDefault();
+                    return View(response);
+                }
+                return View();
+            }
+            else if (AllManagers.Count > 0)
+            {
+                ViewBag.SingleManager = AllManagers.FirstOrDefault(x => x.PageItems.Any(x => x.ManagerId == managerId));
+                return View(response);
+            }
+
+            return View(response);
         }
 
         public IActionResult AllUsers()
