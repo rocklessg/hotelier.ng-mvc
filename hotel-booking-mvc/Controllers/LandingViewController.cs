@@ -22,5 +22,6 @@ namespace hotel_booking_mvc.Controllers
             var hotels = await _hotelService.GetTopHotelsAsync();
             return View(hotels);
         }
+
     }
 }

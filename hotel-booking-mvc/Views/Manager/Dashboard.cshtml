@@ -83,7 +83,7 @@
                     </div>
                     <div class="card-body col-12 text-center">
                         <h1 class="card-title" style="font-size: 30px;">
-                            @Model.Statistics.TotalMonthlyTransactions
+                            @Model.Statistics.TotalMonthlyTransactions.ToString("C", CultureInfo.GetCultureInfo("en-NG"))
                         </h1>
                     </div>
                 </div>
@@ -93,10 +93,10 @@
 
     <!--Commission Statistics-->
     <h4>Commission Statistics</h4>
-    <div class="Transaction-chart pt-5 pb-5 card">
+    <div class="Transaction-chart pt-2 pb-2 card">
         <div class="row d-flex m-3">
             <div class="container">
-                <canvas id="myLineChart" width="800" height="200"></canvas>
+                <canvas id="myLineChart" width="800" height="250"></canvas>
             </div>
         </div>
     </div>
@@ -154,19 +154,33 @@
                 }
             ];
 
+            function RearrangeMonths(arr, n){
+				if(arr.length - 1 !== n){
+					let rightArr = arr.slice(0, n+1);
+					let leftArr = arr .slice(n - arr.length + 1);
+					return leftArr.concat(rightArr);
+				}
+				else {
+					return arr;
+				}
+
+			}
+
             function charting() {
             // Variables
             var months = @Html.Raw(Model.Statistics.Months);
             var revenues = @Html.Raw(Model.Statistics.Revenues);
+            let date = new Date();
+			let currentMonth = date.getMonth();
 
             // Line Chart
             var ctx_line = document.getElementById("myLineChart").getContext("2d");
             var transactionChart = new Chart(ctx_line, {
                 type: 'line',
                 data: {
-                    labels: months,
+                    labels: RearrangeMonths(months, currentMonth),
                     datasets: [{
-                        data: revenues,
+                        data: RearrangeMonths(revenues, currentMonth),
                         backgroundColor: [
                             '#FFBB33',
                         ],

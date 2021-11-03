@@ -70,6 +70,18 @@
     <div class="sidebar m-0 p-0">
         <ul>
             <li>
+                <a class="text-center" asp-controller="LandingView" asp-action="Index">
+                    <div class="container-fluid row d-flex justify-content-center w-100 gx-0 " style="margin-top:15px; margin-bottom:15px;">
+                        <div class="col-12">
+                            <i class='bx bxs-home' style="font-size:30px;"></i>
+                        </div>
+                        <div class="col-12 text-center">
+                            <p>Home</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li>
                 <a class="text-center @(ViewContext.RouteData.Values["Action"].ToString() == "Dashboard" ? "active" : "")" asp-controller="Manager" asp-action="Dashboard" asp-route-managerId=@TempData["managerId"]>
                     <div class="container-fluid row d-flex justify-content-center w-100 gx-0" style="margin-top:15px; margin-bottom:15px;">
                         <div class="col-12">
