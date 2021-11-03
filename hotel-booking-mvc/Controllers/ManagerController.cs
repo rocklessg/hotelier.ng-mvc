@@ -1,10 +1,5 @@
-
-﻿using hotel_booking_model;
-using hotel_booking_model.ViewModels;
-using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using hotel_booking_model.Dtos.AuthenticationDtos;
@@ -12,15 +7,15 @@ using Newtonsoft.Json;
 
 
 using Microsoft.AspNetCore.Authorization;
+using hotel_booking_mvc.CustomAuthorization;
 
 namespace hotel_booking_mvc.Controllers.Manager
 {
-    //[CustomAuthenticationFilter(roles: new string[] { "Manager" })]
+    [CustomAuthenticationFilter( "Manager" )]
     public class ManagerController : Controller
     {
         private readonly IManagerService _managerService;
-        private readonly IHotelService _hotelService;
-        
+        private readonly IHotelService _hotelService;      
 
 
         public ManagerController(IHotelService hotelService, IManagerService managerService)
