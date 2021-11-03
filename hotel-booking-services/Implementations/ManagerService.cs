@@ -72,15 +72,15 @@ namespace hotel_booking_services.Implmentations
 
         }
 
-        public async Task<string> EditManagerAccountAsync(UserDto userDto)
+        public async Task<string> EditManagerAccountAsync(EditManagerViewModel model)
         {
-            var response = await _httpRequestFactory.UpdateRequestPutAsync<UserDto, BasicResponse<string>>
-                                                    (requestUrl: $"/api/Manager/UpdateManager", userDto);
+            var response = await _httpRequestFactory.UpdateRequestPutAsync<EditManagerViewModel, BasicResponse<string>>
+                                                    (requestUrl: $"/api/Manager/UpdateManager", model);
 
             return response.Message;
         }
 
-        public async Task<EditManagerViewModel> GetManagerById(string ManagerId)
+        public async Task<EditManagerViewModel> GetManagerById(string managerId)
         {
             var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<EditManagerViewModel>>
                 (requestUrl: $"/api/Manager/Details");

@@ -1,5 +1,5 @@
-﻿@model ManagerModel
-@{ var manager = ViewData["Manager"] as EditManagerViewModel;}
+﻿@model EditManagerViewModel
+@*@{ var manager = ViewData["Manager"] as EditManagerViewModel;}*@
 
 <div class="container">
     <div class="row d-flex justify-content-center align-items-center mt-5">
@@ -12,7 +12,7 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group mb-2">
 
-                                    @Html.TextBoxFor(x => x.FirstName, new { @Value = manager.FirstName, @class = "form-control has-validation", @placeholder = "First Name", @required = "required" })
+                                    @Html.TextBoxFor(x => x.FirstName, new { @Value = Model.FirstName, @class = "form-control has-validation", @placeholder = "First Name", @required = "required" })
 
                                     @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "badge bg-danger" })
 
@@ -29,7 +29,7 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group mb-2">
 
-                                    @Html.TextBoxFor(x => x.LastName, new { @Value = manager.LastName, @class = "form-control has-validation", @placeholder = "Last Name", @required = "required" })
+                                    @Html.TextBoxFor(x => x.LastName, new { @Value = Model.LastName, @class = "form-control has-validation", @placeholder = "Last Name", @required = "required" })
 
                                     @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "badge bg-danger" })
 
@@ -46,7 +46,7 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group mb-2">
 
-                                    @Html.TextBoxFor(x => x.ManagerPhone, new { @Value = manager.ManagerPhone, @class = "form-control has-validation", @placeholder = "Enter ManagerPhone", @required = "required", @type = "text", @value = "" })
+                                    @Html.TextBoxFor(x => x.ManagerPhone, new { @Value = Model.ManagerPhone, @class = "form-control has-validation", @placeholder = "Enter Manager Phone", @required = "required", @type = "text", @value = "" })
 
                                     @Html.ValidationMessageFor(m => m.ManagerPhone, "", new { @class = "badge bg-danger" })
 
@@ -56,13 +56,13 @@
 
                                         <span class="badge bg-danger">@ViewBag.error</span>
 
-                                    }
+                                    } 
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group mb-2">
 
-                                    @Html.TextBoxFor(x => x.Age, new { @Value = manager.Age, @class = "form-control has-validation", @placeholder = "Enter Age", @required = "required", @type = "text", @value = "" })
+                                    @Html.TextBoxFor(x => x.Age, new { @Value = Model.Age, @class = "form-control has-validation", @placeholder = "Enter Age", @required = "required", @type = "text", @value = "" })
 
                                     @Html.ValidationMessageFor(m => m.Age, "", new { @class = "badge bg-danger" })
 
@@ -78,7 +78,7 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group mb-2">
 
-                                    @Html.TextBoxFor(x => x.CompanyName, new { @Value = manager.CompanyName, @class = "form-control has-validation", @placeholder = "Enter CompanyName", @required = "required", @type = "text", @value = "" })
+                                    @Html.TextBoxFor(x => x.CompanyName, new { @Value = Model.CompanyName, @class = "form-control has-validation", @placeholder = "Enter CompanyName", @required = "required", @type = "text", @value = "" })
 
                                     @Html.ValidationMessageFor(m => m.CompanyName, "", new { @class = "badge bg-danger" })
 
@@ -94,7 +94,7 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group mb-2">
 
-                                    @Html.TextBoxFor(x => x.BusinessEmail, new { @Value = manager.BusinessEmail, @class = "form-control has-validation", @placeholder = "Enter BusinessEmail", @required = "required", @type = "text", @value = "" })
+                                    @Html.TextBoxFor(x => x.BusinessEmail, new { @Value = Model.BusinessEmail, @class = "form-control has-validation", @placeholder = "Enter BusinessEmail", @required = "required", @type = "text", @value = "" })
 
                                     @Html.ValidationMessageFor(m => m.BusinessEmail, "", new { @class = "badge bg-danger" })
 
@@ -112,7 +112,7 @@
 
                                 <div class="form-group mb-2">
 
-                                    @Html.TextBoxFor(x => x.BusinessPhone, new { @Value = manager.BusinessPhone, @class = "form-control has-validation", @placeholder = "Enter BusinessPhone", @required = "required", @type = "text", @value = "" })
+                                    @Html.TextBoxFor(x => x.BusinessPhone, new { @Value = Model.BusinessPhone, @class = "form-control has-validation", @placeholder = "Enter BusinessPhone", @required = "required", @type = "text", @value = "" })
 
                                     @Html.ValidationMessageFor(m => m.BusinessPhone, "", new { @class = "badge bg-danger" })
 
@@ -129,7 +129,7 @@
 
                                 <div class="form-group mb-2">
 
-                                    @Html.TextBoxFor(x => x.CompanyAddress, new { @Value = manager.CompanyAddress, @class = "form-control has-validation", @placeholder = "Enter CompanyAddress", @required = "required", @type = "text", @value = "" })
+                                    @Html.TextBoxFor(x => x.CompanyAddress, new { @Value = Model.CompanyAddress, @class = "form-control has-validation", @placeholder = "Enter CompanyAddress", @required = "required", @type = "text", @value = "" })
 
                                     @Html.ValidationMessageFor(m => m.CompanyAddress, "", new { @class = "badge bg-danger" })
 
@@ -145,7 +145,7 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group mb-2">
 
-                                    @Html.TextBoxFor(x => x.State, new { @Value = ViewData["State"], @class = "form-control has-validation", @placeholder = "Enter State", @required = "required", @type = "text", @value = "" })
+                                    @Html.TextBoxFor(x => x.State, new { @Value = Model.State, @class = "form-control has-validation", @placeholder = "Enter State", @required = "required", @type = "text", @value = "" })
 
                                     @Html.ValidationMessageFor(m => m.State, "", new { @class = "badge bg-danger" })
 
@@ -162,7 +162,7 @@
 
                                 <div class="form-group mb-2">
 
-                                    @Html.TextBoxFor(x => x.AccountName, new { @Value = ViewData["AccountName"], @class = "form-control has-validation", @placeholder = "Enter AccountName", @required = "required", @type = "text", @value = "" })
+                                    @Html.TextBoxFor(x => x.AccountName, new { @Value = Model.AccountName, @class = "form-control has-validation", @placeholder = "Enter AccountName", @required = "required", @type = "text", @value = "" })
 
                                     @Html.ValidationMessageFor(m => m.AccountName, "", new { @class = "badge bg-danger" })
 
@@ -180,7 +180,7 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group mb-2">
 
-                                    @Html.TextBoxFor(x => x.AccountNumber, new { @Value = ViewData["AccountNumber"], @class = "form-control has-validation", @placeholder = "Enter AccountNumber", @required = "required", @type = "text", @value = "" })
+                                    @Html.TextBoxFor(x => x.AccountNumber, new { @Value = Model.AccountNumber, @class = "form-control has-validation", @placeholder = "Enter AccountNumber", @required = "required", @type = "text", @value = "" })
 
                                     @Html.ValidationMessageFor(m => m.AccountNumber, "", new { @class = "badge bg-danger" })
 

@@ -1,15 +1,11 @@
 ﻿using hotel_booking_model.Dtos.AuthenticationDtos;
+using hotel_booking_model.ViewModels;
 using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
-using hotel_booking_model;
-using hotel_booking_model.ViewModels;
-using System.Collections.Generic;
-using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace hotel_booking_mvc.Controllers.Manager
 {
@@ -82,71 +78,46 @@ namespace hotel_booking_mvc.Controllers.Manager
         }
 
         [HttpGet]
-        public IActionResult Account()
+        public async Task<IActionResult> Account()
         {
             var loggedInUser = HttpContext.Session.GetString("User");
 
-            var user = JsonConvert.DeserializeObject<ManagerModel>(loggedInUser);
-            var manager = _managerService.GetManagerById(user.ManagerId);
-            ViewData["FirstName"] = user.FirstName;
-            ViewData["Manager"] = manager;
+            var user = JsonConvert.DeserializeObject<LoggedInUserViewModel>(loggedInUser);
+            var manager = await _managerService.GetManagerById(user.Id);
+            manager.Id = user.Id;
 
-            return View(user);
+            //ViewData["Manager"] = manager;
+            return View(manager);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> Account(UserDto userDto)
+        public async Task<IActionResult> Account(EditManagerViewModel model)
         {
-            //var loggedInUser = HttpContext.Session.GetString("User");
-            //var user = JsonConvert.DeserializeObject<UserDto>(loggedInUser);
-            //userDto.Id = user.Id;
+            var loggedInUser = HttpContext.Session.GetString("User");
+            var user = JsonConvert.DeserializeObject<LoggedInUserViewModel>(loggedInUser);
+            model.Id = user.Id;
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var response = await _managerService.EditManagerAccountAsync(userDto);
-
+                ModelState.AddModelError(string.Empty, "Invalid data entry");
                 return View();
             }
-            throw new ArgumentException("user data can not be null");
+            else
+            {
+                var response = await _managerService.EditManagerAccountAsync(model);
+
+                return RedirectToAction("Dashboard", "Manager", new { ManagerId = model.Id });
+            }
+          
         }
        
 
-        public async Task<IActionResult> UpdateManagerDetails(string managerId)
-        {
-            var result = await _managerService.GetManagerById(managerId);
-            return View(result);
-        }
-        //[HttpGet]
-      /*  public async Task<IActionResult> UpdateManagerDetails()
-        {
-            IEnumerable<EditManagerViewModel> EditManager = null;
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new baseUrl("");
-                var responseTask = client.GetAsync("Manaager");
-                responseTask.Wait();
-                var result = responseTask.Result;
-                if (result.IsSuccessStatusCode)
-                {
-                    var readTask = result.Content.ReadAsAsync<IList<EditManagerViewModel>>();
-                    readTask.Wait();
-                    var result = responseTask.Result;
-                    if (result.IsSuccessStatusCode)
-                    {
-                        var readTask = result.Content.ReadAsAsync<IList<EditManagerViewModel>>();
-                        readTask.Wait();
-                        EditManager = readTask.Result;
-                    }
-                    else
-                    {
-                        EditManager = TaskAsyncEnumerableExtensions.Empty<EditManagerViewModel>();
-                        ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
-                    }
-                }
-                return View(EditManager);
-            }*/
-
+        //public async Task<IActionResult> UpdateManagerDetails(string managerId)
+        //{
+        //    var result = await _managerService.GetManagerById(managerId);
+        //    return View(result);
         //}
+      
     }
 }
