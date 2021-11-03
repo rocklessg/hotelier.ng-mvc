@@ -1,112 +1,119 @@
-﻿using hotel_booking_model.Dtos.AuthenticationDtos;
+﻿using hotel_booking_model;
+using hotel_booking_model.commons;
+using hotel_booking_model.Dtos.AuthenticationDtos;
+using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using hotel_booking_mvc.CustomAuthorization;
 
 namespace hotel_booking_mvc.Controllers.Admin
 {
     [CustomAuthenticationFilter(roles: new string[] { "Admin" })]
-	public class AdminController : Controller
-	{
-		private readonly IHotelService _hotelService;
-		private readonly IAdminService _adminService;
-		private readonly IManagerService _managerService;
-	
-		public AdminController(IHotelService hotelService, IAdminService adminService,
-			IManagerService managerService)
-		{
-			_hotelService = hotelService;
-			_adminService = adminService;
-			_managerService = managerService;
-		}
+    public class AdminController : Controller
+    {
+        private readonly IHotelService _hotelService;
+        private readonly IAdminService _adminService;
+        private readonly IManagerService _managerService;
 
-        
-		public async Task<IActionResult> Dashboard()
-		{
-			var result = await _adminService.ShowAdminDashboard();
-			return View(result);
-		}
+        public AdminController(IHotelService hotelService, IAdminService adminService,
+            IManagerService managerService)
+        {
+            _hotelService = hotelService;
+            _adminService = adminService;
+            _managerService = managerService;
+        }
+
+        public async Task<IActionResult> Dashboard()
+        {
+            var result = await _adminService.ShowAdminDashboard();
+            return View(result);
+        }
 
 
-		public async Task<IActionResult> HotelAsync(int pageNumber)
+        public async Task<IActionResult> HotelAsync(int pageNumber)
         {
             var hotelList = await _hotelService.GetAllHotelAsync(pageNumber);
             return View(hotelList);
-        }     
+        }
 
-		
-		public IActionResult Manager()
-		{
-			return View();  
-		}
 
-		[HttpGet]
-		public async Task<IActionResult> Transactions(int pageNumber, int pageSize)
-		{
-			var transactions = await _adminService.GetAllTransactions(pageSize, pageNumber);
-			var app = transactions;
-			return View(transactions);  
-		}
+        public IActionResult Manager()
+        {
+            return View();
+        }
 
-		[HttpPost]
-		public async Task<IActionResult> Transactions(int pageNumber, int pageSize, string searchQuery)
-		{
-			var transactions = await _adminService.GetAllTransactions(pageSize, pageNumber, searchQuery);
-			var app = transactions;
-			return View(transactions);  
-		}
+        [HttpGet]
+        public async Task<IActionResult> Transactions(int pageNumber, int pageSize)
+        {
+            var transactions = await _adminService.GetAllTransactions(pageSize, pageNumber);
+            return View(transactions);
+        }
 
-		public IActionResult HotelRooms()
-		{
-			return View();
-		}
+        [HttpPost]
+        public async Task<IActionResult> Transactions(int pageNumber, int pageSize, string searchQuery)
+        {
+            var transactions = await _adminService.GetAllTransactions(pageSize, pageNumber, searchQuery);
+            return View(transactions);
+        }
 
-		public async Task<IActionResult> AllManagers(string managerId, int? pageNumber)
-		{
-			var response = await _managerService.GetAllManagersAsync(pageNumber);
-			
-			if (response!=null)
+        public IActionResult HotelRooms()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> AllManagers(string managerId, int? pageNumber)
+        {
+            List<PaginationResponse<IEnumerable<ManagerModel>>> AllManagers = new List<PaginationResponse<IEnumerable<ManagerModel>>>();
+            if (AllManagers.Count <= 0)
             {
-				ViewBag.SingleManager = null;
-				var singleManager = response.PageItems.FirstOrDefault(x => x.ManagerId == managerId);
-				ViewBag.SingleManager = singleManager ??= response.PageItems.FirstOrDefault();
-				return View(response);
-			}
-            else
-            {
-				return View();
+                var response = await _managerService.GetAllManagersAsync(pageNumber);
+                if (response != null)
+                {
+                    AllManagers.Add(response);
+                    ViewBag.SingleManager = null;
+                    var singleManager = response.PageItems.FirstOrDefault(x => x.ManagerId == managerId);
+                    ViewBag.SingleManager = singleManager ??= response.PageItems.FirstOrDefault();
+                    return View(response);
+                }
+
             }
-		}
+            else if (AllManagers.Count > 0)
+            {
+                ViewBag.SingleManager = AllManagers.FirstOrDefault(x => x.PageItems.Any(x => x.ManagerId == managerId));
+            }
 
-		public IActionResult AllUsers()
-		{
-			return View();
-		}
-		public async Task<IActionResult> HotelDetails(string hotelId)
-		{
-			var singleHotel = await _hotelService.GetHotelById(hotelId);
-			ViewData["GetHotel"] = singleHotel;
-			return View();
-		}
-
-	
-		public IActionResult Account()
-		{
-			return View();
-		}
-
-
-		[HttpPost]
-		public IActionResult Account(UserDto userDto)
-        {
-			return View();
+            return View();
         }
 
-		public IActionResult AllManagersRequests()
+        public IActionResult AllUsers()
         {
-			return View();
+            return View();
         }
-	}
+        public async Task<IActionResult> HotelDetails(string hotelId)
+        {
+            var singleHotel = await _hotelService.GetHotelById(hotelId);
+            ViewData["GetHotel"] = singleHotel;
+            return View();
+        }
+
+
+        public IActionResult Account()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Account(UserDto userDto)
+        {
+            return View();
+        }
+
+        public IActionResult AllManagersRequests()
+        {
+            return View();
+        }
+    }
 }

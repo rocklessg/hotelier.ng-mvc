@@ -1,5 +1,6 @@
 ﻿using hotel_booking_model;
 using hotel_booking_model.commons;
+using hotel_booking_model.Dtos;
 using hotel_booking_model.Dtos.Hotels;
 using hotel_booking_services.Interfaces;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace hotel_booking_services.Implmentations
             var response = await _requestFactory.GetRequestAsync
                 <BasicResponse< PaginationResponse<IEnumerable < HotelBasicView>>>>(
                     requestUrl: $"api/Hotel/all-hotels?PageSize=5&PageNumber={pageNumber}");
-            
+
             return response.Data;
         }
 
@@ -32,7 +33,7 @@ namespace hotel_booking_services.Implmentations
             var response = await _requestFactory.GetRequestAsync
                 <BasicResponse<IEnumerable<HotelBasicView>>>(
                     requestUrl: $"api/Manager/{managerId}/hotels");
-                    
+
             return response.Data;
         }
 
@@ -63,6 +64,14 @@ namespace hotel_booking_services.Implmentations
                 <BasicResponse<HotelDetailsViewDTo>>(
                     requestUrl: $"api/Hotel/{hotelId}");
 
+            return response.Data;
+        }
+
+        public async Task<RoomTypeDetailsDto> GetRoomTypeDetails(string roomTypeId)
+        {
+            var response = await _requestFactory.GetRequestAsync
+                <BasicResponse<RoomTypeDetailsDto>>(
+                requestUrl: $"/api/Hotel/roomTypedetails/{roomTypeId}");
             return response.Data;
         }
     }

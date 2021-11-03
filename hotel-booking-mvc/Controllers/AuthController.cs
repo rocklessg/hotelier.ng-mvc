@@ -8,7 +8,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using System.Collections;
+<<<<<<< HEAD
+using hotel_booking_model.ViewModels;
+=======
 using hotel_booking_mvc.CustomAuthorization;
+>>>>>>> aa94faf3d2e47df6af8806a1567c5147b0a2fffa
 
 namespace hotel_booking_mvc.Controllers.Auth
 {
@@ -33,30 +37,34 @@ namespace hotel_booking_mvc.Controllers.Auth
             if (ModelState.IsValid)
             {
                 var response = await _auth.Login(loginDto);
-
                 var result = response.Data;
-                var handler = new JwtSecurityTokenHandler();
-                JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Token);
-                Hashtable user = new Hashtable();
-                user.Add("Id", decodedValue.Claims.ElementAt(0).Value);
-                user.Add("FirstName", decodedValue.Claims.ElementAt(2).Value);
-                user.Add("LastName", decodedValue.Claims.ElementAt(3).Value);
-                user.Add("Avatar", decodedValue.Claims.ElementAt(4).Value);
-                var Role = decodedValue.Claims.ElementAt(5).Value;
-                HttpContext.Session.SetString("User", JsonConvert.SerializeObject(user));
-                if (Role == null)
+                if (result != null)
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid Login Details");
-                    return View();
+                    var handler = new JwtSecurityTokenHandler();
+                    JwtSecurityToken decodedValue = handler.ReadJwtToken(result.Token);
+                    Hashtable user = new Hashtable();
+                    user.Add("Id", decodedValue.Claims.ElementAt(0).Value);
+                    user.Add("FirstName", decodedValue.Claims.ElementAt(2).Value);
+                    user.Add("LastName", decodedValue.Claims.ElementAt(3).Value);
+                    user.Add("Avatar", decodedValue.Claims.ElementAt(4).Value);
+                    var Role = decodedValue.Claims.ElementAt(5).Value;
+                    HttpContext.Session.SetString("User", JsonConvert.SerializeObject(user));
+                    if (Role == null)
+                    {
+                        ModelState.AddModelError(string.Empty, "Invalid Login Details");
+                        return View();
+                    }
+                    else if (Role == "Manager")
+                    {
+                        return RedirectToAction("Dashboard", "Manager", new { managerId = result.Id });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Dashboard", "Admin");
+                    }
                 }
-                else if (Role == "Manager")
-                {
-                    return RedirectToAction("Dashboard", "Manager", new { managerId = result.Id });
-                }
-                else
-                {
-                    return RedirectToAction("Dashboard", "Admin");
-                }     
+                ViewBag.error = "Invalid credentials";
+                return View(loginDto); 
 
             }
             return View(loginDto);
@@ -139,6 +147,11 @@ namespace hotel_booking_mvc.Controllers.Auth
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Login", "Auth");
+        }
+
+        public IActionResult ManagerRequest(MgrReqViewModel mgrReqViewModel)
+        {
+            return View(mgrReqViewModel);
         }
     }
 }
