@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using hotel_booking_model.ViewModels;
 
 namespace hotel_booking_mvc.Controllers
 {
@@ -8,5 +9,6 @@ namespace hotel_booking_mvc.Controllers
         {
             return View();
         }
+
     }
 }
