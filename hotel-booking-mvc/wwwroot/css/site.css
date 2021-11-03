@@ -104,3 +104,7 @@ p.bold-font.p {
 .blue__bg {
     background-color: #2067A1 !important;
 }
+
+.height__100 {
+    min-height: 100vh;
+}
