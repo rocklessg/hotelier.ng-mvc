@@ -2,8 +2,6 @@
 @using hotel_booking_model.commons
 @model PaginationResponse<IEnumerable<ManagerRequests>>
 
-@{
-}
 <div class="container">
     <div class="row">
         <div class="col">
@@ -12,8 +10,6 @@
     </div>
 
     <div id="manager-requests">
-        @await Html.PartialAsync("_ManagerRequests", Model);
+        @await Html.PartialAsync("_ManagerRequests", Model)
     </div>
-
-
 </div>

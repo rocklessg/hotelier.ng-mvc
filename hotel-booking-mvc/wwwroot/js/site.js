@@ -11,11 +11,3 @@
         }
     })
 }
- 
-/*function paginatedRequest(url) {
-    $.ajax({
-        type: "GET",
-        url: url,
-        success: function(response)
-    })
-}*/

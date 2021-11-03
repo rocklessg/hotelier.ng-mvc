@@ -8,11 +8,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using System.Collections;
-<<<<<<< HEAD
 using hotel_booking_model.ViewModels;
-=======
 using hotel_booking_mvc.CustomAuthorization;
->>>>>>> aa94faf3d2e47df6af8806a1567c5147b0a2fffa
 
 namespace hotel_booking_mvc.Controllers.Auth
 {
@@ -152,6 +149,19 @@ namespace hotel_booking_mvc.Controllers.Auth
         public IActionResult ManagerRequest(MgrReqViewModel mgrReqViewModel)
         {
             return View(mgrReqViewModel);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ManagerRequest(ManagerRequest managerRequest)
+        {
+            var response = await _auth.SendManagerRequest(managerRequest);
+            if(response)
+            {
+                ViewData["Message"] = "We have successfully recieved your request. Look out for our Invitation mail.";
+                return View("Confirmation");
+            }
+            return View();
         }
     }
 }

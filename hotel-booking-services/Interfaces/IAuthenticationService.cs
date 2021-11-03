@@ -14,5 +14,7 @@ namespace hotel_booking_services.Interfaces
         Task<RegisterDto> Register(RegisterDto registerdto);
         Task<string> ForgotPassword(string email);
         Task<string> UpdatePassword(UpdatePasswordDto updatePasswordDto);
+
+        Task<bool> SendManagerRequest(ManagerRequest managerRequest);
     }
 }

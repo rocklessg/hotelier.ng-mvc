@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hotel_booking_model
+namespace hotel_booking_model.Dtos.AuthenticationDtos
 {
-    public class ManagerRequests
+    public class ManagerRequest
     {
         public string Email { get; set; }
-        public string HotelName { get; set; }
         public string HotelAddress { get; set; }
-        public bool ConfirmationFlag { get; set; }
+        public string HotelName { get; set; }
     }
 }

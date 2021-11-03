@@ -79,5 +79,11 @@ namespace hotel_booking_services.Implmentations
         }
 
 
+        public async Task<bool> SendManagerRequest(ManagerRequest managerRequest)
+        {
+           var response = await _httpRequestFactory.PostRequestAsync<ManagerRequest, 
+               BasicResponse<ManagerRequest>>("/api/Manager/request", managerRequest);
+            return response.Succeeded;
+        }
     }
 }
