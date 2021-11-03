@@ -6,8 +6,6 @@ using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using hotel_booking_model.Dtos.AuthenticationDtos;
 using Newtonsoft.Json;
 
 
