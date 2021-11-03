@@ -12,10 +12,11 @@ using Newtonsoft.Json;
 
 
 using Microsoft.AspNetCore.Authorization;
+using hotel_booking_model.Dtos;
 
 namespace hotel_booking_mvc.Controllers.Manager
 {
-    //[CustomAuthenticationFilter(roles: new string[] { "Manager" })]
+    [CustomAuthenticationFilter(roles: new string[] { "Manager" })]
     public class ManagerController : Controller
     {
         private readonly IManagerService _managerService;
@@ -97,8 +98,25 @@ namespace hotel_booking_mvc.Controllers.Manager
 
 
         [AllowAnonymous]
-        public IActionResult RegisterManager()
+        public IActionResult RegisterManager([FromQuery] RegisterManagerMailToken emailToken)
         {
+            ManagerRegistration managerRegistration = new ManagerRegistration();
+            managerRegistration.ManagerMailToken.Email = emailToken.Email;
+            managerRegistration.ManagerMailToken.Token = emailToken.Token;
+
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> RegisterNewManager(ManagerRegistration managerRegistration)
+        {
+            var response = await _managerService.RegisterManager(managerRegistration);
+            if (response)
+            {
+                ViewData["Message"] = "You have been successfully registered! Check your email for a confirmation message.";
+                return View("Confirmation");
+            }
             return View();
         }
     }

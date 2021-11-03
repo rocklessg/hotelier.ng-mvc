@@ -71,10 +71,10 @@ namespace hotel_booking_services.Implmentations
         }
 
 
-        public async Task<PaginationResponse<IEnumerable<ManagerRequests>>> GetAllManagerRequests(int? pageNumber)
+        public async Task<PaginationResponse<IEnumerable<ManagerRequestsView>>> GetAllManagerRequests(int? pageNumber)
         {
             pageNumber = pageNumber > 0 ? pageNumber : 1;
-            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<PaginationResponse<IEnumerable<ManagerRequests>>>>(
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<PaginationResponse<IEnumerable<ManagerRequestsView>>>>(
                                                        requestUrl: $"/api/Manager/getall-request?PageSize=10&PageNumber={pageNumber}");
             return response.Data;
         }
@@ -84,6 +84,14 @@ namespace hotel_booking_services.Implmentations
         {
             var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<bool>>(
                                 requestUrl: $"/api/Manager/send-invite?email={email}");
+            return response.Succeeded;
+        }
+
+
+        public async Task<bool> RegisterManager(ManagerRegistration managerRegistration)
+        {
+            var response = await _httpRequestFactory.PostRequestAsync<ManagerRegistration, BasicResponse<bool>>(
+                                requestUrl: "/api/Manager/AddManager", content: managerRegistration);
             return response.Succeeded;
         }
 

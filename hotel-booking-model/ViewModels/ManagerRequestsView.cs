@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace hotel_booking_model
 {
-    public class ManagerRequests
+    public class ManagerRequestsView
     {
         public string Email { get; set; }
         public string HotelName { get; set; }
