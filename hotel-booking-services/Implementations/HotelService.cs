@@ -76,10 +76,11 @@ namespace hotel_booking_services.Implmentations
             return response.Data;
         }
 
-        public async Task<AddHotelViewModel> AddHotelAsync(AddHotelViewModel addHotelViewModel)
+        public async Task<BasicResponse<AddHotelViewModel>> AddHotelAsync(AddHotelViewModel addHotelViewModel)
         {
             var response = await _requestFactory.PostRequestAsync<AddHotelViewModel, BasicResponse<AddHotelViewModel>>("api/Hotel", addHotelViewModel);
-            return response.Data;
+            
+            return response;
         }
     }
 }

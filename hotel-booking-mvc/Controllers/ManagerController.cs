@@ -2,14 +2,12 @@
 using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using hotel_booking_model.Dtos.AuthenticationDtos;
 using Newtonsoft.Json;
 using hotel_booking_model.ViewModels;
+using hotel_booking_mvc.Helpers;
+using System.Security.Claims;
 
 namespace hotel_booking_mvc.Controllers.Manager
 {
@@ -97,7 +95,28 @@ namespace hotel_booking_mvc.Controllers.Manager
         public IActionResult AddHotel()
         {
             var hotel = new AddHotelViewModel();
-            return PartialView("_AddHotelPartial", hotel);
+            return View(hotel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddHotel(AddHotelViewModel model)
+        {
+            var user = HttpContext.Session.GetString("User");
+            var loggedInUser = JsonConvert.DeserializeObject<AuthenticatedDto>(user);
+            
+            if (ModelState.IsValid)
+            {
+                var result = await _hotelService.AddHotelAsync(model);
+                if (result.Succeeded)
+                {
+                    return Json(new { isValid = true, html = Helper.RenderRazorViewToString(this, "_HotelList", await _hotelService.GetAllHotelForManagerAsync(loggedInUser.Id))});
+                }
+                ViewBag.Error = result.Message;
+                return BadRequest();
+            }
+
+            return Json(new { isValid = false, html = Helper.RenderRazorViewToString(this, "AddHotel", model)});
+
         }
 
     }

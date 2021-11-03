@@ -10,7 +10,7 @@ namespace hotel_booking_services.Interfaces
 {
 	public interface IHotelService
 	{
-		Task<AddHotelViewModel> AddHotelAsync(AddHotelViewModel addHotelViewModel);
+		Task<BasicResponse<AddHotelViewModel>> AddHotelAsync(AddHotelViewModel addHotelViewModel);
 		Task<PaginationResponse<IEnumerable<HotelBasicView>>> GetAllHotelAsync(int pageNumber);
         Task<IEnumerable<HotelBasicView>> GetAllHotelForManagerAsync(string managerId);
 		Task<IEnumerable<HotelBasicDetailsDto>> GetTopHotelsAsync();

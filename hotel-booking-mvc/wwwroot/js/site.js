@@ -1,22 +1,44 @@
-﻿$(function () {
-    var PlaceHolderElement = $('#PlaceHolderHere');
-    $('button[data-toggle="ajax-modal"]').click(function (event) {
+﻿
 
-        var url = $(this).data('url');
-        $.get(url).done(function (data) {
-            PlaceHolderElement.html(data);
-            PlaceHolderElement.find('.modal').modal('show');
-        })
+showInPopup = (url, title) => {
+    $.ajax({
+        type: "GET",
+        url: url,
+        success: function (res) {
+            $('#form-modal .modal-body').html(res);
+            $('#form-modal .modal-title').html(title);
+            $('#form-modal').modal('show');
+        }
     })
+}
 
-    PlaceHolderElement.on('click', '[data-save="modal"]', function (event) {
+jQueryAjaxPost = form => {
 
-        var form = $(this).parents('.modal').find('form');
-        var actionUrl = form.attr('action');
-        var sendData = form.serialize();
-        $.post(actionUrl, sendData).done(function (data) {
-            PlaceHolderElement.find('.modal').modal('hide');
+    try {
+        $.ajax({
+            type: 'POST',
+            url: form.action,
+            data: new FormData(form),
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                if (res.isValid) {
+                    $("#hotel-list").html(res.html);
+                    $('#form-modal .modal-body').html('');
+                    $('#form-modal .modal-title').html('');
+                    $('#form-modal').modal('hide');
+                } else {
+                    $('#form-modal .modal-body').html(res.html);
+                }
+            },
+            error: function (err) {
+
+            }
         })
-    })
+    } catch (e) {
 
-})
+    }
+
+    //to prevent default form submit
+    return false;
+}
