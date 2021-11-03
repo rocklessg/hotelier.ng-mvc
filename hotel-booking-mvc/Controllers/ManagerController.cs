@@ -11,10 +11,11 @@ using hotel_booking_model.Dtos.AuthenticationDtos;
 using Newtonsoft.Json;
 
 
+using Microsoft.AspNetCore.Authorization;
 
 namespace hotel_booking_mvc.Controllers.Manager
 {
-    [CustomAuthenticationFilter(roles: new string[] { "Manager" })]
+    //[CustomAuthenticationFilter(roles: new string[] { "Manager" })]
     public class ManagerController : Controller
     {
         private readonly IManagerService _managerService;
@@ -95,5 +96,10 @@ namespace hotel_booking_mvc.Controllers.Manager
         }
 
 
+        [AllowAnonymous]
+        public IActionResult RegisterManager()
+        {
+            return View();
+        }
     }
 }
