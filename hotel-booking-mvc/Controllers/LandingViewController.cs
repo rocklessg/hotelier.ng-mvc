@@ -1,26 +1,13 @@
-﻿using hotel_booking_services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
+using hotel_booking_model.ViewModels;
 
 namespace hotel_booking_mvc.Controllers
 {
     public class LandingViewController : Controller
     {
-        private readonly IHotelService _hotelService;
-
-        public LandingViewController(IHotelService hotelService)
+        public IActionResult Index()
         {
-            _hotelService = hotelService;
-        }
-
-
-
-
-        [HttpGet]
-        public async Task<IActionResult> Index()
-        {
-            var hotels = await _hotelService.GetTopHotelsAsync();
-            return View(hotels);
+            return View();
         }
 
     }
