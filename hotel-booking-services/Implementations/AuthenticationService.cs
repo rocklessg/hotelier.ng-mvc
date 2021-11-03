@@ -40,7 +40,6 @@ namespace hotel_booking_services.Implmentations
 
                 return result;
             }
-
             return result;
         }
 

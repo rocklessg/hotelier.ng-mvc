@@ -3,8 +3,6 @@ using hotel_booking_model.Dtos;
 using hotel_booking_model.Dtos.TransactionsDtos;
 using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,8 +22,8 @@ namespace hotel_booking_services.Implmentations
         {
             var response = await _httpRequestFactory.GetRequestAsync
                 <BasicResponse<AdminStatisticsDto>>(
-                    requestUrl: $"api/Statistics/get-statistics/admin",
-                    baseUrl: "https://localhost:44319/");
+                    requestUrl: $"api/Statistics/get-statistics/admin");
+
             return response.Data;
         }
 
@@ -54,8 +52,7 @@ namespace hotel_booking_services.Implmentations
             pageNumber = pageNumber > 0 ? pageNumber : 1;
             var result = await _httpRequestFactory.GetRequestAsync<TransactionsResponseDto>
                 (
-                requestUrl: $"api/Admin/transactions?PageSize={pageSize}&PageNumber={pageNumber}&SearchQuery={searchQuery}",
-                baseUrl: "http://hoteldotnet.herokuapp.com"
+                requestUrl: $"api/Admin/transactions?PageSize={pageSize}&PageNumber={pageNumber}&SearchQuery={searchQuery}"      
                 );
             return result;
         }
