@@ -36,10 +36,12 @@ namespace hotel_booking_mvc.Controllers.Auth
                 var response = await _auth.Login(loginDto);
 
                 var result = response.Data;
+                var message = response.Message;
+
 
                 if (result == null && !response.Succeeded)
                 {
-                    ModelState.AddModelError(string.Empty, response.Message);
+                    ModelState.AddModelError(string.Empty, response.Message = "Invalid Credentials" ?? response.Message);
                     return View();
                 }
 
