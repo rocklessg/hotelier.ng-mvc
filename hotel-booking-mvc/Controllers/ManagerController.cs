@@ -31,17 +31,20 @@ namespace hotel_booking_mvc.Controllers.Manager
             _managerService = managerService;
         }
 
-        public async Task<IActionResult> DashboardAsync(string managerId)
+        public async Task<IActionResult> DashboardAsync()
         {
-            TempData["managerId"] = managerId;
-            var result = await _managerService.ShowManagerDashboard(managerId);
+            var loggedinUser = HttpContext.Session.GetString("User");
+            var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+            var result = await _managerService.ShowManagerDashboard(user.Id);
             return View(result);
         }
 
-        public async Task<IActionResult> HotelAsync(string managerId)
+        public async Task<IActionResult> HotelAsync()
         {
-            TempData["managerId"] = managerId;
-            var paginationResponse = await _hotelService.GetAllHotelForManagerAsync(managerId);
+
+            var loggedinUser = HttpContext.Session.GetString("User");
+            var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+            var paginationResponse = await _hotelService.GetAllHotelForManagerAsync(user.Id);
             return View(paginationResponse);
         }
 
@@ -56,6 +59,7 @@ namespace hotel_booking_mvc.Controllers.Manager
 
             var loggedinUser = HttpContext.Session.GetString("User");
             var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+
 
             var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(user.Id, pageSize, pageNumber);
             return View(managerTransactionsList);
@@ -79,7 +83,9 @@ namespace hotel_booking_mvc.Controllers.Manager
         public async Task<IActionResult> HotelDetails(string hotelId)
         {
             var singleHotel = await _hotelService.GetHotelById(hotelId);
+            var customers = await _hotelService.GetHotelCustomersAsync(hotelId);
             ViewData["GetHotel"] = singleHotel;
+            ViewData["Customers"] = customers;
             return View();
         }
 
