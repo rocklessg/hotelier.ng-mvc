@@ -21,10 +21,23 @@
             </div>
             <div class="phone-div">
                 <ul class="phone-flex">
-                    <li><a class="form-control me-2" asp-area="" asp-controller="LandingView" asp-action="Index">HOME</a></li>
-                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="">SERVICES</a></li>
-                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="">CONTACT</a></li>
-                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="">HELP</a></li>
+
+
+                    <li><a class="form-control me-2" href="#footer">CONTACT</a></li>
+
+                    <li>
+                        <a class="btn btn-outline-primary" asp-area="" asp-controller="Auth" asp-action="Login"
+                           style=" text-decoration:none !important; background-image: linear-gradient( 135deg, rgb(24, 42, 115) 0%, rgb(33, 138, 174) 69%,
+                            rgb(32, 167, 172) 89% ) !important; padding: 5px 15px !important; border-radius: 3px !important; margin: 5px !important; color:#fff !important; font-weight:900 !important;">
+                            LOGIN
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn btn-outline-primary" asp-area="" asp-controller="Auth" asp-action="ManagerRequest"
+                           style=" text-decoration: none !important; background-image: linear-gradient( 135deg, rgb(24, 42, 115) 0%, rgb(32, 167, 172) 89%, rgb(33, 138, 174) 69%) !important; padding: 5px 15px !important; border-radius: 3px !important; margin: 5px !important; color: #fff !important; font-weight: 900 !important; ">
+                            MANAGER
+                        </a>
+                    </li>
                 </ul>
             </div>
 
@@ -34,15 +47,19 @@
             <nav class="navbar">
                 <img src="~/images/logos_only_dark.svg" width="40" height="40" style="padding:3px;" asp-area="" asp-controller="Home" asp-action="Index" />
                 <ul class="flex">
-                    <li><a class="form-control me-2" asp-area="" asp-controller="LandingView" asp-action="Index" style="text-decoration: none;color: darkblue;">HOME</a></li>
-                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="" style="text-decoration: none;color: darkblue;">SERVICES</a></li>
-                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="" style="text-decoration: none;color: darkblue;">CONTACT</a></li>
-                    <li><a class="form-control me-2" asp-area="" asp-controller="" asp-action="" style="text-decoration: none;color: darkblue;">HELP</a></li>
+                    <li><a class="form-control me-2" href="#footer" style="text-decoration: none;color: darkblue;">CONTACT</a></li>
+
                     <li>
                         <a class="btn btn-outline-primary" asp-area="" asp-controller="Auth" asp-action="Login"
                            style=" text-decoration:none !important; background-image: linear-gradient( 135deg, rgb(24, 42, 115) 0%, rgb(33, 138, 174) 69%,
                             rgb(32, 167, 172) 89% ) !important; padding: 5px 15px !important; border-radius: 3px !important; margin: 5px !important; color:#fff !important; font-weight:900 !important;">
                             LOGIN
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn btn-outline-primary" asp-area="" asp-controller="Auth" asp-action="ManagerRequest"
+                           style=" text-decoration: none !important; background-image: linear-gradient( 135deg, rgb(24, 42, 115) 0%, rgb(32, 167, 172) 89%, rgb(33, 138, 174) 69%) !important; padding: 5px 15px !important; border-radius: 3px !important; margin: 5px !important; color: #fff !important; font-weight: 900 !important; ">
+                            MANAGER
                         </a>
                     </li>
                 </ul>
@@ -55,8 +72,8 @@
             @RenderBody()
         </main>
     </div>
-
-    <div class="footer">
+     
+    <div class="footer" id="footer" style="transition: .5s;">
         <p class="footer-paragraph">&#9400; 2021 Decagon Headquarters. All Rights Reserved.</p>
         <ul class="footer-list">
             <li><a class="one-with-bar" href="#">Terms & Conditions</a></li>

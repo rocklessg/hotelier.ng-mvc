@@ -40,25 +40,26 @@
 
 
     <div class="container-fluid">
-        <div class="first-cover">
+        <div class="first-cover" style="display:grid; grid-template-columns: 3fr 1fr !important; grid-column-gap: 2rem;">
             <div class="first-cover-write-up">
                 <div class="first-cover-heading">
                     <h2 class="head">Affordable Luxury Meets Convenience</h2>
                 </div>
-                <p class="first-cover-paragraph">
+                <div class="first-cover-paragraph" style="width:15rem;">
+                <p>
                     Make bookings conveniently, from a collection of luxury hotels
                     spanned accross the country.
                 </p>
-                <div class="first-cover-navigation">
-                    <a class="nav-class" href="#"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Discover</a>
                 </div>
+      
             </div>
             <div class="first-cover-picture">
                 <div class="covered-picture"></div>
-                <img class="opened-picture img-fluid" style="max-width:100%; max-height:100%;" src="https://www.godsavethepoints.com/wp-content/uploads/2017/07/andaz-tokyo5.jpg" alt="">
+                <div class="opened-picture" style="background: url(https://www.godsavethepoints.com/wp-content/uploads/2017/07/andaz-tokyo5.jpg); background-size: cover;">
+                </div>
             </div>
         </div>
-        <div class="second-cover">
+        <div class="second-cover" style="margin-top:1rem;">
             <!-- <div class="second"> -->
             <h3 class="second-cover-heading">Top Deals</h3>
             <p class="second-cover-paragraph" style="margin-bottom: 20px">Amazing offers only for you</p>
@@ -67,20 +68,26 @@
 
 
             <div class="second-cover-images" style="padding-bottom: 10px; margin-bottom: 30px !important">
-                <img src="https://images.all-free-download.com/images/graphiclarge/green_hotel_197599.jpg" alt="" class="first">
-                <img src="https://i.pinimg.com/474x/63/00/1a/63001ac7ffd71af905c06fd49ca7424f.jpg" alt="" class="second">
-                <img src="https://images.pexels.com/photos/3225531/pexels-photo-3225531.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" class="third">
+                <img src="@hotelImage[0]" alt="" class="first">
+                <img src="@hotelImage[4]" alt="" class="second">
+                <img src="@hotelImage[2]" alt="" class="third">
 
 
 
             </div>
-            <h3 class="second-cover-heading1" style="padding-bottom: 10px; margin: 10px 0 !important">
+            
+        </div>
+
+        <div class="row" style=" width: 100% !important; margin: 0px auto 0 auto; background: #E3ECF7;">
+            <h3 class="second-cover-heading" style="padding-bottom: 10px; text-align:center; margin: 0px 0 !important">
                 Hotels Across Nigeria
             </h3>
         </div>
 
-        <div class="wrapper-cover" style="padding-">
+        <div class="wrapper-cover" style="margin-top:-4rem">
+           
             <div class="wrapper" style=" margin-top: 4rem;">
+                
                 <div class="grid-class one" style="background: linear-gradient(rgba(0, 0, 0, .5),rgba(0, 0, 0, .5)),url( @hotelImage[0] ); background-size: cover; ">
                     <h5 class="hotel-name">@hotelNames[0]</h5>
                     <p class="hotel-names">@hotelAddress[0]</p>
@@ -112,13 +119,15 @@
         </div>
         <div class="third-cover">
             <div class="wrapper2">
-                <div class="wrapper-class-one">
-                    <div class="white-div">
-                        <h3 class="quote">
-                            "Everything is a luxury, this begins with being in this world."
-                            <br /><i>Cesare Pavese</i>
-                        </h3>
-                    </div>
+                <div class="wrapper-class-one" style="background: src(https://www.pexels.com/photo/workplace-with-clipboard-and-green-plant-leaf-5797908/);
+                padding-top: 4rem;">
+
+
+                    <h3 class="quote" style="color: white; text-justify:trim; font-size: 1.5em;">
+                        "Everything is a luxury, this begins with being in this world."
+                        <br /><i>Cesare Pavese</i>
+                    </h3>
+                   
                 </div>
                 <div class="wrapper-class-two"></div>
             </div>
@@ -139,7 +148,7 @@
                 <h3>About Us</h3>
                 <p>We bridge the gap between customers and hotel owners by connecting luxury to business through tech.</p>
             </div>
-            <div class="footer-cover-item">
+            <div class="footer-cover-item" id="footer">
                 <h3>Reach Us</h3>
                 <ul>
                     <li><p><i class="fa fa-envelope-o" aria-hidden="true"></i>  hello@hotelier.ng</p></li>
