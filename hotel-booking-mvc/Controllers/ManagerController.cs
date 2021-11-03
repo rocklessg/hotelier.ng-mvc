@@ -1,10 +1,10 @@
-﻿using hotel_booking_model.Dtos.AuthenticationDtos;
+
+﻿using hotel_booking_model;
+using hotel_booking_model.ViewModels;
 using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using hotel_booking_model.Dtos.AuthenticationDtos;
@@ -93,6 +93,7 @@ namespace hotel_booking_mvc.Controllers.Manager
         {
             return View();
         }
-       
+
+
     }
 }

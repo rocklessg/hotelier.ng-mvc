@@ -8,7 +8,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using System.Collections;
+<<<<<<< HEAD
+using hotel_booking_model.ViewModels;
+=======
 using hotel_booking_mvc.CustomAuthorization;
+>>>>>>> aa94faf3d2e47df6af8806a1567c5147b0a2fffa
 
 namespace hotel_booking_mvc.Controllers.Auth
 {
@@ -143,6 +147,11 @@ namespace hotel_booking_mvc.Controllers.Auth
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Login", "Auth");
+        }
+
+        public IActionResult ManagerRequest(MgrReqViewModel mgrReqViewModel)
+        {
+            return View(mgrReqViewModel);
         }
     }
 }
