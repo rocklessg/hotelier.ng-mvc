@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using hotel_booking_model.ViewModels;
 using hotel_booking_mvc.Helpers;
-using System.Security.Claims;
-
-
 using Microsoft.AspNetCore.Authorization;
 using hotel_booking_mvc.CustomAuthorization;
+using hotel_booking_model.Dtos.AuthenticationDtos;
 
 namespace hotel_booking_mvc.Controllers.Manager
 {
@@ -21,12 +19,11 @@ namespace hotel_booking_mvc.Controllers.Manager
 
 
         public ManagerController(IHotelService hotelService, IManagerService managerService)
-
-        {
-          
+        {          
             _hotelService = hotelService;
             _managerService = managerService;
         }
+
 
         public async Task<IActionResult> DashboardAsync()
         {
@@ -35,6 +32,7 @@ namespace hotel_booking_mvc.Controllers.Manager
             var result = await _managerService.ShowManagerDashboard(user.Id);
             return View(result);
         }
+
 
         public async Task<IActionResult> HotelAsync()
         {
@@ -45,12 +43,14 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View(paginationResponse);
         }
 
+
         public IActionResult Bookings()
         {
             return View();
         }
 
-       [HttpGet]
+
+        [HttpGet]
         public async Task<IActionResult> Transactions(int pageNumber, int pageSize)
         {
 
@@ -61,6 +61,8 @@ namespace hotel_booking_mvc.Controllers.Manager
             var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(user.Id, pageSize, pageNumber);
             return View(managerTransactionsList);
         }
+
+
         [HttpPost]
         public async Task<IActionResult> Transactions(int pageNumber, int pageSize, string searchQuery)
         {
@@ -71,6 +73,8 @@ namespace hotel_booking_mvc.Controllers.Manager
             var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(user.Id, pageSize, pageNumber, searchQuery);
             return View(managerTransactionsList);
         }
+
+
         public async Task<IActionResult> HotelRooms(string roomTypeId)
         {
             var result = await _hotelService.GetRoomTypeDetails(roomTypeId);
@@ -86,6 +90,7 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View();
         }
 
+
         public IActionResult Account()
         {
             return View();
@@ -98,12 +103,14 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View();
         }
 
+
         [HttpGet]
         public IActionResult AddHotel()
         {
             var hotel = new AddHotelViewModel();
             return View(hotel);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> AddHotel(AddHotelViewModel model)
@@ -126,11 +133,14 @@ namespace hotel_booking_mvc.Controllers.Manager
 
         }
 
+
+        [AllowAnonymous]
+        public IActionResult RegisterManager()
+        {
+            return View();
+        }
+
     }
 
-    [AllowAnonymous]
-    public IActionResult RegisterManager()
-    {
-        return View();
-    }
+    
 }
