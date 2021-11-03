@@ -2,14 +2,14 @@
 using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using hotel_booking_model.Dtos.AuthenticationDtos;
 using Newtonsoft.Json;
 using System;
+using hotel_booking_model;
+using hotel_booking_model.ViewModels;
+using System.Collections.Generic;
+using System.Net.Http;
 
 namespace hotel_booking_mvc.Controllers.Manager
 {
@@ -18,13 +18,13 @@ namespace hotel_booking_mvc.Controllers.Manager
     {
         private readonly IManagerService _managerService;
         private readonly IHotelService _hotelService;
-        
+
 
 
         public ManagerController(IHotelService hotelService, IManagerService managerService)
 
         {
-          
+
             _hotelService = hotelService;
             _managerService = managerService;
         }
@@ -48,7 +48,7 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View();
         }
 
-       [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> Transactions(int pageNumber, int pageSize)
         {
 
@@ -86,8 +86,10 @@ namespace hotel_booking_mvc.Controllers.Manager
         {
             var loggedInUser = HttpContext.Session.GetString("User");
 
-            var user = JsonConvert.DeserializeObject<UserDto>(loggedInUser);
+            var user = JsonConvert.DeserializeObject<ManagerModel>(loggedInUser);
+            var manager = _managerService.GetManagerById(user.ManagerId);
             ViewData["FirstName"] = user.FirstName;
+            ViewData["Manager"] = manager;
 
             return View(user);
         }
@@ -108,6 +110,43 @@ namespace hotel_booking_mvc.Controllers.Manager
             }
             throw new ArgumentException("user data can not be null");
         }
+       
 
+        public async Task<IActionResult> UpdateManagerDetails(string managerId)
+        {
+            var result = await _managerService.GetManagerById(managerId);
+            return View(result);
+        }
+        //[HttpGet]
+      /*  public async Task<IActionResult> UpdateManagerDetails()
+        {
+            IEnumerable<EditManagerViewModel> EditManager = null;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new baseUrl("");
+                var responseTask = client.GetAsync("Manaager");
+                responseTask.Wait();
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<IList<EditManagerViewModel>>();
+                    readTask.Wait();
+                    var result = responseTask.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var readTask = result.Content.ReadAsAsync<IList<EditManagerViewModel>>();
+                        readTask.Wait();
+                        EditManager = readTask.Result;
+                    }
+                    else
+                    {
+                        EditManager = TaskAsyncEnumerableExtensions.Empty<EditManagerViewModel>();
+                        ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+                    }
+                }
+                return View(EditManager);
+            }*/
+
+        //}
     }
 }

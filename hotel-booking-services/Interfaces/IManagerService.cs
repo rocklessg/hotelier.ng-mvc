@@ -13,6 +13,7 @@ namespace hotel_booking_services.Interfaces
         Task<PaginationResponse<IEnumerable<ManagerModel>>> GetAllManagersAsync(int? pageNumber);
         Task<ManagerDashboardViewModel> ShowManagerDashboard(string managerId);
         Task<string> EditManagerAccountAsync(UserDto userDto);
+        Task<EditManagerViewModel> GetManagerById(string ManagerId);
 
     }
 }

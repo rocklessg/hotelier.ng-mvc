@@ -80,14 +80,11 @@ namespace hotel_booking_services.Implmentations
             return response.Message;
         }
 
-
-
-
-
-
-
-
-
-
+        public async Task<EditManagerViewModel> GetManagerById(string ManagerId)
+        {
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<EditManagerViewModel>>
+                (requestUrl: $"/api/Manager/Details");
+            return response.Data;
+        }
     }
 }
