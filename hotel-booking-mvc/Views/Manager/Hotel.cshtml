@@ -15,13 +15,14 @@
         <div class="row p-3" style="background-color: #F6FCFF; border-bottom: 1px solid #aaa;">
             <div class="col">
                 <h2 style="color: #173752;">Listing</h2>
-            </div>
-            
+            </div>            
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-12 d-flex justify-content-end">
+        <div class="col-sm-12 col-md-12 col-lg-12 d-flex justify-content-end mb-3">
             <div class="d-flex justify-content-end">
                 <!-- Click on Modal Button -->
-                <button type="button" class="btn btn-primary mx-auto d-block mt-5 my-color" data-bs-toggle="modal" data-bs-target="#modalForm">
+                <div id="PlaceHolderHere"></div>
+                <button type="button" class="btn btn-primary mx-auto d-block mt-5 my-color" data-toggle="ajax-modal" data-target="#addHotel"
+                data-url="@Url.Action("AddHotel")">
                     Add a Hotel
                 </button>
 
@@ -75,72 +76,5 @@
     }
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add a Hotel</h5>
-                <button type="button" class="btn-close my-color" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
 
-
-                <form>
-
-                    <div class="mb-3">
-
-                        <input class="form-control" type="file" id="formFile" name="Add Hotel Photos" multiple>
-                    </div>
-
-                    <div class="mb-3">
-
-                        <input type="text" class="form-control" id="Hotel Name" name="Hotel Name" placeholder="Hotel Name" />
-
-                    </div>
-                    <div class="mb-3">
-                        <div>
-                            <input type="text" class="form-control" id="Street Address" name="Street Address" placeholder="Street Address" />
-
-                        </div>
-
-                    </div>
-                    <div class="mb-3">
-
-                        <input type="text" class="form-control" id="City" name="City" placeholder="City" />
-                    </div>
-                    <div class="mb-3">
-
-                        <input type="text" class="form-control" id="State" name="State" placeholder="State" />
-                    </div>
-
-                    <div class="mb-3">
-
-                        <div class="form-outline">
-                            <textarea class="form-control" id="textAreaExample" name="Description" placeholder="Hotel Description" rows="4"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-
-                        <input type="text" class="form-control" id="Date Hotel Created" name="Date Hotel Created" placeholder="Date Hotel Created" />
-                    </div>
-
-                    <div class="mb-3">
-                        <div>
-                            <input type="text" class="form-control" id="Hotel Type" name="Hotel Type" placeholder="Hotel Type" />
-                        </div>
-
-                    </div>
-
-                    <div class="mb-3 form-check">
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary my-color">Submit</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 

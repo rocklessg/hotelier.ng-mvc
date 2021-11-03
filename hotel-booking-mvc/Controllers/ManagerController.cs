@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using hotel_booking_model.Dtos.AuthenticationDtos;
 using Newtonsoft.Json;
-
-
+using hotel_booking_model.ViewModels;
 
 namespace hotel_booking_mvc.Controllers.Manager
 {
@@ -93,6 +92,13 @@ namespace hotel_booking_mvc.Controllers.Manager
         {
             return View();
         }
-       
+
+        [HttpGet]
+        public IActionResult AddHotel()
+        {
+            var hotel = new AddHotelViewModel();
+            return PartialView("_AddHotelPartial", hotel);
+        }
+
     }
 }

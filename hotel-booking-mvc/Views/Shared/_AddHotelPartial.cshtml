@@ -1,0 +1,64 @@
+﻿@model AddHotelViewModel
+
+<!-- Modal -->
+<div class="modal fade" id="addHotel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add a Hotel</h5>
+                <button type="button" class="btn-close my-color" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form action="AddHotel">
+
+                    <div class="form-group mb-3">
+
+                        <input type="text" class="form-control" asp-for="Name" placeholder="Hotel Name" required/>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <div>
+                            <input type="text" class="form-control" asp-for="Email" placeholder="Hotel Email" required/>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <div>
+                            <input type="text" class="form-control" asp-for="Address" placeholder="Street Address" required/>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" asp-for="City" placeholder="City" required/>
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" asp-for="State" placeholder="State" required/>
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-outline">
+                            <textarea class="form-control" asp-for="Description" placeholder="Hotel Description" rows="4" required></textarea>
+                        </div>
+                    </div>                    
+
+                    <div class="mb-3 form-check">
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary my-color" data-save="modal"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
