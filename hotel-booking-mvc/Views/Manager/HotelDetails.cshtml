@@ -1,6 +1,7 @@
 ﻿@model AddRoomTypeDto
 @{
     HotelDetailsViewDTo SingleHotel = ViewData["GetHotel"] as HotelDetailsViewDTo;
+    IEnumerable<HotelCustomerDTO> customers = ViewData["Customers"] as IEnumerable<HotelCustomerDTO>;
 }
 
 <style>
@@ -302,18 +303,18 @@
 
                                     <tbody>
                                         @{
-                                            for (int i = 0; i < 20; i++)
+                                            foreach (var customer in customers)
                                             {
 
                                                 <tr>
                                                     <td>...</td>
-                                                    <td>Francis</td>
-                                                    <td>Onaja</td>
-                                                    <td>franc@gmail.com</td>
-                                                    <td>090908988776</td>
-                                                    <td>Male</td>
-                                                    <td>98</td>
-                                                    <td>Abuja</td>
+                                                    <td>@customer.FirstName</td>
+                                                    <td>@customer.LastName</td>
+                                                    <td>@customer.Email</td>
+                                                    <td>@customer.PhoneNumber</td>
+                                                    <td>@customer.Gender</td>
+                                                    <td>@customer.Age</td>
+                                                    <td>@customer.State</td>
 
                                                 </tr>
                                             }

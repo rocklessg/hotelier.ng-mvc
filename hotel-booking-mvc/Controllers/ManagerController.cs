@@ -1,5 +1,3 @@
-﻿using hotel_booking_model.Dtos.AuthenticationDtos;
-using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
@@ -9,14 +7,17 @@ using hotel_booking_model.ViewModels;
 using hotel_booking_mvc.Helpers;
 using System.Security.Claims;
 
+
+using Microsoft.AspNetCore.Authorization;
+using hotel_booking_mvc.CustomAuthorization;
+
 namespace hotel_booking_mvc.Controllers.Manager
 {
-    [CustomAuthenticationFilter(roles: new string[] { "Manager" })]
+    [CustomAuthenticationFilter( "Manager" )]
     public class ManagerController : Controller
     {
         private readonly IManagerService _managerService;
-        private readonly IHotelService _hotelService;
-        
+        private readonly IHotelService _hotelService;      
 
 
         public ManagerController(IHotelService hotelService, IManagerService managerService)
@@ -27,17 +28,20 @@ namespace hotel_booking_mvc.Controllers.Manager
             _managerService = managerService;
         }
 
-        public async Task<IActionResult> DashboardAsync(string managerId)
+        public async Task<IActionResult> DashboardAsync()
         {
-            TempData["managerId"] = managerId;
-            var result = await _managerService.ShowManagerDashboard(managerId);
+            var loggedinUser = HttpContext.Session.GetString("User");
+            var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+            var result = await _managerService.ShowManagerDashboard(user.Id);
             return View(result);
         }
 
-        public async Task<IActionResult> HotelAsync(string managerId)
+        public async Task<IActionResult> HotelAsync()
         {
-            TempData["managerId"] = managerId;
-            var paginationResponse = await _hotelService.GetAllHotelForManagerAsync(managerId);
+
+            var loggedinUser = HttpContext.Session.GetString("User");
+            var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+            var paginationResponse = await _hotelService.GetAllHotelForManagerAsync(user.Id);
             return View(paginationResponse);
         }
 
@@ -52,6 +56,7 @@ namespace hotel_booking_mvc.Controllers.Manager
 
             var loggedinUser = HttpContext.Session.GetString("User");
             var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+
 
             var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(user.Id, pageSize, pageNumber);
             return View(managerTransactionsList);
@@ -75,7 +80,9 @@ namespace hotel_booking_mvc.Controllers.Manager
         public async Task<IActionResult> HotelDetails(string hotelId)
         {
             var singleHotel = await _hotelService.GetHotelById(hotelId);
+            var customers = await _hotelService.GetHotelCustomersAsync(hotelId);
             ViewData["GetHotel"] = singleHotel;
+            ViewData["Customers"] = customers;
             return View();
         }
 
@@ -103,21 +110,27 @@ namespace hotel_booking_mvc.Controllers.Manager
         {
             var user = HttpContext.Session.GetString("User");
             var loggedInUser = JsonConvert.DeserializeObject<AuthenticatedDto>(user);
-            
+
             if (ModelState.IsValid)
             {
                 var result = await _hotelService.AddHotelAsync(model);
                 if (result.Succeeded)
                 {
-                    return Json(new { isValid = true, html = Helper.RenderRazorViewToString(this, "_HotelList", await _hotelService.GetAllHotelForManagerAsync(loggedInUser.Id))});
+                    return Json(new { isValid = true, html = Helper.RenderRazorViewToString(this, "_HotelList", await _hotelService.GetAllHotelForManagerAsync(loggedInUser.Id)) });
                 }
                 ViewBag.Error = result.Message;
                 return BadRequest();
             }
 
-            return Json(new { isValid = false, html = Helper.RenderRazorViewToString(this, "AddHotel", model)});
+            return Json(new { isValid = false, html = Helper.RenderRazorViewToString(this, "AddHotel", model) });
 
         }
 
+    }
+
+    [AllowAnonymous]
+    public IActionResult RegisterManager()
+    {
+        return View();
     }
 }

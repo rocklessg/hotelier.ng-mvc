@@ -61,15 +61,15 @@
                                     <td>
                                         @if (transaction.PaymentStatus == true)
                                         {
-                                            <button class="btn btn-primary btn-sm" style="border-radius: 15px 15px 15px 15px; border: 2px solid; width: 80px;">PAID</button>
+                                            <button class="btn btn-primary btn-sm" style="border-radius: 15px; border: 2px solid; width: 80px; background: #2067A1">PAID</button>
                                         }
                                         else
                                         {
-                                            <button class="bg-white btn btn-sm" style="border-radius: 15px 15px 15px 15px; border: 1px solid; border-color: black; color: black; width: 80px; ">UNPAID</button>
+                                            <button class="bg-white btn btn-sm" style="border-radius: 15px; border: 1px solid; border-color: #2067A1; color: #2067A1; width: 80px;">UNPAID</button>
                                         }
                                     </td>
-                                    <td >@transaction.PaymentAmount.ToString("0.00") </td>
-                                    <td>@transaction.Commission.ToString("0.00")</td>
+                                    <td >@transaction.PaymentAmount.ToString("C", CultureInfo.GetCultureInfo("en-NG"))</td>
+                                    <td>@transaction.Commission.ToString("C", CultureInfo.GetCultureInfo("en-NG"))</td>
                                 </tr>
                             }
                         </tbody>
