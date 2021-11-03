@@ -8,6 +8,10 @@ namespace hotel_booking_mvc.Controllers
         {
             return View();
         }
+        public IActionResult Error403()
+        {
+            return View();
+        }
         public IActionResult Error404()
         {
             return View();
