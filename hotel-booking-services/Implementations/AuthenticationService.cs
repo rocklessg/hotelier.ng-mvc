@@ -73,7 +73,7 @@ namespace hotel_booking_services.Implmentations
         /// <returns></returns>
         public async Task<string> UpdatePassword(UpdatePasswordDto updatePasswordDto)
         {
-            string url = $"api/Authentication/update-password";
+            string url = $"api/Authentication/change-password";
             var response = await _httpRequestFactory.UpdateRequestAsync<UpdatePasswordDto, BasicResponse<string>>(url, updatePasswordDto);
             return response.Message;
         }

@@ -1,6 +1,9 @@
 ﻿@model ErrorViewModel
 @{
     ViewData["Title"] = "Error";
+        var user = ViewData["LoggedInUser"] as string;
+        var role = ViewData["Role"] as string;
+    
 }
 
 <h1 class="text-danger">Error.</h1>

@@ -55,6 +55,7 @@ namespace hotel_booking_mvc.Controllers.Auth
                 };
              
                 var Role = result.Claims.ElementAt(5).Value;
+                HttpContext.Session.SetString("role", Role);
                 HttpContext.Session.SetString("User", JsonConvert.SerializeObject(user));
                 if (Role == null)
                 {

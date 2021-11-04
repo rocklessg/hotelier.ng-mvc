@@ -1,6 +1,7 @@
 ﻿using hotel_booking_model;
 using hotel_booking_model.commons;
 using hotel_booking_model.Dtos;
+using hotel_booking_model.Dtos.AuthenticationDtos;
 using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
 using System;
@@ -17,8 +18,6 @@ namespace hotel_booking_services.Implmentations
             _httpRequestFactory = httpRequestFactory;
         }
 
-
-
         public async Task<PaginationResponse<IEnumerable<ManagerTransactionsView>>> GetAllManagerTransactionsAsync(string managerId, int pageSize = 10, int pageNumber = 1, string searchQuery = null)
         {
 
@@ -27,10 +26,8 @@ namespace hotel_booking_services.Implmentations
                                                     (requestUrl: $"/api/Admin/{managerId}/transaction?PageSize={pageSize}&PageNumber={pageNumber}&SearchQuery={searchQuery}");
 
             return response.Data;
-        }// end of GetAllManagerTransactionsAsync
+        }
 
-
-       
 
         public async Task<ManagerStatisticDto> GetManagerStatistics(string managerId)
         {
@@ -60,7 +57,7 @@ namespace hotel_booking_services.Implmentations
 
         }
 
-        public async Task<PaginationResponse<IEnumerable<ManagerModel>>> GetAllManagersAsync( int? pageNumber)
+        public async Task<PaginationResponse<IEnumerable<ManagerModel>>> GetAllManagersAsync(int? pageNumber)
 
         {
             pageNumber = pageNumber > 0 ? pageNumber : 1;
@@ -69,7 +66,6 @@ namespace hotel_booking_services.Implmentations
 
             return response.Data;
         }
-
 
         public async Task<PaginationResponse<IEnumerable<ManagerRequestsView>>> GetAllManagerRequests(int? pageNumber)
         {
@@ -80,11 +76,19 @@ namespace hotel_booking_services.Implmentations
         }
 
 
-        public async Task<bool>SendManagerInvite(string email)
+        public async Task<bool> SendManagerInvite(string email)
         {
             var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<bool>>(
                                 requestUrl: $"/api/Manager/send-invite?email={email}");
             return response.Succeeded;
+        }
+
+        public async Task<string> EditManagerAccountAsync(EditManagerViewModel model)
+        {
+            var response = await _httpRequestFactory.UpdateRequestPutAsync<EditManagerViewModel, BasicResponse<string>>
+                                                    (requestUrl: $"/api/Manager/UpdateManager", model);
+
+            return response.Message;
         }
 
 
@@ -95,5 +99,11 @@ namespace hotel_booking_services.Implmentations
             return response.Succeeded;
         }
 
+        public async Task<EditManagerViewModel> GetManagerById(string managerId)
+        {
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<EditManagerViewModel>>
+                (requestUrl: $"/api/Manager/Details");
+            return response.Data;
+        }
     }
 }

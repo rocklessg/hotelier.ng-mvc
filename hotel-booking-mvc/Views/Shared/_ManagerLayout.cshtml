@@ -3,7 +3,11 @@
 @using Newtonsoft.Json;
 @{
     var loggedinUser = Context.Session.GetString("User");
-    var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+    AuthenticatedDto user = new AuthenticatedDto();
+    if (!string.IsNullOrWhiteSpace(loggedinUser))
+    {
+        user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+    }
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +48,7 @@
                             </a>
                             <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
                                 <li><a class="dropdown-item" asp-controller="Manager" asp-action="Account">Edit My Profile</a></li>
+                                <li><a class="dropdown-item" asp-controller="Manager" asp-action="ChangePassword">Change Password</a></li>
                                 <li><a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Signout</a></li>
                             </ul>
                         </div>
@@ -132,6 +137,23 @@
         </ul>
     </div>
 
+    <div class="modal" tabindex="-1" id="form-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
         let btn = document.querySelector("#side");
@@ -149,6 +171,7 @@
     <script src="~/js/charts.js"></script>
     <script src="~/js/manager-chart.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/js/site.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>

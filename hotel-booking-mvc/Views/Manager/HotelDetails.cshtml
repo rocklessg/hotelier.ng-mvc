@@ -10,14 +10,17 @@
     }
 </style>
 
+@{ var thumbnail = @SingleHotel.Gallery;
+}
+
 <div class="container">
     <div class="row">
         <div class="col">
-            <img class="img-fluid" style="width: 1250px; height: 520px;" src=@SingleHotel.Gallery.FirstOrDefault() />
+            <img class="img-fluid" style="width: 1250px; height: 520px;" src=@(thumbnail == null ? thumbnail.FirstOrDefault() : "https://www.todaytourism.com/img/accommodation-type-img/hotel-default-img.jpg")  />
         </div>
     </div>
 
-    <div class="container mt-4">
+    <div class="container mt-4" id="hotel-details">
         <div class="row">
             <div class="col">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
