@@ -29,10 +29,6 @@
                        
                         <div class="card p-5 border-0">
                             <div class="card-body">
-                                <div class="d-flex justify-content-between mb-1 ">
-                                    <p>Don't have an account?</p>
-                                    <a asp-controller="Auth" asp-action="Signup" class="d-flex justify-content-end align-content-end">Signup <i class='bx bx-right-arrow-alt'></i></a>
-                                </div>
                                 <div class="text-danger" asp-validation-summary="All"></div>
                                 @using (Html.BeginForm("Login", "Auth", FormMethod.Post, new { novalidate = "true", @class = "needs-validation" }))
                                 {
@@ -68,7 +64,7 @@
                                         }
                                 </div>
                                 <div class="form mt-3">
-                                    <input type="submit" value="Login" class="btn btn-primary form-control btn-block" />
+                                    <input type="submit" value="Login" class="btn btn-primary btn-block btn-lg h-50 w-100" />
                                 </div>
 
 
