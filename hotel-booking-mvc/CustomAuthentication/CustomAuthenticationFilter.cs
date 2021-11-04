@@ -63,8 +63,10 @@ namespace hotel_booking_mvc.CustomAuthorization
                     new RouteValueDictionary
                     {
                     { "controller", "Errors" },
-                    { "action", "Error401" }
-                    });
+                    { "action", "Error403" }
+                    }
+                    );
+                return;
 
             }
             // If token is null, it redirects user to the Login Page

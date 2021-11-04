@@ -8,6 +8,7 @@ using hotel_booking_mvc.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_model.Dtos.AuthenticationDtos;
+using System;
 
 namespace hotel_booking_mvc.Controllers.Manager
 {
@@ -15,11 +16,15 @@ namespace hotel_booking_mvc.Controllers.Manager
     public class ManagerController : Controller
     {
         private readonly IManagerService _managerService;
-        private readonly IHotelService _hotelService;      
+        private readonly IHotelService _hotelService;
+        private readonly IAuthenticationService _managerAuth;
 
 
-        public ManagerController(IHotelService hotelService, IManagerService managerService)
-        {          
+
+        public ManagerController(IHotelService hotelService, IManagerService managerService,IAuthenticationService managerAuth)
+
+        {
+            _managerAuth = managerAuth;
             _hotelService = hotelService;
             _managerService = managerService;
         }
@@ -50,7 +55,6 @@ namespace hotel_booking_mvc.Controllers.Manager
             var bookings = await _managerService.GetManagerBookingAsync(loggedinUser.Id, pageNumber, pageSize);
             return View(bookings);
         }
-
 
         [HttpGet]
         public async Task<IActionResult> Transactions(int pageNumber, int pageSize)
@@ -92,20 +96,37 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View();
         }
 
-
-        public IActionResult Account()
+        [HttpGet]
+        public async Task<IActionResult> Account()
         {
-            return View();
+            var loggedInUser = HttpContext.Session.GetString("User");
+
+            var user = JsonConvert.DeserializeObject<LoggedInUserViewModel>(loggedInUser);
+            var manager = await _managerService.GetManagerById(user.Id);
+            manager.Id = user.Id;
+            return View(manager);
         }
 
 
         [HttpPost]
-        public IActionResult Account(UserDto userDto)
-        {
-            return View();
+        public async Task<IActionResult> Account(EditManagerViewModel model) {
+            var loggedInUser = HttpContext.Session.GetString("User");
+            var user = JsonConvert.DeserializeObject<LoggedInUserViewModel>(loggedInUser);
+            model.Id = user.Id;
+
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid data entry");
+                return View(model);
+            }
+            else
+            {
+                var response = await _managerService.EditManagerAccountAsync(model);
+
+                HttpContext.Session.SetString("User", JsonConvert.SerializeObject(model));
+                return RedirectToAction("Dashboard", "Manager", new { ManagerId = model.Id });
+            }
         }
-
-
         [HttpGet]
         public IActionResult AddHotel()
         {
@@ -140,8 +161,33 @@ namespace hotel_booking_mvc.Controllers.Manager
         public IActionResult RegisterManager()
         {
             return View();
+          
         }
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ChangePassword(UpdatePasswordDto obj)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View();
+                }
 
+                var response = _managerAuth.UpdatePassword(obj);
+                ViewBag.Data = response.Result;
+                return View();
+            }
+            catch (Exception)
+            {
+                TempData["error"] = "Oops something bad happened try again!";
+                return View();
+            }
+        }
     }
 
     
