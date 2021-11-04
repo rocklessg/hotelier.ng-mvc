@@ -5,6 +5,7 @@ using hotel_booking_model.ViewModels;
 using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,10 +18,13 @@ namespace hotel_booking_mvc.Controllers.Admin
         private readonly IHotelService _hotelService;
         private readonly IAdminService _adminService;
         private readonly IManagerService _managerService;
+        private readonly IAuthenticationService _adminAuth;
 
         public AdminController(IHotelService hotelService, IAdminService adminService,
-            IManagerService managerService)
+            IManagerService managerService, IAuthenticationService adminAuth)
+
         {
+            _adminAuth = adminAuth;
             _hotelService = hotelService;
             _adminService = adminService;
             _managerService = managerService;
@@ -176,4 +180,36 @@ namespace hotel_booking_mvc.Controllers.Admin
 			return BadRequest();
 		}
 	}
+}
+        public IActionResult AllManagersRequests()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ChangePassword(UpdatePasswordDto obj)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View();
+                }
+
+                var response = _adminAuth.UpdatePassword(obj);
+                ViewBag.Data = response.Result;
+                return View();
+            }
+            catch (Exception)
+            {
+                TempData["error"] = "Oops something bad happened try again!";
+                return View();
+            }
+        }
+    }
 }

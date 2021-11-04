@@ -62,5 +62,9 @@ namespace hotel_booking_services.Interfaces
 			where TRes : class 
 			where TReq : class;
 
+		Task<TRes> UpdateRequestPutAsync<TReq, TRes>(string requestUrl, TReq content, string baseUrl = null)
+			where TRes : class
+			where TReq : class;
+
 	}
 }

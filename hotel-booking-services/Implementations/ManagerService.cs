@@ -1,6 +1,7 @@
 ﻿using hotel_booking_model;
 using hotel_booking_model.commons;
 using hotel_booking_model.Dtos;
+using hotel_booking_model.Dtos.AuthenticationDtos;
 using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
 using System;
@@ -70,7 +71,9 @@ namespace hotel_booking_services.Implmentations
             return response.Data;
         }
 
+        }
 
+<<<<<<< HEAD
         public async Task<PaginationResponse<IEnumerable<ManagerRequests>>> GetAllManagerRequests(int? pageNumber)
         {
             pageNumber = pageNumber > 0 ? pageNumber : 1;
@@ -85,7 +88,21 @@ namespace hotel_booking_services.Implmentations
             var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<bool>>(
                                 requestUrl: $"/api/Manager/send-invite?email={email}");
             return response.Succeeded;
+=======
+        public async Task<string> EditManagerAccountAsync(EditManagerViewModel model)
+        {
+            var response = await _httpRequestFactory.UpdateRequestPutAsync<EditManagerViewModel, BasicResponse<string>>
+                                                    (requestUrl: $"/api/Manager/UpdateManager", model);
+
+            return response.Message;
+>>>>>>> 25f740fc2c6e680d67a02fdb9539bfbff9f7cde7
         }
 
+        public async Task<EditManagerViewModel> GetManagerById(string managerId)
+        {
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<EditManagerViewModel>>
+                (requestUrl: $"/api/Manager/Details");
+            return response.Data;
+        }
     }
 }

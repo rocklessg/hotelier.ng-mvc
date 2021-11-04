@@ -44,6 +44,15 @@ namespace hotel_booking_services.Implmentations
             return await GetResponseResultAsync<TRes>(client, request);
         }
 
+        public async Task<TRes> UpdateRequestPutAsync<TReq, TRes>(string requestUrl, TReq content, string baseUrl = null) where TRes : class where TReq : class
+        {
+            var client = CreateClient(baseUrl);
+            var reqContent = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage(HttpMethod.Put, requestUrl) { Content = reqContent };
+            return await GetResponseResultAsync<TRes>(client, request);
+        }
+
+
         public async Task<TRes> DeleteRequestAsync<TRes>(string requestUrl, string baseUrl = null) where TRes : class
         {
             var client = CreateClient(baseUrl);
