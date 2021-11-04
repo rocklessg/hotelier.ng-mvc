@@ -3,7 +3,11 @@
 @using Newtonsoft.Json;
 @{
     var loggedinUser = Context.Session.GetString("User");
-    var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+    AuthenticatedDto user = new AuthenticatedDto();
+    if (!string.IsNullOrWhiteSpace(loggedinUser))
+    {
+        user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+    }
 }
 <!DOCTYPE html>
 <html lang="en">

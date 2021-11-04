@@ -9,10 +9,13 @@ using Microsoft.AspNetCore.Authorization;
 using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_model.Dtos.AuthenticationDtos;
 using System;
+using hotel_booking_model.Dtos;
+using hotel_booking_model;
 
 namespace hotel_booking_mvc.Controllers.Manager
 {
-    [CustomAuthenticationFilter( "Manager" )]
+    [CustomAuthenticationFilter("Manager")]
+    [CustomAuthenticationFilter(roles: new string[] { "Manager" })]
     public class ManagerController : Controller
     {
         private readonly IManagerService _managerService;
@@ -21,7 +24,7 @@ namespace hotel_booking_mvc.Controllers.Manager
 
 
 
-        public ManagerController(IHotelService hotelService, IManagerService managerService,IAuthenticationService managerAuth)
+        public ManagerController(IHotelService hotelService, IManagerService managerService, IAuthenticationService managerAuth)
 
         {
             _managerAuth = managerAuth;
@@ -109,7 +112,8 @@ namespace hotel_booking_mvc.Controllers.Manager
 
 
         [HttpPost]
-        public async Task<IActionResult> Account(EditManagerViewModel model) {
+        public async Task<IActionResult> Account(EditManagerViewModel model)
+        {
             var loggedInUser = HttpContext.Session.GetString("User");
             var user = JsonConvert.DeserializeObject<LoggedInUserViewModel>(loggedInUser);
             model.Id = user.Id;
@@ -157,12 +161,6 @@ namespace hotel_booking_mvc.Controllers.Manager
         }
 
 
-        [AllowAnonymous]
-        public IActionResult RegisterManager()
-        {
-            return View();
-          
-        }
         [HttpGet]
         public IActionResult ChangePassword()
         {
@@ -187,8 +185,34 @@ namespace hotel_booking_mvc.Controllers.Manager
                 TempData["error"] = "Oops something bad happened try again!";
                 return View();
             }
+
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult RegisterManager([FromQuery] RegisterManagerMailToken emailToken)
+        {
+            ManagerRegistration managerRegistration = new ManagerRegistration();
+            managerRegistration.BusinessEmail = emailToken.Email;
+            managerRegistration.Token = emailToken.Token;
+
+            return View(managerRegistration);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> RegisterNewManager(ManagerRegistration managerRegistration)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _managerService.RegisterManager(managerRegistration);
+                if (response)
+                {
+                    ViewData["Message"] = "You have been successfully registered! Login from the Home Page.";
+                    return View("Confirmation");
+                }
+            }
+            return View("RegisterManager", managerRegistration);
         }
     }
-
-    
 }

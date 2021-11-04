@@ -18,8 +18,6 @@ namespace hotel_booking_services.Implmentations
             _httpRequestFactory = httpRequestFactory;
         }
 
-
-
         public async Task<PaginationResponse<IEnumerable<ManagerTransactionsView>>> GetAllManagerTransactionsAsync(string managerId, int pageSize = 10, int pageNumber = 1, string searchQuery = null)
         {
 
@@ -28,10 +26,8 @@ namespace hotel_booking_services.Implmentations
                                                     (requestUrl: $"/api/Admin/{managerId}/transaction?PageSize={pageSize}&PageNumber={pageNumber}&SearchQuery={searchQuery}");
 
             return response.Data;
-        }// end of GetAllManagerTransactionsAsync
+        }
 
-
-       
 
         public async Task<ManagerStatisticDto> GetManagerStatistics(string managerId)
         {
@@ -61,7 +57,7 @@ namespace hotel_booking_services.Implmentations
 
         }
 
-        public async Task<PaginationResponse<IEnumerable<ManagerModel>>> GetAllManagersAsync( int? pageNumber)
+        public async Task<PaginationResponse<IEnumerable<ManagerModel>>> GetAllManagersAsync(int? pageNumber)
 
         {
             pageNumber = pageNumber > 0 ? pageNumber : 1;
@@ -69,7 +65,22 @@ namespace hotel_booking_services.Implmentations
                                                     (requestUrl: $"/api/Manager/HotelManagers?PageSize=5&PageNumber={pageNumber}");
 
             return response.Data;
+        }
 
+        public async Task<PaginationResponse<IEnumerable<ManagerRequestsView>>> GetAllManagerRequests(int? pageNumber)
+        {
+            pageNumber = pageNumber > 0 ? pageNumber : 1;
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<PaginationResponse<IEnumerable<ManagerRequestsView>>>>(
+                                                       requestUrl: $"/api/Manager/getall-request?PageSize=10&PageNumber={pageNumber}");
+            return response.Data;
+        }
+
+
+        public async Task<bool> SendManagerInvite(string email)
+        {
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<bool>>(
+                                requestUrl: $"/api/Manager/send-invite?email={email}");
+            return response.Succeeded;
         }
 
         public async Task<string> EditManagerAccountAsync(EditManagerViewModel model)
@@ -78,6 +89,14 @@ namespace hotel_booking_services.Implmentations
                                                     (requestUrl: $"/api/Manager/UpdateManager", model);
 
             return response.Message;
+        }
+
+
+        public async Task<bool> RegisterManager(ManagerRegistration managerRegistration)
+        {
+            var response = await _httpRequestFactory.PostRequestAsync<ManagerRegistration, BasicResponse<bool>>(
+                                requestUrl: "/api/Manager/AddManager", content: managerRegistration);
+            return response.Succeeded;
         }
 
         public async Task<EditManagerViewModel> GetManagerById(string managerId)

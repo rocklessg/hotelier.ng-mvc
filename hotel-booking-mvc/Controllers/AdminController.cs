@@ -163,6 +163,26 @@ namespace hotel_booking_mvc.Controllers.Admin
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AllManagersRequests(int? pageNumber)
+        {
+            var managerRequests = await _managerService.GetAllManagerRequests(pageNumber);
+            return View(managerRequests);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SendInvite(string email, int? pageNumber)
+        {
+            var result = await _managerService.SendManagerInvite(email);
+            if (result)
+            {
+                var managerRequests = await _managerService.GetAllManagerRequests(pageNumber);
+                return PartialView("_ManagerRequests", managerRequests);
+            }
+            return BadRequest();
+        }
+
+
         public IActionResult AllManagersRequests()
         {
             return View();

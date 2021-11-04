@@ -2,7 +2,7 @@
 
 namespace hotel_booking_model.commons
 {
-    public class BasicResponse<TRes> where TRes : class
+    public class BasicResponse<TRes> 
     {
         public string Message { get; set; }
         public bool Succeeded { get; set; }

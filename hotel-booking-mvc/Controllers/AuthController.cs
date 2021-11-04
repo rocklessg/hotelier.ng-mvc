@@ -157,6 +157,18 @@ namespace hotel_booking_mvc.Controllers.Auth
         {
             return View(mgrReqViewModel);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ManagerRequest(ManagerRequest managerRequest)
+        {
+            var response = await _auth.SendManagerRequest(managerRequest);
+            if(response)
+            {
+                ViewData["Message"] = "We have successfully recieved your request. Look out for our Invitation mail.";
+                return View("Confirmation");
+            }
+            return View();
+        }
     }
 }
 
