@@ -1,0 +1,58 @@
+﻿@model AddHotelViewModel
+@{
+    ViewData["Title"] = "Add Hotel";
+    Layout = null;
+}
+<!-- Modal -->
+<form action="AddHotel" id="form" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+
+    <div class="form-group mb-3">
+
+        <input type="text" class="form-control" asp-for="Name" placeholder="Hotel Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+
+    </div>
+
+    <div class="mb-3">
+
+        <div>
+            <input type="text" class="form-control" asp-for="Email" placeholder="Hotel Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <div class="mb-3">
+        <div>
+            <input type="text" class="form-control" asp-for="Address" placeholder="Street Address" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <div class="mb-3">
+        <input type="text" class="form-control" asp-for="City" placeholder="City" />
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <input type="text" class="form-control" asp-for="State" placeholder="State" />
+        <span asp-validation-for="State" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <div class="form-outline">
+            <textarea class="form-control" asp-for="Description" placeholder="Hotel Description" rows="4"></textarea>
+        </div>
+    </div>
+
+    <div class="mb-3 form-check">
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary my-color" value="Submit" />
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

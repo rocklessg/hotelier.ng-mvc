@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using System.Collections;
 using hotel_booking_model.ViewModels;
 using hotel_booking_mvc.CustomAuthorization;
+using hotel_booking_model.Dtos;
 
 namespace hotel_booking_mvc.Controllers.Auth
 {
@@ -36,28 +37,28 @@ namespace hotel_booking_mvc.Controllers.Auth
                 var response = await _auth.Login(loginDto);
 
                 var result = response.Data;
-                var message = response.Message;
 
 
-                if (result == null && !response.Succeeded)
+                if (result == null || !response.Succeeded)
                 {
                     ModelState.AddModelError(string.Empty, response.Message = "Invalid Credentials" ?? response.Message);
                     return View();
                 }
 
-                var user = new Hashtable
-                {
-                    { "Id", result.Claims.ElementAt(0).Value },
-                    { "FirstName", result.Claims.ElementAt(2).Value },
-                    { "LastName", result.Claims.ElementAt(3).Value },
-                    { "Avatar", result.Claims.ElementAt(4).Value }
-                };
 
+                var user = new UserLoginResponseDto()
+                {
+                    Id = result.Claims.ElementAt(0).Value,
+                    FirstName = result.Claims.ElementAt(2).Value,
+                    LastName = result.Claims.ElementAt(3).Value,
+                    Avatar = result.Claims.ElementAt(4).Value
+                };
+             
                 var Role = result.Claims.ElementAt(5).Value;
                 HttpContext.Session.SetString("User", JsonConvert.SerializeObject(user));
                 if (Role == null)
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid Login Details");
+                    ModelState.AddModelError(string.Empty, "Unable to log you in at this time.");
                     return View();
                 }
                 else if (Role == "Manager")
@@ -94,7 +95,6 @@ namespace hotel_booking_mvc.Controllers.Auth
                     return View();
                 }
                 var result = _auth.Register(registerDTO);
-                // result.EnsureSuccessStatusCode();
                 return RedirectToAction("Login");
             }
             catch (Exception)
