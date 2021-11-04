@@ -1,35 +1,29 @@
-
-﻿using hotel_booking_model;
-using hotel_booking_model.ViewModels;
-using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using hotel_booking_model.Dtos.AuthenticationDtos;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
-
-
+using hotel_booking_model.ViewModels;
+using hotel_booking_mvc.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using hotel_booking_mvc.CustomAuthorization;
+using hotel_booking_model.Dtos.AuthenticationDtos;
 
 namespace hotel_booking_mvc.Controllers.Manager
 {
-    //[CustomAuthenticationFilter(roles: new string[] { "Manager" })]
+    [CustomAuthenticationFilter( "Manager" )]
     public class ManagerController : Controller
     {
         private readonly IManagerService _managerService;
-        private readonly IHotelService _hotelService;
-        
+        private readonly IHotelService _hotelService;      
 
 
         public ManagerController(IHotelService hotelService, IManagerService managerService)
-
-        {
-          
+        {          
             _hotelService = hotelService;
             _managerService = managerService;
         }
+
 
         public async Task<IActionResult> DashboardAsync()
         {
@@ -38,6 +32,7 @@ namespace hotel_booking_mvc.Controllers.Manager
             var result = await _managerService.ShowManagerDashboard(user.Id);
             return View(result);
         }
+
 
         public async Task<IActionResult> HotelAsync()
         {
@@ -48,12 +43,14 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View(paginationResponse);
         }
 
+
         public IActionResult Bookings()
         {
             return View();
         }
 
-       [HttpGet]
+
+        [HttpGet]
         public async Task<IActionResult> Transactions(int pageNumber, int pageSize)
         {
 
@@ -64,6 +61,8 @@ namespace hotel_booking_mvc.Controllers.Manager
             var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(user.Id, pageSize, pageNumber);
             return View(managerTransactionsList);
         }
+
+
         [HttpPost]
         public async Task<IActionResult> Transactions(int pageNumber, int pageSize, string searchQuery)
         {
@@ -74,6 +73,8 @@ namespace hotel_booking_mvc.Controllers.Manager
             var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(user.Id, pageSize, pageNumber, searchQuery);
             return View(managerTransactionsList);
         }
+
+
         public async Task<IActionResult> HotelRooms(string roomTypeId)
         {
             var result = await _hotelService.GetRoomTypeDetails(roomTypeId);
@@ -89,6 +90,7 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View();
         }
 
+
         public IActionResult Account()
         {
             return View();
@@ -102,10 +104,43 @@ namespace hotel_booking_mvc.Controllers.Manager
         }
 
 
+        [HttpGet]
+        public IActionResult AddHotel()
+        {
+            var hotel = new AddHotelViewModel();
+            return View(hotel);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddHotel(AddHotelViewModel model)
+        {
+            var user = HttpContext.Session.GetString("User");
+            var loggedInUser = JsonConvert.DeserializeObject<AuthenticatedDto>(user);
+
+            if (ModelState.IsValid)
+            {
+                var result = await _hotelService.AddHotelAsync(model);
+                if (result.Succeeded)
+                {
+                    return Json(new { isValid = true, html = Helper.RenderRazorViewToString(this, "_HotelList", await _hotelService.GetAllHotelForManagerAsync(loggedInUser.Id)) });
+                }
+                ViewBag.Error = result.Message;
+                return BadRequest();
+            }
+
+            return Json(new { isValid = false, html = Helper.RenderRazorViewToString(this, "AddHotel", model) });
+
+        }
+
+
         [AllowAnonymous]
         public IActionResult RegisterManager()
         {
             return View();
         }
+
     }
+
+    
 }
