@@ -101,12 +101,13 @@ namespace hotel_booking_mvc.Controllers.Manager
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError(string.Empty, "Invalid data entry");
-                return View();
+                return View(model);
             }
             else
             {
                 var response = await _managerService.EditManagerAccountAsync(model);
 
+                HttpContext.Session.SetString("User", JsonConvert.SerializeObject(model));
                 return RedirectToAction("Dashboard", "Manager", new { ManagerId = model.Id });
             }
           
