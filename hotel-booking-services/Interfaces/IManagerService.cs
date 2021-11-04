@@ -15,18 +15,12 @@ namespace hotel_booking_services.Interfaces
         Task<ManagerDashboardViewModel> ShowManagerDashboard(string managerId);
         Task<string> EditManagerAccountAsync(EditManagerViewModel model);
         Task<EditManagerViewModel> GetManagerById(string ManagerId);
-<<<<<<< HEAD
 
         Task<PaginationResponse<IEnumerable<ManagerRequestsView>>> GetAllManagerRequests(int? pageNumber);
 
         Task<bool> SendManagerInvite(string email);
 
-<<<<<<< HEAD
         Task<bool> RegisterManager(ManagerRegistration managerRegistration);
-=======
-=======
         Task<PaginationResponse<IEnumerable<ManagerBookingDto>>> GetManagerBookingAsync(string managerId, int pageNumber = 1, int pageSize = 10);
->>>>>>> d2aa4f2b2e7199d4f630705af14051c8553d1339
->>>>>>> reviews
     }
 }

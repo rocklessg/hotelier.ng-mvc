@@ -9,6 +9,5 @@ namespace hotel_booking_model.commons
         public int StatusCode { get; set; }
         public TRes Data { get; set; }
         public Claim Claim { get; set; }
-        public Error Errors { get; set; }
     }
 }
