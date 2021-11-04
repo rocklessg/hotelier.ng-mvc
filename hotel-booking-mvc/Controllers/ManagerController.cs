@@ -44,9 +44,11 @@ namespace hotel_booking_mvc.Controllers.Manager
         }
 
 
-        public IActionResult Bookings()
+        public async Task<IActionResult> Bookings(int pageSize = 10, int pageNumber = 1)
         {
-            return View();
+            var loggedinUser = JsonConvert.DeserializeObject<AuthenticatedDto>(HttpContext.Session.GetString("User"));
+            var bookings = await _managerService.GetManagerBookingAsync(loggedinUser.Id, pageNumber, pageSize);
+            return View(bookings);
         }
 
 

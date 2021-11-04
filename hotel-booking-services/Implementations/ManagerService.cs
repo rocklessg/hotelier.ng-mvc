@@ -72,14 +72,12 @@ namespace hotel_booking_services.Implmentations
 
         }//end GetAllManagersAsync
 
-
-
-
-
-
-
-
-        
+        public async Task<PaginationResponse<IEnumerable<ManagerBookingDto>>> GetManagerBookingAsync(string managerId, int pageNumber = 1, int pageSize = 10)
+        {
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<PaginationResponse<IEnumerable<ManagerBookingDto>>>>
+                ($"api/Manager/{managerId}/bookings?PageSize={pageSize}&PageNumber={pageNumber}");
+            return response.Data;
+        }        
 
     }
 }
