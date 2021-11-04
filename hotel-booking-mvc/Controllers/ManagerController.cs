@@ -1,4 +1,4 @@
-﻿using hotel_booking_model.Dtos.AuthenticationDtos;
+using hotel_booking_model.Dtos.AuthenticationDtos;
 using hotel_booking_model.ViewModels;
 using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_services.Interfaces;
