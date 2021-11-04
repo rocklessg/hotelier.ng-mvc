@@ -15,10 +15,6 @@ namespace hotel_booking_services.Interfaces
         Task<ManagerDashboardViewModel> ShowManagerDashboard(string managerId);
         Task<string> EditManagerAccountAsync(EditManagerViewModel model);
         Task<EditManagerViewModel> GetManagerById(string ManagerId);
-
-        public Task<PaginationResponse<IEnumerable<ManagerTransactionsView>>> GetAllManagerTransactionsAsync(string managerId, int pageSize = 10, int pageNumber = 1, string searchQuery = null);
-        public  Task<PaginationResponse<IEnumerable<ManagerModel>>> GetAllManagersAsync(int? pageNumber);
-        Task<ManagerDashboardViewModel> ShowManagerDashboard(string managerId);
         Task<PaginationResponse<IEnumerable<ManagerBookingDto>>> GetManagerBookingAsync(string managerId, int pageNumber = 1, int pageSize = 10);
     }
 }
