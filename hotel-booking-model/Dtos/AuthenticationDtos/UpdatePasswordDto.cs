@@ -10,7 +10,7 @@ namespace hotel_booking_model.Dtos.AuthenticationDtos
     public class UpdatePasswordDto
     {
         [Required]
-        public string CurrentPassword { get; set; }
+        public string OldPassword { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -19,6 +19,6 @@ namespace hotel_booking_model.Dtos.AuthenticationDtos
         [Required]
         [DataType(DataType.Password)]
         [Compare("NewPassword")]
-        public string ConfirmPassword { get; set; }
+        public string ConfirmNewPassword { get; set; }
     }
 }

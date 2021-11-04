@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace hotel_booking_mvc.Controllers
 {
@@ -10,6 +11,10 @@ namespace hotel_booking_mvc.Controllers
         }
         public IActionResult Error403()
         {
+            var loggedinUser = HttpContext.Session.GetString("User");
+            ViewData["LoggedInUser"] = loggedinUser;
+            var role = HttpContext.Session.GetString("role");
+            ViewData["Role"] = role;
             return View();
         }
         public IActionResult Error404()

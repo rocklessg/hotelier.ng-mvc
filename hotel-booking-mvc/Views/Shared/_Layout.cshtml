@@ -1,7 +1,7 @@
-@{ 
+@{
     var user = ViewData["LoggedInUser"] as string;
+    var role = ViewData["Role"] as string;
 }
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,28 +25,6 @@
             </div>
             <div class="phone-div">
                 <ul class="phone-flex">
-                    <li><a class="form-control me-2" href="#footer">CONTACT</a></li>
-                    <li>
-                        <a class="btn btn-outline-primary" asp-area="" asp-controller="Auth" asp-action="Login"
-                           style=" text-decoration:none !important; background-image: linear-gradient( 135deg, rgb(24, 42, 115) 0%, rgb(33, 138, 174) 69%,
-                            rgb(32, 167, 172) 89% ) !important; padding: 5px 15px !important; border-radius: 3px !important; margin: 5px !important; color:#fff !important; font-weight:900 !important;">
-                            LOGIN
-                        </a>
-                    </li>
-                    <li>
-                        <a class="btn btn-outline-primary" asp-area="" asp-controller="Auth" asp-action="ManagerRequest"
-                           style=" text-decoration: none !important; background-image: linear-gradient( 135deg, rgb(24, 42, 115) 0%, rgb(32, 167, 172) 89%, rgb(33, 138, 174) 69%) !important; padding: 5px 15px !important; border-radius: 3px !important; margin: 5px !important; color: #fff !important; font-weight: 900 !important; ">
-                            MANAGER
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <nav class="navbar">
-                <img src="~/images/logos_only_dark.svg" width="40" height="40" style="padding:3px;" asp-area="" asp-controller="Home" asp-action="Index" />
-                <ul class="flex">
-                    <li><a class="form-control me-2" href="#footer">CONTACT</a></li>
                     @if (user == null)
                     {
                         <li>
@@ -60,6 +38,12 @@
                     else
                     {
                         <li>
+                            <a class="btn btn-outline-primary" asp-area="" asp-controller="@role" asp-action="Dashboard" style=" text-decoration:none !important; background-image: linear-gradient( 135deg, rgb(24, 42, 115) 0%, rgb(33, 138, 174) 69%,
+                                rgb(32, 167, 172) 89% ) !important; padding: 5px 15px !important; border-radius: 3px !important; margin: 5px !important; color:#fff !important; font-weight:900 !important;">
+                                DASHBOARD
+                            </a>
+                        </li>
+                        <li>
                             <a class="btn btn-outline-primary" asp-area="" asp-controller="Auth" asp-action="Logout"
                                style=" text-decoration:none !important; background-image: linear-gradient( 135deg, rgb(24, 42, 115) 0%, rgb(33, 138, 174) 69%,
                             rgb(32, 167, 172) 89% ) !important; padding: 5px 15px !important; border-radius: 3px !important; margin: 5px !important; color:#fff !important; font-weight:900 !important;">
@@ -70,12 +54,52 @@
                     <li>
                         <a class="btn btn-outline-primary" asp-area="" asp-controller="Auth" asp-action="ManagerRequest"
                            style=" text-decoration: none !important; background-image: linear-gradient( 135deg, rgb(24, 42, 115) 0%, rgb(32, 167, 172) 89%, rgb(33, 138, 174) 69%) !important; padding: 5px 15px !important; border-radius: 3px !important; margin: 5px !important; color: #fff !important; font-weight: 900 !important; ">
-                            MANAGER
+                            BE A MANAGER
                         </a>
                     </li>
 
                 </ul>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <nav class="navbar">
+                <img src="~/images/logos_only_dark.svg" width="40" height="40" style="padding:3px;" asp-area="" asp-controller="Home" asp-action="Index" />
+                <ul class="flex align-content-between">
+                    @if (user == null)
+                    {
+                        <li>
+                            <a class="btn btn-outline-primary" asp-area="" asp-controller="Auth" asp-action="Login"
+                               style=" text-decoration:none !important; background-image: linear-gradient( 135deg, rgb(24, 42, 115) 0%, rgb(33, 138, 174) 69%,
+                            rgb(32, 167, 172) 89% ) !important; padding: 5px 15px !important; border-radius: 3px !important; margin: 5px !important; color:#fff !important; font-weight:900 !important;">
+                                LOGIN
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a class="btn btn-outline-primary" asp-area="" asp-controller="@role" asp-action="Dashboard"
+                                style=" text-decoration:none !important; background-image: linear-gradient( 135deg, rgb(24, 42, 115) 0%, rgb(33, 138, 174) 69%,
+                                rgb(32, 167, 172) 89% ) !important; padding: 5px 15px !important; border-radius: 3px !important; margin: 5px !important; color:#fff !important; font-weight:900 !important;">
+                                DASHBOARD
+                            </a>
+                        </li>
+                        <li>
+                            <a class="btn btn-outline-primary" asp-area="" asp-controller="Auth" asp-action="Logout"
+                               style=" text-decoration:none !important; background-image: linear-gradient( 135deg, rgb(24, 42, 115) 0%, rgb(33, 138, 174) 69%,
+                            rgb(32, 167, 172) 89% ) !important; padding: 5px 15px !important; border-radius: 3px !important; margin: 5px !important; color:#fff !important; font-weight:900 !important;">
+                                LOGOUT
+                            </a>
+                        </li>
+                    }
+                    <li>
+                        <a class="btn btn-outline-primary" asp-area="" asp-controller="Auth" asp-action="ManagerRequest"
+                           style=" text-decoration: none !important; background-image: linear-gradient( 135deg, rgb(24, 42, 115) 0%, rgb(32, 167, 172) 89%, rgb(33, 138, 174) 69%) !important; padding: 5px 15px !important; border-radius: 3px !important; margin: 5px !important; color: #fff !important; font-weight: 900 !important; ">
+                            BE A MANAGER
+                        </a>
+                    </li>
 
+                </ul>
                 <button class="nav-button">&#9776</button>
             </nav>
         </div>

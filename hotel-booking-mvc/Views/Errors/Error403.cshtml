@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-     ViewData["Title"] = "Error";
+    ViewData["Title"] = "Error";
 }
 <div class="container-fluid mt-5"  style="background: #F6FCFF;">
     <div class="row d-flex align-items-center justify-content-center">
@@ -15,6 +15,7 @@
                     <h1 class="bold-font">403</h1>
                     <h3 class="bold-font-sm">Forbidden</h3>
                     <p class="card-text bold-font-p text-center w-100">You seem lost! Are you?</p>
+                    <a style="text-decoration:none; color:darkblue;" class=" card-text bold-font-p text-center w-100" asp-controller="LandingView" asp-action="Index">Go Home</a>
                 </div>
             </div>
         </div>
