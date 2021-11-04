@@ -1,6 +1,7 @@
 ﻿using hotel_booking_model;
 using hotel_booking_model.commons;
 using hotel_booking_model.Dtos;
+using hotel_booking_model.Dtos.AuthenticationDtos;
 using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
 using System;
@@ -69,17 +70,21 @@ namespace hotel_booking_services.Implmentations
 
             return response.Data;
 
+        }
 
-        }//end GetAllManagersAsync
+        public async Task<string> EditManagerAccountAsync(EditManagerViewModel model)
+        {
+            var response = await _httpRequestFactory.UpdateRequestPutAsync<EditManagerViewModel, BasicResponse<string>>
+                                                    (requestUrl: $"/api/Manager/UpdateManager", model);
 
+            return response.Message;
+        }
 
-
-
-
-
-
-
-        
-
+        public async Task<EditManagerViewModel> GetManagerById(string managerId)
+        {
+            var response = await _httpRequestFactory.GetRequestAsync<BasicResponse<EditManagerViewModel>>
+                (requestUrl: $"/api/Manager/Details");
+            return response.Data;
+        }
     }
 }

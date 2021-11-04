@@ -54,7 +54,6 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View();
         }
 
-
         [HttpGet]
         public async Task<IActionResult> Transactions(int pageNumber, int pageSize)
         {
@@ -95,20 +94,37 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View();
         }
 
-
-        public IActionResult Account()
+        [HttpGet]
+        public async Task<IActionResult> Account()
         {
-            return View();
+            var loggedInUser = HttpContext.Session.GetString("User");
+
+            var user = JsonConvert.DeserializeObject<LoggedInUserViewModel>(loggedInUser);
+            var manager = await _managerService.GetManagerById(user.Id);
+            manager.Id = user.Id;
+            return View(manager);
         }
 
 
         [HttpPost]
-        public IActionResult Account(UserDto userDto)
-        {
-            return View();
+        public async Task<IActionResult> Account(EditManagerViewModel model) {
+            var loggedInUser = HttpContext.Session.GetString("User");
+            var user = JsonConvert.DeserializeObject<LoggedInUserViewModel>(loggedInUser);
+            model.Id = user.Id;
+
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid data entry");
+                return View(model);
+            }
+            else
+            {
+                var response = await _managerService.EditManagerAccountAsync(model);
+
+                HttpContext.Session.SetString("User", JsonConvert.SerializeObject(model));
+                return RedirectToAction("Dashboard", "Manager", new { ManagerId = model.Id });
+            }
         }
-
-
         [HttpGet]
         public IActionResult AddHotel()
         {
@@ -143,6 +159,7 @@ namespace hotel_booking_mvc.Controllers.Manager
         public IActionResult RegisterManager()
         {
             return View();
+          
         }
         [HttpGet]
         public IActionResult ChangePassword()
