@@ -170,14 +170,8 @@
 
                                 <div class="form-group mb-2" style="border-style:none;">
 
-                                    @Html.TextBoxFor(x => x.BusinessEmail, new { @class = "form-control has-validation", @value = Model.ManagerMailToken.Email, @placeholder = "Business Email", @required = "required", @disabled="true"})
+                                    @Html.HiddenFor(x => x.BusinessEmail)
 
-                                    @Html.ValidationMessageFor(m => m.BusinessEmail, "", new { @class = "badge bg-danger" })
-
-                                    @if (ViewBag.error != null)
-                                    {
-                                        <span class="badge bg-danger">@ViewBag.error</span>
-                                    }
                                 </div>
 
                                 <div class="form-group mb-2" style="border-style:none;">
@@ -283,14 +277,8 @@
 
                                 <div class="form-group mb-2" style="border-style:none;">
 
-                                    @Html.TextBoxFor(x => x.Token, new { @class = "form-control has-validation", @value = Model.ManagerMailToken.Token, @required = "required", @disabled="true", @hidden ="true"})
+                                    @Html.HiddenFor( x => x.Token)
 
-                                    @Html.ValidationMessageFor(m => m.Token, "", new { @class = "badge bg-danger" })
-
-                                    @if (ViewBag.error != null)
-                                    {
-                                    <span class="badge bg-danger">@ViewBag.error</span>
-                                    }
                                 </div>
 
                             </div>

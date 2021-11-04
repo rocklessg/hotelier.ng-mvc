@@ -32,17 +32,20 @@ namespace hotel_booking_mvc.Controllers.Manager
             _managerService = managerService;
         }
 
-        public async Task<IActionResult> DashboardAsync(string managerId)
+        public async Task<IActionResult> DashboardAsync()
         {
-            TempData["managerId"] = managerId;
-            var result = await _managerService.ShowManagerDashboard(managerId);
+            var loggedinUser = HttpContext.Session.GetString("User");
+            var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+            var result = await _managerService.ShowManagerDashboard(user.Id);
             return View(result);
         }
 
-        public async Task<IActionResult> HotelAsync(string managerId)
+        public async Task<IActionResult> HotelAsync()
         {
-            TempData["managerId"] = managerId;
-            var paginationResponse = await _hotelService.GetAllHotelForManagerAsync(managerId);
+
+            var loggedinUser = HttpContext.Session.GetString("User");
+            var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+            var paginationResponse = await _hotelService.GetAllHotelForManagerAsync(user.Id);
             return View(paginationResponse);
         }
 
@@ -57,6 +60,7 @@ namespace hotel_booking_mvc.Controllers.Manager
 
             var loggedinUser = HttpContext.Session.GetString("User");
             var user = JsonConvert.DeserializeObject<AuthenticatedDto>(loggedinUser);
+
 
             var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(user.Id, pageSize, pageNumber);
             return View(managerTransactionsList);
@@ -80,7 +84,9 @@ namespace hotel_booking_mvc.Controllers.Manager
         public async Task<IActionResult> HotelDetails(string hotelId)
         {
             var singleHotel = await _hotelService.GetHotelById(hotelId);
+            var customers = await _hotelService.GetHotelCustomersAsync(hotelId);
             ViewData["GetHotel"] = singleHotel;
+            ViewData["Customers"] = customers;
             return View();
         }
 
@@ -101,23 +107,26 @@ namespace hotel_booking_mvc.Controllers.Manager
         public IActionResult RegisterManager([FromQuery] RegisterManagerMailToken emailToken)
         {
             ManagerRegistration managerRegistration = new ManagerRegistration();
-            managerRegistration.ManagerMailToken.Email = emailToken.Email;
-            managerRegistration.ManagerMailToken.Token = emailToken.Token;
+            managerRegistration.BusinessEmail = emailToken.Email;
+            managerRegistration.Token = emailToken.Token;
 
-            return View();
+            return View(managerRegistration);
         }
 
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> RegisterNewManager(ManagerRegistration managerRegistration)
         {
-            var response = await _managerService.RegisterManager(managerRegistration);
-            if (response)
+            if(ModelState.IsValid)
             {
-                ViewData["Message"] = "You have been successfully registered! Check your email for a confirmation message.";
-                return View("Confirmation");
+                var response = await _managerService.RegisterManager(managerRegistration);
+                if (response)
+                {
+                    ViewData["Message"] = "You have been successfully registered! Login from the Home Page.";
+                    return View("Confirmation");
+                }
             }
-            return View();
+            return View("RegisterManager", managerRegistration);
         }
     }
 }
