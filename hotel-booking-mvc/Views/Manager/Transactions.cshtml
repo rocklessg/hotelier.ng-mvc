@@ -75,6 +75,25 @@
                         </tbody>
                     </table>
                 </div> <!-- END label row -->
+                <div class="col-10 mx-auto mb-5 d-flex justify-content-center">
+                    <nav aria-label="Pagination">
+                        <ul class="pagination justify-content-center">
+                            @for (int i = 1; i <= Model.NumberOfPages; i++)
+                            {
+                                if (i == Model.CurrentPage)
+                                {
+                                    <li class="page-item active" aria-current="page">
+                                        <span class="page-link" asp-route-pageNumber=@i style="background-color: #2067A1; border-color: #2067A1; ">@i</span>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item"><a class="page-link" asp-route-pageNumber=@i style="color:black" a>@i</a></li>
+                                }
+                            }
+                        </ul>
+                    </nav>
+                </div>
                
             </div>
         </div>
@@ -83,24 +102,6 @@
 
 
 
-<div class="col-10 mx-auto mb-5 d-flex justify-content-center">
-    <nav aria-label="Pagination">
-        <ul class="pagination justify-content-center">
-            @for (int i = 1; i <= Model.NumberOfPages; i++)
-            {
-                if (i == Model.CurrentPage)
-                {
-                    <li class="page-item active" aria-current="page">
-                        <span class="page-link" asp-route-pageNumber=@i style="background-color: #2067A1; border-color: #2067A1; ">@i</span>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item"><a class="page-link" asp-route-pageNumber=@i style="color:black" a>@i</a></li>
-                }
-            }
-        </ul>
-    </nav>
-</div>
+    
 
 </div>
