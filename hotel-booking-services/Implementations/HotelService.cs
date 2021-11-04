@@ -2,6 +2,7 @@
 using hotel_booking_model.commons;
 using hotel_booking_model.Dtos;
 using hotel_booking_model.Dtos.Hotels;
+using hotel_booking_model.ViewModels;
 using hotel_booking_services.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -47,6 +48,12 @@ namespace hotel_booking_services.Implmentations
             return response.Data;
         }
 
+        public async Task<IEnumerable<HotelCustomerDTO>> GetHotelCustomersAsync(string hotelId)
+        {
+            var response = await _requestFactory.GetRequestAsync<BasicResponse<IEnumerable<HotelCustomerDTO>>>($"api/Hotel/{hotelId}/customers");
+            return response.Data;
+        }
+
 
         public async Task<Dictionary<string, int>> GetTotalHotelsPerLocation()
         {
@@ -73,6 +80,13 @@ namespace hotel_booking_services.Implmentations
                 <BasicResponse<RoomTypeDetailsDto>>(
                 requestUrl: $"/api/Hotel/roomTypedetails/{roomTypeId}");
             return response.Data;
+        }
+
+        public async Task<BasicResponse<AddHotelViewModel>> AddHotelAsync(AddHotelViewModel addHotelViewModel)
+        {
+            var response = await _requestFactory.PostRequestAsync<AddHotelViewModel, BasicResponse<AddHotelViewModel>>("api/Hotel", addHotelViewModel);
+            
+            return response;
         }
     }
 }

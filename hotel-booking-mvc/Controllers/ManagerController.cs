@@ -1,22 +1,18 @@
-
-﻿using hotel_booking_model;
-using hotel_booking_model.ViewModels;
-using hotel_booking_mvc.CustomAuthorization;
 using hotel_booking_services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using hotel_booking_model.Dtos.AuthenticationDtos;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
-
-
+using hotel_booking_model.ViewModels;
+using hotel_booking_mvc.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using hotel_booking_mvc.CustomAuthorization;
+using hotel_booking_model.Dtos.AuthenticationDtos;
 using System;
 
 namespace hotel_booking_mvc.Controllers.Manager
 {
-    //[CustomAuthenticationFilter(roles: new string[] { "Manager" })]
+    [CustomAuthenticationFilter( "Manager" )]
     public class ManagerController : Controller
     {
         private readonly IManagerService _managerService;
@@ -33,6 +29,7 @@ namespace hotel_booking_mvc.Controllers.Manager
             _managerService = managerService;
         }
 
+
         public async Task<IActionResult> DashboardAsync()
         {
             var loggedinUser = HttpContext.Session.GetString("User");
@@ -40,6 +37,7 @@ namespace hotel_booking_mvc.Controllers.Manager
             var result = await _managerService.ShowManagerDashboard(user.Id);
             return View(result);
         }
+
 
         public async Task<IActionResult> HotelAsync()
         {
@@ -50,12 +48,14 @@ namespace hotel_booking_mvc.Controllers.Manager
             return View(paginationResponse);
         }
 
+
         public IActionResult Bookings()
         {
             return View();
         }
 
-       [HttpGet]
+
+        [HttpGet]
         public async Task<IActionResult> Transactions(int pageNumber, int pageSize)
         {
 
@@ -66,6 +66,8 @@ namespace hotel_booking_mvc.Controllers.Manager
             var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(user.Id, pageSize, pageNumber);
             return View(managerTransactionsList);
         }
+
+
         [HttpPost]
         public async Task<IActionResult> Transactions(int pageNumber, int pageSize, string searchQuery)
         {
@@ -76,6 +78,8 @@ namespace hotel_booking_mvc.Controllers.Manager
             var managerTransactionsList = await _managerService.GetAllManagerTransactionsAsync(user.Id, pageSize, pageNumber, searchQuery);
             return View(managerTransactionsList);
         }
+
+
         public async Task<IActionResult> HotelRooms(string roomTypeId)
         {
             var result = await _hotelService.GetRoomTypeDetails(roomTypeId);
@@ -85,9 +89,12 @@ namespace hotel_booking_mvc.Controllers.Manager
         public async Task<IActionResult> HotelDetails(string hotelId)
         {
             var singleHotel = await _hotelService.GetHotelById(hotelId);
+            var customers = await _hotelService.GetHotelCustomersAsync(hotelId);
             ViewData["GetHotel"] = singleHotel;
+            ViewData["Customers"] = customers;
             return View();
         }
+
 
         public IActionResult Account()
         {
@@ -99,6 +106,36 @@ namespace hotel_booking_mvc.Controllers.Manager
         public IActionResult Account(UserDto userDto)
         {
             return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult AddHotel()
+        {
+            var hotel = new AddHotelViewModel();
+            return View(hotel);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddHotel(AddHotelViewModel model)
+        {
+            var user = HttpContext.Session.GetString("User");
+            var loggedInUser = JsonConvert.DeserializeObject<AuthenticatedDto>(user);
+
+            if (ModelState.IsValid)
+            {
+                var result = await _hotelService.AddHotelAsync(model);
+                if (result.Succeeded)
+                {
+                    return Json(new { isValid = true, html = Helper.RenderRazorViewToString(this, "_HotelList", await _hotelService.GetAllHotelForManagerAsync(loggedInUser.Id)) });
+                }
+                ViewBag.Error = result.Message;
+                return BadRequest();
+            }
+
+            return Json(new { isValid = false, html = Helper.RenderRazorViewToString(this, "AddHotel", model) });
+
         }
 
 
@@ -133,4 +170,6 @@ namespace hotel_booking_mvc.Controllers.Manager
             }
         }
     }
+
+    
 }
